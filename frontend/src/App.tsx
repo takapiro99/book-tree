@@ -16,7 +16,14 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learn React Takapiro konbanwa
+          <div></div>
+          <div>
+            <p></p>
+            <p></p>
+            <h3>Hello World</h3>
+          </div>
+
         </a>
       </header>
     </div>
