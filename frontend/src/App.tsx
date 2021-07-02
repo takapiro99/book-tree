@@ -13,9 +13,9 @@ function App() {
           <Switch>
             <Route exact path="/" component={Top} />
             <Route exact path="/signin" component={SignIn} />
-            {/* TODO:  */}
+            {/* TODO: reviewsはnestさせて/reviews/newってする */}
             {/* <Route exact path="/reviews" component={SignIn} /> */}
-            <Route path="/:id" component={Mypage} />
+            <Route path="/@:id" component={Mypage} />
             <Route component={NotFound} />
           </Switch>
         </div>
