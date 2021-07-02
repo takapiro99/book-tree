@@ -1,3 +1,7 @@
+html{
+  font-size: 100%;
+  /* 16px */
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,6 +9,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+p{
+  /* 100%の1em=100% 16px */
+  font-size:1em;
 }
 
 code {
