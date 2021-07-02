@@ -1,7 +1,5 @@
-import React from "react";
-
-const top = () => {
-  return <div></div>;
+const Top = () => {
+  return <div>ここがTOP画面</div>;
 };
 
-export default top;
+export default Top;
