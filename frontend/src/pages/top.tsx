@@ -1,7 +1,9 @@
 import React from "react";
 
 const top = () => {
-  return <div></div>;
+  return <div>
+    <p>aaa</p>
+  </div>;
 };
 
 export default top;

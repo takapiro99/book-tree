@@ -1,5 +1,4 @@
 
-
 .booktree_logo{
     width: 30vw;
     text-align: center;
@@ -8,11 +7,11 @@
     margin-left: auto;
 }
 .BrandLogo_sentence{
-    font-size: 0.1vw;
+    font-size: 1vw;
     color: #6B6B6B;
     text-align: center;
-    line-height:13px;
-
+    line-height:6px;
+//  レスポンシブでつくってく
 }
 .yellowbox{
     width: 18vw;
@@ -59,3 +58,48 @@
 }
 
 
+@media screen and (max-width: 930px) {
+    .BrandLogo_sentence{
+        font-size: 12px;
+    }
+}
+@media screen and (max-width: 900px) {
+    .BrandLogo_sentence{
+        font-size: 10px;
+    }
+}
+@media screen and (max-width: 780px) {
+    .BrandLogo_sentence{
+        font-size: 9px;
+    }
+}
+@media screen and (max-width: 750px) {
+    .BrandLogo_sentence{
+        font-size: 8px;
+    }
+}
+@media screen and (max-width: 930px) {
+    .BrandLogo_sentence{
+        font-size: 12px;
+    }
+}
+@media screen and (max-width: 930px) {
+    .BrandLogo_sentence{
+        font-size: 12px;
+    }
+}
+@media screen and (max-width: 930px) {
+    .BrandLogo_sentence{
+        font-size: 12px;
+    }
+}
+@media screen and (max-width: 930px) {
+    .BrandLogo_sentence{
+        font-size: 12px;
+    }
+}
+@media screen and (max-width: 350px) {
+    .BrandLogo_sentence{
+        font-size: 1%;
+    }
+}
