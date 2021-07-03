@@ -1,11 +1,16 @@
 import React from "react";
 import Mypage from "./pages/Mypage";
+import {AuthProvider} from "./lib/AuthProvider";
 
 function App() {
+
   return (
-    <div className="App">
-      <Mypage />
-    </div>
+    <AuthProvider>
+      <div className="App">
+        <Mypage />
+      </div>
+    </AuthProvider>
+    
   );
 }
 

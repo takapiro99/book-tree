@@ -18,10 +18,9 @@ const firebaseConfig = {
     messagingSenderId: "664873500340",
     appId: "1:664873500340:web:0a00c42b344849ff4c21e1",
     measurementId: "G-LSXL0EBCF4"
-  };
+};
 
 firebase.initializeApp(firebaseConfig);
 firebase.auth().languageCode = "ja";
-export const provider = new firebase.auth.TwitterAuthProvider();
 
 export default firebase;
