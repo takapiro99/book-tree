@@ -11,6 +11,10 @@ const Footer = () => {
       <Link to="/@myID">mypage</Link>
       <span>&nbsp;</span>
       <Link to="/404">not found</Link>
+      <span>&nbsp;</span>
+      <Link to="/review/@hoge">review</Link>
+      <span>&nbsp;</span>
+      <Link to="/review/new">review編集/new</Link>
     </div>
   );
 };
