@@ -3,6 +3,8 @@ import BigTreeWithBooks from "../components/BigTreeWithBooks";
 import BrandLogo from "../components/BrandLogo";
 import LittleTree from "../components/LittleTree";
 import Reviewtree from "../components/review_tree";
+import BooksWrapper from "../components/BooksWrapper";
+
 
 interface RouteParams {
   id: string;
@@ -16,6 +18,7 @@ const Mypage = () => {
       <p>マイページだよ！</p>
       <BrandLogo />
       <LittleTree />
+      
       <Reviewtree />
       <h3>マイページ</h3>
       <p>
@@ -23,6 +26,7 @@ const Mypage = () => {
       </p>
       <div>通知的なやつ</div>
       <BigTreeWithBooks />
+      <BooksWrapper/>
       <p>Nekoさん</p>
       {/* ここにメニュー */}
     </div>

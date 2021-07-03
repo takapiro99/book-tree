@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div style={{ border: "1px grey solid" }}>
-      仮のfooterです
+      仮のfooterです 
       <Link to="/">top</Link>
       <span>&nbsp;</span>
       <Link to="/signin">signin</Link>

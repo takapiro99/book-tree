@@ -5,6 +5,7 @@ import NotFound from "./pages/NotFound";
 import SignIn from "./pages/SignIn";
 import Top from "./pages/Top";
 
+
 function App() {
   return (
     <div className="App">
@@ -17,6 +18,7 @@ function App() {
             {/* <Route exact path="/reviews" component={SignIn} /> */}
             <Route path="/@:id" component={Mypage} />
             <Route component={NotFound} />
+            
           </Switch>
         </div>
         <Footer />
