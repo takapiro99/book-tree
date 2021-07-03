@@ -8,7 +8,7 @@
     }
     .sentence_1{
         position: absolute;
-        top: 1.7vw;
+        top: 2.5vw;
         left: 37vw;
         font-size: 6vw;
         line-height: 0px;
@@ -20,21 +20,37 @@
         font-size: 1.5vw;
     }
 }
-.icon_pic{
+.icon_pic2{
     position: absolute;
-    border-radius: 50%;
+    width: 5vw;
+    height: 5vw;
+    left: 35%;
+    top: 1vw;
+    img{
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: solid 0.2vw rgb(255, 214, 79);
+
+    }
+}
+.icon_pic1{
+    position: absolute;
     width: 15vw;
     height: 15vw;
     left: 24vw;
     z-index: 1006;
     top: 20vw;
+    border-radius:50%;
     border: solid 0.5vw rgb(255, 214, 79);
+
     img{
         position:relative;
         width:100%;
         height:100%;
         border-radius: 50%;
         z-index:2;
+
         &:hover{          
             opacity: 0.7;          
         }
