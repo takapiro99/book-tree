@@ -22,11 +22,7 @@ const Mypage = () => {
     <div className={styles.mypageNews}>
         <div className={styles.mypageNews__news}><i className="fas fa-bullhorn"></i>　<a href="#review">お願いしていたレビューが届いたよ！</a></div>
     </div>
-
     <BigTreeWithBooks />
-
-
-       
     </div>
 
     <div className={styles.mypageButtons}>

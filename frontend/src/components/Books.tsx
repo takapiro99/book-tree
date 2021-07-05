@@ -5,7 +5,7 @@ import iconFox from "../assets/icon1.png";
 // TODO: アイコンがある場合とない場合で分岐したい　
 // TODO: レビューページの右上のまるがあるかないかの分岐
 
-interface BooksProps {
+export interface BooksProps {
     // 本の画像、リンク、表示のさせ方（アイコンの場合アイコン画像とID）
     bookImageURL: string
     bookLink: string
@@ -18,6 +18,11 @@ const Books = (props: BooksProps) => {
     return (
         <div className={styles.booksWithIcon}>
             <div className={styles.booksBlock}>
+                
+            {
+                    props.displayType === "bookMark" && 
+                    <div className={`${styles.bookMark} ${styles.reviewpageReviewBook__bookMark}`}></div>
+                }
                 <div className={styles.books}>book</div>
                 {
                     props.displayType === "icon" &&
@@ -27,38 +32,9 @@ const Books = (props: BooksProps) => {
                         </a>
                     </div>
                 }
-                {
-                    props.displayType === "bookMark" &&
-                    <div className={styles.booksBlock__account}>
-                        <a href="#accont-review">
-                            <img className={styles.accountImg} src={iconFox} alt="アイコン画像" />
-                        </a>
-                    </div>
-                }
             </div>
         </div>
     );
-    // } else if (type === "bookmark") {
-    //     return (
-    //         <div className={styles.booksWithIcon}>
-    //             <div className={styles.booksBlock}>
-    //                 <div className={styles.books}>book</div>
-    //                 <div className={styles.booksBlock__account}>
-    //                     <a href="#accont-review">
-    //                         <img className={styles.accountImg} src={iconFox} alt="アイコン画像" />
-    //                     </a>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     );
-    // } else {
-    //     return (
-    //         <div className={styles.books_block}>
-    //             <div className={styles.books}>book</div>
-    //         </div>
-    //     );
-    // }
 };
 
 export default Books;
-

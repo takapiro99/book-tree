@@ -1,11 +1,11 @@
 .books_wrapper{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .booksWithIcon{
-    padding: 9rem 2rem 4rem 2rem;
+    // padding: 9rem 2rem 4rem 2rem;
 
     .booksBlock{
         position: relative;
@@ -14,7 +14,7 @@
     .books{
         width:9rem;
         height:12rem;
-        margin: auto;
+        // margin: auto;
         background-color: gray;    
     &:hover{
         background-color: lightblue;
@@ -29,7 +29,7 @@
 
 
 }
-.booksWithIcon:nth-child(odd) {
+.booksWithIcon:nth-child(even) {
     margin-top: 80px;
 }
 
@@ -60,17 +60,16 @@
 
 }
 
-.reviewpage-review-book__book-mark{
+.reviewpageReviewBook__bookMark{
     position: absolute;
-    top: -0.7rem;
-    left:-1.3rem;
+    top: -1.2rem;
+    left:-1.9rem;
 }
 
 
-.book-mark{
+.bookMark{
     width:4rem;
     height:4rem;
     border-radius: 50%;
     background-color: #F9D555;
 }
-

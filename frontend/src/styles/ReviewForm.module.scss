@@ -42,14 +42,11 @@ h1{
 .logo-title{
     width: 14rem;
     /* margin:0 30%; */
-
 }
-
 
 .wrapper-content{
     padding: 5rem 7rem;
 }
-
 
 .fotter{
     text-align: center;
@@ -80,8 +77,6 @@ h1{
 .reviewformName{
     margin-top: 1rem;
     display: flex;
-    
-    
 }
 .reviewformName__block{
     flex: 1;
@@ -114,13 +109,13 @@ h1{
 
 .reviewform3keywords__example{
     margin-bottom: 0.7rem;
-    
 }
 
 .reviewform3keywords__list{
     display: flex;
     flex-direction: row;
 }
+
 .reviewform3keywords__3box{
 background-color: lightgray;
 width: 30%;
@@ -131,9 +126,6 @@ border:1px solid #707070;
 .reviewform__plus{
  margin:auto 1rem;   
 }
-
-
-
 .reviewformBookselect__block{
     width:auto;
     height:19rem;
@@ -158,7 +150,6 @@ border:1px solid #707070;
     margin:1rem 1rem 1rem 0;
 }
 
-
 .reviewformSubmit{
     display: flex;
     justify-content: center;
@@ -180,20 +171,19 @@ border:1px solid #707070;
     background-color: #6B6B6B;
     border-color: #6B6B6B;
     color:#F9D555;
+    }
 }
-}
-
 
 // For AddReview Component
 
-.reviewformAddreview {
+.reviewformAddreview{
     display: flex;
     flex-direction: row;
 }
 
 .reviewformAddreviewBooks{
     flex: 1;
-    margin:2rem 3rem 2rem 2rem;
+    margin:2rem 2rem 2rem 4rem;
 }
 .reviewformAddreviewBooks__books{
     width:9rem;
@@ -202,7 +192,7 @@ border:1px solid #707070;
     background-color: gray;
 }
 .reviewformAddreviewReview{
-    flex:2;
+    flex:3;
     margin-top: 0rem;
 }
 .reviewformAddreviewReview__review{

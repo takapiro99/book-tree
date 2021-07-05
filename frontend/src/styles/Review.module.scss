@@ -6,6 +6,10 @@
     text-align: center;
 }
 
+.reviewpageReviewBlock{
+    margin:0 3rem;
+}
+
 // BookWithReviewに関するstyles
 .reviewpageReviewBlock{
     display: flex;
@@ -14,21 +18,21 @@
 }
 .reviewpageReviewBook{
     display: flex;
-    margin: 3rem 0;
+    margin: 1.8rem 0 1.8rem 0.4rem;
     position: relative;
 }
- 
 
 .reviewpageReviewContent{
     flex:3;
-    margin:0 4rem;
-    
+    margin:0 0 0 3rem ;
 }
+
 .reviewpageReviewContent__reason{
     background-color: gray;
     padding: 1rem 1rem 1rem 1.5rem;
     border-radius: 20px;
 }
+
 .reviewpageReviewContent__comment{
     margin-top: 1rem;
     padding: 1rem 1rem 1rem 1.5rem;
@@ -37,3 +41,8 @@
     border-radius: 20px;
 }
 
+.reviewpageReview{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

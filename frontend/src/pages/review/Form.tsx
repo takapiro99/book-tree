@@ -38,11 +38,12 @@ const Form = () => {
             <input type="text" className={styles.reviewformBookselect__input} placeholder="本のタイトルを入力する" />
             <div className={styles.reviewformBookselectResult}>
             {/* map */}
-            {/* <Books /> */}
+            <Books bookImageURL="" bookLink="" displayType="bookOnly" userID="sakusaku" />
             </div>
             </div>
         </div>
 
+        <AddReview />
         <AddReview />
         
         <div className={styles.reviewformSubmit}>

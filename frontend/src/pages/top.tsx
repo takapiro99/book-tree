@@ -28,6 +28,11 @@ const Top = () => {
         <LittleTree />
         <LittleTree />
       </div>
+      <div className={styles.littletreeWrapper}>
+        <LittleTree />
+        <LittleTree />
+        <LittleTree />
+      </div>
   </div>
   </div>
   </div>);

@@ -4,7 +4,7 @@ const AddReview = () => {
     return(
         <div className={`${styles.reviewformAddreview} ${styles.blockbtwMd}`}>
         <div className={styles.reviewformAddreviewBooks}>
-           {/* <Books/> */}
+        <Books bookImageURL="" bookLink="" displayType="bookOnly" userID="sakusaku" />
         </div>
         <div className={styles.reviewformAddreviewReview}>
         <div className={styles.reviewformAddreviewReview__reason}>お勧めする理由を選択</div>

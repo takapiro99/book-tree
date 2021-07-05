@@ -5,8 +5,9 @@ const BigTreeWithBooks = () => {
   return (
     <div>
       <div className={styles.BigTreeWrapper}>
-        {/* icon */}
+      {/* icon */}
       <BooksWrapper />
+      
       </div>
 
     </div>
