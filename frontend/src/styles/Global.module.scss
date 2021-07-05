@@ -1,0 +1,43 @@
+
+h1{
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper{
+    margin: 5rem 13rem 5rem 13rem;
+    position: relative;
+}
+.wrapper__title{
+    text-align: center;
+}
+
+.logoTitle{
+    width: 14rem;
+    /* margin:0 30%; */
+
+}
+
+
+.wrapper-content{
+    padding: 5rem 7rem;
+}
+
+
+.fotter{
+    text-align: center;
+    margin:4rem;
+    position: relative;
+}
+
+.footer-img{
+    position: absolute;
+    left:-5rem;
+    top: -4rem;
+    width: 24%;
+}
+
+.blockbtwMd{
+    $margin: 4rem 0 !global;
+    margin:$margin;
+}

@@ -7,11 +7,11 @@ import Books from "../components/Books";
 const BooksWrapper = () => {
   return (
     <div className={styles.books_wrapper}>
-      <Books />
-      <Books />
-      <Books />
-      <Books />
-      <Books />
+      <Books bookImageURL="" bookLink="" displayType="icon" userID="sakusaku" />
+      <Books bookImageURL="" bookLink="" displayType="bookMark" userID="sakusaku" />
+      <Books bookImageURL="" bookLink="" displayType="bookOnly" userID="sakusaku" />
+      <Books bookImageURL="" bookLink="" displayType="icon" userID="sakusaku" />
+      <Books bookImageURL="" bookLink="" displayType="icon" userID="sakusaku" />
     </div>
   );
 };
