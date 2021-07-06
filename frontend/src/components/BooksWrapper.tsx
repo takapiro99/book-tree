@@ -11,14 +11,15 @@ const BooksWrapper = () => {
   useEffect(() => {
     const booksdata = getBooks("sakusaku", "icon")
     setBooks(booksdata)
-    // console.log(booksdata)
+    //console.log(booksdata)
   }, [])
 
   return (
     <div className={styles.books_wrapper}>
       {books.length && books.map((book) => {
-        <Books bookImageURL={book.bookImageURL} bookLink={book.bookLink} displayType={book.displayType} userID={book.userID} />
-      })}
+        return(
+        <Books bookImageURL={book.bookImageURL} bookLink={book.bookLink} displayType={book.displayType} userID={book.userID} key={book.userID}/>
+      )})}
     </div>
   );
 };
