@@ -3,7 +3,7 @@ import icon1 from "../assets/icon1.png"
 import fukidashi from "../assets/fukidashi.png"
 import greencloud from "../assets/greencloud.png"
 
-const Recommended_Sentence = () => {
+const RecommendedSentence = () => {
     return (
         <div>
             <div className={styles.icon}><img src={icon1} alt="TwitterIcon" /></div>
@@ -17,4 +17,4 @@ const Recommended_Sentence = () => {
     )
 }
 
-export default Recommended_Sentence
+export default RecommendedSentence

@@ -1,4 +1,4 @@
-import Recommended_Sentence from "../../components/Recommended_Sentence";
+import RecommendedSentence from "../../components/RecommendedSentence";
 import Reviewtree from "../../components/review_tree";
 import BookWithReview from "../../components/BookWithReview";
 import styles from "../../styles/Review.module.scss";
@@ -6,7 +6,7 @@ import globalStyles from "../../styles/Global.module.scss";
 
 const Review = () => {
     return <div className={globalStyles.wrapper}>
-        <Recommended_Sentence />
+        <RecommendedSentence />
         {/* 本の情報を複数渡す */}
         <Reviewtree />
         <div className="reviewpage-review">
