@@ -42,6 +42,7 @@ const Top = () => {
       </div>
   </div>
   </div>
+  <div className={styles.greenbar2}> </div>
   </div>);
 };
 export default Top;

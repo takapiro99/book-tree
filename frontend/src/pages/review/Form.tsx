@@ -6,17 +6,19 @@ import globalStyles from "../../styles/Global.module.scss";
 
 const Form = () => {
     return <div>
-    <div className="greenbar"></div>
+    <div className={styles.yellowgreenbar}></div>
 
     <div className={globalStyles.wrapper}>
         
-    <div className="reviewform">
+    <form className="reviewform">
         <div className={globalStyles.wrapper__title}>
         <img src="BOOKTREEを作る.svg" alt="BOOKTREEを作る" className={globalStyles.logoTitle} />
         </div> 
         <div className={`${styles.reviewformName} ${styles.blockbtwMd}`}>
             <div className={styles.reviewformName__block}>
-                <div className={styles.reviewformName__name}>Nameさん</div>
+                <div className={styles.reviewformName__namewrapper}>
+                    <div className={styles.reviewformName__name}>Nameさん</div>
+                </div>
                 <div className={styles.reviewformName__icon}></div>
                 
             </div>
@@ -49,7 +51,7 @@ const Form = () => {
         <div className={styles.reviewformSubmit}>
         <button className={styles.submitButton}>決定</button>
         </div>
-    </div>
+    </form>
     </div></div>
 }
 
