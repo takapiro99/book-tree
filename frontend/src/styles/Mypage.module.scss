@@ -1,0 +1,107 @@
+.mypageNews{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.mypageNews__news{
+    border: 1px solid black;
+    padding:1rem 4rem;
+    width: 40vw;
+
+}
+
+.mypageButtons{
+    margin-top: 20px;
+}
+
+.mypageButtons__button{
+    width:30%;
+    min-width: 200px;
+    margin: 5px 1rem;
+    font-size: 19px;
+    padding: 1rem 1rem;
+    border-radius: 30px;
+    border: 1px solid;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.buttonWhite{
+    background-color: yellowgreen;
+    color: white;
+    &:hover{
+    background-color: white;
+    color: yellowgreen;
+    border:1px solid yellowgreen
+    }
+}
+
+
+.buttonGray{
+    background-color: lightgray;
+    color: gray;
+    &:hover{
+    background-color: white;
+    color: black;
+    }
+}
+
+
+.button-white-S{
+    /* background-color: ; */
+    color: black;
+    width:155px;
+    min-width: 155px;
+    font-size: 16px;
+    padding: 3px 5px;
+    border-radius: 25px;
+    border: none;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+}
+.button-white-S:hover{
+    background-color: white;
+    color: black;
+}
+
+.mypage-tree{
+    display: flex;
+    justify-content: center; 
+    background-color: lightgray;
+    height: 40rem;
+    width: 100%;
+    
+}
+.mypage-tree-books{
+    padding: 9rem 2rem 4rem 2rem;
+    
+}
+
+
+.mypage-tree-books__books{
+    position: relative;
+    
+}
+
+.mypage-tree-books:nth-child(odd) {
+    margin-top: 80px;
+  }
+
+.mypage-tree-books__account{
+    position: absolute;
+    right: -2rem;;
+    bottom: -2rem;
+}
+
+.account-img{
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    border: 4px solid white;
+}
+.mypage-tree-books__account-link:hover{
+    opacity: 30%;
+    }
+

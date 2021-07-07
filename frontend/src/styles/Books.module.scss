@@ -1,11 +1,11 @@
 .books_wrapper{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .booksWithIcon{
-    padding: 9rem 2rem 4rem 2rem;
+    // padding: 9rem 2rem 4rem 2rem;
 
     .booksBlock{
         position: relative;
@@ -14,7 +14,7 @@
     .books{
         width:9rem;
         height:12rem;
-        margin: auto;
+        // margin: auto;
         background-color: gray;    
     &:hover{
         background-color: lightblue;
@@ -27,13 +27,49 @@
         bottom: -2rem;
     }
 
+
+}
+.booksWithIcon:nth-child(even) {
+    margin-top: 80px;
+}
+
+.booksBlock__account{
     .accountImg{
         width: 4rem;
         height: 4rem;
         border-radius: 50%;
         border: 4px solid white;
+        position: relative;
+        &:hover{          
+            opacity: 0.7; 
+            cursor: pointer;
+        }
     }
+    
+    &:before{
+        content:'';
+        position:absolute;
+        top:0;
+        left:0;
+        background-color:white;
+        width:98%;
+        height:96%;
+        border-radius:50%;
+        z-index:0;
+    }
+
 }
-.booksWithIcon:nth-child(odd) {
-    margin-top: 80px;
+
+.reviewpageReviewBook__bookMark{
+    position: absolute;
+    top: -1.2rem;
+    left:-1.9rem;
+}
+
+
+.bookMark{
+    width:4rem;
+    height:4rem;
+    border-radius: 50%;
+    background-color: #F9D555;
 }

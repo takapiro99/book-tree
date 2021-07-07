@@ -14,21 +14,11 @@ const Reviewtree = () => {
                 alt="reviewtree"
             />
             <p className={styles.sentence_1}>NEKOさん</p>
-            <p className={styles.sentence_2}>
-                北大OG　＋　文系からIT　＋　猫が好き
-            </p>
-            <div className={styles.icon_pic2}>
-                <img src={icon2} alt="TwitterIcon" />
-            </div>
-            <div className={styles.icon_pic1}>
-                <img src={icon1} alt="TwitterIcon" />
-            </div>
-            <div className={styles.fukidashi}>
-                <img src={fukidashi} alt="fukidashi" />
-                <p>フロントエンドがすごい人</p>
-            </div>
-            <div>
-                <BooksWrapper />
+            <p className={styles.sentence_2}>北大OG　＋　文系からIT　＋　猫が好き</p>
+            <div className={styles.icon_pic2}><img  src={icon2} alt="TwitterIcon" /></div>
+            <div className={styles.icon_pic1}><img  src={icon1} alt="TwitterIcon" /></div>
+            <div className={styles.booksBlockInReview}>
+            <BooksWrapper/>
             </div>
         </div>
     )

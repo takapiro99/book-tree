@@ -3,7 +3,7 @@ import Footer from './components/Footer'
 import Mypage from './pages/Mypage'
 import NotFound from './pages/NotFound'
 import SignIn from './pages/SignIn'
-import Top from './pages/Top'
+import Top from './pages/Top1'
 import BrandLogo from './components/BrandLogo'
 import Index from './pages/review'
 

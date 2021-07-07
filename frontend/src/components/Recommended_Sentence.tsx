@@ -6,7 +6,7 @@ import greencloud from "../assets/greencloud.png"
 const Recommended_Sentence = () => {
     return (
         <div>
-            <div className={styles.icon1}><img src={icon1} alt="TwitterIcon" /></div>
+            <div className={styles.icon}><img src={icon1} alt="TwitterIcon" /></div>
             <div className={styles.fukidashi}>
                 <img src={fukidashi} alt="fukidashi" />
                 <p>***がすごいあなたに</p>
