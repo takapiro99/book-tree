@@ -12,6 +12,7 @@ const AddReview = () => {
         <option selected　value="grapefruit">**＊を始めたい人におすすめ</option>
         <option value="lime">影響を受けたのはこの本！</option>
         <option value="coconut">難しいけどおすすめ</option>
+        <option value="orange">一番</option>
         </select>
         </div> 
         <input className={styles.reviewformAddreviewReview__review} placeholder="レビューを入力してください" />

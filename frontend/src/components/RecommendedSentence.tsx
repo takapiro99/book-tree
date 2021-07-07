@@ -5,16 +5,15 @@ import greencloud from "../assets/greencloud.png"
 
 const RecommendedSentence = () => {
     return (
-        <div>
+        <div className={styles.recommended}>
             <div className={styles.icon}><img src={icon1} alt="TwitterIcon" /></div>
-            <div className={styles.fukidashi}>
-                <img src={fukidashi} alt="fukidashi" />
-                <p>***がすごいあなたに</p>
-                <p>おすすめの本を教えてほしい！</p>
-            </div>
             <div className={styles.greencloud}><img src={greencloud} alt="cloud" /></div>
+            <div className={styles.fukidashi}>
+                <img src={fukidashi} alt="fukidashi" /> </div>
+            <p className={styles.sentence1}>***がすごいあなたに</p>
+            <p className={styles.sentence2}>おすすめの本を教えてほしい！</p>
         </div>
     )
 }
 
-export default RecommendedSentence
+export default RecommendedSentence;

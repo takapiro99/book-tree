@@ -14,7 +14,7 @@
 }
 
 .greenbar{
-    margin-top: 40px;
+    margin-top: 80px;
     width: 100vw;
     height: 3rem;
     transform: rotate(6deg); 
@@ -59,6 +59,7 @@
     flex-direction: column;
     // justify-content: center;
     // margin-right: 20px;
+    gap:30px;
 }
 
 .littletreeWrapper2{
@@ -67,6 +68,7 @@
     margin-top: 155px;
     // margin-left: 40px;
     // margin-right:50px;
+    gap:30px;
 }
 .littletreeWrapper3{
     display: flex;
@@ -74,6 +76,7 @@
     // justify-content: center;
     // margin-right: 20px;
     margin-top: 80px;
+    gap:30px;
 }
 
 .BookTreeForest{

@@ -1,14 +1,66 @@
-
-.reviewpageReview__title{
-    background-color: lightblue;
-    width: 100%;
-    padding: 1rem;
-    text-align: center;
+.reviewpageReview{
+    background-color: lightgray;
+    position: relative;
+    .yellowgreenbar{
+        // margin: 4rem 0;
+        position: absolute;
+        top:-7rem;
+        z-index:0;
+        width: 100vw;
+        height:15rem;
+        transform: rotate(8deg); 
+        background-color: lightgray;
+        }
+    .reviewWrapper2{
+            margin-top: 0rem;
+            margin-bottom: 5rem;
+            width: 100%;
+            position: relative;
+          }
+    .reviewBlock{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
 }
+
+.reviewWrapper1{
+    margin-top: 5rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0;
+    width: 100%;
+    position: relative;
+  }
+
+.reviewWrapper2{
+    margin-top: 0rem;
+    margin-bottom: 5rem;
+    padding:0 auto;
+    width: 100%;
+    position: relative;
+  }
+  
+.reviewpageReview__title{
+    width: 100%;
+    //padding: 1rem;
+    text-align: center;
+    }
+
+.yellowgreenbar{
+    // margin: 4rem 0;
+    position: absolute;
+    top:50%;
+    width: 100vw;
+    height:3rem;
+    transform: rotate(8deg); 
+    background-color: #6FA769;
+    }
 
 .reviewpageReviewBlock{
     margin:0 3rem;
 }
+
 
 // BookWithReviewに関するstyles
 .reviewpageReviewBlock{
@@ -17,8 +69,10 @@
     position: relative;
 }
 .reviewpageReviewBook{
+    flex:1;
     display: flex;
-    margin: 1.8rem 0 1.8rem 0.4rem;
+    margin-top: 2rem;
+    justify-content:center;
     position: relative;
 }
 
@@ -31,6 +85,8 @@
     background-color: gray;
     padding: 1rem 1rem 1rem 1.5rem;
     border-radius: 20px;
+    width: 80%;
+    max-width: 800px;
 }
 
 .reviewpageReviewContent__comment{
@@ -39,6 +95,8 @@
     background-color: gray;
     height: 10rem;
     border-radius: 20px;
+    width: 80%;
+    max-width: 800px;
 }
 
 .reviewpageReview{
@@ -46,3 +104,4 @@
     flex-direction: column;
     justify-content: center;
 }
+// BookWithReviewに関するstyles 終わり
