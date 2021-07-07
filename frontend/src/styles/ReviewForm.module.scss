@@ -73,6 +73,16 @@ h1{
     height:3rem;
     width:100%;
 }
+.yellowgreenbar{
+    // margin: 4rem 0;
+    width: 100vw;
+    transform: rotate(8deg); 
+    background-color: #6FA769;
+    position: absolute;
+    top:26rem;
+    height:4.7rem;
+    width:100%;
+}
 
 .reviewformName{
     margin-top: 1rem;
@@ -85,7 +95,7 @@ h1{
     margin: 0 20%;
     background-color: white;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
-    height:8rem;
+    height:9rem;
     color:black;
     border-radius: 80px;   
 }
@@ -97,14 +107,20 @@ h1{
     height:5.1rem;
     background-color: lightgray;
     border-radius:50%;
-    margin:1.4rem 3rem;
+    margin:1.8rem 5rem;
 }
-.reviewformName__name{
+.reviewformName__namewrapper{
     position: absolute;
-    top:3.2rem;
-    left:12rem;
-    font-size: 20px;
-    color: black;
+    top:3.5rem;
+    left: 15rem;
+    
+    .reviewformName__name{
+        font-weight: bold;
+        font-size: 24px;
+        color: black;
+        text-align: center;
+        letter-spacing: 1px;
+    }
 }
 
 .reviewform3keywords__example{

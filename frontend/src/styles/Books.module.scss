@@ -1,7 +1,7 @@
 .books_wrapper{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 .booksWithIcon{
@@ -23,8 +23,8 @@
 
     .booksBlock__account{
         position: absolute;
-        right: -2rem;;
-        bottom: -2rem;
+        right: -1.5rem;;
+        bottom: -1.5rem;
     }
 
 
@@ -35,8 +35,8 @@
 
 .booksBlock__account{
     .accountImg{
-        width: 4rem;
-        height: 4rem;
+        width: 3rem;
+        height: 3rem;
         border-radius: 50%;
         border: 4px solid white;
         position: relative;

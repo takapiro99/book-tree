@@ -18,12 +18,11 @@ const Books = (props: BooksProps) => {
     return (
         <div className={styles.booksWithIcon}>
             <div className={styles.booksBlock}>
-                
             {
                     props.displayType === "bookMark" && 
                     <div className={`${styles.bookMark} ${styles.reviewpageReviewBook__bookMark}`}></div>
                 }
-                <div className={styles.books}>book</div>
+                <a href={props.bookLink}><img src={props.bookImageURL} className={styles.books} alt="本の表紙画像"/></a>
                 {
                     props.displayType === "icon" &&
                     <div className={styles.booksBlock__account}>

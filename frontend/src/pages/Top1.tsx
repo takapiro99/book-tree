@@ -5,6 +5,7 @@ import StaffTree from "../assets/BOOKTREE.png"
 
 
 const Top = () => {
+  const today="8/1"
   return(<div>
     <div className={globalStyles.wrapper}>
       <div className={styles.topContent}>
@@ -14,6 +15,12 @@ const Top = () => {
           ***********************
         </div>
 
+      </div>
+    </div>
+    <div className={styles.greenbar}>
+      <div className={styles.greenbar__icon}>what's new?</div>
+      <div className={styles.circleDate}>
+        <div className={styles.circleDate__date}>{today}</div>
       </div>
     </div>
     <div className={styles.BookTreeForest}>
@@ -28,13 +35,14 @@ const Top = () => {
         <LittleTree />
         <LittleTree />
       </div>
-      <div className={styles.littletreeWrapper}>
+      <div className={styles.littletreeWrapper3}>
         <LittleTree />
         <LittleTree />
         <LittleTree />
       </div>
   </div>
   </div>
+  <div className={styles.greenbar2}> </div>
   </div>);
 };
 export default Top;
