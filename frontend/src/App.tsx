@@ -10,27 +10,27 @@ import Index from './pages/review'
 import {AuthProvider} from "./lib/AuthProvider";
 
 function App() {
-  return (
-    <AuthProvider>
-              <div className="App">
-            <BrowserRouter>
-                <BrandLogo />
-                <div className="mainBody">
-                    <Switch>
-                        <Route exact path="/" component={Top} />
-                        <Route exact path="/signin" component={SignIn} />
-                        {/* TODO: reviewsはnestさせて/reviews/newってする */}
-                        {/* <Route exact path="/reviews" component={SignIn} /> */}
-                        <Route path="/@:id" component={Mypage} />
-                        <Route path="/review" component={Index} />
-                        <Route component={NotFound} />
-                    </Switch>
-                </div>
-                <Footer />
-            </BrowserRouter>
-        </div>
-    </AuthProvider>
-  );
+    return (
+        <AuthProvider>
+            <div className="App">
+                <BrowserRouter>
+                    <BrandLogo />
+                    <div className="mainBody">
+                        <Switch>
+                            <Route exact path="/" component={Top} />
+                            <Route exact path="/signin" component={SignIn} />
+                            {/* TODO: reviewsはnestさせて/reviews/newってする */}
+                            {/* <Route exact path="/reviews" component={SignIn} /> */}
+                            <Route path="/@:id" component={Mypage} />
+                            <Route path="/review" component={Index} />
+                            <Route component={NotFound} />
+                        </Switch>
+                    </div>
+                    <Footer />
+                </BrowserRouter>
+            </div>
+        </AuthProvider>
+    );
 }
 
 export default App
