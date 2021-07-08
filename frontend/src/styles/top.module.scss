@@ -1,0 +1,103 @@
+.topContent{
+    display: flex;
+    flex-direction: row;
+}
+.topContent__staffTree{
+    flex: 1;
+    width: 64%;
+
+}
+.topContent__introduce{
+    flex: 1;
+    padding: 1rem 1rem 1rem 0;
+
+}
+
+.greenbar{
+    margin-top: 80px;
+    width: 100vw;
+    height: 3rem;
+    transform: rotate(6deg); 
+    background-color: #6FA769;
+    position: relative;
+    .greenbar__icon{
+        position: absolute;
+        top: -30px;
+        left: 26%;
+        font-size: 24px;
+        font-weight: 400;
+    }
+} 
+
+.greenbar2{
+    margin: 4rem 0;
+    width: 100vw;
+    height: 3rem;
+    transform: rotate(6deg); 
+    background-color: #6FA769;
+}
+
+.circleDate{
+    position: absolute;
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    background-color: #91B522;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+    left: 16%;
+    top: -60px;
+    .circleDate__date{
+        color: white;
+        padding: 1.8rem 1.6rem;
+        font-size: 30px;
+        font-weight: bold;
+    }    
+}
+
+.littletreeWrapper{
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    // margin-right: 20px;
+    gap:30px;
+}
+
+.littletreeWrapper2{
+    display: flex;
+    flex-direction: column;
+    margin-top: 155px;
+    // margin-left: 40px;
+    // margin-right:50px;
+    gap:30px;
+}
+.littletreeWrapper3{
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    // margin-right: 20px;
+    margin-top: 80px;
+    gap:30px;
+}
+
+.BookTreeForest{
+    margin: 0 1rem;
+    background-image: url("../assets/dot.svg");
+    background-repeat:space repeat;
+    background-size: 39%;  
+}
+
+.forestWrapper{
+    display: flex;
+    flex-direction: row;
+    margin-top:4rem;
+    gap: 4%; 
+    //justify-content: space-between;
+}
+
+@media screen and (max-width: 920px) {
+    .forestWrapper{
+        display: flex;
+        flex-direction: column;
+        
+    }
+} 

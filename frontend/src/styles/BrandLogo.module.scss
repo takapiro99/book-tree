@@ -5,19 +5,21 @@
     display: block;
     margin-right: auto;
     margin-left: auto;
+    
 }
 .BrandLogo_sentence{
-    font-size: 1vw;
     color: #6B6B6B;
     text-align: center;
     line-height:6px;
+    font-size: 1vw;
+
 //  レスポンシブでつくってく
 }
 .yellowbox{
     width: 18vw;
     height: 3.5vw;
     background-color: rgb(255, 214, 79);
-    border-radius: 30px;
+    border-radius: 100px;
     margin-top: 1.3vw;
     margin-right: auto;
     margin-left: auto;
@@ -26,80 +28,39 @@
     transition: 0.4s;
     box-shadow: 0.5px 0.5px 3px;
     position: relative;
+    .tukuttemiru{
+        margin-top: 1.3vw;
+        text-align:center;
+        width: 12vw;
+        position: absolute;
+        left:50%;
+        transform:translate(-50%);
+    
+    }
+    .tukuttemiru_yellow{
+        margin-top: 1.3vw;
+        text-align:center;
+        width: 12vw;
+        z-index: 1001;
+        position: absolute;
+        left:50%;
+        transform:translate(-50%);
+        opacity: 0;
+    }
+    &:hover{
+        background-color: #6B6B6B;
+        color:  rgb(255, 214, 79);
+    }
+    &:hover  .tukuttemiru_yellow{
+        opacity: 1;
+    }
+    &:hover  .tukuttemiru{
+        opacity: 0;
+    }
+    
 }
-.tukuttemiru{
-    margin-top: 1.3vw;
-    text-align:center;
-    width: 12vw;
-    position: absolute;
-    left:50%;
-    transform:translate(-50%);
 
-}
-.tukuttemiru_yellow{
-    margin-top: 1.3vw;
-    text-align:center;
-    width: 12vw;
-    z-index: 1001;
-    position: absolute;
-    left:50%;
-    transform:translate(-50%);
-    opacity: 0;
-}
-.yellowbox:hover{
-    background-color: #6B6B6B;
-    color:  rgb(255, 214, 79);
-}
-.yellowbox:hover  .tukuttemiru_yellow{
-    opacity: 1;
-}
-.yellowbox:hover  .tukuttemiru{
-    opacity: 0;
+.BrandLogo{
+    margin-top: 3rem;
 }
 
-
-@media screen and (max-width: 930px) {
-    .BrandLogo_sentence{
-        font-size: 12px;
-    }
-}
-@media screen and (max-width: 900px) {
-    .BrandLogo_sentence{
-        font-size: 10px;
-    }
-}
-@media screen and (max-width: 780px) {
-    .BrandLogo_sentence{
-        font-size: 9px;
-    }
-}
-@media screen and (max-width: 750px) {
-    .BrandLogo_sentence{
-        font-size: 8px;
-    }
-}
-@media screen and (max-width: 930px) {
-    .BrandLogo_sentence{
-        font-size: 12px;
-    }
-}
-@media screen and (max-width: 930px) {
-    .BrandLogo_sentence{
-        font-size: 12px;
-    }
-}
-@media screen and (max-width: 930px) {
-    .BrandLogo_sentence{
-        font-size: 12px;
-    }
-}
-@media screen and (max-width: 930px) {
-    .BrandLogo_sentence{
-        font-size: 12px;
-    }
-}
-@media screen and (max-width: 350px) {
-    .BrandLogo_sentence{
-        font-size: 1%;
-    }
-}
