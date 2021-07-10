@@ -26,9 +26,9 @@ const Mypage = () => {
     </div>
 
     <div className={styles.mypageButtons}>
-        <button className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}>レビューを作成する</button>
-        <button className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}>レビューをお願いする</button>
-        <button className={`${styles.mypageButtons__button} ${styles.buttonGray}`}>BOOK TREEを削除する</button>
+        <button className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}><a>レビューを作成する</a></button>
+        <button className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}><a>レビューをお願いする</a></button>
+        <button className={`${styles.mypageButtons__buttonGray} ${styles.buttonGray}`}><a>BOOK TREEを削除する</a></button>
     </div>
     </div>
 

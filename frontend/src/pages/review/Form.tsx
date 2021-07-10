@@ -7,12 +7,13 @@ import { BooksProps } from '../../components/Books';
 import axios from 'axios';
 import useDebounce from '../../lib/useDebounce'
 
-    // インターフェース
+
 interface IData {
-        threeWords: string[]
-        books:BooksProps[]
+        threeWords: string[] 
+        books:BooksProps[] //検索結果
+        selectedBooks:string[] //レビュー用に選ばれたBooks
       }
-      // 初期データ
+
 const initialData: IData = {
         threeWords: [],
         books:[{
@@ -21,6 +22,7 @@ const initialData: IData = {
         bookLink:"",
         userID:"",
         }],
+        selectedBooks:[],
       }
 
 const Form = () => {
@@ -101,10 +103,10 @@ const Form = () => {
             </div>
         </div>
         {/* {
-            data.books.length && data.selectedBooks.map((book) =>{
+            data.selectedBooks.length && data.selectedBooks.map((book) =>{
                 return(
                     <AddReview                             
-                    bookImageURL={data.book.bookImageURL}
+                    bookImageURL={data.selectedBook.bookImageURL}
                     bookLink={data.book.bookLink}
                     displayType={data.book.displayType}
                     userID={data.book.userID}

@@ -1,21 +1,66 @@
 .reviewpageReview{
-    background-color: lightgray;
+    //background-color: lightgray;
     position: relative;
-    .yellowgreenbar{
-        // margin: 4rem 0;
+    // .yellowgreenbar{
+    //     // margin: 4rem 0;
+    //     position: absolute;
+    //     top:-7rem;
+    //     z-index:0;
+    //     width: 100vw;
+    //     height:15rem;
+    //     transform: rotate(8deg); 
+    //     background-color: lightgray;
+    //     }
+    &::before {
+        content: "";
         position: absolute;
-        top:-7rem;
-        z-index:0;
-        width: 100vw;
-        height:15rem;
-        transform: rotate(8deg); 
-        background-color: lightgray;
-        }
+        width: 100%;
+        height: 100%;
+        top: 5%;
+        right: 0;
+        clip-path: polygon(0 0, 100% 13%, 100% 100%, 0% 100%);
+        background-color: lightcyan;
+        z-index: -1;
+      }
+        
     .reviewWrapper2{
             margin-top: 0rem;
             margin-bottom: 5rem;
             width: 100%;
             position: relative;
+            .reviewUserBlock{
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                transform: rotate(5deg); 
+                margin: 0 0 0 9%;
+                position: relative;
+                .icon{
+                    padding: 5rem;
+                    width: 4rem;
+                    height: 4rem;
+                    border-radius: 50%;
+                    background-color: lightpink;
+                }
+                .reviewUserName{
+                    display: inline-block;
+                    padding: 4% 1% 0 6%;
+                    //background-color: lightslategray;
+                    // display: flex;
+                    // flex-direction: column;
+                    // text-align: left;
+                    .reviewUserName__name{
+                        font-size: 47px;
+                        letter-spacing: 2px;
+                        font-weight: bold;
+                        }
+                }
+                .reviewUserKeywords{
+                    display: inline-block;
+                    font-size:20px;
+                    padding: 6rem 5% 0 5%;
+                }
+            }
           }
     .reviewBlock{
         display: flex;
@@ -23,6 +68,8 @@
         justify-content: space-between;
     }
 }
+
+
 
 .reviewWrapper1{
     margin-top: 5rem;
@@ -33,19 +80,7 @@
     position: relative;
   }
 
-.reviewWrapper2{
-    margin-top: 0rem;
-    margin-bottom: 5rem;
-    padding:0 auto;
-    width: 100%;
-    position: relative;
-  }
-  
-.reviewpageReview__title{
-    width: 100%;
-    //padding: 1rem;
-    text-align: center;
-    }
+
 
 .yellowgreenbar{
     // margin: 4rem 0;
@@ -71,8 +106,8 @@
 .reviewpageReviewBook{
     flex:1;
     display: flex;
-    margin-top: 2rem;
-    justify-content:center;
+    margin: 2rem 0rem 2rem 6rem;
+    justify-content: center;
     position: relative;
 }
 
