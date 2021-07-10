@@ -1,5 +1,4 @@
-
-.flag_sentence{
+.flag_sentence {
     position: relative;
     width: 20vw;
     left: 15vw;
@@ -7,28 +6,27 @@
     margin-bottom: 10px;
     cursor: pointer;
 
-    .littletree_pic{
-        width:100%;
+    .littletree_pic {
+        width: 100%;
         // メイン画像の位置を動かす時
         z-index: 1000;
     }
-    .flag_sentence_1{
+    .flag_sentence_1 {
         position: absolute;
         top: 2vw;
-        left:24%;
+        left: 24%;
         font-size: 2vw;
         text-align: center;
     }
-    .flag_sentence_2{
+    .flag_sentence_2 {
         position: absolute;
         top: 6vw;
-        left:35%;
+        left: 35%;
         font-size: 1.5vw;
         text-align: center;
-
     }
 }
-.icon_pic{
+.icon_pic {
     position: absolute;
     border-radius: 50%;
     width: 6vw;
@@ -36,27 +34,27 @@
     left: 0vw;
     top: 12vw;
     border: solid 0.5vw rgb(255, 214, 79);
-    img{
-        position:relative;
-        width:100%;
-        height:100%;
+    img {
+        position: relative;
+        width: 100%;
+        height: 100%;
         border-radius: 50%;
-        z-index:1000;
-        &:hover{          
-            opacity: 0.7; 
+        z-index: 1000;
+        &:hover {
+            opacity: 0.7;
             cursor: pointer;
         }
     }
-    &:before{
-        content:'';
-        position:absolute;
-        top:0;
-        left:0;
-        background-color:white;
-        width:100%;
-        height:100%;
-        border-radius:50%;
-        z-index:0;
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: white;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        z-index: 0;
     }
 }
 
@@ -80,13 +78,13 @@
 //     .icon_pic{
 //         top: 40vw;
 //     }
-    
+
 // }
 // @media screen and (max-width: 610px) {
 //     .icon_pic{
 //         top: 42vw;
 //     }
-    
+
 // }
 // @media screen and (max-width: 550px) {
 //     .icon_pic{
@@ -137,4 +135,3 @@
 //         top: 2vw;
 //     }
 // }
-

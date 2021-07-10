@@ -1,4 +1,4 @@
-.reviewpageReview{
+.reviewpageReview {
     //background-color: lightgray;
     position: relative;
     // .yellowgreenbar{
@@ -8,11 +8,11 @@
     //     z-index:0;
     //     width: 100vw;
     //     height:15rem;
-    //     transform: rotate(8deg); 
+    //     transform: rotate(8deg);
     //     background-color: lightgray;
     //     }
     &::before {
-        content: "";
+        content: '';
         position: absolute;
         width: 100%;
         height: 100%;
@@ -21,102 +21,97 @@
         clip-path: polygon(0 0, 100% 13%, 100% 100%, 0% 100%);
         background-color: lightcyan;
         z-index: -1;
-      }
-        
-    .reviewWrapper2{
-            margin-top: 0rem;
-            margin-bottom: 5rem;
-            width: 100%;
+    }
+
+    .reviewWrapper2 {
+        margin-top: 0rem;
+        margin-bottom: 5rem;
+        width: 100%;
+        position: relative;
+        .reviewUserBlock {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            transform: rotate(5deg);
+            margin: 0 0 0 9%;
             position: relative;
-            .reviewUserBlock{
-                display: flex;
-                flex-direction: row;
-                flex-wrap: wrap;
-                transform: rotate(5deg); 
-                margin: 0 0 0 9%;
-                position: relative;
-                .icon{
-                    padding: 5rem;
-                    width: 4rem;
-                    height: 4rem;
-                    border-radius: 50%;
-                    background-color: lightpink;
-                }
-                .reviewUserName{
-                    display: inline-block;
-                    padding: 4% 1% 0 6%;
-                    //background-color: lightslategray;
-                    // display: flex;
-                    // flex-direction: column;
-                    // text-align: left;
-                    .reviewUserName__name{
-                        font-size: 47px;
-                        letter-spacing: 2px;
-                        font-weight: bold;
-                        }
-                }
-                .reviewUserKeywords{
-                    display: inline-block;
-                    font-size:20px;
-                    padding: 6rem 5% 0 5%;
+            .icon {
+                padding: 5rem;
+                width: 4rem;
+                height: 4rem;
+                border-radius: 50%;
+                background-color: lightpink;
+            }
+            .reviewUserName {
+                display: inline-block;
+                padding: 4% 1% 0 6%;
+                //background-color: lightslategray;
+                // display: flex;
+                // flex-direction: column;
+                // text-align: left;
+                .reviewUserName__name {
+                    font-size: 47px;
+                    letter-spacing: 2px;
+                    font-weight: bold;
                 }
             }
-          }
-    .reviewBlock{
+            .reviewUserKeywords {
+                display: inline-block;
+                font-size: 20px;
+                padding: 6rem 5% 0 5%;
+            }
+        }
+    }
+    .reviewBlock {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
     }
 }
 
-
-
-.reviewWrapper1{
+.reviewWrapper1 {
     margin-top: 5rem;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 0;
     width: 100%;
     position: relative;
-  }
-
-
-
-.yellowgreenbar{
-    // margin: 4rem 0;
-    position: absolute;
-    top:50%;
-    width: 100vw;
-    height:3rem;
-    transform: rotate(8deg); 
-    background-color: #6FA769;
-    }
-
-.reviewpageReviewBlock{
-    margin:0 3rem;
 }
 
+.yellowgreenbar {
+    // margin: 4rem 0;
+    position: absolute;
+    top: 50%;
+    width: 100vw;
+    height: 3rem;
+    transform: rotate(8deg);
+    background-color: #6fa769;
+}
+
+.reviewpageReviewBlock {
+    margin: 0 3rem;
+}
 
 // BookWithReviewに関するstyles
-.reviewpageReviewBlock{
+.reviewpageReviewBlock {
     display: flex;
     margin: 3rem 3rem;
     position: relative;
 }
-.reviewpageReviewBook{
-    flex:1;
+.reviewpageReviewBook {
+    flex: 1;
     display: flex;
     margin: 2rem 0rem 2rem 6rem;
     justify-content: center;
     position: relative;
 }
 
-.reviewpageReviewContent{
-    flex:3;
-    margin:0 0 0 3rem ;
+.reviewpageReviewContent {
+    flex: 3;
+    margin: 0 0 0 3rem;
 }
 
-.reviewpageReviewContent__reason{
+.reviewpageReviewContent__reason {
     background-color: gray;
     padding: 1rem 1rem 1rem 1.5rem;
     border-radius: 20px;
@@ -124,7 +119,7 @@
     max-width: 800px;
 }
 
-.reviewpageReviewContent__comment{
+.reviewpageReviewContent__comment {
     margin-top: 1rem;
     padding: 1rem 1rem 1rem 1.5rem;
     background-color: gray;
@@ -134,7 +129,7 @@
     max-width: 800px;
 }
 
-.reviewpageReview{
+.reviewpageReview {
     display: flex;
     flex-direction: column;
     justify-content: center;
