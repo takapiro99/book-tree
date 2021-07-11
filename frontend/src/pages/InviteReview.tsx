@@ -1,23 +1,26 @@
 import globalStyles from '../styles/Global.module.scss'
-import styles from "../styles/createLink.module.scss"
+import styles from "../styles/InviteReview.module.scss"
 import Iconpic from '../components/Iconpic'
+import greencloud from '../assets/greencloud.png'
 
-const CreateLink = () => {
+const InviteReview = () => {
     return <div className={globalStyles.wrapper}>
 
         <div className={styles.nominateBlock}>
             <div className={styles.nominateReasonWrapper}>
-            <h1 className={styles.nominateBlock__reason}>
-                デザインがすごいあなたに<br/>おすすめの本をとっても教えてほしーーーーーい！
+            <h1 className={styles.nominateBlock__reason}>デザインがすごいあなたに<br/>おすすめの本を教えて<br/>ほしーーーーーい！！
             </h1>
             </div>
 
             <div className={styles.nominateFromWho}>
                 <Iconpic />
+                
+                <img src={greencloud} alt="cloud" className={styles.greenCloud}/>
+                
             </div>
 
             <div　className={styles.nominateExplation}>
-                あなたがレビューを書いてくれると＊＊＊さんのBOOKTREEにあなたのレビューが実ります。
+                レビューを書いてくれると＊＊＊さんのBOOKTREEにあなたのレビューが実ります。
             </div>
         
 
@@ -32,4 +35,4 @@ const CreateLink = () => {
     </div>
 }
 
-export default CreateLink
+export default InviteReview;

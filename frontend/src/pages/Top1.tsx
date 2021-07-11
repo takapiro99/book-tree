@@ -19,14 +19,35 @@ const Top = () => {
                         ***********************
                     </div>
                 </div>
-            </div>
-            <div className={styles.greenbar}>
-                <div className={styles.greenbar__icon}>what's new?</div>
-                <div className={styles.circleDate}>
-                    <div className={styles.circleDate__date}>{today}</div>
+                <h1 className={styles.topContentSteps__title}>どんなことができる？</h1>
+                <div className={styles.topContent__steps}>
+                    
+                    <div className={styles.topContentSteps__block}>
+                        <div className={styles.topContentSteps__photo}>photo</div>
+                        <div className={styles.topContentSteps__explain}>BOOK TREEをつくろう</div>
+                        <div className={styles.topContentSteps__explainS}>無料でアカウントを作成して、BOOKTREEをつくろう</div>
+                    </div>
+                    <div className={styles.topContentSteps__block}>
+                        <div className={styles.topContentSteps__photo}>photo</div>
+                        <div className={styles.topContentSteps__explain}>すごい人にお願いして・・・</div>
+                        <div className={styles.topContentSteps__explainS}>あなたの周りのすごいひとにおすすめの本を教えてもらおう</div>
+                    </div>
+                    <div className={styles.topContentSteps__block}>
+                        <div className={styles.topContentSteps__photo}>photo</div>
+                        <div className={styles.topContentSteps__explain}>たくさん本を実らせよう！</div>
+                        <div className={styles.topContentSteps__explainS}>おすすめの本を教えてもらたら、その本があなたのツリーに実るよ。自分がお願いしてないすごいひとのレビューも実っちゃうかも？！</div>
+                    </div>
+
                 </div>
             </div>
+            <div className={styles.greenbar}>
+                
+                {/* <div className={styles.circleDate}>
+                    <div className={styles.circleDate__date}>{today}</div>
+                </div> */}
+            </div>
             <div className={styles.BookTreeForest}>
+            <h1 className={styles.BookTreeForest__title}>what's new?</h1>
                 <div className={styles.forestWrapper}>
                     <div className={styles.littletreeWrapper}>
                         <LittleTree />
