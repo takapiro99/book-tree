@@ -1,0 +1,28 @@
+.createLinkTitle{
+    text-align: center;
+}
+.createLinkBlock{
+    display: flex;
+    justify-content: center;
+    padding: 3vw 1vw;
+    margin:1rem 20%;
+    border: 1px solid black;
+    border-radius: 50px;
+    font-size: 20px;
+   // font-weight: bold;
+}
+.LinkCreated{
+    width: 80%;
+    min-width: 400px;
+    border: 1px solid green;
+    height: 3rem;
+    margin: 0 10%;
+    position: relative;
+    .LinkCreated__share{
+        text-align: right;
+        position: absolute;
+        top: 30%;
+        right: 2%;
+    }
+
+}

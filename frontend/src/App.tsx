@@ -10,6 +10,7 @@ import Delete from './pages/Delete'
 
 import { AuthProvider } from './lib/AuthProvider'
 import InviteReview from './pages/InviteReview'
+import CreateLink from './pages/ CreateLink'
 
 function App() {
     return (
@@ -29,6 +30,8 @@ function App() {
                             <Route path="/delete" component={Delete} />
                             {/* 招待リンクをアクセスしたときのやつ↓ これで良い？ */}
                             <Route path="/invitation" component={InviteReview} />
+                            {/* 招待リンク作るところ */}
+                            <Route path="/createLink" component={CreateLink} />
                             <Route component={NotFound} />
                         </Switch>
                     </div>
