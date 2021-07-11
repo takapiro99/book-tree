@@ -22,6 +22,5 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig)
 firebase.auth().languageCode = 'ja'
-export const provider = new firebase.auth.TwitterAuthProvider()
 
 export default firebase
