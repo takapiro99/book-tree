@@ -1,62 +1,58 @@
-
-h1{
+h1 {
     margin: 0;
     padding: 0;
 }
 
 // .wrapper{
 //     margin: 5rem 13rem 5rem 13rem;
-    
+
 // }
-.wrapper{
+.wrapper {
     margin: 5rem auto 0 auto;
     max-width: 1580px;
     width: 100%;
     position: relative;
-  }
-  
-  @media only screen and (min-width: 601px) {
+}
+
+@media only screen and (min-width: 601px) {
     .wrapper {
-      width: 85%;
+        width: 85%;
     }
-  }
-  
-  @media only screen and (min-width: 993px) {
+}
+
+@media only screen and (min-width: 993px) {
     .wrapper {
-      width: 70%;
+        width: 70%;
     }
-  }
-  
-.wrapper__title{
+}
+
+.wrapper__title {
     text-align: center;
 }
 
-.logoTitle{
+.logoTitle {
     width: 14rem;
     /* margin:0 30%; */
-
 }
 
-
-.wrapper-content{
+.wrapper-content {
     padding: 5rem 7rem;
 }
 
-
-.fotter{
+.fotter {
     text-align: center;
-    margin:4rem;
+    margin: 4rem;
     position: relative;
 }
 
-.footer-img{
+.footer-img {
     position: absolute;
-    left:-5rem;
+    left: -5rem;
     top: -4rem;
     width: 24%;
 }
 
-.blockbtwMd{
+.blockbtwMd {
     $margin: 4rem 0 !global;
-    margin:$margin;
+    margin: $margin;
 }

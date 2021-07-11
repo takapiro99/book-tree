@@ -1,5 +1,5 @@
 const ThumbnailAndTwitterIcon = () => {
-  return <div>ここがサムネだよ～～</div>;
-};
+    return <div>ここがサムネだよ～～</div>
+}
 
-export default ThumbnailAndTwitterIcon;
+export default ThumbnailAndTwitterIcon
