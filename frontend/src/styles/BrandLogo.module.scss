@@ -1,66 +1,91 @@
-
-.booktree_logo{
-    width: 30vw;
-    text-align: center;
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-    
-}
-.BrandLogo_sentence{
-    color: #6B6B6B;
-    text-align: center;
-    line-height:6px;
-    font-size: 1vw;
-
-//  レスポンシブでつくってく
-}
-.yellowbox{
-    width: 18vw;
-    height: 3.5vw;
-    background-color: rgb(255, 214, 79);
-    border-radius: 100px;
-    margin-top: 1.3vw;
-    margin-right: auto;
-    margin-left: auto;
-    text-align:center;
-    line-height:3.5vw;
-    transition: 0.4s;
-    box-shadow: 0.5px 0.5px 3px;
-    position: relative;
-    .tukuttemiru{
-        margin-top: 1.3vw;
-        text-align:center;
-        width: 12vw;
-        position: absolute;
-        left:50%;
-        transform:translate(-50%);
-    
-    }
-    .tukuttemiru_yellow{
-        margin-top: 1.3vw;
-        text-align:center;
-        width: 12vw;
-        z-index: 1001;
-        position: absolute;
-        left:50%;
-        transform:translate(-50%);
-        opacity: 0;
-    }
-    &:hover{
-        background-color: #6B6B6B;
-        color:  rgb(255, 214, 79);
-    }
-    &:hover  .tukuttemiru_yellow{
-        opacity: 1;
-    }
-    &:hover  .tukuttemiru{
-        opacity: 0;
-    }
-    
-}
-
 .BrandLogo{
-    margin-top: 3rem;
+    position: fixed;
+    width: 100%;
+    height: 5vw;
+    background-color: #ffebc6;
+    top: 0;
+    z-index: 10000;
+    opacity: 0.8;
 }
+.booktree_logo{
+    position: absolute;
+    width: 13vw;
+    top: 1.5vw;
+    left: 1.5vw;
+}
+ul{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    justify-content:space-around;
+    margin:0;
+    padding: 1.5vw;
+    cursor: pointer;
+    margin-left: 70vw;
+    li{
+        font-size: 1.3vw;
+        position: relative;
+    }
+    li::after {
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        content: '';
+        width: 100%;
+        height: 2px;
+        background: black;
+        transform: scale(0, 1);
+        transform-origin: left top;
+        transition: transform .3s;
+    }
+    li:hover::after {
+        transform: scale(1, 1);
+    }
+    }
+ 
 
+
+// .yellowbox{
+//     width: 18vw;
+//     height: 3.5vw;
+//     background-color: rgb(255, 214, 79);
+//     border-radius: 100px;
+//     margin-top: 1.3vw;
+//     margin-right: auto;
+//     margin-left: auto;
+//     text-align:center;
+//     line-height:3.5vw;
+//     transition: 0.4s;
+//     box-shadow: 0.5px 0.5px 3px;
+//     position: relative;
+//     .tukuttemiru{
+//         margin-top: 1.3vw;
+//         text-align:center;
+//         width: 12vw;
+//         position: absolute;
+//         left:50%;
+//         transform:translate(-50%);
+    
+//     }
+//     .tukuttemiru_yellow{
+//         margin-top: 1.3vw;
+//         text-align:center;
+//         width: 12vw;
+//         z-index: 1001;
+//         position: absolute;
+//         left:50%;
+//         transform:translate(-50%);
+//         opacity: 0;
+//     }
+//     &:hover{
+//         background-color: #6B6B6B;
+//         color:  rgb(255, 214, 79);
+//     }
+//     &:hover  .tukuttemiru_yellow{
+//         opacity: 1;
+//     }
+//     &:hover  .tukuttemiru{
+//         opacity: 0;
+//     }
+    
+// }
