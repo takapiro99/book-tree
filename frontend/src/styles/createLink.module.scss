@@ -1,0 +1,56 @@
+.nominateBlock{
+    //background-color: lightgray;
+    padding: 1vh 5vw;
+    .nominateReasonWrapper{
+
+    .nominateBlock__reason{
+        background-color: aqua;
+        font-size: 4rem;
+        display: inline-block;
+    }
+    // &::after{
+    //     content: "";
+    //     border-right: 1px solid black;
+    //     // background-color: black;
+    //     // width: 1rem;
+    //     // height: 1rem;
+    //     transform: rotate(10deg);
+
+    // }
+    // &::before{
+    //     content: "";
+    //     border-right: 1px solid black;
+    //     // background-color: black;
+    //     // width: 1rem;
+    //     // height: 1rem;
+    //     transform: rotate(10deg);
+
+    // }
+
+}
+    .nominateFromWho{
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+
+    }
+    .nominateExplation{
+        margin: 2rem 0;
+        text-align: center;
+    }
+
+
+
+
+    .reviewSteps{
+        margin: 1rem 0;
+        background-color: white;
+        background-color: blue;
+    }
+
+
+    .accontCreateFromRecom{
+        margin: 1rem 0;
+        background-color: aqua;
+    }
+}
