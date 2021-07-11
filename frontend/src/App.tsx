@@ -7,7 +7,7 @@ import Top from './pages/Top1'
 import BrandLogo from './components/BrandLogo'
 import Index from './pages/review'
 
-import {AuthProvider} from "./lib/AuthProvider";
+import { AuthProvider } from './lib/AuthProvider'
 
 function App() {
     return (
@@ -30,7 +30,7 @@ function App() {
                 </BrowserRouter>
             </div>
         </AuthProvider>
-    );
+    )
 }
 
 export default App

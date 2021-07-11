@@ -11,16 +11,16 @@ import 'firebase/auth'
 import 'firebase/firestore'
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAhAboU5u76UAidJnBdSJJ82dIpz_VjUas",
-    authDomain: "book-tree--dev.firebaseapp.com",
-    projectId: "book-tree--dev",
-    storageBucket: "book-tree--dev.appspot.com",
-    messagingSenderId: "664873500340",
-    appId: "1:664873500340:web:0a00c42b344849ff4c21e1",
-    measurementId: "G-LSXL0EBCF4"
-};
+    apiKey: 'AIzaSyAhAboU5u76UAidJnBdSJJ82dIpz_VjUas',
+    authDomain: 'book-tree--dev.firebaseapp.com',
+    projectId: 'book-tree--dev',
+    storageBucket: 'book-tree--dev.appspot.com',
+    messagingSenderId: '664873500340',
+    appId: '1:664873500340:web:0a00c42b344849ff4c21e1',
+    measurementId: 'G-LSXL0EBCF4'
+}
 
-firebase.initializeApp(firebaseConfig);
-firebase.auth().languageCode = "ja";
+firebase.initializeApp(firebaseConfig)
+firebase.auth().languageCode = 'ja'
 
 export default firebase
