@@ -1,120 +1,119 @@
-
 @media (min-width: 300px) {
-    .body{
+    .body {
         font-size: 4px;
     }
-    }
+}
 @media (min-width: 600px) {
-    .body{
+    .body {
         font-size: 8px;
     }
-    }
+}
 @media (max-width: 1000px) {
     .body {
         font-size: 20px;
     }
+}
+@media screen and (max-width: 920px) {
+    .reviewform3keywords__list {
+        display: flex;
+        flex-direction: column;
     }
-@media screen and (max-width: 920px){
-        .reviewform3keywords__list{
-            display: flex;
-            flex-direction: column;
-        }
-            .reviewform__plus{
-             margin: 3px 120px;
-            }
+    .reviewform__plus {
+        margin: 3px 120px;
+    }
 }
 
 /* ここから下はglobalにしたい */
 
-h1{
+h1 {
     margin: 0;
     padding: 0;
 }
 
-.wrapper{
+.wrapper {
     margin: 5rem 13rem 5rem 13rem;
     position: relative;
 }
-.wrapper__title{
+.wrapper__title {
     text-align: center;
 }
 
-.logo-title{
+.logo-title {
     width: 14rem;
     /* margin:0 30%; */
 }
 
-.wrapper-content{
+.wrapper-content {
     padding: 5rem 7rem;
 }
 
-.fotter{
+.fotter {
     text-align: center;
-    margin:4rem;
+    margin: 4rem;
     position: relative;
 }
 
-.footer-img{
+.footer-img {
     position: absolute;
-    left:-5rem;
+    left: -5rem;
     top: -4rem;
     width: 24%;
 }
 
-.blockbtwMd{
-    margin: 4rem 0 ;
+.blockbtwMd {
+    margin: 4rem 0;
 }
 /* ここから上はglobalにしたい */
 
-.greenbar{
+.greenbar {
     /* background-image: url("黄緑バー.svg"); */
     position: absolute;
-    top:25.3rem;
-    height:3rem;
-    width:100%;
+    top: 25.3rem;
+    height: 3rem;
+    width: 100%;
 }
-.yellowgreenbar{
+.yellowgreenbar {
     // margin: 4rem 0;
     width: 100vw;
-    transform: rotate(8deg); 
-    background-color: #6FA769;
+    transform: rotate(8deg);
+    background-color: #6fa769;
     position: absolute;
-    top:26rem;
-    height:4.7rem;
-    width:100%;
+    top: 26rem;
+    height: 4.7rem;
+    width: 100%;
 }
 
-.reviewformName{
+.reviewformName {
     margin-top: 1rem;
     display: flex;
 }
-.reviewformName__block{
+.reviewformName__block {
     flex: 1;
     display: block;
     position: relative;
     margin: 0 20%;
     background-color: white;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
-    height:9rem;
-    color:black;
-    border-radius: 80px;   
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    height: 9rem;
+    color: black;
+    border-radius: 80px;
 }
 
-.reviewformName__icon{
+.reviewformName__icon {
     position: absolute;
-    top:0rem;
-    width:5.1rem;
-    height:5.1rem;
+    top: 0rem;
+    width: 5.1rem;
+    height: 5.1rem;
     background-color: lightgray;
-    border-radius:50%;
-    margin:1.8rem 5rem;
+    border-radius: 50%;
+    margin: 1.8rem 5rem;
 }
-.reviewformName__namewrapper{
+.reviewformName__namewrapper {
     position: absolute;
-    top:3.5rem;
+    top: 3.5rem;
     left: 15rem;
-    
-    .reviewformName__name{
+
+    .reviewformName__name {
         font-weight: bold;
         font-size: 24px;
         color: black;
@@ -123,95 +122,95 @@ h1{
     }
 }
 
-.reviewform3keywords__example{
+.reviewform3keywords__example {
     margin-bottom: 0.7rem;
 }
 
-.reviewform3keywords__list{
+.reviewform3keywords__list {
     display: flex;
     flex-direction: row;
 }
 
-.reviewform3keywords__3box{
-background-color: lightgray;
-width: 30%;
-min-width: 240px;
-height:3rem;
-border:1px solid #707070;
+.reviewform3keywords__3box {
+    background-color: lightgray;
+    width: 30%;
+    min-width: 240px;
+    height: 3rem;
+    border: 1px solid #707070;
 }
-.reviewform__plus{
- margin:auto 1rem;   
+.reviewform__plus {
+    margin: auto 1rem;
 }
-.reviewformBookselect__block{
-    width:auto;
-    height:19rem;
+.reviewformBookselect__block {
+    width: auto;
+    height: 19rem;
     padding: 2rem;
-    border:1px solid black;
+    border: 1px solid black;
 }
-.reviewformBookselect__input{
-    width:30rem;
-    height:2rem;
-    margin-bottom:0.3rem;
-    }
+.reviewformBookselect__input {
+    width: 30rem;
+    height: 2rem;
+    margin-bottom: 0.3rem;
+}
 
-.reviewformBookselectResult{
+.reviewformBookselectResult {
     display: flex;
     flex-direction: row;
 }
 
-.reviewform-bookselect-result__books{
-    width:9rem;
-    height:12rem;
+.reviewform-bookselect-result__books {
+    width: 9rem;
+    height: 12rem;
     background-color: gray;
-    margin:1rem 1rem 1rem 0;
+    margin: 1rem 1rem 1rem 0;
 }
 
-.reviewformSubmit{
+.reviewformSubmit {
     display: flex;
     justify-content: center;
 }
 
-.submitButton{
-    background-color: #F9D555;
+.submitButton {
+    background-color: #f9d555;
     color: black;
     border-radius: 40px;
     width: 10rem;
     height: 2.5rem;
-    margin-left:auto;
+    margin-left: auto;
     margin-right: auto;
-    border-color:  #F9D555;
+    border-color: #f9d555;
     font-size: 18px;
-    font-weight:bold;
+    font-weight: bold;
     letter-spacing: 2px;
-    &:hover{
-    background-color: #6B6B6B;
-    border-color: #6B6B6B;
-    color:#F9D555;
+    &:hover {
+        background-color: #6b6b6b;
+        border-color: #6b6b6b;
+        color: #f9d555;
     }
 }
 
 // For AddReview Component
 
-.reviewformAddreview{
+.reviewformAddreview {
     display: flex;
     flex-direction: row;
 }
 
-.reviewformAddreviewBooks{
+.reviewformAddreviewBooks {
     flex: 1;
-    margin:2rem 2rem 2rem 4rem;
+    margin: 2rem 2rem 2rem 4rem;
 }
-.reviewformAddreviewBooks__books{
-    width:9rem;
-    height:12rem;
+.reviewformAddreviewBooks__books {
+    width: 9rem;
+    height: 12rem;
     margin: auto;
     background-color: gray;
 }
-.reviewformAddreviewReview{
-    flex:3;
+.reviewformAddreviewReview {
+    flex: 3;
     margin-top: 0rem;
 }
-.reviewformAddreviewReview__review{
+.reviewformAddreviewReview__review {
     height: 13rem;
     width: 98%;
 }

@@ -5,6 +5,7 @@ import tukuttemiru_yellow from "../assets/tukuttemiru_yellow.png";
 
 import styles from "../styles/BrandLogo.module.scss";
 
+import styles from '../styles/BrandLogo.module.scss'
 
 const BrandLogo = () => {
   return(
@@ -28,5 +29,4 @@ const BrandLogo = () => {
   );
 };
 
-export default BrandLogo;
-  
+export default BrandLogo
