@@ -1,17 +1,15 @@
-import styles from "../styles/BigTreeWithBooks.module.scss";
-import BooksWrapper from "./BooksWrapper";
+import styles from '../styles/BigTreeWithBooks.module.scss'
+import BooksWrapper from './BooksWrapper'
 
 const BigTreeWithBooks = () => {
-  return (
-    <div>
-      <div className={styles.BigTreeWrapper}>
-      {/* icon */}
-      <BooksWrapper />
-      
-      </div>
+    return (
+        <div>
+            <div className={styles.BigTreeWrapper}>
+                {/* icon */}
+                <BooksWrapper />
+            </div>
+        </div>
+    )
+}
 
-    </div>
-  );
-};
-
-export default BigTreeWithBooks;
+export default BigTreeWithBooks
