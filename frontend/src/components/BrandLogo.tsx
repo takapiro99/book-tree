@@ -1,11 +1,7 @@
 import booktree_logo from "../assets/BrandLogo.png";
-import tukuttemiru from "../assets/tukuttemiru.png";
-import tukuttemiru_yellow from "../assets/tukuttemiru_yellow.png";
 
 
 import styles from "../styles/BrandLogo.module.scss";
-
-import styles from '../styles/BrandLogo.module.scss'
 
 const BrandLogo = () => {
   return(
@@ -18,11 +14,6 @@ const BrandLogo = () => {
     <li>マイページ</li>
 
     </ul>
-
-    {/* <div className={styles.BrandLogo_sentence}>
-        <p>top</p>
-        <p>mypage</p>
-    </div> */}
    
   </div>
 
