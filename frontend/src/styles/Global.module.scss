@@ -52,7 +52,8 @@ h1 {
     width: 24%;
 }
 
+$global_margin: 4rem 0 !global;
+
 .blockbtwMd {
-    $margin: 4rem 0 !global;
-    margin: $margin;
+    margin: $global_margin;
 }

@@ -6,8 +6,10 @@ import SignIn from './pages/SignIn'
 import Top from './pages/Top1'
 import BrandLogo from './components/BrandLogo'
 import Index from './pages/review'
+import Delete from './pages/Delete'
 
 import { AuthProvider } from './lib/AuthProvider'
+import CreateLink from './pages/CreateLink'
 
 function App() {
     return (
@@ -23,6 +25,10 @@ function App() {
                             {/* <Route exact path="/reviews" component={SignIn} /> */}
                             <Route path="/@:id" component={Mypage} />
                             <Route path="/review" component={Index} />
+                            {/* BOOKTREE削除ページのルーティングを追加した */}
+                            <Route path="/delete" component={Delete} />
+                            {/* お願いリンク作成ルーティング これで良い？ */}
+                            <Route path="/createLink" component={CreateLink} />
                             <Route component={NotFound} />
                         </Switch>
                     </div>

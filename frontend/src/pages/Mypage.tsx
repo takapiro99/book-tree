@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import BigTreeWithBooks from '../components/BigTreeWithBooks'
 import styles from '../styles/Mypage.module.scss'
 import globalStyles from '../styles/Global.module.scss'
@@ -35,21 +35,21 @@ const Mypage = () => {
                 </div>
 
                 <div className={styles.mypageButtons}>
-                    <button
+                <Link to="/review/new"><button
                         className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}
                     >
-                        <a>レビューを作成する</a>
-                    </button>
+                        レビューを作成する
+                    </button></Link>
                     <button
                         className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}
                     >
                         <a>レビューをお願いする</a>
                     </button>
-                    <button
+                    <Link to="/delete"><button
                         className={`${styles.mypageButtons__buttonGray} ${styles.buttonGray}`}
                     >
-                        <a>BOOK TREEを削除する</a>
-                    </button>
+                        BOOK TREEを削除する
+                    </button></Link>
                 </div>
             </div>
         </div>

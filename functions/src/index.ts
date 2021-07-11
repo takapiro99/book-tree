@@ -1,13 +1,9 @@
-import * as functions from 'firebase-functions';
-import * as admin from 'firebase-admin';
+import * as functions from "firebase-functions";
 
-admin.initializeApp();
-
-export const userOnCreate = functions.auth.user().onCreate(async(user) => {
-	var userDoc = await admin.firestore().collection('users').doc(user.uid).get();
-	await userDoc.ref.set({
-		screen_name: user.uid,
-		display_name: user.displayName,
-		created_at: admin.firestore.FieldValue.serverTimestamp(),
-	});
-});
+// // Start writing Firebase Functions
+// // https://firebase.google.com/docs/functions/typescript
+//
+// export const helloWorld = functions.https.onRequest((request, response) => {
+//   functions.logger.info("Hello logs!", {structuredData: true});
+//   response.send("Hello from Firebase!");
+// });

@@ -15,6 +15,11 @@ const Footer = () => {
             <Link to="/review/@hoge">review</Link>
             <span>&nbsp;</span>
             <Link to="/review/new">review編集/new</Link>
+            <span>&nbsp;</span>
+            <Link to="/delete">BOOKTREE削除</Link>
+            <span>&nbsp;</span>
+            <Link to="/createLink">お願いリンク作成</Link>
+            <span>&nbsp;</span>
         </div>
     )
 }
