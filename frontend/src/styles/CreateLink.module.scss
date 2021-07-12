@@ -1,28 +1,116 @@
+.createLinkWrapper{
+    margin-bottom: 5%;
+    background-image: url('../assets/dot.svg');
+    background-repeat:  no-repeat;
+    background-size: 50%;
+    background-position: center;
+    z-index: -1;
+
+}
+
 .createLinkTitle{
     text-align: center;
 }
+// .images_item02::before {
+//     top: -10px;
+//     right: -10px;
+//     border-top: 30px solid #053e62;
+//     border-right: 30px solid #053e62;
+//     border-bottom: 30px solid rgba(0, 0, 0, 0) 0;
+//     border-left: 30px solid rgba(0, 0, 0, 0) 0;
+//   }
+
 .createLinkBlock{
     display: flex;
     justify-content: center;
-    padding: 3vw 1vw;
-    margin:1rem 20%;
-    border: 1px solid black;
-    border-radius: 50px;
+    //flex-direction: column;
+    padding: 2vw 1vw;
+    margin:1rem 10%;
+    //border: 1px solid lightgray;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
     font-size: 20px;
-   // font-weight: bold;
+    position: relative;
+    z-index: 3;
+
+    .createLinkBlock__tree{
+        width: 7rem;
+        position: absolute;
+        top: 13%;
+        left: 8%;
+        opacity: 0.7;
+    }
+
+    // .createLinkContent{
+    //     display: flex;
+    //     flex-direction: column;
+    //     justify-content: center;
+    // }
+
+
+
+   .createLinkBlock__input{
+    font-weight: 500;
+    .createLinkBlock__reason{
+        border-radius: 15px;
+        border: 1px solid gray;
+        padding: 4px 10px;
+        margin: 0 5px;
+        height: 24px;
+        display: inline-block;
+        }
+
+    }
+   .createButtonBlock{
+       //position: absolute;
+       display: inline-block;
+       width: 8%;
+       //top: 30%;
+       //right: 7%;
+       
+       .createButtonBlock__button{
+        border-radius: 20px;
+        border: none;
+        padding: 5px 10px;
+        margin-left: 20px;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+        background-color: #6fa769;
+        color: white;
+        height: 2rem;
+        width: 4rem;
+        transition: 0.3s;
+        font-weight: bold;
+        letter-spacing: 1px;
+        &:hover{
+            cursor: pointer;
+                text-decoration: none;
+                //color: white;
+                box-shadow: 0 0 0;
+
+        }
+       }
+   }
 }
 .LinkCreated{
     width: 80%;
     min-width: 400px;
-    border: 1px solid green;
-    height: 3rem;
+    border: 1px solid black;
+    height: 2.1rem;
     margin: 0 10%;
     position: relative;
+    background-color: lightgray;
+    text-align: center;
+    padding: 5px 0 0 0;
+    letter-spacing: 1px;
+    &:hover{
+        cursor: pointer;
+    }
     .LinkCreated__share{
         text-align: right;
         position: absolute;
-        top: 30%;
+        top: 25%;
         right: 2%;
+
     }
 
 }
