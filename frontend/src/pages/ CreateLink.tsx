@@ -1,7 +1,7 @@
 import globalStyles from '../styles/Global.module.scss'
 import styles from '../styles/CreateLink.module.scss'
 import BOOKTREE from "../assets/BOOKTREE.png"
-
+import LinkBlock from '../components/LinkBlock'
 
 const CreateLink = () => {
     return <div className={globalStyles.wrapper}>
@@ -11,9 +11,9 @@ const CreateLink = () => {
             <img src={BOOKTREE} alt='ブックツリー' className={styles.createLinkBlock__tree}/>
             <div className={styles.createLinkBlock__input}><input className={styles.createLinkBlock__reason} placeholder="なにがすごい？" /><span>がすごいひとにお願いする</span></div>
             <div className={styles.createButtonBlock}><button className={styles.createButtonBlock__button}>作成</button></div>
-            
-            </div>
-        <div className={styles.LinkCreated}>リンクをコピー<span className={styles.LinkCreated__share}><i className="fas fa-external-link-alt"></i></span></div>
+        </div>
+        <LinkBlock />
+        <LinkBlock />
         </div>
     </div>
 }
