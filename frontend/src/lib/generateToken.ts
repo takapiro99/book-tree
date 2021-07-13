@@ -2,7 +2,7 @@
 
 import crypto from "crypto"
 
-const generateToken = () => {
+const generateToken = (): string => {
     const N = 16
     const token = crypto.randomBytes(N).toString('base64').substring(0, N)
     return token
