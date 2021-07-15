@@ -38,7 +38,7 @@ export const userOnCreate = functions.auth.user().onCreate(async (user) => {
 
 export const createInvitationCode = functions.https.onCall(
     async (data, context) => {
-        const token = generateToken()
+        const token = await generateToken()
 
         console.log(data)
         console.log(context.auth)
