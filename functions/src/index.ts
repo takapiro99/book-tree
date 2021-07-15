@@ -23,16 +23,17 @@ const generateToken = async () => {
 }
 
 export const userOnCreate = functions.auth.user().onCreate(async (user) => {
-let userDoc = await admin
-    .firestore()
-    .collection('users')
-    .doc(user.uid)
-    .get()
-await userDoc.ref.set({
-    screen_name: user.uid,
-    display_name: user.displayName,
-    created_at: admin.firestore.FieldValue.serverTimestamp()
-})
+    let userDoc = await admin
+        .firestore()
+        .collection('users')
+        .doc(user.uid)
+        .get()
+
+    await userDoc.ref.set({
+        screen_name: user.uid,
+        display_name: user.displayName,
+        created_at: admin.firestore.FieldValue.serverTimestamp()
+    })
 })
 
 export const createInvitationCode = functions.https.onCall(
