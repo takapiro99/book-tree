@@ -65,27 +65,42 @@ h1 {
 }
 /* ここから上はglobalにしたい */
 
-.greenbar {
-    /* background-image: url("黄緑バー.svg"); */
-    position: absolute;
-    top: 25.3rem;
-    height: 3rem;
-    width: 100%;
+// .greenbar {
+//     /* background-image: url("黄緑バー.svg"); */
+//     position: absolute;
+//     top: 25.3rem;
+//     height: 3rem;
+//     width: 100%;
+// }
+// .yellowgreenbar {
+//     // margin: 4rem 0;
+//     width: 100vw;
+//     transform: rotate(8deg);
+//     background-color: #6fa769;
+//     position: absolute;
+//     top: 26rem;
+//     height: 4.7rem;
+//     width: 100%;
+// }
+.reviewformWrapper{
+    //background-color: aqua;
+    &:before {
+        background-color: aqua;
+        // margin-top: 20px;
+        width: 100vw;
+        // clip-path: polygon(0 20%, 0 0, 100% 40%, 100% 60%);
+        // height: 35vh;
+        // // transform: rotate(1rad);
+        // background-color: #6fa769;
+        // position: relative;
+        // z-index: -1;
+        // }
+    }
 }
-.yellowgreenbar {
-    // margin: 4rem 0;
-    width: 100vw;
-    transform: rotate(8deg);
-    background-color: #6fa769;
-    position: absolute;
-    top: 26rem;
-    height: 4.7rem;
-    width: 100%;
-}
-
 .reviewformName {
     margin-top: 1rem;
     display: flex;
+
 }
 .reviewformName__block {
     flex: 1;

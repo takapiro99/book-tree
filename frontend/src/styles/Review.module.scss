@@ -15,11 +15,11 @@
         content: '';
         position: absolute;
         width: 100%;
-        height: 100%;
-        top: 5%;
+        height: 150vh;
+        top: 47%;
         right: 0;
         clip-path: polygon(0 0, 100% 13%, 100% 100%, 0% 100%);
-        background-color: lightcyan;
+        background-color: #F1F8DC;
         z-index: -1;
     }
 
@@ -32,8 +32,7 @@
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
-            transform: rotate(7.4deg);
-            margin: 0 0 0 9%;
+            justify-content: center;
             position: relative;
             .icon {
                 padding: 5rem;
@@ -41,6 +40,7 @@
                 height: 4rem;
                 border-radius: 50%;
                 background-color: lightpink;
+                //transform: rotate(7.4deg);
             }
             .reviewUserName {
                 display: inline-block;
@@ -57,7 +57,7 @@
             }
             .reviewUserKeywords {
                 display: inline-block;
-                font-size: 20px;
+                font-size: 15px;
                 padding: 6rem 5% 0 5%;
             }
         }
@@ -66,6 +66,16 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        .reviewBlock__title{
+            text-align: center;
+        }
+    }
+
+    .reviewBigTree{
+        margin: 0 15% 5rem 15%;
+        width: 70%;
+        text-align: center;
+
     }
 }
 

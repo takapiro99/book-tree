@@ -4,7 +4,6 @@ import globalStyles from '../styles/Global.module.scss'
 import StaffTree from '../assets/BOOKTREE.png'
 
 const Top = () => {
-    const today = '8/1'
     return (
         <div>
             <div className={globalStyles.wrapper}>
