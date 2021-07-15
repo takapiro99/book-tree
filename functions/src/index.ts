@@ -1,21 +1,27 @@
 import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin'
-import { randomBytes } from 'crypto'
+
+const crypto = require('crypto')
 
 admin.initializeApp()
 
 const generateToken = async () => {
     const N = 16
     const loopNumber = 10 // 無限ループ防止のために10回で区切る
+    const S = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 
     for (let i = 0; i < loopNumber; i++) {
-        let token = randomBytes(N).toString('base64').substring(0, N)
-        let invitationDoc = await admin
+        const randomArray: number[] = Array.from(
+            crypto.randomFillSync(new Uint8Array(N))
+        )
+        const token = randomArray.map((n: number) => S[n % S.length]).join('')
+
+        let querySnapshot = await admin
             .firestore()
             .collection('invitations')
-            .doc(token)
+            .where('token', '==', token)
             .get()
-        if (invitationDoc.exists == false) {
+        if (querySnapshot.size === 0) {
             return token
         }
     }
@@ -39,9 +45,6 @@ export const userOnCreate = functions.auth.user().onCreate(async (user) => {
 export const createInvitationCode = functions.https.onCall(
     async (data, context) => {
         const token = await generateToken()
-
-        console.log(data)
-        console.log(context.auth)
 
         if (token) {
             const invitationURL = `http://localhost:3000/invite/?token=${token}`
