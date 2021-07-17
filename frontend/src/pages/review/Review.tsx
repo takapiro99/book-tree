@@ -23,10 +23,11 @@ const Review = () => {
                             <div className={styles.reviewUserName__name}>
                                 NEKOさん
                             </div>
-                        </div>
-                        <div className={styles.reviewUserKeywords}>
+                            <div className={styles.reviewUserKeywords}>
                             北大OG ＋ 猫 ＋ マイクラ
                         </div>
+                        </div>
+
                     </div>
 
                     <div className={globalStyles.blockbtwMd}>
