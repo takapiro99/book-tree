@@ -44,20 +44,54 @@ export const userOnCreate = functions.auth.user().onCreate(async (user) => {
 
 export const createInvitationCode = functions.https.onCall(
     async (data, context) => {
+        if (context.auth?.uid === undefined) {
+            return "ログインをしてください"
+        }
+
         const token = await generateToken()
 
         if (token) {
             const invitationURL = `http://localhost:3000/invite/?token=${token}`
             let invitationsRef = admin.firestore().collection('invitations')
             invitationsRef.add({
-                to: 'user',
-                from: '',
+                to: null,
+                from: context.auth?.uid,
                 token: token,
+                accepted: false,
                 created_at: admin.firestore.FieldValue.serverTimestamp()
             })
             return invitationURL
         } else {
             return 'error'
         }
+    }
+)
+
+export const checkInvitationCode = functions.https.onCall(
+    async (data, context) => {
+        if (context.auth?.uid === undefined) {
+            return "ログインをしてください"
+        }
+        const clientToken = data.text
+        console.log(clientToken)
+        let querySnapshot = await admin
+            .firestore()
+            .collection('invitations')
+            .where('token', '==', clientToken)
+            .get()
+        if (querySnapshot.size === 0) {
+            return '無効な招待コードです'
+        } else if (querySnapshot.size === 1) {
+            let docData = querySnapshot.docs[0].data();
+            if (docData.accepted === true) {
+                return "既に承認されています。"
+            }
+            
+        } else {
+            return 'トークンが重複しています'
+        }
+
+        let docId = querySnapshot.docs[0].id;
+        docId.strike
     }
 )
