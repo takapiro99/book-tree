@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }: any) => {
         try {
             await firebase.auth().signOut()
         } catch (error) {
-            alert(error)
+            alert("ログアウトに失敗しました。")
         }
     }
 
