@@ -1,7 +1,48 @@
 .topContent {
     display: flex;
     flex-direction: row;
+
+
 }
+.topContentSteps__title{
+    text-align: center;
+    margin: 8% 0 4% 0;
+}
+.topContent__steps{
+
+    display: flex;
+    flex-direction: row;
+    gap: 4%;
+
+    
+    .topContentSteps__block{
+        display: flex;
+        flex-direction: column;
+        //gap: 5%;
+        .topContentSteps__photo{
+            width: 22vw;
+            height:40vh;
+            background-color: lightgray;
+            margin-bottom: 5%;
+        }
+        .topContentSteps__explain{
+            text-align: center;
+            width: 22vw;
+            //height:20%;
+            margin-bottom: 3%;
+            //background-color: lightgray;
+            font-size: 24px;
+            font-weight: bold;
+            
+        }
+        .topContentSteps__explainS{
+            font-size: 15px;
+        }
+
+
+    }
+}
+
 .topContent__staffTree {
     flex: 1;
     width: 64%;
@@ -12,27 +53,36 @@
 }
 
 .greenbar {
+   //background: linear-gradient(106deg, transparent 0%, transparent 30%, #666 30%, #666 100%);
     margin-top: 80px;
     width: 100vw;
-    height: 3rem;
-    transform: rotate(1rad);
+    clip-path: polygon(0 20%, 0 0, 100% 40%, 100% 60%);
+    height: 35vh;
+    // transform: rotate(1rad);
     background-color: #6fa769;
     position: relative;
-    .greenbar__icon {
-        position: absolute;
-        top: -30px;
-        left: 26%;
-        font-size: 24px;
-        font-weight: 400;
-    }
+    z-index: -1;
+    // .greenbar__icon {
+    //     position: absolute;
+    //     z-index: 2;
+    //     top: -30px;
+    //     left: 26%;
+    //     font-size: 24px;
+    //     font-weight: 400;
+    // }
 }
 
 .greenbar2 {
     margin: 4rem 0;
-    width: 100vw;
-    height: 3rem;
-    transform: rotate(6deg);
-    background-color: #6fa769;
+   //background: linear-gradient(106deg, transparent 0%, transparent 30%, #666 30%, #666 100%);
+   margin-top: 80px;
+   width: 100vw;
+   clip-path: polygon(0 20%, 0 0, 100% 40%, 100% 60%);
+   height: 35vh;
+   // transform: rotate(1rad);
+   background-color: #6fa769;
+   z-index: -1;
+   // position: relative;
 }
 
 .circleDate {
@@ -78,10 +128,15 @@
 }
 
 .BookTreeForest {
+
     margin: 0 1rem;
     background-image: url('../assets/dot.svg');
     background-repeat: space repeat;
     background-size: 39%;
+    .BookTreeForest__title{
+        text-align: center;
+        //font-size: 20px;
+    }
 }
 
 .forestWrapper {

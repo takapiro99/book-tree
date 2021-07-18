@@ -18,7 +18,9 @@ const Footer = () => {
             <span>&nbsp;</span>
             <Link to="/delete">BOOKTREE削除</Link>
             <span>&nbsp;</span>
-            <Link to="/createLink">お願いリンク作成</Link>
+            <Link to="/invitation">依頼された時</Link>
+            <span>&nbsp;</span>
+            <Link to="/createLink">リンクを作る</Link>
             <span>&nbsp;</span>
         </div>
     )

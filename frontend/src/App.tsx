@@ -9,7 +9,8 @@ import Index from './pages/review'
 import Delete from './pages/Delete'
 
 import { AuthProvider } from './lib/AuthProvider'
-import CreateLink from './pages/CreateLink'
+import InviteReview from './pages/InviteReview'
+import CreateLink from './pages/ CreateLink'
 
 function App() {
     return (
@@ -27,7 +28,9 @@ function App() {
                             <Route path="/review" component={Index} />
                             {/* BOOKTREE削除ページのルーティングを追加した */}
                             <Route path="/delete" component={Delete} />
-                            {/* お願いリンク作成ルーティング これで良い？ */}
+                            {/* 招待リンクをアクセスしたときのやつ↓ これで良い？ */}
+                            <Route path="/invitation" component={InviteReview} />
+                            {/* 招待リンク作るところ */}
                             <Route path="/createLink" component={CreateLink} />
                             <Route component={NotFound} />
                         </Switch>
