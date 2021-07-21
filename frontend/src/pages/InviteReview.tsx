@@ -2,6 +2,7 @@ import globalStyles from '../styles/Global.module.scss'
 import styles from "../styles/InviteReview.module.scss"
 import Iconpic from '../components/Iconpic'
 import greencloud from '../assets/greencloud.png'
+import reviewImg from '../assets/reviewImg.png'
 
 const InviteReview = () => {
     return <div className={globalStyles.wrapper}>
@@ -25,10 +26,9 @@ const InviteReview = () => {
         
 
         <div className={styles.reviewSteps}>
-            <div>explation1</div>
-            <div>2</div>
+            <img src={reviewImg} alt="レビューを書くと相手の木に実る" />
         </div>
-        <div className={styles.accontCreateFromRecom}>createここにアカウント作るを入れる</div>
+        <div className={styles.accontCreateFromRecom}>createここにアカウント作ると同じものを入れる</div>
 
 
         </div>

@@ -2,6 +2,9 @@ import LittleTree from '../components/LittleTree'
 import styles from '../styles/top.module.scss'
 import globalStyles from '../styles/Global.module.scss'
 import StaffTree from '../assets/BOOKTREE.png'
+import top_1 from '../assets/top_1.png'
+import top_2 from '../assets/top_2.png'
+import top_3 from '../assets/top_3.png'
 
 const Top = () => {
     return (
@@ -22,17 +25,17 @@ const Top = () => {
                 <div className={styles.topContent__steps}>
                     
                     <div className={styles.topContentSteps__block}>
-                        <div className={styles.topContentSteps__photo}>photo</div>
+                        <div className={styles.topContentSteps__photo}><img src={top_1} alt="" /></div>
                         <div className={styles.topContentSteps__explain}>BOOK TREEをつくろう</div>
                         <div className={styles.topContentSteps__explainS}>無料でアカウントを作成して、BOOKTREEをつくろう</div>
                     </div>
                     <div className={styles.topContentSteps__block}>
-                        <div className={styles.topContentSteps__photo}>photo</div>
+                        <div className={styles.topContentSteps__photo}><img src={top_2} alt="" /></div>
                         <div className={styles.topContentSteps__explain}>すごい人にお願いして・・・</div>
                         <div className={styles.topContentSteps__explainS}>あなたの周りのすごいひとにおすすめの本を教えてもらおう</div>
                     </div>
                     <div className={styles.topContentSteps__block}>
-                        <div className={styles.topContentSteps__photo}>photo</div>
+                        <div className={styles.topContentSteps__photo}><img src={top_3} alt="" /></div>
                         <div className={styles.topContentSteps__explain}>たくさん本を実らせよう！</div>
                         <div className={styles.topContentSteps__explainS}>おすすめの本を教えてもらたら、その本があなたのツリーに実るよ。自分がお願いしてないすごいひとのレビューも実っちゃうかも？！</div>
                     </div>
