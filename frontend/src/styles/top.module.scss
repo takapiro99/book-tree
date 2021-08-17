@@ -22,8 +22,11 @@
         .topContentSteps__photo{
             width: 22vw;
             height:40vh;
-            background-color: lightgray;
+            //background-color: lightgray;
             margin-bottom: 5%;
+            img{
+                width: 22vw;
+            }
         }
         .topContentSteps__explain{
             text-align: center;
@@ -132,7 +135,8 @@
     margin: 0 1rem;
     background-image: url('../assets/dot.svg');
     background-repeat: space repeat;
-    background-size: 39%;
+    background-position: center center;
+    background-size: 51%;
     .BookTreeForest__title{
         text-align: center;
         //font-size: 20px;
