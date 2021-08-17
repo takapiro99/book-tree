@@ -62,9 +62,7 @@ const Form = () => {
     }
 
     return (
-        <div>
-            <div className={styles.yellowgreenbar}></div>
-
+        <div className={styles.reviewformWrapper}>
             <div className={globalStyles.wrapper}>
                 <form className="reviewform">
                     <div className={globalStyles.wrapper__title}>
@@ -150,8 +148,7 @@ const Form = () => {
                             </div>
                         </div>
                     </div>
-                    {/* {
-            data.selectedBooks.length && data.selectedBooks.map((book) =>{
+                    {/* {data?.selectedBooks.map((book) =>{
                 return(
                     <AddReview                             
                     bookImageURL={data.selectedBook.bookImageURL}
