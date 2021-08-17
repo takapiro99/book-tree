@@ -51,11 +51,11 @@ const Top = () => {
                 <div className={styles.forestWrapper}>
                     <div className={styles.littletreeWrapper}>
                         <LittleTree />
-                        <LittleTree />
+                        {/* <LittleTree />
 
-                        <LittleTree />
+                        <LittleTree /> */}
                     </div>
-                    <div className={styles.littletreeWrapper2}>
+                    {/* <div className={styles.littletreeWrapper2}>
                         <LittleTree />
                         <LittleTree />
                         <LittleTree />
@@ -64,7 +64,7 @@ const Top = () => {
                         <LittleTree />
                         <LittleTree />
                         <LittleTree />
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <div className={styles.greenbar2}> </div>

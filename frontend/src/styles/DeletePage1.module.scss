@@ -1,3 +1,18 @@
 .DeletePage1{
-    font-size: 1.5vw;
+    height: 1000px;
+    text-align: center;
+
+    img{
+        margin-top: 12vw;
+        width: 50%;
+        height: 30%;
+    }
+    p{
+        font-size: 1.5vw;
+    }
+    button{
+        background-color: blue;
+        cursor: pointer;
+    }
+
 }
