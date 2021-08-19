@@ -11,7 +11,7 @@ import Delete from './pages/Delete'
 import { AuthProvider } from './lib/AuthProvider'
 import InviteReview from './pages/InviteReview'
 import CreateLink from './pages/ CreateLink'
-
+import CreateBookTree from './pages/CreateBookTree'
 function App() {
     return (
         <AuthProvider>
@@ -32,6 +32,9 @@ function App() {
                             <Route path="/invitation" component={InviteReview} />
                             {/* 招待リンク作るところ */}
                             <Route path="/createLink" component={CreateLink} />
+                            
+                            <Route path="/createBookTree" component={CreateBookTree} />
+
                             <Route component={NotFound} />
                         </Switch>
                     </div>
