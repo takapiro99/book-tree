@@ -14,7 +14,7 @@ const BrandLogo = () => {
     <li>マイページ</li>
 
     </ul>
-   
+
   </div>
 
   );

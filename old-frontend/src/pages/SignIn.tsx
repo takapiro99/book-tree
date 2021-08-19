@@ -1,11 +1,13 @@
-import DeletePage1 from "../components/DeletePage1";
-import Iconpic from "../components/Iconpic"
+import styles from "../styles/Signin.module.scss";
+
 
 
 const SignIn = () => {
-  return <div>sign in here!
-  <DeletePage1 />
-  <Iconpic />
+  return <div>
+        <p className={styles.title}>BOOKTREEにログインする</p>
+        <p className={styles.Twitter}>Twitterアカウントでログイン</p>
+        <p className={styles.Google}>Googleアカウントでログイン</p>
+  
   </div>;
 };
 
