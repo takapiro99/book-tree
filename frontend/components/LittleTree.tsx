@@ -11,8 +11,8 @@ const LittleTree = () => {
                 <Image
                     className={styles.littletree_pic}
                     src="/images/LittleTree_flag.png"
-										layout='fill'
-										objectFit='contain'
+                    layout="fill"
+                    objectFit="contain"
                     alt="littetree"
                 />
                 <p className={styles.flag_sentence_1}>{content}</p>
