@@ -1,7 +1,6 @@
 import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin'
-
-const crypto = require('crypto')
+import crypto = require('crypto')
 
 admin.initializeApp()
 
@@ -16,7 +15,7 @@ const generateToken = async () => {
         )
         const token = randomArray.map((n: number) => S[n % S.length]).join('')
 
-        let querySnapshot = await admin
+        const querySnapshot = await admin
             .firestore()
             .collection('invitations')
             .where('token', '==', token)
@@ -29,7 +28,7 @@ const generateToken = async () => {
 }
 
 export const userOnCreate = functions.auth.user().onCreate(async (user) => {
-    let userDoc = await admin
+    const userDoc = await admin
         .firestore()
         .collection('users')
         .doc(user.uid)
@@ -45,14 +44,14 @@ export const userOnCreate = functions.auth.user().onCreate(async (user) => {
 export const createInvitationCode = functions.https.onCall(
     async (data, context) => {
         if (context.auth?.uid === undefined) {
-            return "ログインをしてください"
+            return 'ログインをしてください'
         }
 
         const token = await generateToken()
 
         if (token) {
             const invitationURL = `http://localhost:3000/invite/?token=${token}`
-            let invitationsRef = admin.firestore().collection('invitations')
+            const invitationsRef = admin.firestore().collection('invitations')
             invitationsRef.add({
                 to: null,
                 from: context.auth?.uid,
@@ -70,11 +69,11 @@ export const createInvitationCode = functions.https.onCall(
 export const checkInvitationCode = functions.https.onCall(
     async (data, context) => {
         if (context.auth?.uid === undefined) {
-            return "ログインをしてください"
+            return 'ログインをしてください'
         }
         const clientToken = data.text
         console.log(clientToken)
-        let querySnapshot = await admin
+        const querySnapshot = await admin
             .firestore()
             .collection('invitations')
             .where('token', '==', clientToken)
@@ -82,16 +81,15 @@ export const checkInvitationCode = functions.https.onCall(
         if (querySnapshot.size === 0) {
             return '無効な招待コードです'
         } else if (querySnapshot.size === 1) {
-            let docData = querySnapshot.docs[0].data();
+            const docData = querySnapshot.docs[0].data()
             if (docData.accepted === true) {
-                return "既に承認されています。"
+                return '既に承認されています。'
             }
-            
         } else {
             return 'トークンが重複しています'
         }
 
-        let docId = querySnapshot.docs[0].id;
+        const docId = querySnapshot.docs[0].id
         docId.strike
     }
 )
