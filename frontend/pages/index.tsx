@@ -1,6 +1,11 @@
 import Image from 'next/image'
 import LittleTree from '../components/LittleTree'
-import styles from './Home.module.scss'
+import styles from '../styles/Home.module.scss'
+
+import StaffTree from '../public/images/home/booktree.png'
+import top_1 from '../public/images/home/top_1.png'
+import top_2 from '../public/images/home/top_2.png'
+import top_3 from '../public/images/home/top_3.png'
 
 export default function Home() {
     return (
@@ -10,10 +15,8 @@ export default function Home() {
                     <div className={styles.topContent}>
                         <Image
                             className={styles.topContent__staffTree}
-                            src="/images/home/booktree.png"
+                            src={StaffTree}
                             alt="スタッフのブックツリー"
-                            layout="fill"
-                            objectFit="contain"
                         />
                         <div className={styles.topContent__introduce}>
                             <h1>すごい人</h1>
@@ -27,10 +30,10 @@ export default function Home() {
                         <div className={styles.topContentSteps__block}>
                             <div className={styles.topContentSteps__photo}>
                                 <Image
-                                    src="/images/home/top_1.png"
+                                    src={top_1}
                                     alt=""
-                                    layout="fill"
-                                    objectFit="contain"
+                                    width={144}
+                                    height={144}
                                 />
                             </div>
                             <div className={styles.topContentSteps__explain}>
@@ -43,10 +46,10 @@ export default function Home() {
                         <div className={styles.topContentSteps__block}>
                             <div className={styles.topContentSteps__photo}>
                                 <Image
-                                    src="/images/home/top_2.png"
+                                    src={top_2}
                                     alt=""
-                                    layout="fill"
-                                    objectFit="contain"
+                                    width={144}
+                                    height={144}
                                 />
                             </div>
                             <div className={styles.topContentSteps__explain}>
@@ -59,10 +62,10 @@ export default function Home() {
                         <div className={styles.topContentSteps__block}>
                             <div className={styles.topContentSteps__photo}>
                                 <Image
-                                    src="/images/home/top_3.png"
+                                    src={top_3}
                                     alt=""
-                                    layout="fill"
-                                    objectFit="contain"
+                                    width={144}
+                                    height={144}
                                 />
                             </div>
                             <div className={styles.topContentSteps__explain}>
