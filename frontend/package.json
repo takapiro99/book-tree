@@ -8,8 +8,8 @@
         "start": "next start",
         "lint": "yarn lint:eslint && yarn lint:prettier",
         "lint:eslint": "next lint",
-        "lint:prettier": "prettier --check --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json,css}'",
-        "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json,css}'"
+        "lint:prettier": "prettier --check --ignore-path .gitignore \"./**/*.{js,jsx,ts,tsx,json,css}\"",
+        "format": "prettier --write --ignore-path .gitignore \"./**/*.{js,jsx,ts,tsx,json,css}\""
     },
     "dependencies": {
         "next": "11.0.1",
