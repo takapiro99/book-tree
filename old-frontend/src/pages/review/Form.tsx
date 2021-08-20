@@ -65,61 +65,7 @@ const Form = () => {
         <div className={styles.reviewformWrapper}>
             <div className={globalStyles.wrapper}>
                 <form className="reviewform">
-                    <div className={globalStyles.wrapper__title}>
-                        <img
-                            src="BOOKTREEを作る.svg"
-                            alt="BOOKTREEを作る"
-                            className={globalStyles.logoTitle}
-                        />
-                    </div>
-                    <div
-                        className={`${styles.reviewformName} ${styles.blockbtwMd}`}
-                    >
-                        <div className={styles.reviewformName__block}>
-                            <div className={styles.reviewformName__namewrapper}>
-                                <div className={styles.reviewformName__name}>
-                                    Nameさん
-                                </div>
-                            </div>
-                            <div className={styles.reviewformName__icon}></div>
-                        </div>
-                    </div>
-                    <div className={styles.blockbtwMd}>
-                        <div className={styles.reviewform3keywords}>
-                            <h2>3つのキーワード</h2>
-                            <div
-                                className={styles.reviewform3keywords__example}
-                            >
-                                例：北大2年 + カフェが好き + 漫画が好き
-                            </div>
-                            <div className={styles.reviewform3keywords__list}>
-                                <input
-                                    className={styles.reviewform3keywords__3box}
-                                    name="threeWords"
-                                    value={data.threeWords[0]}
-                                    onChange={handleChangeInput}
-                                />{' '}
-                                <span className={styles.reviewform__plus}>
-                                    <i className="fas fa-plus"></i>{' '}
-                                </span>
-                                <input
-                                    className={styles.reviewform3keywords__3box}
-                                    name="threeWords"
-                                    value={data.threeWords[1]}
-                                    onChange={handleChangeInput}
-                                />{' '}
-                                <span className={styles.reviewform__plus}>
-                                    <i className="fas fa-plus"></i>
-                                </span>
-                                <input
-                                    className={styles.reviewform3keywords__3box}
-                                    name="threeWords"
-                                    value={data.threeWords[2]}
-                                    onChange={handleChangeInput}
-                                />
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div
                         className={`${styles.reviewformBookselect} ${styles.blockbtwMd}`}
                     >
