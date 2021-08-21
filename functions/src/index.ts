@@ -35,8 +35,10 @@ export const userOnCreate = functions.auth.user().onCreate(async (user) => {
         .get()
 
     await userDoc.ref.set({
-        screen_name: user.uid,
+        uid: user.uid,
+        profileImage: user.photoURL,
         display_name: user.displayName,
+        email: user.email,
         created_at: admin.firestore.FieldValue.serverTimestamp()
     })
 })
@@ -89,7 +91,7 @@ export const checkInvitationCode = functions.https.onCall(
             return 'トークンが重複しています'
         }
 
-        const docId = querySnapshot.docs[0].id
-        docId.strike
+        // const docId = querySnapshot.docs[0].id
+        return "ok";
     }
 )
