@@ -1,10 +1,12 @@
     .littletree_pic {
         position: relative;
-        width: 90vw;
+        
+        width: 27vw;
         // メイン画像の位置を動かす時
         z-index: 1000;
         img{
-            width: 100%;
+            //LittleTreeの大きさ
+            width: 87%;
         }
         .flag_sentence_1 {
             position: absolute;

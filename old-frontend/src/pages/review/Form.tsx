@@ -82,13 +82,16 @@ const Form = () => {
                             <div className={styles.reviewformBookselectResult}>
                                 {data.books.length &&
                                     data.books.map((b) => {
-                                        return (
+                                        return (<div>
                                             <Books
                                                 bookImageURL={b.bookImageURL}
                                                 bookLink=""
                                                 displayType="bookOnly"
                                                 userID="sakusaku"
                                             />
+                                            <div className={styles.plus}><i className="fas fa-plus-circle"></i> </div>
+                                            </div>
+
                                         )
                                     })}
                             </div>

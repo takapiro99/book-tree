@@ -5,7 +5,7 @@
 
     .nominateBlock__reason{
         //background-color: aqua;
-        font-size: 4rem;
+        font-size: 3.5rem;
         text-align: center;
     }
 
@@ -53,6 +53,36 @@
 
     .accontCreateFromRecom{
         margin: 1rem 0;
-        background-color: aqua;
+    }
+    .title{
+        width: 36vw;
+        margin-top: 5vw;
+        margin-left: 160px;
+        margin-bottom: 2vw;
+    }
+    .Twitter{
+        width: 30vw;
+        height: 4vw;
+        font-size: 1.8vw;
+        text-align: center;
+        background-color: rgb(104, 205, 251);
+        color: white;
+        margin-left: 190px;
+        position: relative;
+        border-radius: 100px;
+        padding-top:1.3vw ;
+        cursor: pointer;
+    }
+    .Google{
+        width: 30vw;
+        height: 4vw;
+        background-color: gray;
+        font-size: 1.8vw;
+        text-align: center;
+        color: white;
+        margin-left:190px;
+        border-radius: 100px;
+        padding-top:1.3vw ;
+        cursor: pointer;
     }
 }

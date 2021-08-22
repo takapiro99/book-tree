@@ -22,7 +22,7 @@
         background-color: #F1F8DC;
         z-index: -1;
     }
-
+   
     .reviewWrapper2 {
         margin-top: 0rem;
         margin-bottom: 5rem;
@@ -40,7 +40,7 @@
                 width: 6rem;
                 height: 6rem;
                 border-radius: 50%;
-                background-color: lightpink;
+                background-color: lightgray;
                 //display: inline-block;
                 //transform: rotate(7.4deg);
             }
@@ -66,6 +66,15 @@
             }
         }
     }
+    .reccomment{
+        margin :15px 20%;
+        .reccomment_content{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        }
+    }
     .reviewBlock {
         display: flex;
         flex-direction: column;
@@ -76,12 +85,37 @@
     }
 
     .reviewBigTree{
-        margin: 0 15% 5rem 15%;
+        margin: 7rem 15% 5rem 15%;
         width: 70%;
         text-align: center;
 
     }
 }
+
+.topBtn{
+    position: fixed;
+    bottom: 5vh;
+    right: 3vw;
+    background-color: white;
+    //border:1px solid white;
+    border:none;
+    border-radius: 50%;
+    width:81px;
+    height:81px;
+    //font-size:51px;
+    .topBtn_icon{
+        font-size: 24px;
+    }
+    .topBtn_txt{
+        font-size: 13px;
+    }
+    :hover{
+        cursor: pointer;
+    }
+
+}
+
+
 
 .reviewWrapper1 {
     margin-top: 5rem;
@@ -147,5 +181,19 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+.mypageNews {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 1rem;
+    
+}
+
+.mypageNews__news {
+    border: 1px solid black;
+    padding: 1rem 4rem;
+    width: 40vw;
 }
 // BookWithReviewに関するstyles 終わり
