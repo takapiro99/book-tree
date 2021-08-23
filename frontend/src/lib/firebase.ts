@@ -9,6 +9,7 @@ import 'firebase/analytics'
 // Add the Firebase products that you want to use
 import 'firebase/auth'
 import 'firebase/firestore'
+import 'firebase/functions'
 
 const firebaseConfig = {
     apiKey: 'AIzaSyAhAboU5u76UAidJnBdSJJ82dIpz_VjUas',
@@ -23,6 +24,12 @@ const firebaseConfig = {
 if (firebase.apps.length === 0) {
     firebase.initializeApp(firebaseConfig)
 }
+
+// emulatorを使用
+if (process.browser && location.hostname === "localhost") {
+    firebase.functions().useEmulator("localhost", 5001);
+}
+  
 firebase.auth().languageCode = 'ja'
 
 export default firebase

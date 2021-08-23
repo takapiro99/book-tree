@@ -1,6 +1,17 @@
 import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin'
 import crypto = require('crypto')
+const validUrl = require('valid-url');
+
+type Review = {
+    userID: string | null | undefined;
+    specialty: string | null | undefined;
+    title: string;
+    content: string;
+    bookImageURL: string;
+    bookLink: string;
+    createdAt: any; // 型の読みこみ方がわからない
+}
 
 admin.initializeApp()
 
@@ -27,6 +38,17 @@ const generateToken = async () => {
     return null
 }
 
+// validateに失敗したらHttpErrorを出す
+const validateReview: (review: Review) => void = (review) => {
+    if (!review.title || !review.content || !review.bookImageURL || !validUrl.isUri(review.bookLink)) {
+        throw new functions.https.HttpsError('invalid-argument', '必須の項目を入力してください。')
+    }
+
+    if (!validUrl.isUri(review.bookImageURL) || !validUrl.isUri(review.bookLink)) {
+        throw new functions.https.HttpsError('invalid-argument', '不正なURLです')
+    }
+}
+
 export const userOnCreate = functions.auth.user().onCreate(async (user) => {
     const userDoc = await admin
         .firestore()
@@ -46,7 +68,11 @@ export const userOnCreate = functions.auth.user().onCreate(async (user) => {
 export const createInvitationCode = functions.https.onCall(
     async (data, context) => {
         if (context.auth?.uid === undefined) {
-            return 'ログインをしてください'
+            throw new functions.https.HttpsError('failed-precondition', 'ログインをしてください')
+        }
+        const specialty = data.specialty || null
+        if (!specialty) {
+            throw new functions.https.HttpsError('invalid-argument','「～がすごいひと」を入力してください。')
         }
 
         const token = await generateToken()
@@ -59,11 +85,12 @@ export const createInvitationCode = functions.https.onCall(
                 from: context.auth?.uid,
                 token: token,
                 accepted: false,
-                created_at: admin.firestore.FieldValue.serverTimestamp()
+                specialty: specialty,
+                created_at: admin.firestore.FieldValue.serverTimestamp(),
             })
             return invitationURL
         } else {
-            return 'error'
+            throw new functions.https.HttpsError('aborted', 'トークンの生成に失敗しました。')
         }
     }
 )
@@ -71,27 +98,77 @@ export const createInvitationCode = functions.https.onCall(
 export const checkInvitationCode = functions.https.onCall(
     async (data, context) => {
         if (context.auth?.uid === undefined) {
-            return 'ログインをしてください'
+            throw new functions.https.HttpsError('failed-precondition', 'ログインをしてください');
         }
-        const clientToken = data.text
-        console.log(clientToken)
+        const clientToken:string = data.token
         const querySnapshot = await admin
             .firestore()
             .collection('invitations')
             .where('token', '==', clientToken)
             .get()
+        
         if (querySnapshot.size === 0) {
-            return '無効な招待コードです'
-        } else if (querySnapshot.size === 1) {
-            const docData = querySnapshot.docs[0].data()
-            if (docData.accepted === true) {
-                return '既に承認されています。'
-            }
-        } else {
-            return 'トークンが重複しています'
+            throw new functions.https.HttpsError('not-found', '招待が見つかりませんでした。')
+        } else if (querySnapshot.size >= 2) {
+            throw new functions.https.HttpsError('internal' ,'トークンが重複しています')
+        } 
+
+        const docData = querySnapshot.docs[0].data()
+
+        if (docData.from === context.auth.uid) {
+            throw new functions.https.HttpsError('failed-precondition', '別のユーザーが作成した招待のみ有効です。') 
         }
 
-        // const docId = querySnapshot.docs[0].id
-        return "ok";
+        if (docData.accepted === true) {
+            throw new functions.https.HttpsError('already-exists', '既に承認されています。')
+        }
+
+        return docData;
+    }
+)
+
+export const createInvitationReview = functions.https.onCall(
+    async (data, context) => {
+        if (context.auth?.uid === undefined) {
+            throw new functions.https.HttpsError('failed-precondition', 'ログインをしてください');
+        }
+        const clientToken: string = data.token
+        const querySnapshot = await admin
+            .firestore()
+            .collection('invitations')
+            .where('token', '==', clientToken)
+            .get()
+        
+        if (querySnapshot.size === 0) {
+            throw new functions.https.HttpsError('not-found', '招待が見つかりませんでした。')
+        } else if (querySnapshot.size >= 2) {
+            throw new functions.https.HttpsError('internal' ,'トークンが重複しています')
+        } 
+
+        const docData = querySnapshot.docs[0].data()
+
+        if (docData.from === context.auth.uid) {
+            throw new functions.https.HttpsError('failed-precondition', '別のユーザーが作成した招待のみ有効です。') 
+        }
+
+        if (docData.accepted === true) {
+            throw new functions.https.HttpsError('already-exists', '既に承認されています。')
+        }
+
+        const reviews: Review[] = data.reviews
+        reviews.forEach(async (review) => {
+            validateReview(review)
+            review.userID = context.auth?.uid
+            review.createdAt = admin.firestore.FieldValue.serverTimestamp()
+            review.specialty = docData.specialty
+            await admin.firestore().collection('reviews').add(review)
+        })
+
+        const docId = querySnapshot.docs[0].id
+        await admin.firestore().collection('invitations').doc(docId).update({
+            accepted: true,
+            to: context.auth.uid
+        })
+        return "success";
     }
 )
