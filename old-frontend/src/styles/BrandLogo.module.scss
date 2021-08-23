@@ -1,49 +1,100 @@
-.BrandLogo{
+
+.BrandLogo {
     position: fixed;
     width: 100%;
-    height: 5vw;
-    background-color: #ffebc6;
+    height: 6vw;
+    // background-color: #ffebc6;
     top: 0;
     z-index: 10000;
-    opacity: 0.8;
+    // opacity: 0.8;
 }
-.booktree_logo{
+.booktree_logo {
     position: absolute;
     width: 13vw;
-    top: 1.5vw;
+    top: 1.9vw;
     left: 1.5vw;
 }
-ul{
-    display: flex;
-    align-items: center;
-    list-style: none;
-    justify-content:space-around;
-    margin:0;
-    padding: 1.5vw;
+.icon {
+    opacity: 1;
+    margin-left: 90vw;
+    width: 5vw;
+    height: 5vw;
+    border-radius: 50%;
+    margin-top: 0.6vw;
     cursor: pointer;
-    margin-left: 70vw;
-    li{
-        font-size: 1.3vw;
-        position: relative;
-    }
-    li::after {
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        content: '';
-        width: 100%;
-        height: 2px;
-        background: black;
-        transform: scale(0, 1);
-        transform-origin: left top;
-        transition: transform .3s;
-    }
-    li:hover::after {
-        transform: scale(1, 1);
-    }
-    }
- 
+}
+ul{
+    background-color:#F4FCDB;
+    align-items: center;
+    width: 16vw;
+    list-style: none;
+    margin-left: 81vw;
+    margin-top: 15px;
+    padding: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    cursor: pointer;
+    box-shadow: 10px 10px rgb(205, 226, 110);
+    border-radius: 5px;
+}
+li {
+    font-weight: bolder;
+    color: rgb(20, 20, 20);
+    opacity: 1;
+    padding: 8px;
+    font-size: 15px;
+    align-items: center;
+    // border: 1px solid rgb(160, 152, 152);
+    position: relative;
+}
+li::after {
+            position: absolute;
+            margin-left:13px ;
+            bottom: -2px;
+            left: 0;
+            content: '';
+            width: 90%;
+            height: 1.7px;
+            background: rgb(71, 71, 71);
+            transform: scale(0, 1);
+            transform-origin: left top;
+            transition: transform 0.4s;
+        }
+        li:hover::after {
+            transform: scale(1, 1);
+        }
 
+
+
+// ul {
+//     display: flex;
+//     align-items: center;
+//     list-style: none;
+//     justify-content: space-around;
+//     margin: 0;
+//     padding: 1.5vw;
+//     cursor: pointer;
+//     margin-left: 60vw;
+//     li {
+//         font-size: 1.3vw;
+//         position: relative;
+//     }
+//     li::after {
+//         position: absolute;
+//         bottom: -4px;
+//         left: 0;
+//         content: '';
+//         width: 100%;
+//         height: 2px;
+//         background: black;
+//         transform: scale(0, 1);
+//         transform-origin: left top;
+//         transition: transform 0.3s;
+//     }
+//     li:hover::after {
+//         transform: scale(1, 1);
+//     }
+// }
 
 // .yellowbox{
 //     width: 18vw;
@@ -65,7 +116,7 @@ ul{
 //         position: absolute;
 //         left:50%;
 //         transform:translate(-50%);
-    
+
 //     }
 //     .tukuttemiru_yellow{
 //         margin-top: 1.3vw;
@@ -87,5 +138,5 @@ ul{
 //     &:hover  .tukuttemiru{
 //         opacity: 0;
 //     }
-    
+
 // }

@@ -12,6 +12,7 @@ import { AuthProvider } from './lib/AuthProvider'
 import InviteReview from './pages/InviteReview'
 import CreateLink from './pages/ CreateLink'
 import CreateBookTree from './pages/CreateBookTree'
+import Setting from "./pages/Setting"
 function App() {
     return (
         <AuthProvider>
@@ -35,6 +36,7 @@ function App() {
                             
                             <Route path="/createBookTree" component={CreateBookTree} />
 
+                            <Route path="/setting" component={Setting} />
                             <Route component={NotFound} />
                         </Switch>
                     </div>

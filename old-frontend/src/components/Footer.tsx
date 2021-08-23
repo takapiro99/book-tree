@@ -24,6 +24,8 @@ const Footer = () => {
             <span>&nbsp;</span>
             <Link to="/createBookTree">BookTreeをつくる</Link>
             <span>&nbsp;</span>
+            <Link to="/setting">設定</Link>
+            <span>&nbsp;</span>
         </div>
     )
 }
