@@ -10,11 +10,7 @@ const LittleTree = () => {
     return (
         <div>
             <div className={styles.flag_sentence}>
-                <Image
-                    className={styles.littletree_pic}
-                    src={littletree}
-                    alt="littetree"
-                />
+                <Image className={styles.littletree_pic} src={littletree} alt="littetree" />
                 <p className={styles.flag_sentence_1}>{content}</p>
                 <p className={styles.flag_sentence_2}>がすごい人！</p>
                 <div className={styles.icon_pic}>
