@@ -10,7 +10,7 @@ type Review = {
     content: string
     bookImageURL: string
     bookLink: string
-    createdAt: any // 型の読みこみ方がわからない
+    createdAt: admin.firestore.FieldValue
 }
 
 type getBookTreePostType = {
@@ -270,7 +270,6 @@ export const getBookTree = functions.https.onCall(
         userIDs = Array.from(new Set(userIDs))
         console.log(userIDs)
 
-        // できればanyから適切な型にする
         const bookTree: Review[] = []
         for (const id of userIDs) {
             const querySnapshot = await admin
