@@ -19,10 +19,10 @@
         top: 45%;
         right: 0;
         clip-path: polygon(0 0, 100% 13%, 100% 100%, 0% 100%);
-        background-color: #F1F8DC;
+        background-color: #f1f8dc;
         z-index: -1;
     }
-   
+
     .reviewWrapper2 {
         margin-top: 0rem;
         margin-bottom: 5rem;
@@ -45,7 +45,6 @@
                 //transform: rotate(7.4deg);
             }
             .reviewUserName {
-                
                 display: inline-block;
                 width: 30%;
                 padding: 4% 1% 0 6%;
@@ -66,56 +65,52 @@
             }
         }
     }
-    .reccomment{
-        margin :15px 20%;
-        .reccomment_content{
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
+    .reccomment {
+        margin: 15px 20%;
+        .reccomment_content {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
         }
     }
     .reviewBlock {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        .reviewBlock__title{
+        .reviewBlock__title {
             text-align: center;
         }
     }
 
-    .reviewBigTree{
+    .reviewBigTree {
         margin: 7rem 15% 5rem 15%;
         width: 70%;
         text-align: center;
-
     }
 }
 
-.topBtn{
+.topBtn {
     position: fixed;
     bottom: 5vh;
     right: 3vw;
     background-color: white;
     //border:1px solid white;
-    border:none;
+    border: none;
     border-radius: 50%;
-    width:81px;
-    height:81px;
+    width: 81px;
+    height: 81px;
     //font-size:51px;
-    .topBtn_icon{
+    .topBtn_icon {
         font-size: 24px;
     }
-    .topBtn_txt{
+    .topBtn_txt {
         font-size: 13px;
     }
-    :hover{
+    :hover {
         cursor: pointer;
     }
-
 }
-
-
 
 .reviewWrapper1 {
     margin-top: 5rem;
@@ -188,7 +183,6 @@
     align-items: center;
     text-align: center;
     margin-top: 1rem;
-    
 }
 
 .mypageNews__news {

@@ -1,6 +1,5 @@
 import styles from '../styles/Setting.module.scss'
 
-
 import Books from '../components/Books'
 import AddReview from '../components/AddReview'
 import globalStyles from '../styles/Global.module.scss'
@@ -67,7 +66,6 @@ const Setting = () => {
         <div className={styles.reviewformWrapper}>
             <div className={globalStyles.wrapper}>
                 <form className="reviewform">
-                    
                     <div
                         className={`${styles.reviewformName} ${styles.blockbtwMd}`}
                     >
@@ -118,10 +116,8 @@ const Setting = () => {
                     </div>
                     <div
                         className={`${styles.reviewformBookselect} ${styles.blockbtwMd}`}
-                    >
-                        
-                    </div>
-                
+                    ></div>
+
                     <div className={styles.reviewformSubmit}>
                         <button className={styles.submitButton}>決定</button>
                     </div>

@@ -7,13 +7,12 @@ import RecComment from '../../components/recComment'
 import RecommendedSentence from '../../components/RecommendedSentence'
 
 const Review = () => {
-
     const returnTop = () => {
         window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
-      };
+            top: 0,
+            behavior: 'smooth'
+        })
+    }
 
     return (
         <>
@@ -26,14 +25,14 @@ const Review = () => {
                     <a href="#review">お願いしていたレビューが届いたよ！</a>
                 </div>
             </div>
-            
-            <div className={styles .reviewpageReview}>
+
+            <div className={styles.reviewpageReview}>
                 <div className={`${styles.reviewWrapper2}`}>
                     <div className={styles.reviewUserBlock}>
                         <div className={styles.icon}>icon </div>
                         <div className={styles.reviewUserName}>
                             {/* <div>紹介してくれたのは・・・</div> */}
-                           
+
                             <div className={styles.reviewUserName__name}>
                                 NEKOさん
                             </div>
@@ -44,15 +43,14 @@ const Review = () => {
                     </div>
                     <div className={styles.reccomment}>
                         <div className={styles.reccomment_content}>
-                            <RecComment comment="フロントエンド"/>
-                            <RecComment comment="デザイン"/>
-                            <RecComment comment="フロントエンド"/>
+                            <RecComment comment="フロントエンド" />
+                            <RecComment comment="デザイン" />
+                            <RecComment comment="フロントエンド" />
                         </div>
                     </div>
 
                     <div className={globalStyles.blockbtwMd}></div>
-                    
-                    
+
                     <div className={styles.reviewBigTree}>
                         <h1>NekoさんのCollection Tree</h1>
                         <div>Nekoさんのところに集まった本たち</div>
@@ -69,8 +67,13 @@ const Review = () => {
                         <BookWithReview />
                     </div>
                 </div>
-                
-                <button className={styles.topBtn} onClick={returnTop}><span className={styles.topBtn_icon}><i className="fas fa-arrow-circle-up"></i></span><p className={styles.topBtn_txt}>Topに戻る</p></button>
+
+                <button className={styles.topBtn} onClick={returnTop}>
+                    <span className={styles.topBtn_icon}>
+                        <i className="fas fa-arrow-circle-up"></i>
+                    </span>
+                    <p className={styles.topBtn_txt}>Topに戻る</p>
+                </button>
             </div>
         </>
     )

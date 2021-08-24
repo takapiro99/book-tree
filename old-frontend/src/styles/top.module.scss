@@ -1,34 +1,30 @@
 .topContent {
     display: flex;
     flex-direction: row;
-
-
 }
-.topContentSteps__title{
+.topContentSteps__title {
     text-align: center;
     margin: 8% 0 4% 0;
 }
-.topContent__steps{
-
+.topContent__steps {
     display: flex;
     flex-direction: row;
     gap: 4%;
 
-    
-    .topContentSteps__block{
+    .topContentSteps__block {
         display: flex;
         flex-direction: column;
         //gap: 5%;
-        .topContentSteps__photo{
+        .topContentSteps__photo {
             width: 22vw;
-            height:40vh;
+            height: 40vh;
             //background-color: lightgray;
             margin-bottom: 5%;
-            img{
+            img {
                 width: 22vw;
             }
         }
-        .topContentSteps__explain{
+        .topContentSteps__explain {
             text-align: center;
             width: 22vw;
             //height:20%;
@@ -36,13 +32,10 @@
             //background-color: lightgray;
             font-size: 24px;
             font-weight: bold;
-            
         }
-        .topContentSteps__explainS{
+        .topContentSteps__explainS {
             font-size: 15px;
         }
-
-
     }
 }
 
@@ -56,7 +49,7 @@
 }
 
 .greenbar {
-   //background: linear-gradient(106deg, transparent 0%, transparent 30%, #666 30%, #666 100%);
+    //background: linear-gradient(106deg, transparent 0%, transparent 30%, #666 30%, #666 100%);
     margin-top: 80px;
     width: 100vw;
     clip-path: polygon(0 20%, 0 0, 100% 40%, 100% 60%);
@@ -77,15 +70,15 @@
 
 .greenbar2 {
     margin: 4rem 0;
-   //background: linear-gradient(106deg, transparent 0%, transparent 30%, #666 30%, #666 100%);
-   margin-top: 80px;
-   width: 100vw;
-   clip-path: polygon(0 20%, 0 0, 100% 40%, 100% 60%);
-   height: 35vh;
-   // transform: rotate(1rad);
-   background-color: #6fa769;
-   z-index: -1;
-   // position: relative;
+    //background: linear-gradient(106deg, transparent 0%, transparent 30%, #666 30%, #666 100%);
+    margin-top: 80px;
+    width: 100vw;
+    clip-path: polygon(0 20%, 0 0, 100% 40%, 100% 60%);
+    height: 35vh;
+    // transform: rotate(1rad);
+    background-color: #6fa769;
+    z-index: -1;
+    // position: relative;
 }
 
 .circleDate {
@@ -131,13 +124,12 @@
 }
 
 .BookTreeForest {
-
     margin: 0 1rem;
     background-image: url('../assets/dot.svg');
     background-repeat: space repeat;
     background-position: center center;
     background-size: 51%;
-    .BookTreeForest__title{
+    .BookTreeForest__title {
         text-align: center;
         //font-size: 20px;
     }

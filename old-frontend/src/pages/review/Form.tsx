@@ -65,7 +65,6 @@ const Form = () => {
         <div className={styles.reviewformWrapper}>
             <div className={globalStyles.wrapper}>
                 <form className="reviewform">
-                    
                     <div
                         className={`${styles.reviewformBookselect} ${styles.blockbtwMd}`}
                     >
@@ -82,16 +81,20 @@ const Form = () => {
                             <div className={styles.reviewformBookselectResult}>
                                 {data.books.length &&
                                     data.books.map((b) => {
-                                        return (<div>
-                                            <Books
-                                                bookImageURL={b.bookImageURL}
-                                                bookLink=""
-                                                displayType="bookOnly"
-                                                userID="sakusaku"
-                                            />
-                                            <div className={styles.plus}><i className="fas fa-plus-circle"></i> </div>
+                                        return (
+                                            <div>
+                                                <Books
+                                                    bookImageURL={
+                                                        b.bookImageURL
+                                                    }
+                                                    bookLink=""
+                                                    displayType="bookOnly"
+                                                    userID="sakusaku"
+                                                />
+                                                <div className={styles.plus}>
+                                                    <i className="fas fa-plus-circle"></i>{' '}
+                                                </div>
                                             </div>
-
                                         )
                                     })}
                             </div>
