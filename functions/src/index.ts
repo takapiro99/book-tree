@@ -271,7 +271,7 @@ export const getBookTree = functions.https.onCall(
         console.log(userIDs)
 
         // できればanyから適切な型にする
-        const bookTree: any[] = []
+        const bookTree: Review[] = []
         for (const id of userIDs) {
             const querySnapshot = await admin
                 .firestore()
@@ -279,7 +279,7 @@ export const getBookTree = functions.https.onCall(
                 .where('userID', '==', id)
                 .get()
             querySnapshot.forEach((res) => {
-                bookTree.push(res.data())
+                bookTree.push(<Review>res.data())
             })
         }
         return bookTree
