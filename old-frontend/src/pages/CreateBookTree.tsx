@@ -1,15 +1,14 @@
-
-import styles from "../styles/CreateBookTree.module.scss";
-import title from "../assets/createBookTree.svg"
+import styles from '../styles/CreateBookTree.module.scss'
+import title from '../assets/createBookTree.svg'
 
 const CreateBookTree = () => {
     return (
-    <div>
-        <img className={styles.title}src={title} alt="aaa" />
-        <p className={styles.Twitter}>Twitterアカウントで作る</p>
-        <p className={styles.Google}>Googleアカウントで作る</p>
+        <div>
+            <img className={styles.title} src={title} alt="aaa" />
+            <p className={styles.Twitter}>Twitterアカウントで作る</p>
+            <p className={styles.Google}>Googleアカウントで作る</p>
+        </div>
+    )
+}
 
-    </div>
-    )};
-  
-  export default CreateBookTree
+export default CreateBookTree

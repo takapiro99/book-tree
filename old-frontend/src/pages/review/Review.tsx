@@ -57,21 +57,21 @@ const Review = () => {
                         <BigTreeWithBooks />
                     </div>
                     <div className={styles.mypageButtons}>
-                            <button
-                                className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}
-                            >
-                                レビューを作成する
-                            </button>
-                            <button
-                                className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}
-                            >
-                                レビューをお願いする
-                            </button>
-                            <button
-                                className={`${styles.mypageButtons__buttonGray} ${styles.buttonGray}`}
-                            >
-                                BOOK TREEを削除する
-                            </button>
+                        <button
+                            className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}
+                        >
+                            レビューを作成する
+                        </button>
+                        <button
+                            className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}
+                        >
+                            レビューをお願いする
+                        </button>
+                        <button
+                            className={`${styles.mypageButtons__buttonGray} ${styles.buttonGray}`}
+                        >
+                            BOOK TREEを削除する
+                        </button>
                     </div>
 
                     <div className={styles.reviewBlock}>

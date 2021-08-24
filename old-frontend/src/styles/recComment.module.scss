@@ -1,25 +1,24 @@
-.comment{
-    background-color:  #F1F8DC;
+.comment {
+    background-color: #f1f8dc;
     border-radius: 10px;
     width: 200px;
     max-width: 300px;
     font-size: 13px;
     padding-right: 10px;
     padding-left: 10px;
-    margin-left:3px;
-    margin-right:3px; 
+    margin-left: 3px;
+    margin-right: 3px;
     padding-top: 5px;
     padding-bottom: 5px;
     font-weight: bold;
 
-    .comment_content{
+    .comment_content {
         //margin: 15px;
-        .comment_reason{
+        .comment_reason {
             font-size: 15px;
-            
         }
-        .comment_below{
-        font-size: 13px;
+        .comment_below {
+            font-size: 13px;
         }
     }
 }

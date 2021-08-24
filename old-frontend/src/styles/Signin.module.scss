@@ -1,12 +1,11 @@
-.title{
+.title {
     font-size: 3vw;
     text-align: center;
     margin-top: 10vw;
     margin-bottom: 3vw;
 }
 
-
-.Twitter{
+.Twitter {
     width: 30vw;
     height: 4vw;
     font-size: 1.8vw;
@@ -16,7 +15,7 @@
     margin-left: 35vw;
     position: relative;
     border-radius: 100px;
-    padding-top:1.3vw ;
+    padding-top: 1.3vw;
     cursor: pointer;
     box-shadow: 0 5px 0 #4eb8ff;
     transition: 0.1s;
@@ -30,7 +29,7 @@
         cursor: pointer;
     }
 }
-.Google{
+.Google {
     width: 30vw;
     height: 4vw;
     background-color: gray;
@@ -39,7 +38,7 @@
     color: white;
     margin-left: 35vw;
     border-radius: 100px;
-    padding-top:1.3vw ;
+    padding-top: 1.3vw;
     cursor: pointer;
     box-shadow: 0 5px 0 #535353;
     transition: 0.1s;

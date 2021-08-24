@@ -12,7 +12,7 @@ import { AuthProvider } from './lib/AuthProvider'
 import InviteReview from './pages/InviteReview'
 import CreateLink from './pages/ CreateLink'
 import CreateBookTree from './pages/CreateBookTree'
-import Setting from "./pages/Setting"
+import Setting from './pages/Setting'
 function App() {
     return (
         <AuthProvider>
@@ -30,11 +30,17 @@ function App() {
                             {/* BOOKTREE削除ページのルーティングを追加した */}
                             <Route path="/delete" component={Delete} />
                             {/* 招待リンクをアクセスしたときのやつ↓ これで良い？ */}
-                            <Route path="/invitation" component={InviteReview} />
+                            <Route
+                                path="/invitation"
+                                component={InviteReview}
+                            />
                             {/* 招待リンク作るところ */}
                             <Route path="/createLink" component={CreateLink} />
-                            
-                            <Route path="/createBookTree" component={CreateBookTree} />
+
+                            <Route
+                                path="/createBookTree"
+                                component={CreateBookTree}
+                            />
 
                             <Route path="/setting" component={Setting} />
                             <Route component={NotFound} />
