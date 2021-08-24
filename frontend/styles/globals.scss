@@ -1,6 +1,6 @@
 h1 {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 // .wrapper{
@@ -8,52 +8,52 @@ h1 {
 
 // }
 .wrapper {
-  margin: 7rem auto 0 auto;
-  max-width: 1580px;
-  width: 100%;
-  position: relative;
+    margin: 7rem auto 0 auto;
+    max-width: 1580px;
+    width: 100%;
+    position: relative;
 }
 
 @media only screen and (min-width: 601px) {
-  .wrapper {
-    width: 85%;
-  }
+    .wrapper {
+        width: 85%;
+    }
 }
 
 @media only screen and (min-width: 993px) {
-  .wrapper {
-    width: 70%;
-  }
+    .wrapper {
+        width: 70%;
+    }
 }
 
 .wrapper__title {
-  text-align: center;
+    text-align: center;
 }
 
 .logoTitle {
-  width: 14rem;
-  /* margin:0 30%; */
+    width: 14rem;
+    /* margin:0 30%; */
 }
 
 .wrapper-content {
-  padding: 5rem 7rem;
+    padding: 5rem 7rem;
 }
 
 .fotter {
-  text-align: center;
-  margin: 4rem;
-  position: relative;
+    text-align: center;
+    margin: 4rem;
+    position: relative;
 }
 
 .footer-img {
-  position: absolute;
-  left: -5rem;
-  top: -4rem;
-  width: 24%;
+    position: absolute;
+    left: -5rem;
+    top: -4rem;
+    width: 24%;
 }
 
 $global_margin: 4rem 0;
 
 .blockbtwMd {
-  margin: $global_margin;
+    margin: $global_margin;
 }
