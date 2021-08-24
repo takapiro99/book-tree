@@ -15,7 +15,6 @@ const BrandLogo = () => {
                 alt="booktreelogo"
             />
             <img className={styles.icon} src={icon} id="icon" alt="icon" />
-            <div>
             <div className={styles.menu}>
                 <ul>
                     <li>
