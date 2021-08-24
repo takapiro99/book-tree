@@ -10,13 +10,24 @@
     height: 4vw;
     font-size: 1.8vw;
     text-align: center;
-    background-color: rgb(89, 178, 219);
+    background-color: rgb(114, 211, 255);
     color: white;
     margin-left: 35vw;
     position: relative;
     border-radius: 100px;
     padding-top: 1.3vw;
     cursor: pointer;
+    box-shadow: 0 5px 0 #4eb8ff;
+    transition: 0.1s;
+    border-radius: 30px;
+    border: none;
+
+    &:hover {
+        transform: translateY(3px);
+        text-decoration: none;
+        box-shadow: 0 2px 0 #91beec;
+        cursor: pointer;
+    }
 }
 .Google {
     width: 30vw;
@@ -29,4 +40,15 @@
     border-radius: 100px;
     padding-top: 1.3vw;
     cursor: pointer;
+    box-shadow: 0 5px 0 #535353;
+    transition: 0.1s;
+    border-radius: 30px;
+    border: none;
+
+    &:hover {
+        transform: translateY(3px);
+        text-decoration: none;
+        box-shadow: 0 2px 0 #aaaaaa;
+        cursor: pointer;
+    }
 }

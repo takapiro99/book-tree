@@ -16,6 +16,7 @@ const BrandLogo = () => {
             />
             <img className={styles.icon} src={icon} id="icon" alt="icon" />
             <div>
+            <div className={styles.menu}>
                 <ul>
                     <li>
                         　<i className="fas fa-book"></i>　トップページ

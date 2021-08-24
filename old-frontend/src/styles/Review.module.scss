@@ -15,7 +15,7 @@
         content: '';
         position: absolute;
         width: 100%;
-        height: 135vh;
+        height: 170vh;
         top: 45%;
         right: 0;
         clip-path: polygon(0 0, 100% 13%, 100% 100%, 0% 100%);
@@ -108,6 +108,55 @@
         font-size: 13px;
     }
     :hover {
+        cursor: pointer;
+    }
+}
+.mypageButtons {
+    // margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 100px;
+}
+.mypageButtons__button {
+    margin: 0 auto;
+    padding: 1em 2em;
+    width: 300px;
+    min-width: 240px;
+    color: black;
+    font-size: 18px;
+    font-weight: 700;
+    background-color: #cceeb8;
+    box-shadow: 0 5px 0 #b1cfa0;
+    transition: 0.1s;
+    border-radius: 30px;
+    border: none;
+
+    &:hover {
+        transform: translateY(3px);
+        text-decoration: none;
+        box-shadow: 0 2px 0 #aaaaaa;
+        cursor: pointer;
+    }
+}
+.mypageButtons__buttonGray {
+    margin: 0 auto;
+    padding: 1em 2em;
+    width: 300px;
+    min-width: 240px;
+    color: black;
+    font-size: 18px;
+    font-weight: 700;
+    background-color: #cccccc;
+    box-shadow: 0 5px 0 #aaaaaa;
+    transition: 0.1s;
+    border-radius: 30px;
+    border: none;
+
+    &:hover {
+        transform: translateY(3px);
+        text-decoration: none;
+        box-shadow: 0 2px 0 #aaaaaa;
         cursor: pointer;
     }
 }

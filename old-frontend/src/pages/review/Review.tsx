@@ -52,9 +52,26 @@ const Review = () => {
                     <div className={globalStyles.blockbtwMd}></div>
 
                     <div className={styles.reviewBigTree}>
-                        <h1>NekoさんのCollection Tree</h1>
+                        <h1>NekoさんのBook Tree</h1>
                         <div>Nekoさんのところに集まった本たち</div>
                         <BigTreeWithBooks />
+                    </div>
+                    <div className={styles.mypageButtons}>
+                        <button
+                            className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}
+                        >
+                            レビューを作成する
+                        </button>
+                        <button
+                            className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}
+                        >
+                            レビューをお願いする
+                        </button>
+                        <button
+                            className={`${styles.mypageButtons__buttonGray} ${styles.buttonGray}`}
+                        >
+                            BOOK TREEを削除する
+                        </button>
                     </div>
 
                     <div className={styles.reviewBlock}>
@@ -69,9 +86,9 @@ const Review = () => {
                 </div>
 
                 <button className={styles.topBtn} onClick={returnTop}>
-                    <span className={styles.topBtn_icon}>
-                        <i className="fas fa-arrow-circle-up"></i>
-                    </span>
+                    <p className={styles.topBtn_icon}>
+                        <i className="fas fa-arrow-circle-up ${}"></i>
+                    </p>
                     <p className={styles.topBtn_txt}>Topに戻る</p>
                 </button>
             </div>
