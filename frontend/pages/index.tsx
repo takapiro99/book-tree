@@ -23,18 +23,11 @@ export default function Home() {
                             ***********************
                         </div>
                     </div>
-                    <h1 className={styles.topContentSteps__title}>
-                        どんなことができる？
-                    </h1>
+                    <h1 className={styles.topContentSteps__title}>どんなことができる？</h1>
                     <div className={styles.topContent__steps}>
                         <div className={styles.topContentSteps__block}>
                             <div className={styles.topContentSteps__photo}>
-                                <Image
-                                    src={top_1}
-                                    alt=""
-                                    width={144}
-                                    height={144}
-                                />
+                                <Image src={top_1} alt="" width={144} height={144} />
                             </div>
                             <div className={styles.topContentSteps__explain}>
                                 BOOK TREEをつくろう
@@ -45,12 +38,7 @@ export default function Home() {
                         </div>
                         <div className={styles.topContentSteps__block}>
                             <div className={styles.topContentSteps__photo}>
-                                <Image
-                                    src={top_2}
-                                    alt=""
-                                    width={144}
-                                    height={144}
-                                />
+                                <Image src={top_2} alt="" width={144} height={144} />
                             </div>
                             <div className={styles.topContentSteps__explain}>
                                 すごい人にお願いして・・・
@@ -61,12 +49,7 @@ export default function Home() {
                         </div>
                         <div className={styles.topContentSteps__block}>
                             <div className={styles.topContentSteps__photo}>
-                                <Image
-                                    src={top_3}
-                                    alt=""
-                                    width={144}
-                                    height={144}
-                                />
+                                <Image src={top_3} alt="" width={144} height={144} />
                             </div>
                             <div className={styles.topContentSteps__explain}>
                                 たくさん本を実らせよう！
@@ -83,9 +66,7 @@ export default function Home() {
                 </div> */}
                 </div>
                 <div className={styles.BookTreeForest}>
-                    <h1 className={styles.BookTreeForest__title}>
-                        what&apos;s new?
-                    </h1>
+                    <h1 className={styles.BookTreeForest__title}>what&apos;s new?</h1>
                     <div className={styles.forestWrapper}>
                         <div className={styles.littletreeWrapper}>
                             <LittleTree />
