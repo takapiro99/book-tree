@@ -42,13 +42,19 @@ const Top = () => {
 
                 </div>
             </div>
+            {/* <div className={styles.greenbar}>
+                
+                <div className={styles.circleDate}>
+                    <div className={styles.circleDate__date}>{today}</div>
+                </div>
+            </div> */}
+            <div className={styles.BookTreeForest}>
             <div className={styles.greenbar}>
                 
                 {/* <div className={styles.circleDate}>
                     <div className={styles.circleDate__date}>{today}</div>
                 </div> */}
             </div>
-            <div className={styles.BookTreeForest}>
             <h1 className={styles.BookTreeForest__title}>what's new?</h1>
                 <div className={styles.forestWrapper}>
                     <div className={styles.littletreeWrapper}>

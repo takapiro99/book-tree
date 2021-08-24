@@ -9,7 +9,7 @@ const DeletePage1 = () => {
             {/* <img className={styles.deleteBOOKTREE}src={deleteBOOKTREE} alt="BookTreeを削除します" /> */}
             <p>アカウント情報とレビュー内容を削除します。</p>
             <p>参加してくれてありがとう！</p>
-            <p className={styles.button}>削除</p>
+            <button>削除</button>
         </div>
 
     );

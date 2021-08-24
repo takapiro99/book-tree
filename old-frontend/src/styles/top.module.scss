@@ -64,7 +64,7 @@
     // transform: rotate(1rad);
     background-color: #6fa769;
     position: relative;
-    z-index: -1;
+    z-index: 0;
     // .greenbar__icon {
     //     position: absolute;
     //     z-index: 2;
@@ -131,8 +131,8 @@
 }
 
 .BookTreeForest {
-
-    margin: 0 1rem;
+    margin-top: -4vw;
+    // margin: 0 2rem;
     background-image: url('../assets/dot.svg');
     background-repeat: space repeat;
     background-position: center center;

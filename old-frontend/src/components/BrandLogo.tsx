@@ -11,7 +11,7 @@ const BrandLogo = () => {
                 alt="booktreelogo"
             />
             <img className={styles.icon} src={icon} id="icon" alt="icon" />
-            <div className={styles.menu}>
+            {/* <div className={styles.menu}>
                 <ul>
                     <li>
                         　<i className="fas fa-book"></i>　トップページ
@@ -26,7 +26,7 @@ const BrandLogo = () => {
                         　<i className="fas fa-sign-out-alt"></i>　ログアウト
                     </li>
                 </ul>
-            </div>
+            </div> */}
         </div>
     )
 }

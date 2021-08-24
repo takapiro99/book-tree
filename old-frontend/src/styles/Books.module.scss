@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    right: 10px;
+
 }
 
 .booksWithIcon {
@@ -9,8 +11,8 @@
     .booksBlock {
         position: relative;
         .books {
-            width: 9rem;
-            height: 12rem;
+            width: 8rem;
+            height: 10rem;
             &:hover {
                 opacity: 0.2;
                 cursor: pointer;
@@ -48,9 +50,10 @@
 .booksBlock__account {
     .accountImg {
         width: 3rem;
+        z-index: 1000;
         height: 3rem;
         border-radius: 50%;
-        border: 4px solid white;
+        border: 3px solid rgb(255, 255, 254);
         position: relative;
         &:hover {
             opacity: 0.7;
@@ -67,7 +70,7 @@
         width: 98%;
         height: 96%;
         border-radius: 50%;
-        z-index: 0;
+        z-index: 1;
     }
 }
 

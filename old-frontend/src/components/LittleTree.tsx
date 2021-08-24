@@ -2,7 +2,7 @@
 //import littletree from '../assets/shioritree2.png'
 //import littletree from '../assets/yellowribbon.png'
 import littletree from '../assets/LittleTreeSmall.png'
-import icon from '../assets/icon1.png'
+import icon1 from '../assets/kaede.png'
 import styles from '../styles/LittleTree.module.scss'
 
 const LittleTree = () => {
@@ -14,9 +14,9 @@ const LittleTree = () => {
                <img src={littletree} alt="littletree" />
                 <p className={styles.flag_sentence_1}>{content}</p>
                 <p className={styles.flag_sentence_2}>がすごい人！</p>
-                {/* <div className={styles.icon_pic}>
-                    <img src={icon} alt="TwitterIcon" />
-                </div> */}
+                <div className={styles.icon_pic}>
+                    <img src={icon1} alt="TwitterIcon" />
+                </div>
             </div>
             {/* <div className={styles.icon_pic}><img  src={icon} alt="TwitterIcon" /></div> */}
         </div>
