@@ -1,17 +1,17 @@
-.icon{
+.icon {
     width: 6vw;
     height: 6vw;
     position: relative;
     border-radius: 50%;
 
-    img{
+    img {
         position: relative;
         width: 100%;
         height: 100%;
         border-radius: 50%;
         z-index: 1;
         transition: all 0.4s;
-    border: solid 0.5vw rgb(255, 214, 79);
+        border: solid 0.5vw rgb(255, 214, 79);
 
         &:hover {
             opacity: 0.5;

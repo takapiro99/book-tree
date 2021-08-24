@@ -10,7 +10,9 @@ const AddReview = (props: BooksProps) => {
                     displayType="bookOnly"
                     userID="sakusaku"
                 />
-                <div className={styles.plus}><i className="fas fa-plus-circle"></i></div>
+                <div className={styles.plus}>
+                    <i className="fas fa-plus-circle"></i>
+                </div>
             </div>
             <div className={styles.reviewformAddreviewReview}>
                 <div className={styles.reviewformAddreviewReview__reason}>

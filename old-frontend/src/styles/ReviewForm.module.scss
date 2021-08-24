@@ -82,7 +82,7 @@ h1 {
 //     height: 4.7rem;
 //     width: 100%;
 // }
-.reviewformWrapper{
+.reviewformWrapper {
     //background-color: aqua;
     &:before {
         background-color: aqua;
@@ -100,7 +100,6 @@ h1 {
 .reviewformName {
     margin-top: 1rem;
     display: flex;
-
 }
 .reviewformName__block {
     flex: 1;
@@ -172,7 +171,7 @@ h1 {
     display: flex;
     flex-direction: row;
 }
-.plus{
+.plus {
     text-align: center;
     font-size: 140%;
 }

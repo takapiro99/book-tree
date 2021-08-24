@@ -10,8 +10,8 @@ const LittleTree = () => {
     const content = 'フロントエンド'
     return (
         <div>
-           <div className={styles.littletree_pic}>
-               <img src={littletree} alt="littletree" />
+            <div className={styles.littletree_pic}>
+                <img src={littletree} alt="littletree" />
                 <p className={styles.flag_sentence_1}>{content}</p>
                 <p className={styles.flag_sentence_2}>がすごい人！</p>
                 <div className={styles.icon_pic}>
