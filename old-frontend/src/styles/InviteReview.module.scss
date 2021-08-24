@@ -5,7 +5,7 @@
 
     .nominateBlock__reason{
         //background-color: aqua;
-        font-size: 4rem;
+        font-size: 3.5rem;
         text-align: center;
     }
 
@@ -53,6 +53,58 @@
 
     .accontCreateFromRecom{
         margin: 1rem 0;
-        background-color: aqua;
+    }
+    .title{
+        width: 36vw;
+        margin-top: 5vw;
+        margin-left: 13vw;
+        margin-bottom: 2vw;
+    }
+    .Twitter{
+        width: 30vw;
+        height: 4vw;
+        font-size: 1.8vw;
+        text-align: center;
+        background-color: rgb(114, 211, 255);
+        color: white;
+        margin-left: 16vw;
+        position: relative;
+        border-radius: 100px;
+        padding-top:1.3vw ;
+        cursor: pointer;
+        box-shadow: 0 5px 0 #7291a7;
+        transition: 0.1s;
+        border-radius: 30px;
+        border: none;
+    
+        &:hover {
+            transform: translateY(3px);
+            text-decoration: none;
+            box-shadow: 0 2px 0 #353638;
+            cursor: pointer;
+        }
+    }
+    .Google{
+        width: 30vw;
+        height: 4vw;
+        background-color: gray;
+        font-size: 1.8vw;
+        text-align: center;
+        color: white;
+        margin-left: 16vw;
+        border-radius: 100px;
+        padding-top:1.3vw ;
+        cursor: pointer;
+        box-shadow: 0 5px 0 #535353;
+        transition: 0.1s;
+        border-radius: 30px;
+        border: none;
+    
+        &:hover {
+            transform: translateY(3px);
+            text-decoration: none;
+            box-shadow: 0 2px 0 #2c2b2b;
+            cursor: pointer;
+        }
     }
 }
