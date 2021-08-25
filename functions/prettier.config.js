@@ -4,4 +4,5 @@ module.exports = {
     semi: false,
     tabWidth: 4,
     htmlWhitespaceSensitivity: "ignore",
+    printWidth: 100
 };

@@ -5,15 +5,13 @@ import validUrl = require('valid-url')
 
 import { Review } from './types'
 
-export const generateToken = async () => {
+export const generateToken: () => Promise<string | null> = async () => {
     const N = 16
     const loopNumber = 10 // 無限ループ防止のために10回で区切る
     const S = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 
     for (let i = 0; i < loopNumber; i++) {
-        const randomArray: number[] = Array.from(
-            crypto.randomFillSync(new Uint8Array(N))
-        )
+        const randomArray: number[] = Array.from(crypto.randomFillSync(new Uint8Array(N)))
         const token = randomArray.map((n: number) => S[n % S.length]).join('')
 
         const querySnapshot = await admin
@@ -36,19 +34,10 @@ export const validateReview: (review: Review) => void = (review) => {
         !review.bookImageURL ||
         !validUrl.isUri(review.bookLink)
     ) {
-        throw new functions.https.HttpsError(
-            'invalid-argument',
-            '必須の項目を入力してください。'
-        )
+        throw new functions.https.HttpsError('invalid-argument', '必須の項目を入力してください。')
     }
 
-    if (
-        !validUrl.isUri(review.bookImageURL) ||
-        !validUrl.isUri(review.bookLink)
-    ) {
-        throw new functions.https.HttpsError(
-            'invalid-argument',
-            '不正なURLです'
-        )
+    if (!validUrl.isUri(review.bookImageURL) || !validUrl.isUri(review.bookLink)) {
+        throw new functions.https.HttpsError('invalid-argument', '不正なURLです')
     }
 }
