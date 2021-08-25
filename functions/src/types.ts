@@ -5,6 +5,7 @@ export type Review = {
     specialty: string | null | undefined
     title: string
     content: string
+    reason: string
     bookImageURL: string
     bookLink: string
     createdAt: admin.firestore.FieldValue

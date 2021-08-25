@@ -11,7 +11,9 @@ export const generateToken: () => Promise<string | null> = async () => {
     const S = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 
     for (let i = 0; i < loopNumber; i++) {
-        const randomArray: number[] = Array.from(crypto.randomFillSync(new Uint8Array(N)))
+        const randomArray: number[] = Array.from(
+            crypto.randomFillSync(new Uint8Array(N))
+        )
         const token = randomArray.map((n: number) => S[n % S.length]).join('')
 
         const querySnapshot = await admin
@@ -32,12 +34,23 @@ export const validateReview: (review: Review) => void = (review) => {
         !review.title ||
         !review.content ||
         !review.bookImageURL ||
-        !validUrl.isUri(review.bookLink)
+        !review.reason ||
+        !review.bookLink ||
+        !review.bookImageURL
     ) {
-        throw new functions.https.HttpsError('invalid-argument', '必須の項目を入力してください。')
+        throw new functions.https.HttpsError(
+            'invalid-argument',
+            '必須の項目を入力してください。'
+        )
     }
 
-    if (!validUrl.isUri(review.bookImageURL) || !validUrl.isUri(review.bookLink)) {
-        throw new functions.https.HttpsError('invalid-argument', '不正なURLです')
+    if (
+        !validUrl.isUri(review.bookImageURL) ||
+        !validUrl.isUri(review.bookLink)
+    ) {
+        throw new functions.https.HttpsError(
+            'invalid-argument',
+            '不正なURLです'
+        )
     }
 }
