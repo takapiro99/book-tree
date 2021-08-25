@@ -10,6 +10,7 @@ const reviewMock: Review = {
     specialty: undefined,
     title: 'テストの森',
     content: 'テストテストテストテストテストテストテスト',
+    reason: 'テスト初心者向け',
     bookImageURL:
         'https://shop.r10s.jp/neowing-r/cabinet/item_img_1158/neobk-2151500.jpg',
     bookLink: 'https://item.rakuten.co.jp/neowing-r/neobk-2151500/',
