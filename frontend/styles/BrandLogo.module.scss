@@ -1,28 +1,33 @@
-.BrandLogo {
+.navbar_wrapper {
     outline: 2px red solid;
     position: fixed;
     width: 100%;
-    height: 6vw;
+    height: 80px;
     // background-color: #ffebc6;
     top: 0;
     z-index: 10000;
     // opacity: 0.8;
 }
-.booktree_logo {
+.booktree_logo_wrapper{
+    outline:2px solid green;
     position: absolute;
-    width: 13vw;
+    width: 150px;
     top: 1.9vw;
     left: 1.5vw;
 }
+
 // vw だとスマホのときに米粒になってしまう
 .icon {
-    opacity: 1;
-    margin-left: 90vw;
-    width: 5vw;
-    height: 5vw;
+    position:absolute;
+    top:0;
+    right: 0;
+    // opacity: 1;
+    // margin-left: 90vw;
+    // width: 5vw;
+    // height: 5vw;
     border-radius: 50%;
-    margin-top: 0.6vw;
-    cursor: pointer;
+    // margin-top: 0.6vw;
+    // cursor: pointer;
 }
 
 .navMenu {
@@ -33,8 +38,8 @@
     margin-left: 81vw;
     margin-top: 15px;
     padding: 0;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    // padding-top: 8px;
+    // padding-bottom: 8px;
     cursor: pointer;
     box-shadow: 10px 10px rgb(205, 226, 110);
     border-radius: 5px;
@@ -42,7 +47,7 @@
         font-weight: bolder;
         color: rgb(20, 20, 20);
         opacity: 1;
-        padding: 8px;
+        // padding: 8px;
         font-size: 15px;
         align-items: center;
         // border: 1px solid rgb(160, 152, 152);
