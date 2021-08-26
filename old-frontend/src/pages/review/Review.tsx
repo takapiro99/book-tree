@@ -54,7 +54,7 @@ const Review = () => {
                     <div className={styles.reviewBigTree}>
                         <h1>NekoさんのBook Tree</h1>
                         <div>Nekoさんのところに集まった本たち</div>
-                        <BigTreeWithBooks />
+                        {/* <BigTreeWithBooks /> */}
                     </div>
                     <div className={styles.mypageButtons}>
                         <button

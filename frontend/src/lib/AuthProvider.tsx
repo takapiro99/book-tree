@@ -44,6 +44,8 @@ export const AuthProvider: React.FC = ({ children }) => {
         }
     }
 
+    // TODO: 一番最初にユーザー検知するまで loading ってことにしといたほうがよさそう(UIがかくつく)
+    // TODO: でも、ログインしてなかったら永遠に loading になっちゃいそうなのでどうすればいいかわかんない
     useEffect(() => {
         firebase.auth().onAuthStateChanged(async (user) => {
             setCurrentUser(user)
