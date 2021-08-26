@@ -3,22 +3,28 @@ import firebase from './firebase'
 import { User } from '@firebase/auth-types'
 
 type UserState = User | null | undefined
+type NavMenuState = boolean | null | undefined
 type AuthContextType = {
     twitterLogin: (() => Promise<void>) | undefined
     googleLogin: (() => Promise<void>) | undefined
     signOut: (() => Promise<void>) | undefined
     currentUser: UserState
+    isNavMenuOpen: NavMenuState
+    setNavMenuOpen: (isOpen: boolean) => void
 }
 
 export const AuthContext = React.createContext<AuthContextType>({
     twitterLogin: undefined,
     googleLogin: undefined,
     signOut: undefined,
-    currentUser: undefined
+    currentUser: undefined,
+    isNavMenuOpen: false,
+    setNavMenuOpen: () => {}
 })
 
 export const AuthProvider: React.FC = ({ children }) => {
     const [currentUser, setCurrentUser] = useState<UserState>(null)
+    const [isNavMenuOpen, setNavMenuOpen] = useState<NavMenuState>(false)
 
     const twitterLogin = async () => {
         const provider = new firebase.auth.TwitterAuthProvider()
@@ -50,7 +56,9 @@ export const AuthProvider: React.FC = ({ children }) => {
                 twitterLogin: twitterLogin,
                 googleLogin: googleLogin,
                 signOut: signOut,
-                currentUser
+                currentUser,
+                isNavMenuOpen,
+                setNavMenuOpen
             }}
         >
             {children}

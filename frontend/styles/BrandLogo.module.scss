@@ -9,65 +9,79 @@
     // opacity: 0.8;
 }
 .booktree_logo_wrapper {
-    outline: 2px solid green;
+    cursor: pointer;
     position: absolute;
-    width: 150px;
-    top: 1.9vw;
-    left: 1.5vw;
+    height: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+}
+
+.booktree_logo {
+    height: 100%;
+    object-fit: contain;
 }
 
 // vw だとスマホのときに米粒になってしまう
 .icon {
     position: absolute;
-    top: 0;
-    right: 0;
-    // opacity: 1;
-    // margin-left: 90vw;
-    // width: 5vw;
-    // height: 5vw;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 15px;
     border-radius: 50%;
-    // margin-top: 0.6vw;
-    // cursor: pointer;
+    height: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    &:hover {
+        transition: all 0.3s ease;
+        /* 6dp elevation modified*/
+        -webkit-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12),
+            0 2px 4px -1px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12),
+            0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    }
 }
 
 .navMenu {
+    position: absolute;
+    top: 70px;
+    right: 20px;
     background-color: #f4fcdb;
-    align-items: center;
-    width: 16vw;
-    list-style: none;
-    margin-left: 81vw;
-    margin-top: 15px;
+    width: 200px;
     padding: 0;
-    // padding-top: 8px;
-    // padding-bottom: 8px;
-    cursor: pointer;
     box-shadow: 10px 10px rgb(205, 226, 110);
     border-radius: 5px;
-    li {
-        font-weight: bolder;
-        color: rgb(20, 20, 20);
-        opacity: 1;
-        // padding: 8px;
-        font-size: 15px;
+    ul {
+        list-style: none;
         align-items: center;
-        // border: 1px solid rgb(160, 152, 152);
-        position: relative;
-    }
-    li::after {
-        position: absolute;
-        margin-left: 13px;
-        bottom: -2px;
-        left: 0;
-        content: '';
-        width: 90%;
-        height: 1.7px;
-        background: rgb(71, 71, 71);
-        transform: scale(0, 1);
-        transform-origin: left top;
-        transition: transform 0.4s;
-    }
-    li:hover::after {
-        transform: scale(1, 1);
+        padding-left: 20px;
+        li {
+            cursor: pointer;
+            font-weight: bolder;
+            color: rgb(20, 20, 20);
+            opacity: 1;
+            padding: 3px;
+            font-size: 15px;
+            align-items: center;
+            border: 1px solid rgb(160, 152, 152);
+            position: relative;
+        }
+        li::after {
+            position: absolute;
+            margin-left: 13px;
+            bottom: -2px;
+            left: 0;
+            content: '';
+            width: 90%;
+            height: 1.7px;
+            background: rgb(71, 71, 71);
+            transform: scale(0, 1);
+            transform-origin: left top;
+            transition: transform 0.4s;
+        }
+        li:hover::after {
+            transform: scale(1, 1);
+        }
     }
 }
 
