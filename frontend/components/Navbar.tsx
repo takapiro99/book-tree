@@ -9,9 +9,12 @@ const mockIcon = 'https://pbs.twimg.com/profile_images/1268541932541804544/pTEgO
 
 const NavBar = () => {
     return (
-        <div className={styles.BrandLogo}>
-            <Image className={styles.booktree_logo} src={booktree_logo} alt="booktreelogo" />
-            <Image
+        <>
+            <div className={styles.navbar_wrapper}>
+                <div className={styles.booktree_logo_wrapper}>
+                    <Image objectFit="contain" src={booktree_logo} alt="booktreelogo" />
+                </div>
+                {/* <Image
                 className={styles.icon}
                 src={mockIcon}
                 id="icon"
@@ -19,8 +22,8 @@ const NavBar = () => {
                 objectFit="contain"
                 height={50}
                 width={50}
-            />
-            <div>
+            /> */}
+                {/* <div>
                 <ul className={styles.navMenu}>
                     <li>
                         <FaBook />
@@ -39,8 +42,10 @@ const NavBar = () => {
                         &emsp;ログアウト
                     </li>
                 </ul>
+            </div> */}
             </div>
-        </div>
+            <div style={{ height: '80px' }} />
+        </>
     )
 }
 

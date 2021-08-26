@@ -1,4 +1,5 @@
 import { useRouter } from 'next/dist/client/router'
+import BigTreeWithBooks from '../../components/BigTreeWithBooks'
 import Custom404 from '../404'
 
 interface RouteParams {
@@ -18,6 +19,7 @@ const Mypage = () => {
         <div>
             mypage
             <p>hello, {userId} さん</p>
+            <BigTreeWithBooks />
         </div>
     )
 }

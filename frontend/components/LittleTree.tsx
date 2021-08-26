@@ -2,7 +2,7 @@ import Image from 'next/image'
 import styles from '../styles/LittleTree.module.scss'
 
 import littletree from '../public/images/LittleTree_flag.png'
-import icon from '../public/images/icon1.png'
+import icon from '../public/images/foxIcon.png'
 
 const LittleTree = () => {
     // 文字カウントする関数
