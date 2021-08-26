@@ -11,7 +11,33 @@ const mockIcon = 'https://pbs.twimg.com/profile_images/1268541932541804544/pTEgO
 /*  eslint @next/next/no-img-element:0 */
 
 const NavBar = () => {
-    const { isNavMenuOpen, setNavMenuOpen } = useContext(AuthContext)
+    const { signOut } = useContext(AuthContext)
+    const { currentUser, isNavMenuOpen, setNavMenuOpen } = useContext(AuthContext)
+    const handleToggleNavMenu = () => {
+        if (currentUser) {
+            setNavMenuOpen(!isNavMenuOpen)
+        } else {
+            if (
+                window.confirm(`ログインしてね！
+ログイン画面に移動しますか？`)
+            ) {
+                location.href = '/auth/signin'
+            }
+        }
+    }
+    const handleSignOut = () => {
+        signOut().then(
+            (res) => {
+                console.log(res)
+                alert('ログアウト成功！ｗ')
+            },
+            (err) => {
+                console.error(err)
+                alert('ログアウト失敗！ｗ')
+            }
+        )
+    }
+    console.log(currentUser)
     return (
         <nav>
             <div className={styles.navbar_wrapper}>
@@ -26,33 +52,41 @@ const NavBar = () => {
                 </Link>
                 <img
                     className={styles.icon}
-                    src={mockIcon}
+                    src={currentUser?.photoURL ? currentUser.photoURL : '/images/foxIcon.png'}
                     id="icon"
                     alt="icon"
-                    onClick={() => setNavMenuOpen(!isNavMenuOpen)}
+                    onClick={handleToggleNavMenu}
                 />
-                {isNavMenuOpen && (
-                    <div className={styles.navMenu}>
-                        <ul>
-                            <li>
-                                <FaBook />
-                                &emsp;トップページ
-                            </li>
-                            <li>
-                                <FaTree />
-                                &emsp;マイページ
-                            </li>
-                            <li>
-                                <FaUserCog />
-                                &emsp;プロフィール編集
-                            </li>
-                            <li>
-                                <FaSignOutAlt />
-                                &emsp;ログアウト
-                            </li>
-                        </ul>
-                    </div>
-                )}
+                {
+                    currentUser ? (
+                        <>
+                            {isNavMenuOpen && (
+                                <div className={styles.navMenu}>
+                                    <ul>
+                                        <Link href="/" passHref={true}>
+                                            <li>
+                                                <FaBook />
+                                                &emsp;トップページ
+                                            </li>
+                                        </Link>
+                                        <li>
+                                            <FaTree />
+                                            &emsp;マイページ
+                                        </li>
+                                        <li>
+                                            <FaUserCog />
+                                            &emsp;プロフィール編集
+                                        </li>
+                                        <li onClick={handleSignOut}>
+                                            <FaSignOutAlt />
+                                            &emsp;ログアウト
+                                        </li>
+                                    </ul>
+                                </div>
+                            )}
+                        </>
+                    ) : null /* empty icon */
+                }
             </div>
             <div style={{ height: '80px' }} />
         </nav>

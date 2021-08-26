@@ -7,7 +7,7 @@ type NavMenuState = boolean | null | undefined
 type AuthContextType = {
     twitterLogin: (() => Promise<void>) | undefined
     googleLogin: (() => Promise<void>) | undefined
-    signOut: (() => Promise<void>) | undefined
+    signOut: () => Promise<void>
     currentUser: UserState
     isNavMenuOpen: NavMenuState
     setNavMenuOpen: (isOpen: boolean) => void
@@ -16,7 +16,7 @@ type AuthContextType = {
 export const AuthContext = React.createContext<AuthContextType>({
     twitterLogin: undefined,
     googleLogin: undefined,
-    signOut: undefined,
+    signOut: async () => {},
     currentUser: undefined,
     isNavMenuOpen: false,
     setNavMenuOpen: () => {}
