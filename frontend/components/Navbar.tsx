@@ -69,10 +69,12 @@ const NavBar = () => {
                                                 &emsp;トップページ
                                             </li>
                                         </Link>
-                                        <li>
-                                            <FaTree />
-                                            &emsp;マイページ
-                                        </li>
+                                        <Link href={`/${currentUser.uid}`} passHref={true}>
+                                            <li>
+                                                <FaTree />
+                                                &emsp;マイページ
+                                            </li>
+                                        </Link>
                                         <li>
                                             <FaUserCog />
                                             &emsp;プロフィール編集
