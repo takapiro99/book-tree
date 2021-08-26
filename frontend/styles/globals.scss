@@ -1,12 +1,5 @@
-h1 {
-    margin: 0;
-    padding: 0;
-}
+@import url(sanitize.css);
 
-// .wrapper{
-//     margin: 5rem 13rem 5rem 13rem;
-
-// }
 .wrapper {
     margin: 7rem auto 0 auto;
     max-width: 1580px;
@@ -52,8 +45,12 @@ h1 {
     width: 24%;
 }
 
-$global_margin: 4rem 0;
+// $global_margin: 4rem 0;
 
-.blockbtwMd {
-    margin: $global_margin;
+// .blockbtwMd {
+//     margin: $global_margin;
+// }
+
+* {
+    outline: 1px solid blue;
 }
