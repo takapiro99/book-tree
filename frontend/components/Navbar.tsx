@@ -1,5 +1,4 @@
 import styles from '../styles/BrandLogo.module.scss'
-import booktree_logo from '/public/images/BrandLogo.png'
 import Link from 'next/link'
 import { FaBook, FaTree, FaUserCog, FaSignOutAlt } from 'react-icons/fa'
 import { useContext } from 'react'
@@ -14,7 +13,7 @@ const mockIcon = 'https://pbs.twimg.com/profile_images/1268541932541804544/pTEgO
 const NavBar = () => {
     const { isNavMenuOpen, setNavMenuOpen } = useContext(AuthContext)
     return (
-        <>
+        <nav>
             <div className={styles.navbar_wrapper}>
                 <Link href="/" passHref={true}>
                     <div className={styles.booktree_logo_wrapper}>
@@ -56,7 +55,7 @@ const NavBar = () => {
                 )}
             </div>
             <div style={{ height: '80px' }} />
-        </>
+        </nav>
     )
 }
 

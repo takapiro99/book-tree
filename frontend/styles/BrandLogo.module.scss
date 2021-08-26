@@ -1,12 +1,12 @@
 .navbar_wrapper {
-    outline: 2px red solid;
     position: fixed;
     width: 100%;
     height: 80px;
-    // background-color: #ffebc6;
     top: 0;
     z-index: 10000;
-    // opacity: 0.8;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: rgba(250, 250, 250, .96);
+    backdrop-filter: blur(3px);
 }
 .booktree_logo_wrapper {
     cursor: pointer;
