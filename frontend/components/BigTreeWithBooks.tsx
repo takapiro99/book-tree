@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getBooksToShowOnTopPage } from '../lib/api'
+import { fetchBooksEachUser } from '../lib/api'
 import styles from '../styles/BigTreeWithBooks.module.scss'
 import BookOnBigTree, { BookOnBigTreeProps } from '../components/BookOnBigTree'
 
@@ -9,7 +9,7 @@ const BigTreeWithBooks = () => {
     // 複数もらった画像をmapする
     const [books, setBooks] = useState<BookOnBigTreeProps[]>([])
     useEffect(() => {
-        const booksdata = getBooksToShowOnTopPage('sakusaku')
+        const booksdata = fetchBooksEachUser('sakusaku')
         setBooks(booksdata)
         //console.log(booksdata)
     }, [])
