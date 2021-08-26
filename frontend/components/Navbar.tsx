@@ -7,12 +7,19 @@ const mockIcon = 'https://pbs.twimg.com/profile_images/1268541932541804544/pTEgO
 
 // TODO: ログイン状態またはローディングを取得し、それに応じて表示を変える
 
+/*  eslint @next/next/no-img-element:0 */
+
 const NavBar = () => {
     return (
         <>
             <div className={styles.navbar_wrapper}>
                 <div className={styles.booktree_logo_wrapper}>
-                    <Image objectFit="contain" src={booktree_logo} alt="booktreelogo" />
+                    {/* <Image objectFit="contain" src={booktree_logo} alt="booktreelogo" /> */}
+                    <img
+                        className={styles.booktree_logo}
+                        src="/images/BrandLogo.png"
+                        alt="booktreelogo"
+                    />
                 </div>
                 {/* <Image
                 className={styles.icon}

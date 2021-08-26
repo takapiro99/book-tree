@@ -10,7 +10,6 @@ export interface BookOnBigTreeProps {
     // 本の画像、リンク、表示のさせ方（アイコンの場合アイコン画像とID）
     bookImageURL: string
     bookLink: string
-    displayType: 'icon' | 'bookMark' | 'bookOnly'
     userIconImage?: string
     userID: string
 }
@@ -19,11 +18,9 @@ const BookOnBigTree = (props: BookOnBigTreeProps) => {
     return (
         <div className={styles.booksWithIcon}>
             <div className={styles.booksBlock}>
-                {props.displayType === 'bookMark' && (
-                    <div
-                        className={`${styles.bookMark} ${styles.reviewpageReviewBook__bookMark}`}
-                    ></div>
-                )}
+                <div
+                    className={`${styles.bookMark} ${styles.reviewpageReviewBook__bookMark}`}
+                ></div>
                 <div className={styles.bookLinkBlock}>
                     <a href={props.bookLink}>
                         <Image
@@ -36,13 +33,11 @@ const BookOnBigTree = (props: BookOnBigTreeProps) => {
                         />
                     </a>
                 </div>
-                {props.displayType === 'icon' && (
-                    <div className={styles.booksBlock__account}>
-                        <a href="#accont-review">
-                            <Image className={styles.accountImg} src={iconFox} alt="アイコン画像" />
-                        </a>
-                    </div>
-                )}
+                <div className={styles.booksBlock__account}>
+                    <a href="#accont-review">
+                        <Image className={styles.accountImg} src={iconFox} alt="アイコン画像" />
+                    </a>
+                </div>
             </div>
         </div>
     )
