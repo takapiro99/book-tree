@@ -1,34 +1,30 @@
 .topContent {
     display: flex;
     flex-direction: row;
-
-
 }
-.topContentSteps__title{
+.topContentSteps__title {
     text-align: center;
     margin: 8% 0 4% 0;
 }
-.topContent__steps{
-
+.topContent__steps {
     display: flex;
     flex-direction: row;
     gap: 4%;
 
-    
-    .topContentSteps__block{
+    .topContentSteps__block {
         display: flex;
         flex-direction: column;
         //gap: 5%;
-        .topContentSteps__photo{
+        .topContentSteps__photo {
             width: 22vw;
-            height:40vh;
+            height: 40vh;
             //background-color: lightgray;
             margin-bottom: 5%;
-            img{
+            img {
                 width: 22vw;
             }
         }
-        .topContentSteps__explain{
+        .topContentSteps__explain {
             text-align: center;
             width: 22vw;
             //height:20%;
@@ -36,13 +32,10 @@
             //background-color: lightgray;
             font-size: 24px;
             font-weight: bold;
-            
         }
-        .topContentSteps__explainS{
+        .topContentSteps__explainS {
             font-size: 15px;
         }
-
-
     }
 }
 
@@ -54,9 +47,32 @@
     flex: 1;
     padding: 1rem 1rem 1rem 0;
 }
+.Twitter {
+    width: 30vw;
+    height: 4vw;
+    font-size: 1.8vw;
+    text-align: center;
+    background-color: rgb(159, 207, 150);
+    color: white;
+    margin-left: 35vw;
+    position: relative;
+    border-radius: 100px;
+    padding-top: 1.3vw;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #7c9b7f;
+    transition: 0.1s;
+    border-radius: 30px;
+    border: none;
 
+    &:hover {
+        transform: translateY(3px);
+        text-decoration: none;
+        box-shadow: 0 2px 0 #3b5336;
+        cursor: pointer;
+    }
+}
 .greenbar {
-   //background: linear-gradient(106deg, transparent 0%, transparent 30%, #666 30%, #666 100%);
+    //background: linear-gradient(106deg, transparent 0%, transparent 30%, #666 30%, #666 100%);
     margin-top: 80px;
     width: 100vw;
     clip-path: polygon(0 20%, 0 0, 100% 40%, 100% 60%);
@@ -77,15 +93,15 @@
 
 .greenbar2 {
     margin: 4rem 0;
-   //background: linear-gradient(106deg, transparent 0%, transparent 30%, #666 30%, #666 100%);
-   margin-top: 80px;
-   width: 100vw;
-   clip-path: polygon(0 20%, 0 0, 100% 40%, 100% 60%);
-   height: 35vh;
-   // transform: rotate(1rad);
-   background-color: #6fa769;
-   z-index: -1;
-   // position: relative;
+    //background: linear-gradient(106deg, transparent 0%, transparent 30%, #666 30%, #666 100%);
+    margin-top: 80px;
+    width: 100vw;
+    clip-path: polygon(0 20%, 0 0, 100% 40%, 100% 60%);
+    height: 35vh;
+    // transform: rotate(1rad);
+    background-color: #6fa769;
+    z-index: -1;
+    // position: relative;
 }
 
 .circleDate {
@@ -137,11 +153,22 @@
     background-repeat: space repeat;
     background-position: center center;
     background-size: 51%;
-    .BookTreeForest__title{
-        text-align: center;
+    position: relative;
+    .shiori{
+        position: absolute;
+        z-index: 2;
+        width: 580px;
+        left: 16rem;
+        margin-top: -70px;
+    }
+    .BookTreeForest__title {
+        left: 30rem;
+        position: absolute;
+        z-index: 3;
         //font-size: 20px;
     }
 }
+
 
 .forestWrapper {
     display: flex;
@@ -151,6 +178,13 @@
     justify-content: center;
     //justify-content: space-between;
 }
+// .shiori{
+//     top: 0;
+//     z-index: -100;
+//     margin-left: 23vw;
+//     margin-top: -5vw;
+//     width: 50%;
+// }
 
 @media screen and (max-width: 920px) {
     .forestWrapper {

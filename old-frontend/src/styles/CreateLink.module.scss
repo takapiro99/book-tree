@@ -1,14 +1,13 @@
-.createLinkWrapper{
+.createLinkWrapper {
     margin-bottom: 5%;
     // background-image: url('../assets/dot.svg');
     // background-repeat:  no-repeat;
     // background-size: 50%;
     // background-position: center;
     // z-index: -1;
-
 }
 
-.createLinkTitle{
+.createLinkTitle {
     text-align: center;
 }
 // .images_item02::before {
@@ -20,12 +19,12 @@
 //     border-left: 30px solid rgba(0, 0, 0, 0) 0;
 //   }
 
-.createLinkBlock{
+.createLinkBlock {
     display: flex;
     justify-content: center;
     //flex-direction: column;
     padding: 2vw 1vw;
-    margin:1rem 10% 7% 10%;
+    margin: 1rem 10% 7% 10%;
     //border: 1px solid lightgray;
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
@@ -33,7 +32,7 @@
     position: relative;
     z-index: 3;
 
-    .createLinkBlock__tree{
+    .createLinkBlock__tree {
         width: 7rem;
         position: absolute;
         top: 13%;
@@ -41,55 +40,76 @@
         opacity: 0.7;
     }
 
-   .createLinkBlock__input{
-    font-weight: 500;
-    .createLinkBlock__reason{
-        border-radius: 15px;
-        border: 1px solid gray;
-        padding: 4px 10px;
-        margin: 0 5px;
-        height: 24px;
-        display: inline-block;
+    .createLinkBlock__input {
+        font-weight: 500;
+        .createLinkBlock__reason {
+            border-radius: 15px;
+            border: 1px solid gray;
+            padding: 4px 10px;
+            margin: 0 5px;
+            height: 24px;
+            display: inline-block;
         }
-
     }
-   .createButtonBlock{
-       //position: absolute;
-       display: inline-block;
-       width: 8%;
-       //top: 30%;
-       //right: 7%;
-       
-       .createButtonBlock__button{
-        border-radius: 20px;
-        border: none;
-        padding: 5px 10px;
-        margin-left: 20px;
-        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-        background-color: #6fa769;
-        color: white;
-        height: 2rem;
-        width: 4rem;
-        transition: 0.3s;
-        font-weight: bold;
-        letter-spacing: 1px;
-        &:hover{
-            cursor: pointer;
+    .createButtonBlock {
+        //position: absolute;
+        display: inline-block;
+        width: 8%;
+        //top: 30%;
+        //right: 7%;
+
+        .createButtonBlock__button {
+            border-radius: 20px;
+            border: none;
+            padding: 5px 10px;
+            margin-left: 20px;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+            background-color: #6fa769;
+            color: white;
+            height: 2rem;
+            width: 4rem;
+            transition: 0.3s;
+            font-weight: bold;
+            letter-spacing: 1px;
+            &:hover {
+                cursor: pointer;
                 text-decoration: none;
                 //color: white;
                 box-shadow: 0 0 0;
-
+            }
         }
-       }
-   }
+    }
+}
+.linkcopy {
+    position: relative;
+    .url {
+        margin-bottom: 12vw;
+        margin-left: 15vw;
+        width: 45vw;
+        height: 4vw;
+        border-radius: 20px;
+        font-size: 20px;
+        border: 1px solid gray;
+    }
+    .link {
+        position: absolute;
+        top: -15px;
+        left: 10vw;
+        font-size: 2vw;
+    }
+    .copyicon {
+        top: 12px;
+        position: absolute;
+        right: 130px;
+        size: 12vw;
+    }
 }
 
-
 //LinkBlock
-.LinkWrapper{
+.LinkWrapper {
     margin: 0 10%;
 
-    .LinkCreated{
+    .LinkCreated {
         width: 100%;
         min-width: 400px;
         border: 1px solid black;
@@ -101,18 +121,18 @@
         padding: 6px 0 0 0;
         font-size: 15px;
         letter-spacing: 1px;
-        &:hover{
+        &:hover {
             cursor: pointer;
         }
-        .LinkCreated__share{
+        .LinkCreated__share {
             text-align: right;
             position: absolute;
             top: 25%;
             right: 2%;
         }
+    }
 }
-}
-.LinkWrapper:nth-child(n+2){
+.LinkWrapper:nth-child(n + 2) {
     margin-bottom: 1.2rem;
 }
 //LinkBlock end
