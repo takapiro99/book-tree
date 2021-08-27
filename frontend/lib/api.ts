@@ -1,7 +1,6 @@
 // そのうち各機能ごとにファイル作ったほうがよさそう
 import firebase from '../src/lib/firebase'
-import { BookOnBigTreeProps } from '../components/BookOnBigTree'
-import { UserInfo, ReviewJoinedUser } from './types'
+import { UserInfo, ReviewJoinedUser, Review, Invitation } from './types'
 
 const db = firebase.firestore()
 
@@ -22,12 +21,12 @@ export const fetchBooksToShowOnTopPage = async () => {
     })
 
     // レビューの数が最大で9個なので速度に劣る2重ループでも良し
-    const userIDs = reviews.map((review) => review.userID as string)
+    const userIDs = reviews.map((review) => review.uid as string)
     const querySnapshotUser = await db.collection('users').where('uid', 'in', userIDs).get()
     querySnapshotUser.forEach((res) => {
-        const userInfo: UserInfo = <UserInfo>res.data()
+        const userInfo = <UserInfo>res.data()
         reviews.forEach((review) => {
-            if (review.userID == userInfo.uid) {
+            if (review.uid == userInfo.uid) {
                 review.user = userInfo
             }
         })
@@ -36,14 +35,88 @@ export const fetchBooksToShowOnTopPage = async () => {
     return reviews
 }
 
-export const fetchBooksEachUser: (userID: string) => BookOnBigTreeProps[] = (userID) => {
-    const mockData = [
-        {
-            bookImageURL: 'https://tshop.r10s.jp/book/cabinet/9420/4534530129420.jpg',
-            bookLink: 'https://books.rakuten.co.jp/rb/16674317/',
-            userID: userID,
-            userIconImage: 'http://flat-icon-design.com/f/f_object_156/s256_f_object_156_0bg.png'
-        }
-    ]
-    return mockData
+export const fetchBooksEachUser: (userID: string) => Promise<ReviewJoinedUser[]> = async (
+    userID
+) => {
+    const querySnapshotReview = await db.collection('reviews').where('uid', '==', userID).get()
+
+    const querySnapshotUser = await db.collection('users').where('uid', '==', userID).get()
+
+    const userData = <UserInfo>querySnapshotUser.docs[0].data()
+
+    const reviews: ReviewJoinedUser[] = []
+    querySnapshotReview.forEach((res) => {
+        const review = <ReviewJoinedUser>res.data()
+        review.user = userData
+        reviews.push(review)
+    })
+
+    return reviews
+}
+
+// 招待を受け取らずレビューをする。
+// TODO: specialtyを書き換え不可能に
+export const postReviewsIndividual: (reviews: Review[]) => Promise<boolean> = async (reviews) => {
+    for (const review of reviews) {
+        if (!review.uid || review.specialty) return false
+    }
+
+    const promises: Promise<firebase.firestore.DocumentReference<Review>>[] = []
+    for (const review of reviews) {
+        promises.push(
+            db.collection('reviews').add(review) as Promise<
+                firebase.firestore.DocumentReference<Review>
+            >
+        )
+    }
+
+    await Promise.all(promises)
+
+    return true
+}
+
+// 招待を受け取ったときのレビュー
+export const postReviewsInvitation: (reviews: Review[], token: string) => Promise<boolean> = async (
+    reviews,
+    token
+) => {
+    const createInvitationReviewFunc = firebase.functions().httpsCallable('createInvitationReview')
+    try {
+        const res = await createInvitationReviewFunc({
+            token: token,
+            reviews: reviews
+        })
+    } catch {
+        return false
+    }
+
+    return true
+}
+
+// 招待コードが有効かチェック
+export const checkInvitation: (token: string) => Promise<Invitation | null> = async (token) => {
+    const checkInvitationFunc = firebase.functions().httpsCallable('checkInvitationCode')
+    try {
+        const res = await checkInvitationFunc({ token: token })
+        return res.data as Invitation
+    } catch (err) {
+        alert(err)
+    }
+
+    return null
+}
+
+// ブックツリーの取得
+export const getBookTree: (userID: string) => Promise<ReviewJoinedUser[] | null> = async (
+    userID
+) => {
+    const getBookTreeFunc = firebase.functions().httpsCallable('getBookTree')
+    try {
+        const res = await getBookTreeFunc({ uid: userID })
+        return res.data() as ReviewJoinedUser[]
+    } catch (err) {
+        alert(err)
+    }
+
+    return null
 }

@@ -2,6 +2,8 @@ import styles from '../styles/BookOnBigTree.module.scss'
 import iconFox from '../public/images/foxIcon.png'
 import Image from 'next/image'
 
+import { ReviewJoinedUser } from '../lib/types'
+
 // TODO: book on big tree 以外でもこのコンポーネントを使おうと思うので、 rename する
 
 // TODO: 本の表紙の画像が欲しいです
@@ -9,12 +11,8 @@ import Image from 'next/image'
 // TODO: レビューページの右上のまるがあるかないかの分岐
 
 /*  eslint @next/next/no-img-element:0 */
-export interface BookOnBigTreeProps {
+export interface BookOnBigTreeProps extends ReviewJoinedUser {
     // 本の画像、リンク、表示のさせ方（アイコンの場合アイコン画像とID）
-    bookImageURL: string
-    bookLink: string
-    userIconImage?: string
-    userID: string
     withYellowBackground?: boolean
 }
 

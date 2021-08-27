@@ -1,6 +1,6 @@
 import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin'
-import { Review, getBookTreePostType } from './types'
+import { Review, getBookTreePostType, ReviewJoinedUser, UserInfo } from './types'
 import { validateReview, generateToken } from './util'
 
 admin.initializeApp()
@@ -219,23 +219,23 @@ export const getBookTree = functions.https.onCall(
         // 重複削除
         userIDs = Array.from(new Set(userIDs))
 
-        const bookTree: Review[] = []
-        const reviewPromises: Promise<
-            admin.firestore.QuerySnapshot<admin.firestore.DocumentData>
-        >[] = []
-        for (const uid of userIDs) {
-            reviewPromises.push(
-                db.collection('reviews').where('uid', '==', uid).get()
-            )
-        }
+        const bookTree: ReviewJoinedUser[] = []
 
-        const querySnapshots = await Promise.all(reviewPromises)
+        const querySnapshotReview = await db.collection('reviews').where('uid', 'in', userIDs).get()
+        const querySnapshotUser = await db.collection('users').where('uid', 'in', userIDs).get()
+        querySnapshotReview.forEach((res) => {
+            bookTree.push(<ReviewJoinedUser>res.data())
+        })
 
-        querySnapshots.forEach((querySnapshot) => {
-            querySnapshot.forEach((res) => {
-                bookTree.push(<Review>res.data())
+        querySnapshotUser.forEach((res) => {
+            const userInfo = <UserInfo>res.data()
+            bookTree.forEach((review) => {
+                if (review.uid == userInfo.uid) {
+                    review.user = userInfo
+                }
             })
         })
+
         return bookTree
     }
 )

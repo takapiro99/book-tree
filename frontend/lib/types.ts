@@ -1,15 +1,15 @@
 import firebase from '../src/lib/firebase'
 
-export type UserInfo = {
-    display_name: string
-    email: string
+export interface UserInfo {
+    displayName: string
     profileImage: string
     uid: string
-    created_at: firebase.firestore.FieldValue
+    gratePartList: (string | null | undefined)[]
+    createdAt: firebase.firestore.FieldValue
 }
 
-export type ReviewJoinedUser = {
-    userID: string | null | undefined
+export interface Review {
+    uid: string | null | undefined
     specialty: string | null | undefined
     title: string
     content: string
@@ -17,5 +17,18 @@ export type ReviewJoinedUser = {
     bookImageURL: string
     bookLink: string
     createdAt: firebase.firestore.FieldValue
+}
+
+export interface ReviewJoinedUser extends Review {
     user: UserInfo | null | undefined
+}
+
+export interface Invitation {
+    accepted: boolean
+    from: string
+    to: string | null
+    specialty: string
+    token: string
+    acceptedAt: firebase.firestore.FieldValue | null
+    createdAt: firebase.firestore.FieldValue
 }

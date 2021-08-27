@@ -1,6 +1,14 @@
 import * as admin from 'firebase-admin'
 
-export type Review = {
+export interface UserInfo {
+    displayName: string
+    profileImage: string
+    uid: string
+    gratePartList: (string | null | undefined)[]
+    createdAt: admin.firestore.FieldValue
+}
+
+export interface Review {
     uid: string | null | undefined
     specialty: string | null | undefined
     title: string
@@ -9,6 +17,10 @@ export type Review = {
     bookImageURL: string
     bookLink: string
     createdAt: admin.firestore.FieldValue
+}
+
+export interface ReviewJoinedUser extends Review {
+    user: UserInfo | null | undefined
 }
 
 export type getBookTreePostType = {

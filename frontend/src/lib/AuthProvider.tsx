@@ -5,15 +5,15 @@ import { User } from '@firebase/auth-types'
 type UserState = User | null | undefined
 type NavMenuState = boolean | null | undefined
 type AuthContextType = {
-    twitterLogin: (() => Promise<void>) | undefined
-    googleLogin: (() => Promise<void>) | undefined
+    twitterLogin: () => Promise<void>
+    googleLogin: () => Promise<void>
     signOut: () => Promise<void>
     currentUser: UserState
 }
 
 export const AuthContext = React.createContext<AuthContextType>({
-    twitterLogin: undefined,
-    googleLogin: undefined,
+    twitterLogin: async () => {},
+    googleLogin: async () => {},
     signOut: async () => {},
     currentUser: undefined
 })
