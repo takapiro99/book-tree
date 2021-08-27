@@ -37,7 +37,6 @@ const NavBar = () => {
             }
         )
     }
-    console.log(currentUser)
     return (
         <nav>
             <div className={styles.navbar_wrapper}>

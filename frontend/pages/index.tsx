@@ -11,7 +11,7 @@ import top_3 from '../public/images/home/top_3.png'
 export default function Home() {
     return (
         <div>
-            <div>
+            <div className="container">
                 <div className={styles.topContent}>
                     <img
                         className={styles.topContent__staffTree}
@@ -61,33 +61,31 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <div className={styles.greenbar}>
-                {/* <div className={styles.circleDate}>
-                    <div className={styles.circleDate__date}>{today}</div>
-                </div> */}
-            </div>
-            <div className={styles.BookTreeForest}>
-                <h1 className={styles.BookTreeForest__title}>what&apos;s new?</h1>
-                <img className={styles.shiori} src="/images/home/shiori.png" alt="shiori" />
-                <div className={styles.forestWrapper}>
-                    <div className={styles.littletreeWrapper}>
-                        <LittleTree />
-                        <LittleTree />
-                        <LittleTree />
-                    </div>
-                    <div className={styles.littletreeWrapper2}>
-                        <LittleTree />
-                        <LittleTree />
-                        <LittleTree />
-                    </div>
-                    <div className={styles.littletreeWrapper3}>
-                        <LittleTree />
-                        <LittleTree />
-                        <LittleTree />
+            <div className={styles.greenbar} />
+            <div className="container">
+                <div className={styles.BookTreeForest}>
+                    <h1 className={styles.BookTreeForest__title}>what&apos;s new?</h1>
+                    <img className={styles.shiori} src="/images/home/shiori.png" alt="shiori" />
+                    <div className={styles.forestWrapper}>
+                        <div className={styles.littletreeWrapper}>
+                            <LittleTree />
+                            <LittleTree />
+                            <LittleTree />
+                        </div>
+                        <div className={styles.littletreeWrapper2}>
+                            <LittleTree />
+                            <LittleTree />
+                            <LittleTree />
+                        </div>
+                        <div className={styles.littletreeWrapper3}>
+                            <LittleTree />
+                            <LittleTree />
+                            <LittleTree />
+                        </div>
                     </div>
                 </div>
             </div>
-            <div className={styles.greenbar2}> </div>
+            <div className={styles.greenbar}> </div>
         </div>
     )
 }
