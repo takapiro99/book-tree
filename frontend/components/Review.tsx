@@ -67,7 +67,7 @@ const Review = () => {
                         <button className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}>
                             レビューを作成する
                         </button>
-                        <Link href={`${router.asPath}/invite`} passHref={true}>
+                        <Link href={`/invite`} passHref={true}>
                             <button
                                 className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}
                             >
