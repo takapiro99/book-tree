@@ -9,6 +9,7 @@ import { useRouter } from 'next/dist/client/router'
 import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../src/lib/AuthProvider'
 import { User } from '@firebase/auth-types'
+import { getProfile, getReviews, Profile } from '../lib/firestore'
 /*  eslint @next/next/no-img-element:0 */
 
 const Review = () => {
@@ -16,10 +17,24 @@ const Review = () => {
     const { currentUser } = useContext(AuthContext)
 
     useEffect(() => {
-        // TODO: fetch profile
-        // TODO: fetch user's reviews
-        setLoadingProfileAndBooks(false)
-    }, [])
+        if (currentUser) {
+            // TODO: fetch profile
+            getProfile(currentUser.uid)
+                .then((profile) => {
+                    if (profile) {
+                        console.log(profile)
+                    } else {
+                        // 深刻なerror
+                    }
+                })
+                .catch((err) => {})
+            // TODO: fetch user's reviews
+            getReviews(currentUser.uid)
+                .then((reviews) => {})
+                .catch((err) => {})
+            setLoadingProfileAndBooks(false)
+        }
+    }, [currentUser])
 
     const returnTop = () => {
         window.scrollTo({

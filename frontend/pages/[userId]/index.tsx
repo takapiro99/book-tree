@@ -21,6 +21,7 @@ const Mypage = () => {
     //     console.log('invalid route')
     //     return <Custom404 />
     // }
+    console.log(currentUser)
     if (!currentUser) {
         return (
             <div>
