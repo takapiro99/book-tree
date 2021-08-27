@@ -106,6 +106,19 @@ export const checkInvitation: (token: string) => Promise<Invitation | null> = as
     return null
 }
 
+// 招待コードの作成
+export const createInvitationCode: (specialty: string) => Promise<Invitation | null> = async (specialty) => {
+    const createInvitationFunc = firebase.functions().httpsCallable('createInvitationCode')
+    try {
+        const res = await createInvitationFunc({ specialty: specialty })
+        return res.data() as Invitation
+    } catch (err) {
+        alert(err)
+    }
+
+    return null
+}
+
 // ブックツリーの取得
 export const getBookTree: (userID: string) => Promise<ReviewJoinedUser[] | null> = async (
     userID
