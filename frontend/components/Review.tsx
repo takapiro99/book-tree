@@ -1,10 +1,13 @@
 //import Reviewtree from '../../components/review_tree'
-import BookWithReview from '../../components/BookWithReview'
-import styles from '../../styles/Review.module.scss'
-import globalStyles from '../../styles/Global.module.scss'
-import BigTreeWithBooks from '../../components/BigTreeWithBooks'
-import RecComment from '../../components/recComment'
-import RecommendedSentence from '../../components/RecommendedSentence'
+import BookWithReview from './BookWithReview'
+import styles from '../styles/Review.module.scss'
+import { FaArrowCircleUp, FaBullhorn } from 'react-icons/fa'
+import RecComment from './RecComment'
+import BigTreeWithBooks from './BigTreeWithBooks'
+import Link from 'next/link'
+import { useRouter } from 'next/dist/client/router'
+
+/*  eslint @next/next/no-img-element:0 */
 
 const Review = () => {
     const returnTop = () => {
@@ -13,15 +16,16 @@ const Review = () => {
             behavior: 'smooth'
         })
     }
+    const router = useRouter()
 
     return (
         <>
-            <div className={globalStyles.wrapper}>
-                {/* 本の情報を複数渡す */}
-            </div>
+            {/* <div className={globalStyles.wrapper}> */}
+            {/* 本の情報を複数渡す */}
+            {/* </div> */}
             <div className={styles.mypageNews}>
                 <div className={styles.mypageNews__news}>
-                    <i className="fas fa-bullhorn"></i>　
+                    <FaBullhorn />
                     <a href="#review">お願いしていたレビューが届いたよ！</a>
                 </div>
             </div>
@@ -29,13 +33,16 @@ const Review = () => {
             <div className={styles.reviewpageReview}>
                 <div className={`${styles.reviewWrapper2}`}>
                     <div className={styles.reviewUserBlock}>
-                        <div className={styles.icon}>icon </div>
+                        <img
+                            className={styles.icon}
+                            alt="user icon"
+                            src={
+                                'http://flat-icon-design.com/f/f_object_156/s256_f_object_156_0bg.png'
+                            }
+                        ></img>
                         <div className={styles.reviewUserName}>
                             {/* <div>紹介してくれたのは・・・</div> */}
-
-                            <div className={styles.reviewUserName__name}>
-                                NEKOさん
-                            </div>
+                            <div className={styles.reviewUserName__name}>NEKOさん</div>
                             <div className={styles.reviewUserKeywords}>
                                 北大OG ＋ 猫 ＋ マイクラ
                             </div>
@@ -49,28 +56,29 @@ const Review = () => {
                         </div>
                     </div>
 
-                    <div className={globalStyles.blockbtwMd}></div>
+                    <div className="blockbtwMd"></div>
 
                     <div className={styles.reviewBigTree}>
                         <h1>NekoさんのBook Tree</h1>
                         <div>Nekoさんのところに集まった本たち</div>
-                        {/* <BigTreeWithBooks /> */}
+                        <BigTreeWithBooks />
                     </div>
                     <div className={styles.mypageButtons}>
-                        <button
-                            className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}
-                        >
+                        <button className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}>
                             レビューを作成する
                         </button>
-                        <button
-                            className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}
-                        >
-                            レビューをお願いする
-                        </button>
+                        <Link href={`${router.asPath}/invite`} passHref={true}>
+                            <button
+                                className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}
+                            >
+                                レビューをお願いする
+                            </button>
+                        </Link>
                         <button
                             className={`${styles.mypageButtons__buttonGray} ${styles.buttonGray}`}
                         >
                             BOOK TREEを削除する
+                            {/* このボタンはこんなに目立たせてはいけない */}
                         </button>
                     </div>
 
@@ -87,7 +95,7 @@ const Review = () => {
 
                 <button className={styles.topBtn} onClick={returnTop}>
                     <p className={styles.topBtn_icon}>
-                        <i className="fas fa-arrow-circle-up ${}"></i>
+                        <FaArrowCircleUp />
                     </p>
                     <p className={styles.topBtn_txt}>Topに戻る</p>
                 </button>
