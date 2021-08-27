@@ -223,9 +223,9 @@ export const getBookTree = functions.https.onCall(
         const reviewPromises: Promise<
             admin.firestore.QuerySnapshot<admin.firestore.DocumentData>
         >[] = []
-        for (const id of userIDs) {
+        for (const uid of userIDs) {
             reviewPromises.push(
-                db.collection('reviews').where('userID', '==', id).get()
+                db.collection('reviews').where('uid', '==', uid).get()
             )
         }
 
