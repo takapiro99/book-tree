@@ -1,7 +1,7 @@
 import * as admin from 'firebase-admin'
 
 export type Review = {
-    userID: string | null | undefined
+    uid: string | null | undefined
     specialty: string | null | undefined
     title: string
     content: string
@@ -12,5 +12,5 @@ export type Review = {
 }
 
 export type getBookTreePostType = {
-    userID: string | null | undefined
+    uid: string | null | undefined
 }

@@ -4,18 +4,23 @@ import { Review, getBookTreePostType } from './types'
 import { validateReview, generateToken } from './util'
 
 admin.initializeApp()
-const dbType = admin.firestore // 型の定義に使う
+const dbType = admin.firestore
 const db = admin.firestore()
 
 export const userOnCreate = functions.auth.user().onCreate(async (user) => {
-    const userDoc = await db.collection('users').doc(user.uid).get()
+    await db.runTransaction(async (transaction) => {
+        transaction.set(db.collection('users').doc(user.uid), {
+            uid: user.uid,
+            profileImage: user.photoURL,
+            displayName: user.displayName,
+            gratePartList: [null, null, null],
+            createdAt: dbType.FieldValue.serverTimestamp()
+        })
 
-    await userDoc.ref.set({
-        uid: user.uid,
-        profileImage: user.photoURL,
-        display_name: user.displayName,
-        email: user.email,
-        created_at: dbType.FieldValue.serverTimestamp()
+        transaction.set(db.collection('_users').doc(user.uid), {
+            uid: user.uid,
+            email: user.email
+        })
     })
 })
 
@@ -27,6 +32,7 @@ export const createInvitationCode = functions.https.onCall(
                 'ログインをしてください'
             )
         }
+
         const specialty = data.specialty || null
         if (!specialty) {
             throw new functions.https.HttpsError(
@@ -46,7 +52,8 @@ export const createInvitationCode = functions.https.onCall(
                 token: token,
                 accepted: false,
                 specialty: specialty,
-                created_at: dbType.FieldValue.serverTimestamp()
+                createdAt: dbType.FieldValue.serverTimestamp(),
+                acceptedAt: null
             })
             return invitationURL
         } else {
@@ -147,23 +154,29 @@ export const createInvitationReview = functions.https.onCall(
         }
 
         const reviews: Review[] = data.reviews
-        const reviewPromises: Promise<
-            admin.firestore.DocumentReference<admin.firestore.DocumentData>
-        >[] = []
-        reviews.forEach(async (review) => {
-            validateReview(review)
-            review.userID = context.auth?.uid
-            review.createdAt = dbType.FieldValue.serverTimestamp()
-            review.specialty = docData.specialty
-            reviewPromises.push(db.collection('reviews').add(review))
-        })
-
-        await Promise.all(reviewPromises)
+        if (!reviews) {
+            throw new functions.https.HttpsError(
+                'invalid-argument',
+                'レビューが一つ以上必要です。'
+            )
+        }
 
         const docId = querySnapshot.docs[0].id
-        await db.collection('invitations').doc(docId).update({
-            accepted: true,
-            to: context.auth.uid
+
+        await db.runTransaction(async (transaction) => {
+            reviews.forEach((review) => {
+                validateReview(review)
+                review.uid = context.auth?.uid
+                review.createdAt = dbType.FieldValue.serverTimestamp()
+                review.specialty = docData.specialty
+                transaction.set(db.collection('reviews').doc(), review)
+            })
+
+            transaction.update(db.collection('invitations').doc(docId), {
+                to: context.auth?.uid,
+                accepted: true,
+                acceptedAt: dbType.FieldValue.serverTimestamp()
+            })
         })
         return 'success'
     }
@@ -171,7 +184,7 @@ export const createInvitationReview = functions.https.onCall(
 
 export const getBookTree = functions.https.onCall(
     async (data: getBookTreePostType, context) => {
-        const userID = data.userID
+        const userID = data.uid
         if (!userID) {
             throw new functions.https.HttpsError(
                 'invalid-argument',
