@@ -61,6 +61,19 @@ const CreateLink = () => {
 
         )} */}
             </div>
+            <div className={styles.linkcopy}>
+                <input
+                    className={styles.url}
+                    type="text"
+                    name="link "
+                    placeholder="作成されたURLが表示されます"
+                    // value={link} ここわかりません
+                ></input>
+                <p className={styles.link}>URL</p>
+                <div className={styles.copyicon}>
+                    <i className="far fa-copy"></i>
+                </div>
+            </div>
         </div>
     )
 }

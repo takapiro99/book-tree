@@ -80,6 +80,30 @@
         }
     }
 }
+.linkcopy {
+    position: relative;
+    .url {
+        margin-bottom: 12vw;
+        margin-left: 15vw;
+        width: 45vw;
+        height: 4vw;
+        border-radius: 20px;
+        font-size: 20px;
+        border: 1px solid gray;
+    }
+    .link {
+        position: absolute;
+        top: -15px;
+        left: 10vw;
+        font-size: 2vw;
+    }
+    .copyicon {
+        top: 12px;
+        position: absolute;
+        right: 130px;
+        size: 12vw;
+    }
+}
 
 //LinkBlock
 .LinkWrapper {

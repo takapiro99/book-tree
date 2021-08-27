@@ -47,7 +47,30 @@
     flex: 1;
     padding: 1rem 1rem 1rem 0;
 }
+.Twitter {
+    width: 30vw;
+    height: 4vw;
+    font-size: 1.8vw;
+    text-align: center;
+    background-color: rgb(159, 207, 150);
+    color: white;
+    margin-left: 35vw;
+    position: relative;
+    border-radius: 100px;
+    padding-top: 1.3vw;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #7c9b7f;
+    transition: 0.1s;
+    border-radius: 30px;
+    border: none;
 
+    &:hover {
+        transform: translateY(3px);
+        text-decoration: none;
+        box-shadow: 0 2px 0 #3b5336;
+        cursor: pointer;
+    }
+}
 .greenbar {
     //background: linear-gradient(106deg, transparent 0%, transparent 30%, #666 30%, #666 100%);
     margin-top: 80px;
@@ -130,8 +153,19 @@
     background-repeat: space repeat;
     background-position: center center;
     background-size: 51%;
+    position: relative;
+    .shiori {
+        position: absolute;
+        z-index: 2;
+        width: 580px;
+        left: 16rem;
+        margin-top: -70px;
+    }
     .BookTreeForest__title {
         text-align: center;
+        left: 30rem;
+        position: absolute;
+        z-index: 3;
         //font-size: 20px;
     }
 }
@@ -144,6 +178,13 @@
     justify-content: center;
     //justify-content: space-between;
 }
+// .shiori{
+//     top: 0;
+//     z-index: -100;
+//     margin-left: 23vw;
+//     margin-top: -5vw;
+//     width: 50%;
+// }
 
 @media screen and (max-width: 920px) {
     .forestWrapper {

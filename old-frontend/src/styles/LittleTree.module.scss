@@ -55,6 +55,12 @@
             z-index: 0;
         }
     }
+    .name {
+        position: absolute;
+        left: 12vw;
+        font-size: 2vw;
+        top: 4vw;
+    }
 }
 
 // レスポンシブ350pxまで
