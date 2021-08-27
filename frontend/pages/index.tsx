@@ -1,11 +1,5 @@
-import Image from 'next/image'
 import LittleTree from '../components/LittleTree'
 import styles from '../styles/Home.module.scss'
-import StaffTree from '../public/images/home/booktree.png'
-import top_1 from '../public/images/home/top_1.png'
-import top_2 from '../public/images/home/top_2.png'
-import top_3 from '../public/images/home/top_3.png'
-
 /* eslint @next/next/no-img-element:0 */
 
 export default function Home() {
@@ -13,11 +7,18 @@ export default function Home() {
         <div>
             <div className="container">
                 <div className={styles.topContent}>
-                    <img
-                        className={styles.topContent__staffTree}
-                        src="/images/home/booktree.png"
-                        alt="スタッフのブックツリー"
-                    />
+                    <div className={styles.topContent__staffTree}>
+                        <img
+                            src="/images/home/booktree.png"
+                            alt="スタッフのブックツリー"
+                            style={{
+                                width: '100%',
+                                objectFit: 'contain',
+                                display: 'inline-block',
+                                height: '100%'
+                            }}
+                        />
+                    </div>
                     <div className={styles.topContent__introduce}>
                         <h1>周りにいる凄い人、</h1>
                         <h1>どんな本読んでいるんだろう？</h1>

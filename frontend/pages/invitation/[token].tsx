@@ -22,11 +22,9 @@ const InviteReview = () => {
                     </div>
                     <img src="/images/greencloud.png" alt="cloud" className={styles.greenCloud} />
                 </div>
-
                 <div className={styles.nominateExplation}>
                     レビューを書いてくれると＊＊＊さんのBOOKTREEにあなたのレビューが実ります。
                 </div>
-
                 <div className={styles.reviewSteps}>
                     <img src="/images/reviewImg.png" alt="レビューを書くと相手の木に実る" />
                 </div>
