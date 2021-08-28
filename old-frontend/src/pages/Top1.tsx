@@ -5,6 +5,7 @@ import StaffTree from '../assets/BOOKTREE.png'
 import top_1 from '../assets/top_1.png'
 import top_2 from '../assets/top_2.png'
 import top_3 from '../assets/top_3.png'
+import shiori from '../assets/shiori.png'
 
 const Top = () => {
     return (
@@ -17,8 +18,12 @@ const Top = () => {
                         alt="スタッフのブックツリー"
                     />
                     <div className={styles.topContent__introduce}>
-                        <h1>すごい人</h1>
-                        ***********************
+                        <h1>周りにいる凄い人、</h1>
+                        <h1>どんな本読んでいるんだろう？</h1>
+                        あなたのすごいと思う人が読んでる本を集めてBOOKTREEをつくろう！
+                        新しくやってみたいこと、ずっとやりたいと思っていたこと、知らなかったことに出会う機会
+                        直接人と出会うことが難しい時代
+                        新しい形でつながり学ぼう！
                     </div>
                 </div>
                 <h1 className={styles.topContentSteps__title}>
@@ -60,6 +65,8 @@ const Top = () => {
                     </div>
                 </div>
             </div>
+            <p className={styles.Twitter}>BOOKTREEを作成する</p>
+
             {/* <div className={styles.greenbar}>
                 
                 <div className={styles.circleDate}>
@@ -73,6 +80,7 @@ const Top = () => {
                 </div> */}
                 </div>
                 <h1 className={styles.BookTreeForest__title}>what's new?</h1>
+                <img className={styles.shiori} src={shiori} alt="shiori" />
                 <div className={styles.forestWrapper}>
                     <div className={styles.littletreeWrapper}>
                         <LittleTree />

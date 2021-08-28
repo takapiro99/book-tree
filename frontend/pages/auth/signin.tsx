@@ -1,6 +1,7 @@
 import styles from './Signin.module.scss'
 import { useContext } from 'react'
 import { AuthContext } from '../../src/lib/AuthProvider'
+import { useRouter } from 'next/dist/client/router'
 
 /* eslint @next/next/no-img-element:0 */
 
@@ -8,7 +9,10 @@ import { AuthContext } from '../../src/lib/AuthProvider'
 
 const SignIn = () => {
     const context = useContext(AuthContext)
-
+    const router = useRouter()
+    if (context.currentUser) {
+        router.push(`/@${context.currentUser.uid}`)
+    }
     return (
         <div>
             <h1 className={styles.title}>BOOKTREEにログインする</h1>

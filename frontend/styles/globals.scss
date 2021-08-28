@@ -66,3 +66,10 @@
         width: 70%;
     }
 }
+
+.szh-menu__item {
+    text-decoration: none !important;
+    &:visited {
+        color: black;
+    }
+}

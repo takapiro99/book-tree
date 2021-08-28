@@ -1,16 +1,19 @@
-import globalStyles from '../styles/Global.module.scss'
-import styles from '../styles/CreateLink.module.scss'
-import BOOKTREE from '../assets/BOOKTREE.png'
+import styles from '../styles/invite.module.scss'
 //import LinkBlock from '../components/LinkBlock'
 import { useState } from 'react'
+import { FaCopy } from 'react-icons/fa'
 
 // interface LinkInfo {
 //     Why:String[]
 //     URL:String[]
 // }
 
-const CreateLink = () => {
-    const [reason, SetReason] = useState(String())
+/* eslint @next/next/no-img-element:0 */
+
+// TODO: check if signed in
+
+const Invite = () => {
+    const [reason, SetReason] = useState('')
     //const [addLink,SetAddLink] = useState<LinkInfo>()
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,12 +30,13 @@ const CreateLink = () => {
     }
 
     return (
-        <div className={globalStyles.wrapper}>
+        <div>
+            {/* // className={globalStyles.wrapper} */}
             <div className={styles.createLinkWrapper}>
                 <h1 className={styles.createLinkTitle}>お願いリンクを作る</h1>
                 <div className={styles.createLinkBlock}>
                     <img
-                        src={BOOKTREE}
+                        src="/images/mediumBookTree.png"
                         alt="ブックツリー"
                         className={styles.createLinkBlock__tree}
                     />
@@ -46,10 +50,7 @@ const CreateLink = () => {
                         <span>がすごいひとにお願いする</span>
                     </div>
                     <div className={styles.createButtonBlock}>
-                        <button
-                            className={styles.createButtonBlock__button}
-                            onClick={makeLink}
-                        >
+                        <button className={styles.createButtonBlock__button} onClick={makeLink}>
                             作成
                         </button>
                     </div>
@@ -71,11 +72,11 @@ const CreateLink = () => {
                 ></input>
                 <p className={styles.link}>URL</p>
                 <div className={styles.copyicon}>
-                    <i className="far fa-copy"></i>
+                    <FaCopy />
                 </div>
             </div>
         </div>
     )
 }
 
-export default CreateLink
+export default Invite

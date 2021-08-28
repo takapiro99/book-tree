@@ -1,10 +1,12 @@
 import styles from '../styles/BrandLogo.module.scss'
 import Link from 'next/link'
-import { FaBook, FaTree, FaUserCog, FaSignOutAlt } from 'react-icons/fa'
+import { FaBook, FaTree, FaUserCog, FaSignOutAlt, FaSignInAlt } from 'react-icons/fa'
 import { useContext } from 'react'
 import { AuthContext } from '../src/lib/AuthProvider'
-
-const mockIcon = 'https://pbs.twimg.com/profile_images/1268541932541804544/pTEgObfP_400x400.jpg'
+import { Menu, MenuItem, MenuButton } from '@szhsin/react-menu'
+import '@szhsin/react-menu/dist/index.css'
+import '@szhsin/react-menu/dist/transitions/slide.css'
+import { useRouter } from 'next/dist/client/router'
 
 // TODO: ログイン状態またはローディングを取得し、それに応じて表示を変える
 
@@ -12,19 +14,9 @@ const mockIcon = 'https://pbs.twimg.com/profile_images/1268541932541804544/pTEgO
 
 const NavBar = () => {
     const { signOut } = useContext(AuthContext)
-    const { currentUser, isNavMenuOpen, setNavMenuOpen } = useContext(AuthContext)
-    const handleToggleNavMenu = () => {
-        if (currentUser) {
-            setNavMenuOpen(!isNavMenuOpen)
-        } else {
-            if (
-                window.confirm(`ログインしてね！
-ログイン画面に移動しますか？`)
-            ) {
-                location.href = '/auth/signin'
-            }
-        }
-    }
+    const router = useRouter()
+    const { currentUser } = useContext(AuthContext)
+
     const handleSignOut = () => {
         signOut().then(
             (res) => {
@@ -37,7 +29,6 @@ const NavBar = () => {
             }
         )
     }
-    console.log(currentUser)
     return (
         <nav>
             <div className={styles.navbar_wrapper}>
@@ -50,45 +41,50 @@ const NavBar = () => {
                         />
                     </div>
                 </Link>
-                <img
-                    className={styles.icon}
-                    src={currentUser?.photoURL ? currentUser.photoURL : '/images/foxIcon.png'}
-                    id="icon"
-                    alt="icon"
-                    onClick={handleToggleNavMenu}
-                />
-                {
-                    currentUser ? (
-                        <>
-                            {isNavMenuOpen && (
-                                <div className={styles.navMenu}>
-                                    <ul>
-                                        <Link href="/" passHref={true}>
-                                            <li>
-                                                <FaBook />
-                                                &emsp;トップページ
-                                            </li>
-                                        </Link>
-                                        <Link href={`/${currentUser.uid}`} passHref={true}>
-                                            <li>
-                                                <FaTree />
-                                                &emsp;マイページ
-                                            </li>
-                                        </Link>
-                                        <li>
-                                            <FaUserCog />
-                                            &emsp;プロフィール編集
-                                        </li>
-                                        <li onClick={handleSignOut}>
-                                            <FaSignOutAlt />
-                                            &emsp;ログアウト
-                                        </li>
-                                    </ul>
-                                </div>
-                            )}
-                        </>
-                    ) : null /* empty icon */
-                }
+                {currentUser ? (
+                    <Menu
+                        menuButton={
+                            <img
+                                className={styles.icon}
+                                src={currentUser.photoURL as string}
+                                id="icon"
+                                alt="icon"
+                            />
+                        }
+                        transition
+                        offsetY={10}
+                    >
+                        <MenuItem onClick={() => router.push('/')}>
+                            <FaBook /> &emsp;トップページ
+                        </MenuItem>
+                        <MenuItem
+                            disabled={!currentUser}
+                            onClick={() => router.push(currentUser ? `/${currentUser.uid}` : '')}
+                        >
+                            <FaTree /> &emsp;マイページ
+                        </MenuItem>
+                        <MenuItem disabled={!currentUser} onClick={handleSignOut}>
+                            <FaSignOutAlt /> &emsp;ログアウト
+                        </MenuItem>
+                    </Menu>
+                ) : (
+                    <Menu
+                        menuButton={
+                            <img
+                                className={styles.icon}
+                                src={'/images/foxIcon.png'}
+                                id="icon"
+                                alt="icon"
+                            />
+                        }
+                        transition
+                        offsetY={10}
+                    >
+                        <MenuItem onClick={() => router.push('/auth/signin')}>
+                            <FaSignInAlt /> &emsp;ログインする
+                        </MenuItem>
+                    </Menu>
+                )}
             </div>
             <div style={{ height: '80px' }} />
         </nav>
