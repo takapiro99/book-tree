@@ -126,10 +126,19 @@ export const getBookTree: (userID: string) => Promise<ReviewJoinedUser[] | null>
     const getBookTreeFunc = firebase.functions().httpsCallable('getBookTree')
     try {
         const res = await getBookTreeFunc({ uid: userID })
-        return res.data() as ReviewJoinedUser[]
+        return res.data as ReviewJoinedUser[]
     } catch (err) {
         alert(err)
     }
 
     return null
+}
+
+export const deleteBookTree: () => Promise<void> = async () => {
+    const deleteBookTreeFunc = firebase.functions().httpsCallable('deleteBookTree')
+    try {
+        const res = await deleteBookTreeFunc()
+    } catch (err) {
+        alert(err)
+    }
 }

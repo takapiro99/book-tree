@@ -1,6 +1,11 @@
 import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin'
-import { Review, getBookTreePostType, ReviewJoinedUser, UserInfo } from './types'
+import {
+    Review,
+    getBookTreePostType,
+    ReviewJoinedUser,
+    UserInfo
+} from './types'
 import { validateReview, generateToken } from './util'
 
 admin.initializeApp()
@@ -20,6 +25,39 @@ export const userOnCreate = functions.auth.user().onCreate(async (user) => {
         transaction.set(db.collection('_users').doc(user.uid), {
             uid: user.uid,
             email: user.email
+        })
+    })
+})
+
+// ユーザー削除時にレビューとユーザー削除を削除
+export const userOnDelete = functions.auth.user().onDelete(async (user) => {
+    await db.runTransaction(async (transaction) => {
+        const querySnapshotReview = await transaction.get(
+            db.collection('reviews').where('uid', '==', user.uid)
+        )
+        const querySnapshotFrom = await transaction.get(
+            db
+                .collection('invitations')
+                .where('from', '==', user.uid)
+                .where('accepted', '==', true)
+        )
+        const querySnapshotTo = await transaction.get(
+            db
+                .collection('invitations')
+                .where('to', '==', user.uid)
+                .where('accepted', '==', true)
+        )
+        const fromDoc = querySnapshotFrom.docs
+        const toDoc = querySnapshotTo.docs
+        const invitationDocs = fromDoc.concat(toDoc)
+
+        transaction.delete(db.collection('users').doc(user.uid))
+        transaction.delete(db.collection('_users').doc(user.uid))
+        querySnapshotReview.forEach((res) => {
+            transaction.delete(res.ref)
+        })
+        invitationDocs.forEach((res) => {
+            transaction.delete(res.ref)
         })
     })
 })
@@ -221,8 +259,14 @@ export const getBookTree = functions.https.onCall(
 
         const bookTree: ReviewJoinedUser[] = []
 
-        const querySnapshotReview = await db.collection('reviews').where('uid', 'in', userIDs).get()
-        const querySnapshotUser = await db.collection('users').where('uid', 'in', userIDs).get()
+        const querySnapshotReview = await db
+            .collection('reviews')
+            .where('uid', 'in', userIDs)
+            .get()
+        const querySnapshotUser = await db
+            .collection('users')
+            .where('uid', 'in', userIDs)
+            .get()
         querySnapshotReview.forEach((res) => {
             bookTree.push(<ReviewJoinedUser>res.data())
         })
@@ -239,3 +283,21 @@ export const getBookTree = functions.https.onCall(
         return bookTree
     }
 )
+
+export const deleteBookTree = functions.https.onCall(async (data, context) => {
+    if (context.auth?.uid === undefined) {
+        throw new functions.https.HttpsError(
+            'failed-precondition',
+            'ログインをしてください'
+        )
+    }
+
+    try {
+        await admin.auth().deleteUser(context.auth?.uid)
+    } catch (err) {
+        throw new functions.https.HttpsError(
+            'internal',
+            'ユーザー削除に失敗しました。'
+        )
+    }
+})
