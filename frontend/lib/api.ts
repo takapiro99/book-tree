@@ -4,9 +4,10 @@ import { UserInfo, ReviewJoinedUser, Review, Invitation } from './types'
 
 const db = firebase.firestore()
 
-export const fetchBooksToShowOnTopPage = async () => {
+export const fetchBooksToShowOnTopPage: () => Promise<ReviewJoinedUser[] | null> = async () => {
     const querySnapshotReview = await db
         .collection('reviews')
+        .where('createdAt', '!=', false)
         .orderBy('createdAt', 'desc')
         .limit(9)
         .get()
@@ -14,8 +15,12 @@ export const fetchBooksToShowOnTopPage = async () => {
     querySnapshotReview.forEach((res) => {
         reviews.push(<ReviewJoinedUser>res.data())
     })
+
+    if (reviews.length === 0) {
+        return null
+    }
     const promises = []
-    // userIDは必ずある
+
     reviews.forEach((review) => {
         promises.push(review)
     })
@@ -35,9 +40,13 @@ export const fetchBooksToShowOnTopPage = async () => {
     return reviews
 }
 
-export const fetchBooksEachUser: (userID: string) => Promise<ReviewJoinedUser[]> = async (
+export const fetchBooksEachUser: (userID: string | null | undefined) => Promise<ReviewJoinedUser[] | null> = async (
     userID
 ) => {
+    if (!userID) {
+        return null
+    }
+
     const querySnapshotReview = await db.collection('reviews').where('uid', '==', userID).get()
 
     const querySnapshotUser = await db.collection('users').where('uid', '==', userID).get()
@@ -56,6 +65,7 @@ export const fetchBooksEachUser: (userID: string) => Promise<ReviewJoinedUser[]>
 
 // 招待を受け取らずレビューをする。
 // TODO: specialtyを書き換え不可能に
+// TODO: バックエンドで楽天のURLなのかチェックする方法を考える
 export const postReviewsIndividual: (reviews: Review[]) => Promise<boolean> = async (reviews) => {
     for (const review of reviews) {
         if (!review.uid || review.specialty) return false
@@ -111,7 +121,7 @@ export const createInvitationCode: (specialty: string) => Promise<Invitation | n
     const createInvitationFunc = firebase.functions().httpsCallable('createInvitationCode')
     try {
         const res = await createInvitationFunc({ specialty: specialty })
-        return res.data() as Invitation
+        return res.data as Invitation
     } catch (err) {
         alert(err)
     }
@@ -120,9 +130,13 @@ export const createInvitationCode: (specialty: string) => Promise<Invitation | n
 }
 
 // ブックツリーの取得
-export const getBookTree: (userID: string) => Promise<ReviewJoinedUser[] | null> = async (
+export const getBookTree: (userID: string | null | undefined) => Promise<ReviewJoinedUser[] | null> = async (
     userID
 ) => {
+    if (!userID) {
+        return null
+    }
+
     const getBookTreeFunc = firebase.functions().httpsCallable('getBookTree')
     try {
         const res = await getBookTreeFunc({ uid: userID })

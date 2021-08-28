@@ -16,7 +16,7 @@ export interface Review {
     reason: string
     bookImageURL: string
     bookLink: string
-    createdAt: firebase.firestore.FieldValue
+    createdAt: firebase.firestore.FieldValue | undefined
 }
 
 export interface ReviewJoinedUser extends Review {
