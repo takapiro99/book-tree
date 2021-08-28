@@ -1,6 +1,6 @@
 // そのうち各機能ごとにファイル作ったほうがよさそう
 import firebase from '../src/lib/firebase'
-import { UserInfo, ReviewJoinedUser, Review, Invitation } from './types'
+import { UserInfo, ReviewJoinedUser, Review, Invitation, RakutenResponse } from './types'
 
 const db = firebase.firestore()
 
@@ -155,4 +155,13 @@ export const deleteBookTree: () => Promise<void> = async () => {
     } catch (err) {
         alert(err)
     }
+}
+
+
+export const fetchBookListFromRakutenAPI: (keyword: string) => Promise<RakutenResponse> = async (keyword) => {
+    const applicationId = '1009172447759483209'
+    const url = `https://app.rakuten.co.jp/services/api/BooksTotal/Search/20170404?applicationId=${applicationId}&keyword=${keyword}`
+    const res = await fetch(url)
+    const data = await res.json() as RakutenResponse
+    return data
 }
