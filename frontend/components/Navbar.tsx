@@ -42,43 +42,50 @@ const NavBar = () => {
                         />
                     </div>
                 </Link>
-                <Menu
-                    menuButton={
-                        <img
-                            className={styles.icon}
-                            src={
-                                currentUser?.photoURL ? currentUser.photoURL : '/images/foxIcon.png'
-                            }
-                            id="icon"
-                            alt="icon"
-                        />
-                    }
-                    transition
-                    offsetY={10}
-                >
-                    {currentUser ? (
-                        <>
-                            <MenuItem onClick={() => router.push('/')}>
-                                <FaBook /> &emsp;トップページ
-                            </MenuItem>
-                            <MenuItem
-                                disabled={!currentUser}
-                                onClick={() =>
-                                    router.push(currentUser ? `/${currentUser.uid}` : '')
-                                }
-                            >
-                                <FaTree /> &emsp;マイページ
-                            </MenuItem>
-                            <MenuItem disabled={!currentUser} onClick={handleSignOut}>
-                                <FaSignOutAlt /> &emsp;ログアウト
-                            </MenuItem>
-                        </>
-                    ) : (
+                {currentUser ? (
+                    <Menu
+                        menuButton={
+                            <img
+                                className={styles.icon}
+                                src={currentUser.photoURL as string}
+                                id="icon"
+                                alt="icon"
+                            />
+                        }
+                        transition
+                        offsetY={10}
+                    >
+                        <MenuItem onClick={() => router.push('/')}>
+                            <FaBook /> &emsp;トップページ
+                        </MenuItem>
+                        <MenuItem
+                            disabled={!currentUser}
+                            onClick={() => router.push(currentUser ? `/${currentUser.uid}` : '')}
+                        >
+                            <FaTree /> &emsp;マイページ
+                        </MenuItem>
+                        <MenuItem disabled={!currentUser} onClick={handleSignOut}>
+                            <FaSignOutAlt /> &emsp;ログアウト
+                        </MenuItem>
+                    </Menu>
+                ) : (
+                    <Menu
+                        menuButton={
+                            <img
+                                className={styles.icon}
+                                src={'/images/foxIcon.png'}
+                                id="icon"
+                                alt="icon"
+                            />
+                        }
+                        transition
+                        offsetY={10}
+                    >
                         <MenuItem onClick={() => router.push('/auth/signin')}>
                             <FaSignInAlt /> &emsp;ログインする
                         </MenuItem>
-                    )}
-                </Menu>
+                    </Menu>
+                )}
             </div>
             <div style={{ height: '80px' }} />
         </nav>
