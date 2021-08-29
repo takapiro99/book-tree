@@ -8,8 +8,15 @@ export interface UserInfo {
     createdAt: admin.firestore.FieldValue
 }
 
+// functionsにreviewをpostするときの型
+export interface PostReview {
+    content: string
+    reason: string
+    isbn: string
+}
+
 export interface Review {
-    uid: string | null | undefined
+    uid: string
     specialty: string | null | undefined
     title: string
     content: string
@@ -25,4 +32,30 @@ export interface ReviewJoinedUser extends Review {
 
 export type getBookTreePostType = {
     uid: string | null | undefined
+}
+
+// 必要な属性だけ抽出 (適時追加)
+export interface RakutenBookItem {
+    Item: {
+        title: string
+        author: string
+        itemUrl: string
+        largeImageUrl: string
+        mediumImageUrl: string
+        smallImageUrl: string
+        booksGenreId: string
+        publisherName: string
+        isbn: string // ISBNコードという書籍のユニークなID
+    }
+}
+
+export interface RakutenResponse {
+    Items: RakutenBookItem[]
+    carrier: number
+    count: number
+    first: number
+    hits: number
+    last: number
+    page: number
+    pageCount: number
 }

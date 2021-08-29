@@ -1,6 +1,6 @@
 // そのうち各機能ごとにファイル作ったほうがよさそう
 import firebase from '../src/lib/firebase'
-import { UserInfo, ReviewJoinedUser, Review, Invitation, RakutenResponse } from './types'
+import { UserInfo, ReviewJoinedUser, Review, Invitation, RakutenResponse, PostReview } from './types'
 
 const db = firebase.firestore()
 
@@ -66,37 +66,32 @@ export const fetchBooksEachUser: (userID: string | null | undefined) => Promise<
 // 招待を受け取らずレビューをする。
 // TODO: specialtyを書き換え不可能に
 // TODO: バックエンドで楽天のURLなのかチェックする方法を考える
-export const postReviewsIndividual: (reviews: Review[]) => Promise<boolean> = async (reviews) => {
-    for (const review of reviews) {
-        if (!review.uid || review.specialty) return false
-    }
+export const postReviewsIndividual: (postReviews: PostReview[]) => Promise<boolean> = async (postReviews) => {
 
-    const promises: Promise<firebase.firestore.DocumentReference<Review>>[] = []
-    for (const review of reviews) {
-        promises.push(
-            db.collection('reviews').add(review) as Promise<
-                firebase.firestore.DocumentReference<Review>
-            >
-        )
+    const createReviewsIndividualFunc = firebase.functions().httpsCallable('createReviewsIndividual')
+    try {
+        const res = await createReviewsIndividualFunc({postReviews: postReviews})
+    } catch (err) {
+        console.log(err)
+        return false
     }
-
-    await Promise.all(promises)
 
     return true
 }
 
 // 招待を受け取ったときのレビュー
-export const postReviewsInvitation: (reviews: Review[], token: string) => Promise<boolean> = async (
-    reviews,
+export const postReviewsInvitation: (postReviews: PostReview[], token: string) => Promise<boolean> = async (
+    postReviews,
     token
 ) => {
     const createInvitationReviewFunc = firebase.functions().httpsCallable('createInvitationReview')
     try {
         const res = await createInvitationReviewFunc({
             token: token,
-            reviews: reviews
+            postReviews: postReviews
         })
-    } catch {
+    } catch (err) {
+        console.log(err)
         return false
     }
 
@@ -158,9 +153,9 @@ export const deleteBookTree: () => Promise<void> = async () => {
 }
 
 
-export const fetchBookListFromRakutenAPI: (keyword: string) => Promise<RakutenResponse> = async (keyword) => {
+export const fetchBookListFromRakutenAPI: (title: string) => Promise<RakutenResponse> = async (title) => {
     const applicationId = '1009172447759483209'
-    const url = `https://app.rakuten.co.jp/services/api/BooksTotal/Search/20170404?applicationId=${applicationId}&keyword=${keyword}`
+    const url = `https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?applicationId=${applicationId}&title=${title}`
     const res = await fetch(url)
     const data = await res.json() as RakutenResponse
     return data

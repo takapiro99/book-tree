@@ -1,9 +1,9 @@
 import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin'
+import fetch from 'node-fetch';
 import crypto = require('crypto')
-import validUrl = require('valid-url')
 
-import { Review } from './types'
+import { PostReview, RakutenBookItem, RakutenResponse } from './types'
 
 export const generateToken: () => Promise<string | null> = async () => {
     const N = 16
@@ -29,28 +29,26 @@ export const generateToken: () => Promise<string | null> = async () => {
 }
 
 // validateに失敗したらHttpErrorを出す
-export const validateReview: (review: Review) => void = (review) => {
-    if (
-        !review.title ||
-        !review.content ||
-        !review.bookImageURL ||
-        !review.reason ||
-        !review.bookLink ||
-        !review.bookImageURL
-    ) {
+export const validateReview: (review: PostReview) => void = (review) => {
+    if (!review.content || !review.reason || !review.isbn) {
         throw new functions.https.HttpsError(
             'invalid-argument',
             '必須の項目を入力してください。'
         )
     }
+}
 
-    if (
-        !validUrl.isUri(review.bookImageURL) ||
-        !validUrl.isUri(review.bookLink)
-    ) {
-        throw new functions.https.HttpsError(
-            'invalid-argument',
-            '不正なURLです'
-        )
+export const fetchBookFromRakutenAPI: (
+    isbn: string
+) => Promise<RakutenBookItem | null> = async (isbn) => {
+    const applicationId = '1009172447759483209'
+    const url = `https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?applicationId=${applicationId}&isbnjan=${isbn}`
+    const res = await fetch(url)
+    const data = (await res.json()) as RakutenResponse
+    if (data.Items.length === 0) {
+        return null
     }
+    console.log(data.Items[0])
+
+    return data.Items[0]
 }

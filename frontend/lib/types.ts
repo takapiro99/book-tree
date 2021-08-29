@@ -8,15 +8,22 @@ export interface UserInfo {
     createdAt: firebase.firestore.FieldValue
 }
 
+// functionsにreviewをpostするときの型
+export interface PostReview {
+    content: string
+    reason: string
+    isbn: string
+}
+
 export interface Review {
-    uid: string | null | undefined
+    uid: string
     specialty: string | null | undefined
     title: string
     content: string
     reason: string
     bookImageURL: string
     bookLink: string
-    createdAt: firebase.firestore.FieldValue | undefined
+    createdAt: firebase.firestore.FieldValue
 }
 
 export interface ReviewJoinedUser extends Review {
@@ -35,15 +42,17 @@ export interface Invitation {
 
 // 必要な属性だけ抽出 (適時追加)
 export interface RakutenBookItem {
-    title: string
-    author: string
-    itemUrl: string
-    largeImageUrl: string
-    mediumImageUrl: string
-    smallImageUrl: string
-    booksGenreId: string
-    publisherName: string
-    isbn: string // ISBNコードという書籍のユニークなID
+    Item : {
+        title: string
+        author: string
+        itemUrl: string
+        largeImageUrl: string
+        mediumImageUrl: string
+        smallImageUrl: string
+        booksGenreId: string
+        publisherName: string
+        isbn: string // ISBNコードという書籍のユニークなID
+    }
 }
 
 export interface RakutenResponse {

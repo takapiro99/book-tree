@@ -4,9 +4,10 @@ import {
     Review,
     getBookTreePostType,
     ReviewJoinedUser,
-    UserInfo
+    UserInfo,
+    PostReview
 } from './types'
-import { validateReview, generateToken } from './util'
+import { validateReview, generateToken, fetchBookFromRakutenAPI } from './util'
 
 admin.initializeApp()
 const dbType = admin.firestore
@@ -191,8 +192,8 @@ export const createInvitationReview = functions.https.onCall(
             )
         }
 
-        const reviews: Review[] = data.reviews
-        if (!reviews) {
+        const postReviews: PostReview[] = data.postReviews
+        if (!postReviews || postReviews === []) {
             throw new functions.https.HttpsError(
                 'invalid-argument',
                 'レビューが一つ以上必要です。'
@@ -202,13 +203,27 @@ export const createInvitationReview = functions.https.onCall(
         const docId = querySnapshot.docs[0].id
 
         await db.runTransaction(async (transaction) => {
-            reviews.forEach((review) => {
-                validateReview(review)
-                review.uid = context.auth?.uid
-                review.createdAt = dbType.FieldValue.serverTimestamp()
-                review.specialty = docData.specialty
+            for (const postReview of postReviews) {
+                validateReview(postReview)
+                const bookData = await fetchBookFromRakutenAPI(postReview.isbn)
+                if (!bookData) {
+                    throw new functions.https.HttpsError(
+                        'invalid-argument',
+                        '無効なISBNです'
+                    )
+                }
+                const review: Review = {
+                    uid: context.auth?.uid as string, // ログインしているので必ずある
+                    specialty: docData.specialty,
+                    title: bookData.Item.title,
+                    bookImageURL: bookData.Item.largeImageUrl,
+                    bookLink: bookData.Item.itemUrl,
+                    content: postReview.content,
+                    reason: postReview.reason,
+                    createdAt: dbType.FieldValue.serverTimestamp()
+                }
                 transaction.set(db.collection('reviews').doc(), review)
-            })
+            }
 
             transaction.update(db.collection('invitations').doc(docId), {
                 to: context.auth?.uid,
@@ -301,3 +316,52 @@ export const deleteBookTree = functions.https.onCall(async (data, context) => {
         )
     }
 })
+
+export const createReviewsIndividual = functions.https.onCall(
+    async (data, context) => {
+        if (context.auth?.uid === undefined) {
+            throw new functions.https.HttpsError(
+                'failed-precondition',
+                'ログインをしてください'
+            )
+        }
+
+        const postReviews: PostReview[] = data.postReviews
+        if (postReviews.length === 0) {
+            throw new functions.https.HttpsError(
+                'invalid-argument',
+                'レビューが一つ以上必要です。'
+            )
+        } else if (postReviews.length > 5) {
+            throw new functions.https.HttpsError(
+                'invalid-argument',
+                '一度に投稿できるレビューの数は5個までです。'
+            )
+        }
+
+        await db.runTransaction(async (transaction) => {
+            for (const postReview of postReviews) {
+                validateReview(postReview)
+                const bookData = await fetchBookFromRakutenAPI(postReview.isbn)
+                if (!bookData) {
+                    throw new functions.https.HttpsError(
+                        'invalid-argument',
+                        '無効なISBNです'
+                    )
+                }
+                const review: Review = {
+                    uid: context.auth?.uid as string, // ログインしているので必ずある
+                    specialty: null,
+                    title: bookData.Item.title,
+                    bookImageURL: bookData.Item.largeImageUrl,
+                    bookLink: bookData.Item.itemUrl,
+                    content: postReview.content,
+                    reason: postReview.reason,
+                    createdAt: dbType.FieldValue.serverTimestamp()
+                }
+                transaction.set(db.collection('reviews').doc(), review)
+            }
+        })
+        return 'success'
+    }
+)
