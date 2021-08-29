@@ -27,7 +27,7 @@ export interface Review {
 }
 
 export interface ReviewJoinedUser extends Review {
-    user: UserInfo | null | undefined
+    user: UserInfo
 }
 
 export interface Invitation {

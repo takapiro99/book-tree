@@ -11,9 +11,10 @@ import { ReviewJoinedUser } from '../lib/types'
 // TODO: レビューページの右上のまるがあるかないかの分岐
 
 /*  eslint @next/next/no-img-element:0 */
-export interface BookOnBigTreeProps extends ReviewJoinedUser {
+export interface BookOnBigTreeProps {
     // 本の画像、リンク、表示のさせ方（アイコンの場合アイコン画像とID）
     withYellowBackground?: boolean
+    review?: ReviewJoinedUser
 }
 
 const BookOnBigTree = (props: BookOnBigTreeProps) => {
@@ -26,8 +27,12 @@ const BookOnBigTree = (props: BookOnBigTreeProps) => {
                     ></div>
                 )}
                 <div className={styles.bookLinkBlock}>
-                    <a href={props.bookLink}>
-                        <img src={props.bookImageURL} className={styles.books} alt="本の表紙画像" />
+                    <a href={props.review?.bookLink}>
+                        <img
+                            src={props.review?.bookImageURL}
+                            className={styles.books}
+                            alt="本の表紙画像"
+                        />
                     </a>
                 </div>
                 {!props.withYellowBackground && (

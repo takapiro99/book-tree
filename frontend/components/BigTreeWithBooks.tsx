@@ -12,7 +12,9 @@ const BigTreeWithBooks = () => {
     const [books, setBooks] = useState<ReviewJoinedUser[]>([])
     useEffect(() => {
         fetchBooksEachUser('sakusaku').then((booksdata) => {
-            setBooks(booksdata)
+            if (booksdata) {
+                setBooks(booksdata)
+            }
         })
 
         //console.log(booksdata)
@@ -25,14 +27,7 @@ const BigTreeWithBooks = () => {
                 <div className={styles.books_wrapper}>
                     {books.length &&
                         books.map((book) => {
-                            return (
-                                <BookOnBigTree
-                                    bookImageURL={book.bookImageURL}
-                                    bookLink={book.bookLink}
-                                    userID={book.userID}
-                                    key={book.userID}
-                                />
-                            )
+                            return <BookOnBigTree review={book} key={book.user.uid} />
                         })}
                 </div>
             </div>
