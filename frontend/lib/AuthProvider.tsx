@@ -10,15 +10,26 @@ type AuthContextType = {
     currentUser: UserState
     isFirstLoading: boolean
     setFirstLoading: (loading: boolean) => void
+    isFetchingFirestoreUser: boolean | undefined
+    setFetchingFirestoreUser: (fetching: boolean | undefined) => void
 }
 
 // provider の外側でcontextを絶対呼び出さないという意思の元
 // https://reactjs.org/docs/context.html#reactcreatecontext
 export const AuthContext = React.createContext<AuthContextType>({} as AuthContextType)
 
+
+const getFirestoreUser = () => {
+        
+}
+
 export const AuthProvider: React.FC = ({ children }) => {
     const [currentUser, setCurrentUser] = useState<UserState>(null)
     const [isFirstLoading, setFirstLoading] = useState(true)
+    const [isFetchingFirestoreUser, setFetchingFirestoreUser] = useState<boolean | undefined>(
+        undefined
+    )
+
 
     const twitterLogin = async () => {
         const provider = new firebase.auth.TwitterAuthProvider()
@@ -33,6 +44,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     const signOut = async () => {
         try {
             await firebase.auth().signOut()
+            setFetchingFirestoreUser(undefined)
         } catch (error) {
             alert('ログアウトに失敗しました。')
         }
@@ -43,6 +55,9 @@ export const AuthProvider: React.FC = ({ children }) => {
         firebase.auth().onAuthStateChanged(async (user) => {
             setFirstLoading(false)
             setCurrentUser(user)
+            if (user) {
+                setFetchingFirestoreUser(true)
+            }
         })
     }, [])
 
@@ -54,7 +69,9 @@ export const AuthProvider: React.FC = ({ children }) => {
                 signOut: signOut,
                 currentUser,
                 isFirstLoading,
-                setFirstLoading
+                setFirstLoading,
+                isFetchingFirestoreUser,
+                setFetchingFirestoreUser
             }}
         >
             {children}

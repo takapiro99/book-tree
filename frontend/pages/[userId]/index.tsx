@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useContext } from 'react'
 import BigTreeWithBooks from '../../components/BigTreeWithBooks'
 import Review from '../../components/Review'
-import { AuthContext } from '../../src/lib/AuthProvider'
+import { AuthContext } from '../../lib/AuthProvider'
 import Custom404 from '../404'
 
 interface RouteParams {

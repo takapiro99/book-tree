@@ -1,6 +1,6 @@
 import styles from './Signin.module.scss'
 import { useContext } from 'react'
-import { AuthContext } from '../../src/lib/AuthProvider'
+import { AuthContext } from '../../lib/AuthProvider'
 import { useRouter } from 'next/dist/client/router'
 
 /* eslint @next/next/no-img-element:0 */
