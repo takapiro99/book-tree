@@ -42,7 +42,7 @@ export interface Invitation {
 
 // 必要な属性だけ抽出 (適時追加)
 export interface RakutenBookItem {
-    Item : {
+    Item: {
         title: string
         author: string
         itemUrl: string

@@ -1,6 +1,6 @@
 // そのうち各機能ごとにファイル作ったほうがよさそう
 import firebase from '../src/lib/firebase'
-import { UserInfo, ReviewJoinedUser, Review, Invitation, RakutenResponse, PostReview } from './types'
+import { UserInfo, ReviewJoinedUser, Invitation, RakutenResponse, PostReview } from './types'
 
 const db = firebase.firestore()
 
@@ -40,9 +40,9 @@ export const fetchBooksToShowOnTopPage: () => Promise<ReviewJoinedUser[] | null>
     return reviews
 }
 
-export const fetchBooksEachUser: (userID: string | null | undefined) => Promise<ReviewJoinedUser[] | null> = async (
-    userID
-) => {
+export const fetchBooksEachUser: (
+    userID: string | null | undefined
+) => Promise<ReviewJoinedUser[] | null> = async (userID) => {
     if (!userID) {
         return null
     }
@@ -65,12 +65,14 @@ export const fetchBooksEachUser: (userID: string | null | undefined) => Promise<
 
 // 招待を受け取らずレビューをする。
 // TODO: specialtyを書き換え不可能に
-// TODO: バックエンドで楽天のURLなのかチェックする方法を考える
-export const postReviewsIndividual: (postReviews: PostReview[]) => Promise<boolean> = async (postReviews) => {
-
-    const createReviewsIndividualFunc = firebase.functions().httpsCallable('createReviewsIndividual')
+export const postReviewsIndividual: (postReviews: PostReview[]) => Promise<boolean> = async (
+    postReviews
+) => {
+    const createReviewsIndividualFunc = firebase
+        .functions()
+        .httpsCallable('createReviewsIndividual')
     try {
-        const res = await createReviewsIndividualFunc({postReviews: postReviews})
+        const res = await createReviewsIndividualFunc({ postReviews: postReviews })
     } catch (err) {
         console.log(err)
         return false
@@ -80,25 +82,26 @@ export const postReviewsIndividual: (postReviews: PostReview[]) => Promise<boole
 }
 
 // 招待を受け取ったときのレビュー
-export const postReviewsInvitation: (postReviews: PostReview[], token: string) => Promise<boolean> = async (
-    postReviews,
-    token
-) => {
-    const createInvitationReviewFunc = firebase.functions().httpsCallable('createInvitationReview')
-    try {
-        const res = await createInvitationReviewFunc({
-            token: token,
-            postReviews: postReviews
-        })
-    } catch (err) {
-        console.log(err)
-        return false
+export const postReviewsInvitation: (postReviews: PostReview[], token: string) => Promise<boolean> =
+    async (postReviews, token) => {
+        const createInvitationReviewFunc = firebase
+            .functions()
+            .httpsCallable('createInvitationReview')
+        try {
+            const res = await createInvitationReviewFunc({
+                token: token,
+                postReviews: postReviews
+            })
+        } catch (err) {
+            console.log(err)
+            return false
+        }
+
+        return true
     }
 
-    return true
-}
-
 // 招待コードが有効かチェック
+// 招待が有効だったら招待オブジェクトを返す
 export const checkInvitation: (token: string) => Promise<Invitation | null> = async (token) => {
     const checkInvitationFunc = firebase.functions().httpsCallable('checkInvitationCode')
     try {
@@ -112,11 +115,14 @@ export const checkInvitation: (token: string) => Promise<Invitation | null> = as
 }
 
 // 招待コードの作成
-export const createInvitationCode: (specialty: string) => Promise<Invitation | null> = async (specialty) => {
+// 招待URLを返す
+export const createInvitationCode: (specialty: string) => Promise<string | null> = async (
+    specialty
+) => {
     const createInvitationFunc = firebase.functions().httpsCallable('createInvitationCode')
     try {
         const res = await createInvitationFunc({ specialty: specialty })
-        return res.data as Invitation
+        return res.data as string
     } catch (err) {
         alert(err)
     }
@@ -125,9 +131,9 @@ export const createInvitationCode: (specialty: string) => Promise<Invitation | n
 }
 
 // ブックツリーの取得
-export const getBookTree: (userID: string | null | undefined) => Promise<ReviewJoinedUser[] | null> = async (
-    userID
-) => {
+export const getBookTree: (
+    userID: string | null | undefined
+) => Promise<ReviewJoinedUser[] | null> = async (userID) => {
     if (!userID) {
         return null
     }
@@ -143,20 +149,23 @@ export const getBookTree: (userID: string | null | undefined) => Promise<ReviewJ
     return null
 }
 
-export const deleteBookTree: () => Promise<void> = async () => {
+export const deleteBookTree: () => Promise<boolean> = async () => {
     const deleteBookTreeFunc = firebase.functions().httpsCallable('deleteBookTree')
     try {
         const res = await deleteBookTreeFunc()
     } catch (err) {
         alert(err)
+        return false
     }
+
+    return true
 }
 
-
-export const fetchBookListFromRakutenAPI: (title: string) => Promise<RakutenResponse> = async (title) => {
-    const applicationId = '1009172447759483209'
-    const url = `https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?applicationId=${applicationId}&title=${title}`
-    const res = await fetch(url)
-    const data = await res.json() as RakutenResponse
-    return data
-}
+export const fetchBookListFromRakutenAPIByTitle: (title: string) => Promise<RakutenResponse> =
+    async (title) => {
+        const applicationId = '1009172447759483209'
+        const url = `https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?applicationId=${applicationId}&title=${title}`
+        const res = await fetch(url)
+        const data = (await res.json()) as RakutenResponse
+        return data
+    }

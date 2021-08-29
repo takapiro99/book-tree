@@ -7,7 +7,11 @@ import {
     UserInfo,
     PostReview
 } from './types'
-import { validateReview, generateToken, fetchBookFromRakutenAPI } from './util'
+import {
+    validateReview,
+    generateToken,
+    fetchBookFromRakutenAPIByIsbn
+} from './util'
 
 admin.initializeApp()
 const dbType = admin.firestore
@@ -30,7 +34,7 @@ export const userOnCreate = functions.auth.user().onCreate(async (user) => {
     })
 })
 
-// ユーザー削除時にレビューとユーザー削除を削除
+// ユーザー削除時にレビュー,ユーザー,招待を削除
 export const userOnDelete = functions.auth.user().onDelete(async (user) => {
     await db.runTransaction(async (transaction) => {
         const querySnapshotReview = await transaction.get(
@@ -104,6 +108,7 @@ export const createInvitationCode = functions.https.onCall(
     }
 )
 
+// 招待コードが有効かどうか調べる。有効なら招待オブジェクトを返す。
 export const checkInvitationCode = functions.https.onCall(
     async (data, context) => {
         if (context.auth?.uid === undefined) {
@@ -205,7 +210,9 @@ export const createInvitationReview = functions.https.onCall(
         await db.runTransaction(async (transaction) => {
             for (const postReview of postReviews) {
                 validateReview(postReview)
-                const bookData = await fetchBookFromRakutenAPI(postReview.isbn)
+                const bookData = await fetchBookFromRakutenAPIByIsbn(
+                    postReview.isbn
+                )
                 if (!bookData) {
                     throw new functions.https.HttpsError(
                         'invalid-argument',
@@ -317,6 +324,7 @@ export const deleteBookTree = functions.https.onCall(async (data, context) => {
     }
 })
 
+// 招待無しでレビューを作成する。
 export const createReviewsIndividual = functions.https.onCall(
     async (data, context) => {
         if (context.auth?.uid === undefined) {
@@ -342,7 +350,9 @@ export const createReviewsIndividual = functions.https.onCall(
         await db.runTransaction(async (transaction) => {
             for (const postReview of postReviews) {
                 validateReview(postReview)
-                const bookData = await fetchBookFromRakutenAPI(postReview.isbn)
+                const bookData = await fetchBookFromRakutenAPIByIsbn(
+                    postReview.isbn
+                )
                 if (!bookData) {
                     throw new functions.https.HttpsError(
                         'invalid-argument',

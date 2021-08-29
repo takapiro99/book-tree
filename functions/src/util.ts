@@ -1,6 +1,6 @@
 import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin'
-import fetch from 'node-fetch';
+import fetch from 'node-fetch'
 import crypto = require('crypto')
 
 import { PostReview, RakutenBookItem, RakutenResponse } from './types'
@@ -38,11 +38,11 @@ export const validateReview: (review: PostReview) => void = (review) => {
     }
 }
 
-export const fetchBookFromRakutenAPI: (
+export const fetchBookFromRakutenAPIByIsbn: (
     isbn: string
 ) => Promise<RakutenBookItem | null> = async (isbn) => {
     const applicationId = '1009172447759483209'
-    const url = `https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?applicationId=${applicationId}&isbnjan=${isbn}`
+    const url = `https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?applicationId=${applicationId}&isbn=${isbn}`
     const res = await fetch(url)
     const data = (await res.json()) as RakutenResponse
     if (data.Items.length === 0) {
