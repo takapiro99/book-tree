@@ -8,7 +8,6 @@ import Link from 'next/link'
 import { useRouter } from 'next/dist/client/router'
 import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../src/lib/AuthProvider'
-import { User } from '@firebase/auth-types'
 import { getProfile, getReviews, Profile } from '../lib/firestore'
 /*  eslint @next/next/no-img-element:0 */
 

@@ -1,26 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import firebase from './firebase'
-import { User } from '@firebase/auth-types'
 
-type UserState = User | null | undefined
-type NavMenuState = boolean | null | undefined
+type UserState = firebase.User | null
+
 type AuthContextType = {
     twitterLogin: (() => Promise<void>) | undefined
     googleLogin: (() => Promise<void>) | undefined
     signOut: () => Promise<void>
     currentUser: UserState
+    isFirstLoading: boolean
+    setFirstLoading: (loading: boolean) => void
 }
 
-export const AuthContext = React.createContext<AuthContextType>({
-    twitterLogin: undefined,
-    googleLogin: undefined,
-    signOut: async () => {},
-    currentUser: undefined
-})
+// provider の外側でcontextを絶対呼び出さないという意思の元
+// https://reactjs.org/docs/context.html#reactcreatecontext
+export const AuthContext = React.createContext<AuthContextType>({} as AuthContextType)
 
 export const AuthProvider: React.FC = ({ children }) => {
     const [currentUser, setCurrentUser] = useState<UserState>(null)
-    const [isNavMenuOpen, setNavMenuOpen] = useState<NavMenuState>(false)
+    const [isFirstLoading, setFirstLoading] = useState(true)
 
     const twitterLogin = async () => {
         const provider = new firebase.auth.TwitterAuthProvider()
@@ -40,10 +38,10 @@ export const AuthProvider: React.FC = ({ children }) => {
         }
     }
 
-    // TODO: 一番最初にユーザー検知するまで loading ってことにしといたほうがよさそう(UIがかくつく)
-    // TODO: でも、ログインしてなかったら永遠に loading になっちゃいそうなのでどうすればいいかわかんない
+    // TODO: isFirstLoadingによってUIをいじる
     useEffect(() => {
         firebase.auth().onAuthStateChanged(async (user) => {
+            setFirstLoading(false)
             setCurrentUser(user)
         })
     }, [])
@@ -54,7 +52,9 @@ export const AuthProvider: React.FC = ({ children }) => {
                 twitterLogin: twitterLogin,
                 googleLogin: googleLogin,
                 signOut: signOut,
-                currentUser
+                currentUser,
+                isFirstLoading,
+                setFirstLoading
             }}
         >
             {children}
