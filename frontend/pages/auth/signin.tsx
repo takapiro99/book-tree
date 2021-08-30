@@ -11,7 +11,7 @@ const SignIn = () => {
     const context = useContext(AuthContext)
     const router = useRouter()
     if (context.currentUser) {
-        router.push(`/@${context.currentUser.uid}`)
+        router.push(`/${context.currentUser.uid}`)
     }
     return (
         <div>

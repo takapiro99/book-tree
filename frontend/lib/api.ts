@@ -46,13 +46,13 @@ export const fetchBooksToShowOnTopPage: () => Promise<ReviewJoinedUser[] | null>
     return reviews
 }
 
-export const fetchBooksEachUser: (
+export const getReviewsFromUser: (
     userID: string | null | undefined
 ) => Promise<ReviewJoinedUser[] | null> = async (userID) => {
     if (!userID) {
         return null
     }
-
+    // TODO: check if user with userID exists
     const querySnapshotReview = await db.collection('reviews').where('uid', '==', userID).get()
 
     const querySnapshotUser = await db.collection('users').where('uid', '==', userID).get()

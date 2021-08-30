@@ -1,39 +1,21 @@
-import { FirestoreUser, Review } from './firestore.interface'
 import { Timestamp } from '@firebase/firestore'
+import { db } from './firebase'
+import { UserInfo } from './types'
 
-export const getProfile = async (uid: string): Promise<FirestoreUser | null> => {
-    const mock = {
-        uid: 'cao1Z4k8qChB0gqzYiHJh0IaICf1', // takapiro
-        displayName: 'takapiro',
-        profileImage:
-            'https://pbs.twimg.com/profile_images/1268541932541804544/pTEgObfP_normal.jpg',
-        gratePartList: [null, null, null],
-        createdAt: Timestamp.now()
-    }
-    return mock
-}
-
-export const getReviewsFromUid = async (uid: string): Promise<Review[]> => {
-    return [
-        {
-            user: 'cao1Z4k8qChB0gqzYiHJh0IaICf1',
-            specialty: '身長',
-            bookImageURL: 'https://shop.r10s.jp/book/cabinet/1040/9784097251040.jpg',
-            bookLink: 'https://books.rakuten.co.jp/rb/11182318/',
-            title: 'いい本',
-            content: 'めっちゃいい本',
-            createdAt: Timestamp.now(), // timestamp
-            reason: 'めっちゃいい'
-        },
-        {
-            user: 'cao1Z4k8qChB0gqzYiHJh0IaICf1',
-            specialty: '身長',
-            bookImageURL: 'https://shop.r10s.jp/book/cabinet/1040/9784097251040.jpg',
-            bookLink: 'https://books.rakuten.co.jp/rb/11182318/',
-            title: 'いい本',
-            content: 'めっちゃいい本',
-            createdAt: Timestamp.now(), // timestamp
-            reason: 'めっちゃいい'
-        }
-    ]
+export const getUserInfo = async (uid: string): Promise<UserInfo | null> => {
+    return db
+        .collection('users')
+        .where('uid', '==', uid)
+        .get()
+        .then((querySnapshot) => {
+            if (!querySnapshot.docs.length) {
+                console.warn('no corresponding firestore uid found')
+                return null
+            } else if (querySnapshot.docs.length >= 2) {
+                alert(`${querySnapshot.docs.length} records have same uid`)
+                return null
+            }
+            const userInfo = querySnapshot.docs[0].data() as UserInfo
+            return userInfo
+        })
 }
