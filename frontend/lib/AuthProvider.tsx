@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import firebase, { db } from './firebase'
-import { FirestoreUser } from './firestore.interface'
+import { UserInfo } from './types'
 
 type UserState = firebase.User | null
 
@@ -13,9 +13,9 @@ type AuthContextType = {
     setFirstLoading: (loading: boolean) => void
     isFetchingFirestoreUser: boolean | undefined
     setFetchingFirestoreUser: (fetching: boolean | undefined) => void
-    fireStoreUser: FirestoreUser | null
-    setFireStoreUser: (user: FirestoreUser | null) => void
-    getFirestoreUser: (uid: string) => Promise<void>
+    userInfo: UserInfo | null
+    setUserInfo: (user: UserInfo | null) => void
+    getMyFirebaseUser: (uid: string) => Promise<void>
 }
 
 // provider の外側でcontextを絶対呼び出さないという意思の元
@@ -28,15 +28,15 @@ export const AuthProvider: React.FC = ({ children }) => {
     const [isFetchingFirestoreUser, setFetchingFirestoreUser] = useState<boolean | undefined>(
         undefined
     )
-    const [fireStoreUser, setFireStoreUser] = useState<FirestoreUser | null>(null)
+    const [userInfo, setUserInfo] = useState<UserInfo | null>(null)
 
     const cleanUp = () => {
         setCurrentUser(null)
         setFetchingFirestoreUser(undefined)
-        setFireStoreUser(null)
+        setUserInfo(null)
     }
 
-    const getFirestoreUser = async (uid: string) => {
+    const getMyFirebaseUser = async (uid: string) => {
         return db
             .collection('users')
             .where('uid', '==', uid)
@@ -49,8 +49,8 @@ export const AuthProvider: React.FC = ({ children }) => {
                     alert(`${querySnapshot.docs.length} records have same uid`)
                     return
                 }
-                const profile = querySnapshot.docs[0].data() as FirestoreUser
-                setFireStoreUser(profile)
+                const profile = querySnapshot.docs[0].data() as UserInfo
+                setUserInfo(profile)
                 setFetchingFirestoreUser(false)
             })
             .catch((err) => {
@@ -85,7 +85,7 @@ export const AuthProvider: React.FC = ({ children }) => {
             setCurrentUser(user)
             if (user) {
                 setFetchingFirestoreUser(true)
-                getFirestoreUser(user.uid)
+                getMyFirebaseUser(user.uid)
             }
         })
     }, [])
@@ -101,9 +101,9 @@ export const AuthProvider: React.FC = ({ children }) => {
                 setFirstLoading,
                 isFetchingFirestoreUser,
                 setFetchingFirestoreUser,
-                fireStoreUser,
-                setFireStoreUser,
-                getFirestoreUser
+                userInfo,
+                setUserInfo,
+                getMyFirebaseUser
             }}
         >
             {children}
