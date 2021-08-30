@@ -1,6 +1,7 @@
 import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
 import { useContext } from 'react'
+import GuardedRoute from '../../components/auth/GuardedRoute'
 import BigTreeWithBooks from '../../components/BigTreeWithBooks'
 import Review from '../../components/Review'
 import { AuthContext } from '../../lib/AuthProvider'
@@ -21,18 +22,20 @@ const Mypage = () => {
     //     console.log('invalid route')
     //     return <Custom404 />
     // }
-    console.log(currentUser)
-    if (!currentUser) {
-        return (
-            <div>
-                <Link href="/auth/signin">sign in first</Link>
-            </div>
-        )
-    }
+
+    // if (!currentUser) {
+    //     return (
+    //         <div>
+    //             <Link href="/auth/signin">sign in first</Link>
+    //         </div>
+    //     )
+    // }
     return (
-        <div>
-            <Review />
-        </div>
+        <GuardedRoute>
+            <div>
+                <Review />
+            </div>
+        </GuardedRoute>
     )
 }
 

@@ -1,14 +1,12 @@
-//import Reviewtree from '../../components/review_tree'
 import BookWithReview from './BookWithReview'
 import styles from '../styles/Review.module.scss'
 import { FaArrowCircleUp, FaBullhorn } from 'react-icons/fa'
 import RecComment from './RecComment'
 import BigTreeWithBooks from './BigTreeWithBooks'
 import Link from 'next/link'
-import { useRouter } from 'next/dist/client/router'
 import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../lib/AuthProvider'
-import { getProfile, getReviews, Profile } from '../lib/firestore'
+import { getProfile, getReviewsFromUid } from '../lib/firestore'
 /*  eslint @next/next/no-img-element:0 */
 
 const Review = () => {
@@ -28,7 +26,7 @@ const Review = () => {
                 })
                 .catch((err) => {})
             // TODO: fetch user's reviews
-            getReviews(currentUser.uid)
+            getReviewsFromUid(currentUser.uid)
                 .then((reviews) => {})
                 .catch((err) => {})
             setLoadingProfileAndBooks(false)

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import firebase from './firebase'
+import { FirestoreUser } from './firestore.interface'
 
 type UserState = firebase.User | null
 
@@ -12,18 +13,13 @@ type AuthContextType = {
     setFirstLoading: (loading: boolean) => void
     isFetchingFirestoreUser: boolean | undefined
     setFetchingFirestoreUser: (fetching: boolean | undefined) => void
+    fireStoreUser: FirestoreUser | null
+    setFireStoreUser: (user: FirestoreUser | null) => void
 }
 
 // provider の外側でcontextを絶対呼び出さないという意思の元
 // https://reactjs.org/docs/context.html#reactcreatecontext
-// export const AuthContext = React.createContext<AuthContextType>({} as AuthContextType)
-
-export const AuthContext = React.createContext<AuthContextType>({
-    twitterLogin: async () => {},
-    googleLogin: async () => {},
-    signOut: async () => {},
-    currentUser: undefined
-})
+export const AuthContext = React.createContext<AuthContextType>({} as AuthContextType)
 
 export const AuthProvider: React.FC = ({ children }) => {
     const [currentUser, setCurrentUser] = useState<UserState>(null)
@@ -31,7 +27,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     const [isFetchingFirestoreUser, setFetchingFirestoreUser] = useState<boolean | undefined>(
         undefined
     )
-
+    const [fireStoreUser, setFireStoreUser] = useState<FirestoreUser | null>(null)
 
     const twitterLogin = async () => {
         const provider = new firebase.auth.TwitterAuthProvider()
@@ -73,7 +69,9 @@ export const AuthProvider: React.FC = ({ children }) => {
                 isFirstLoading,
                 setFirstLoading,
                 isFetchingFirestoreUser,
-                setFetchingFirestoreUser
+                setFetchingFirestoreUser,
+                fireStoreUser,
+                setFireStoreUser
             }}
         >
             {children}

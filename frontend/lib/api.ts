@@ -1,5 +1,5 @@
 // そのうち各機能ごとにファイル作ったほうがよさそう
-import firebase from '../src/lib/firebase'
+import firebase from './firebase'
 import { UserInfo, ReviewJoinedUser, Invitation, RakutenResponse, PostReview } from './types'
 
 const db = firebase.firestore()
@@ -13,6 +13,10 @@ export const fetchBooksToShowOnTopPage: () => Promise<ReviewJoinedUser[] | null>
         .get()
     const reviews: ReviewJoinedUser[] = []
     querySnapshotReview.forEach((res) => {
+        if (!res) {
+            console.warn('api.ts [warn] no books to show at home page')
+            return
+        }
         reviews.push(<ReviewJoinedUser>res.data())
     })
 
@@ -29,6 +33,10 @@ export const fetchBooksToShowOnTopPage: () => Promise<ReviewJoinedUser[] | null>
     const userIDs = reviews.map((review) => review.uid as string)
     const querySnapshotUser = await db.collection('users').where('uid', 'in', userIDs).get()
     querySnapshotUser.forEach((res) => {
+        if (!res) {
+            console.warn('api.ts [warn] no user info')
+            return
+        }
         const userInfo = <UserInfo>res.data()
         reviews.forEach((review) => {
             if (review.uid == userInfo.uid) {
@@ -50,11 +58,18 @@ export const fetchBooksEachUser: (
     const querySnapshotReview = await db.collection('reviews').where('uid', '==', userID).get()
 
     const querySnapshotUser = await db.collection('users').where('uid', '==', userID).get()
-
-    const userData = <UserInfo>querySnapshotUser.docs[0].data()
+    let userData: any
+    if (querySnapshotUser.docs[0]) {
+        console.warn('api.ts[warn] no query snapshot user')
+        userData = <UserInfo>querySnapshotUser.docs[0].data()
+    }
 
     const reviews: ReviewJoinedUser[] = []
     querySnapshotReview.forEach((res) => {
+        if (!res) {
+            console.warn(`no reviews from ${userID}`)
+            return
+        }
         const review = <ReviewJoinedUser>res.data()
         review.user = userData
         reviews.push(review)
