@@ -1,11 +1,11 @@
-import * as admin from 'firebase-admin'
+import firebase from '../src/lib/firebase'
 
 export interface UserInfo {
     displayName: string
     profileImage: string
     uid: string
     gratePartList: (string | null | undefined)[]
-    createdAt: admin.firestore.FieldValue
+    createdAt: firebase.firestore.FieldValue
 }
 
 // functionsにreviewをpostするときの型
@@ -23,15 +23,21 @@ export interface Review {
     reason: string
     bookImageURL: string
     bookLink: string
-    createdAt: admin.firestore.FieldValue
+    createdAt: firebase.firestore.FieldValue
 }
 
 export interface ReviewJoinedUser extends Review {
-    user: UserInfo | null | undefined
+    user: UserInfo
 }
 
-export type getBookTreePostType = {
-    uid: string | null | undefined
+export interface Invitation {
+    accepted: boolean
+    from: string
+    to: string | null
+    specialty: string
+    token: string
+    acceptedAt: firebase.firestore.FieldValue | null
+    createdAt: firebase.firestore.FieldValue
 }
 
 // 必要な属性だけ抽出 (適時追加)
