@@ -6,7 +6,7 @@ import { Review } from '../src/types'
 import { validateReview } from '../src/util'
 
 const reviewMock: Review = {
-    userID: undefined,
+    uid: undefined,
     specialty: undefined,
     title: 'テストの森',
     content: 'テストテストテストテストテストテストテスト',

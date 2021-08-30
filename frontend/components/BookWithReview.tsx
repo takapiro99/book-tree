@@ -5,7 +5,7 @@ const BookWithReview = () => {
     return (
         <div className={styles.reviewpageReviewBlock}>
             <div className={styles.reviewpageReviewBook}>
-                <BookOnBigTree bookImageURL="" bookLink="" userID="sakusaku" withYellowBackground />
+                <BookOnBigTree withYellowBackground />
             </div>
             <div className={styles.reviewpageReviewContent}>
                 <div className={styles.reviewpageReviewContent__reason}>初学者におすすめ</div>

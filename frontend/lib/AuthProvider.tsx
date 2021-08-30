@@ -4,8 +4,8 @@ import firebase from './firebase'
 type UserState = firebase.User | null
 
 type AuthContextType = {
-    twitterLogin: (() => Promise<void>) | undefined
-    googleLogin: (() => Promise<void>) | undefined
+    twitterLogin: () => Promise<void>
+    googleLogin: () => Promise<void>
     signOut: () => Promise<void>
     currentUser: UserState
     isFirstLoading: boolean
@@ -16,12 +16,14 @@ type AuthContextType = {
 
 // provider の外側でcontextを絶対呼び出さないという意思の元
 // https://reactjs.org/docs/context.html#reactcreatecontext
-export const AuthContext = React.createContext<AuthContextType>({} as AuthContextType)
+// export const AuthContext = React.createContext<AuthContextType>({} as AuthContextType)
 
-
-const getFirestoreUser = () => {
-        
-}
+export const AuthContext = React.createContext<AuthContextType>({
+    twitterLogin: async () => {},
+    googleLogin: async () => {},
+    signOut: async () => {},
+    currentUser: undefined
+})
 
 export const AuthProvider: React.FC = ({ children }) => {
     const [currentUser, setCurrentUser] = useState<UserState>(null)
