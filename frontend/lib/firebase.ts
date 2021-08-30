@@ -32,4 +32,6 @@ if (process.browser && location.hostname === 'localhost') {
 
 firebase.auth().languageCode = 'ja'
 
+export const db = firebase.firestore()
+
 export default firebase

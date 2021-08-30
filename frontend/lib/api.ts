@@ -1,8 +1,6 @@
 // そのうち各機能ごとにファイル作ったほうがよさそう
-import firebase from './firebase'
+import firebase, { db } from './firebase'
 import { UserInfo, ReviewJoinedUser, Invitation, RakutenResponse, PostReview } from './types'
-
-const db = firebase.firestore()
 
 export const fetchBooksToShowOnTopPage: () => Promise<ReviewJoinedUser[] | null> = async () => {
     const querySnapshotReview = await db

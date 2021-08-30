@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import firebase from './firebase'
+import firebase, { db } from './firebase'
 import { FirestoreUser } from './firestore.interface'
 
 type UserState = firebase.User | null
@@ -15,6 +15,7 @@ type AuthContextType = {
     setFetchingFirestoreUser: (fetching: boolean | undefined) => void
     fireStoreUser: FirestoreUser | null
     setFireStoreUser: (user: FirestoreUser | null) => void
+    getFirestoreUser: (uid: string) => Promise<void>
 }
 
 // provider の外側でcontextを絶対呼び出さないという意思の元
@@ -29,6 +30,35 @@ export const AuthProvider: React.FC = ({ children }) => {
     )
     const [fireStoreUser, setFireStoreUser] = useState<FirestoreUser | null>(null)
 
+    const cleanUp = () => {
+        setCurrentUser(null)
+        setFetchingFirestoreUser(undefined)
+        setFireStoreUser(null)
+    }
+
+    const getFirestoreUser = async (uid: string) => {
+        return db
+            .collection('users')
+            .where('uid', '==', uid)
+            .get()
+            .then((querySnapshot) => {
+                if (!querySnapshot.docs.length) {
+                    alert('no corresponding user record found')
+                    return
+                } else if (querySnapshot.docs.length >= 2) {
+                    alert(`${querySnapshot.docs.length} records have same uid`)
+                    return
+                }
+                const profile = querySnapshot.docs[0].data() as FirestoreUser
+                setFireStoreUser(profile)
+                setFetchingFirestoreUser(false)
+            })
+            .catch((err) => {
+                setFetchingFirestoreUser(false)
+                alert(err)
+            })
+    }
+
     const twitterLogin = async () => {
         const provider = new firebase.auth.TwitterAuthProvider()
         firebase.auth().signInWithRedirect(provider)
@@ -42,7 +72,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     const signOut = async () => {
         try {
             await firebase.auth().signOut()
-            setFetchingFirestoreUser(undefined)
+            cleanUp()
         } catch (error) {
             alert('ログアウトに失敗しました。')
         }
@@ -55,6 +85,7 @@ export const AuthProvider: React.FC = ({ children }) => {
             setCurrentUser(user)
             if (user) {
                 setFetchingFirestoreUser(true)
+                getFirestoreUser(user.uid)
             }
         })
     }, [])
@@ -71,7 +102,8 @@ export const AuthProvider: React.FC = ({ children }) => {
                 isFetchingFirestoreUser,
                 setFetchingFirestoreUser,
                 fireStoreUser,
-                setFireStoreUser
+                setFireStoreUser,
+                getFirestoreUser
             }}
         >
             {children}

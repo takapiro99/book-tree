@@ -18,25 +18,16 @@ const Mypage = () => {
     const router = useRouter()
     const { currentUser } = useContext(AuthContext)
     const { userId } = router.query
-    // if (userId && userId[0] !== '@') {
-    //     console.log('invalid route')
-    //     return <Custom404 />
-    // }
-
-    // if (!currentUser) {
-    //     return (
-    //         <div>
-    //             <Link href="/auth/signin">sign in first</Link>
-    //         </div>
-    //     )
-    // }
-    return (
-        <GuardedRoute>
-            <div>
+    if (currentUser && currentUser.uid === userId) {
+        // 自分のマイページを見ている場合
+        return (
+            <GuardedRoute>
                 <Review />
-            </div>
-        </GuardedRoute>
-    )
+            </GuardedRoute>
+        )
+    } else {
+        return <Review />
+    }
 }
 
 export default Mypage
