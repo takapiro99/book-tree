@@ -6,37 +6,39 @@ import BigTreeWithBooks from './BigTreeWithBooks'
 import Link from 'next/link'
 import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../lib/AuthProvider'
-import { getUserInfo } from '../lib/firestore'
-import { getReviewsFromUser } from '../lib/api'
+import { getReviewsFromUser, getUserInfo } from '../lib/api'
 import { Review, UserInfo } from '../lib/types'
 /*  eslint @next/next/no-img-element:0 */
 
 const ReviewPage = ({ uid }: { uid: string }) => {
+    // TODO: userInfoもbooksもサーバー側で取得しとく説ある
     const [isLoadingProfileAndBooks, setLoadingProfileAndBooks] = useState(true)
     const [targetUserInfo, setTargetUserInfo] = useState<null | UserInfo>(null)
     const [reviews, setReviews] = useState<Review[]>([])
     const { currentUser } = useContext(AuthContext)
-    console.log(reviews)
+
     useEffect(() => {
-        if (currentUser) {
-            getUserInfo(uid)
-                .then((profile) => {
-                    if (profile) {
-                        setTargetUserInfo(profile)
-                        getReviewsFromUser(profile.uid)
-                            .then((reviews) => setReviews(reviews as Review[]))
-                            .catch((err) => alert(err))
-                    } else {
-                        console.log('no user info')
-                        setLoadingProfileAndBooks(false)
-                    }
-                })
-                .catch((err: any) => {
-                    alert(err)
+        getUserInfo(uid)
+            .then((profile) => {
+                if (profile) {
+                    setTargetUserInfo(profile)
+                    getReviewsFromUser(profile.uid)
+                        .then((reviews) => {
+                            setReviews(reviews as Review[])
+                            setLoadingProfileAndBooks(false)
+                        })
+                        .catch((err) => alert(err))
+                } else {
+                    console.log('no user info')
                     setLoadingProfileAndBooks(false)
-                })
-        }
-    }, [currentUser])
+                }
+            })
+            .catch((err: any) => {
+                alert(err)
+                setLoadingProfileAndBooks(false)
+            })
+    }, [])
+
     if (!isLoadingProfileAndBooks && !targetUserInfo) {
         console.log(isLoadingProfileAndBooks, targetUserInfo)
         return <>no user which uid={uid}</>
