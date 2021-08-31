@@ -13,6 +13,12 @@ const Mypage = () => {
     const router = useRouter()
     const { currentUser } = useContext(AuthContext)
     const { userId } = router.query
+    // firestore の len(uid) は 28 らしい
+
+    if ((userId as string)?.length >= 33 || (userId as string)?.length <= 26) {
+        // invalid uid
+        router.push('/404')
+    }
     if (currentUser && currentUser.uid === userId) {
         // 自分のマイページを見ている場合
         return (
