@@ -1,14 +1,10 @@
 import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
 import { useContext } from 'react'
+import GuardedRoute from '../../components/auth/GuardedRoute'
 import BigTreeWithBooks from '../../components/BigTreeWithBooks'
 import Review from '../../components/Review'
-import { AuthContext } from '../../src/lib/AuthProvider'
-import Custom404 from '../404'
-
-interface RouteParams {
-    id: string
-}
+import { AuthContext } from '../../lib/AuthProvider'
 
 // TODO: 色々やる
 // TODO: どこでユーザーが本物か確認する？
@@ -17,23 +13,16 @@ const Mypage = () => {
     const router = useRouter()
     const { currentUser } = useContext(AuthContext)
     const { userId } = router.query
-    // if (userId && userId[0] !== '@') {
-    //     console.log('invalid route')
-    //     return <Custom404 />
-    // }
-    console.log(currentUser)
-    if (!currentUser) {
+    if (currentUser && currentUser.uid === userId) {
+        // 自分のマイページを見ている場合
         return (
-            <div>
-                <Link href="/auth/signin">sign in first</Link>
-            </div>
+            <GuardedRoute>
+                <Review uid={userId} />
+            </GuardedRoute>
         )
+    } else {
+        return <Review uid={userId as string} />
     }
-    return (
-        <div>
-            <Review />
-        </div>
-    )
 }
 
 export default Mypage

@@ -1,15 +1,15 @@
 // Firebase App (the core Firebase SDK) is always required and must be listed first
-import firebase from 'firebase/app'
+import firebase from 'firebase/compat/app'
 // If you are using v7 or any earlier version of the JS SDK, you should import firebase using namespace import
 // import * as firebase from "firebase/app"
 
 // If you enabled Analytics in your project, add the Firebase SDK for Analytics
-import 'firebase/analytics'
+import 'firebase/compat/analytics'
 
 // Add the Firebase products that you want to use
-import 'firebase/auth'
-import 'firebase/firestore'
-import 'firebase/functions'
+import 'firebase/compat/auth'
+import 'firebase/compat/firestore'
+import 'firebase/compat/functions'
 
 const firebaseConfig = {
     apiKey: 'AIzaSyAhAboU5u76UAidJnBdSJJ82dIpz_VjUas',
@@ -31,5 +31,7 @@ if (process.browser && location.hostname === 'localhost') {
 }
 
 firebase.auth().languageCode = 'ja'
+
+export const db = firebase.firestore()
 
 export default firebase

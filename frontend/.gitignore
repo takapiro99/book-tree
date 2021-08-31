@@ -35,3 +35,5 @@ yarn-error.log*
 
 # private
 pages/__test.tsx
+
+/next-env.d.ts
