@@ -1,7 +1,8 @@
-import styles from './Signin.module.scss'
+import styles from '../../styles/Signin.module.scss'
 import { useContext } from 'react'
 import { AuthContext } from '../../lib/AuthProvider'
 import { useRouter } from 'next/dist/client/router'
+import SignInWithTwitterOrGoogle from '../../components/auth/SignInWithTwitterOrGoogle'
 
 /* eslint @next/next/no-img-element:0 */
 
@@ -16,18 +17,7 @@ const SignIn = () => {
     return (
         <div>
             <h1 className={styles.title}>BOOKTREEにログインする</h1>
-            <p className={`${styles.Twitter} ${styles.icon}`} onClick={context.twitterLogin}>
-                <img
-                    src="/twitter-blue.svg"
-                    alt="twitter icon"
-                    height={35}
-                    style={{ display: 'inline-block', marginRight: '15px' }}
-                />
-                twitter で続ける
-            </p>
-            <p className={`${styles.Google} ${styles.icon}`} onClick={context.googleLogin}>
-                Googleアカウントでログイン
-            </p>
+            <SignInWithTwitterOrGoogle />
         </div>
     )
 }

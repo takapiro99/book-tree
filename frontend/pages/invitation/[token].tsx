@@ -1,5 +1,6 @@
 import { useRouter } from 'next/dist/client/router'
 import { useEffect } from 'react'
+import SignInWithTwitterOrGoogle from '../../components/auth/SignInWithTwitterOrGoogle'
 import { checkInvitation } from '../../lib/api'
 import styles from '../../styles/invitation.module.scss'
 
@@ -9,6 +10,7 @@ const InviteReview = () => {
     const router = useRouter()
     const { token } = router.query
     useEffect(() => {
+        return () => {}
         checkInvitation(token as string).then((invitation) => {
             if (invitation) {
                 console.log(invitation)
@@ -43,9 +45,8 @@ const InviteReview = () => {
                 {/* TODO: ここにログインくん */}
                 <div className={styles.accontCreateFromRecom}>
                     <div>
-                        <h2 className={styles.title}>BOOKTREE を作る</h2>s
-                        <p className={styles.Twitter}>Twitterアカウントで作る</p>
-                        <p className={styles.Google}>Googleアカウントで作る</p>
+                        <h2 className={styles.title}>BOOKTREE を作る</h2>
+                        <SignInWithTwitterOrGoogle />
                     </div>
                 </div>
                 {/* TODO: ログインしてたら、新規投稿フォームも出す */}
