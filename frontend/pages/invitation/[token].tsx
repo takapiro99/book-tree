@@ -1,8 +1,20 @@
+import { useRouter } from 'next/dist/client/router'
+import { useEffect } from 'react'
+import { checkInvitation } from '../../lib/api'
 import styles from '../../styles/invitation.module.scss'
 
 /* eslint @next/next/no-img-element:0 */
 
 const InviteReview = () => {
+    const router = useRouter()
+    const { token } = router.query
+    useEffect(() => {
+        checkInvitation(token as string).then((invitation) => {
+            if (invitation) {
+                console.log(invitation)
+            }
+        })
+    }, [])
     return (
         <div>
             <div className={styles.nominateBlock}>
