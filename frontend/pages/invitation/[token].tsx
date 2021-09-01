@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import { useEffect, useState } from 'react'
 import GuardedRoute from '../../components/auth/GuardedRoute'
 import SignInWithTwitterOrGoogle from '../../components/auth/SignInWithTwitterOrGoogle'
+import NewPost from '../../components/NewPost'
 import { checkInvitation } from '../../lib/api'
 import { AuthContext } from '../../lib/AuthProvider'
 import { Invitation } from '../../lib/types'
@@ -70,7 +71,9 @@ const InviteReview = () => {
             {!loadingInvitation && !invitation ? (
                 <p>invalid invitation</p>
             ) : currentUser ? (
-                <p>新規投稿 here</p>
+                <>
+                    <NewPost />
+                </>
             ) : (
                 <div className={styles.accontCreateFromRecom}>
                     <div>
