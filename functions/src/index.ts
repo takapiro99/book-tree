@@ -87,7 +87,10 @@ export const createInvitationCode = functions.https.onCall(
         const token = await generateToken()
 
         if (token) {
+            // TODO: token だけ生成して、URLはフロントエンドで `location.origin` で生成するほうがよさそう
+            // サーバー側でフロントのURLが分からんので
             const invitationURL = `http://localhost:3000/invite/?token=${token}`
+            // それと、`/invitation/{token}` っていうパスにしました…
             const invitationsRef = db.collection('invitations')
             invitationsRef.add({
                 to: null,
