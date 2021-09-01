@@ -4,9 +4,9 @@
     height: 80px;
     top: 0;
     z-index: 10000;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    background-color: rgba(250, 250, 250, 0.96);
-    backdrop-filter: blur(3px);
+    // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);s
+    // background-color: rgba(250, 250, 250, 0.96);
+    // backdrop-filter: blur(3px);
 }
 .booktree_logo_wrapper {
     cursor: pointer;
@@ -46,7 +46,7 @@
     position: absolute;
     top: 70px;
     right: 20px;
-    background-color: #f4fcdb;
+    background-color: #a1bd4d;
     width: 200px;
     padding: 0;
     box-shadow: 10px 10px rgb(205, 226, 110);
@@ -83,7 +83,13 @@
         }
     }
 }
+@media screen and (max-width: 500px) {
+    .booktree_logo{
+        width: 150px;
+    }
 
+    /* 959px以下に適用されるCSS（タブレット用） */
+}
 // ul {
 //     display: flex;
 //     align-items: center;

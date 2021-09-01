@@ -4,7 +4,6 @@
 import littletree from '../assets/LittleTreeSmall.png'
 import icon1 from '../assets/kaede.png'
 import styles from '../styles/LittleTree.module.scss'
-import shiori from "../assets/shiori.png"
 
 const LittleTree = () => {
     // 文字カウントする関数

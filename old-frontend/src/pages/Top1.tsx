@@ -80,7 +80,7 @@ const Top = () => {
                 </div> */}
                 </div>
                 <h1 className={styles.BookTreeForest__title}>what's new?</h1>
-                <img className={styles.shiori} src={shiori} alt="shiori" />
+                {/* <img className={styles.shiori} src={shiori} alt="shiori" /> */}
                 <div className={styles.forestWrapper}>
                     <div className={styles.littletreeWrapper}>
                         <LittleTree />
