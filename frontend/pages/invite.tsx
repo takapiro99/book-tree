@@ -102,7 +102,7 @@ const Invite = () => {
                         {/* TODO: focusがあたるようにしたい */}
                         <FaCopy size="30" color="#777" onClick={handleCopy} />
                     </div>
-                    <p style={{textAlign:'center', color: 'green'}}>{copyStatus}</p>
+                    <p style={{ textAlign: 'center', color: 'green' }}>{copyStatus}</p>
                 </div>
             ) : null}
         </div>

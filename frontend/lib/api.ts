@@ -139,7 +139,6 @@ export const createInvitationCode: (specialty: string) => Promise<string | null>
     } catch (err) {
         alert(err)
     }
-
     return null
 }
 

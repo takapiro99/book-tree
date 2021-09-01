@@ -1,4 +1,3 @@
-import { useRouter } from 'next/dist/client/router'
 import { useContext } from 'react'
 import styles from '../../styles/Signin.module.scss'
 import { AuthContext } from '../../lib/AuthProvider'

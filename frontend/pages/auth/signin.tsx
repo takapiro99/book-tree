@@ -17,6 +17,7 @@ const SignIn = () => {
     // if (context.currentUser) {
     //     router.push(`/${context.currentUser.uid}`)
     // }
+    // TODO: 既にサインインしていた場合どうするか考える
     return (
         <div>
             <h1

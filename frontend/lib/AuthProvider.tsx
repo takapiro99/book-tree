@@ -1,3 +1,4 @@
+import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useState } from 'react'
 import firebase, { db } from './firebase'
 import { UserInfo } from './types'
@@ -23,6 +24,7 @@ type AuthContextType = {
 export const AuthContext = React.createContext<AuthContextType>({} as AuthContextType)
 
 export const AuthProvider: React.FC = ({ children }) => {
+    const router = useRouter()
     const [currentUser, setCurrentUser] = useState<UserState>(null)
     const [isFirstLoading, setFirstLoading] = useState(true)
     const [isFetchingFirestoreUser, setFetchingFirestoreUser] = useState<boolean | undefined>(
@@ -73,6 +75,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         try {
             await firebase.auth().signOut()
             cleanUp()
+            router.push('/')
         } catch (error) {
             alert('ログアウトに失敗しました。')
         }

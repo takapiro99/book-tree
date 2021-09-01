@@ -37,7 +37,7 @@ const ReviewPage = ({ uid }: { uid: string }) => {
                 alert(err)
                 setLoadingProfileAndBooks(false)
             })
-    }, [])
+    }, []) // eslint-disable-line
 
     if (!isLoadingProfileAndBooks && !targetUserInfo) {
         console.log(isLoadingProfileAndBooks, targetUserInfo)
