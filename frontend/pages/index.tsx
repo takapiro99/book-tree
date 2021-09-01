@@ -88,7 +88,5 @@ export default function Home() {
             </div>
             <div className={styles.greenbar}> </div>
         </div>
-        
-
     )
 }
