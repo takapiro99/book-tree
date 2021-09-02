@@ -3,6 +3,7 @@ import { useRef, useState } from 'react'
 import { FaCopy } from 'react-icons/fa'
 import { createInvitationCode } from '../lib/api'
 import { useForm } from 'react-hook-form'
+import Head from 'next/head'
 
 /* eslint @next/next/no-img-element:0 */
 
@@ -52,6 +53,9 @@ const Invite = () => {
 
     return (
         <div className="container">
+            <Head>
+                <title>CreateLink</title>
+            </Head>
             <div>
                 <h1 className={styles.createLinkTitle}>お願いリンクを作る</h1>
                 <div className={styles.createLinkBlock}>

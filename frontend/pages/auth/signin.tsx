@@ -1,4 +1,5 @@
 // import styles from '../../styles/Signin.module.scss'
+import Head from 'next/head'
 import SignInWithTwitterOrGoogle from '../../components/auth/SignInWithTwitterOrGoogle'
 
 /* eslint @next/next/no-img-element:0 */
@@ -20,6 +21,9 @@ const SignIn = () => {
     // TODO: 既にサインインしていた場合どうするか考える
     return (
         <div>
+            <Head>
+                <title>SignIn</title>
+            </Head>
             <h1
                 style={{
                     textAlign: 'center',

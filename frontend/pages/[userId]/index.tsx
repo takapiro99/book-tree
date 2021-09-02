@@ -1,4 +1,5 @@
 import { useRouter } from 'next/dist/client/router'
+import Head from 'next/head'
 import Link from 'next/link'
 import { useContext } from 'react'
 import GuardedRoute from '../../components/auth/GuardedRoute'
@@ -22,9 +23,14 @@ const Mypage = () => {
     if (currentUser && currentUser.uid === userId) {
         // 自分のマイページを見ている場合
         return (
-            <GuardedRoute>
-                <Review uid={userId} />
-            </GuardedRoute>
+            <>
+                <Head>
+                    <title>Mypage</title>
+                </Head>
+                <GuardedRoute>
+                    <Review uid={userId} />
+                </GuardedRoute>
+            </>
         )
     } else {
         return <Review uid={userId as string} />

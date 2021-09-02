@@ -1,10 +1,14 @@
 import LittleTree from '../components/LittleTree'
 import styles from '../styles/Home.module.scss'
 /* eslint @next/next/no-img-element:0 */
+import Head from 'next/head'
 
 export default function Home() {
     return (
         <div>
+            <Head>
+                <title>TopPage</title>
+            </Head>
             <div className="container">
                 <div className={styles.topContent}>
                     <div className={styles.topContent__staffTree}>
