@@ -26,9 +26,9 @@ if (firebase.apps.length === 0) {
 }
 
 // emulatorを使用
-if (process.browser && location.hostname === 'localhost') {
-    firebase.functions().useEmulator('localhost', 5001)
-}
+// if (process.browser && location.hostname === 'localhost') {
+//     firebase.functions().useEmulator('localhost', 5001)
+// }
 
 firebase.auth().languageCode = 'ja'
 
