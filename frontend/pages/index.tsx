@@ -1,9 +1,27 @@
 import LittleTree from '../components/LittleTree'
 import styles from '../styles/Home.module.scss'
+import React, { useEffect, useState } from 'react'
+
+import { ReviewJoinedUser } from '../lib/types'
+import { fetchBooksToShowOnTopPage } from '../lib/api'
 /* eslint @next/next/no-img-element:0 */
 import Head from 'next/head'
 
 export default function Home() {
+    // 列ごとに状態を持つ
+    const [booksRow1, setBooksRow1] = useState<ReviewJoinedUser[]>([])
+    const [booksRow2, setBooksRow2] = useState<ReviewJoinedUser[]>([])
+    const [booksRow3, setBooksRow3] = useState<ReviewJoinedUser[]>([])
+    useEffect(() => {
+        const f = async () => {
+            const books = await fetchBooksToShowOnTopPage()
+            setBooksRow1(books.slice(0, 3))
+            setBooksRow2(books.slice(3, 6))
+            setBooksRow3(books.slice(6, 9))
+        }
+        f()
+    }, [])
+
     return (
         <div>
             <Head>
@@ -73,19 +91,19 @@ export default function Home() {
                     <img className={styles.shiori} src="/images/home/shiori.png" alt="shiori" />
                     <div className={styles.forestWrapper}>
                         <div className={styles.littletreeWrapper}>
-                            <LittleTree />
-                            <LittleTree />
-                            <LittleTree />
+                            {booksRow1.map((book, index) => {
+                                return <LittleTree review={book} key={index} />
+                            })}
                         </div>
                         <div className={styles.littletreeWrapper2}>
-                            <LittleTree />
-                            <LittleTree />
-                            <LittleTree />
+                            {booksRow2.map((book, index) => {
+                                return <LittleTree review={book} key={index} />
+                            })}
                         </div>
                         <div className={styles.littletreeWrapper3}>
-                            <LittleTree />
-                            <LittleTree />
-                            <LittleTree />
+                            {booksRow3.map((book, index) => {
+                                return <LittleTree review={book} key={index} />
+                            })}
                         </div>
                     </div>
                 </div>

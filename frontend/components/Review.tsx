@@ -7,14 +7,21 @@ import Link from 'next/link'
 import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../lib/AuthProvider'
 import { getReviewsFromUser, getUserInfo } from '../lib/api'
-import { Review, UserInfo } from '../lib/types'
+import { ReviewJoinedUser, UserInfo } from '../lib/types'
 /*  eslint @next/next/no-img-element:0 */
+
+const isNullGradePart = (arr: (string | null | undefined)[]) => {
+    let f = true
+    if (arr.length !== 3) f = false
+    if (arr.filter((el) => el !== null).length === 0) return false
+    return true
+}
 
 const ReviewPage = ({ uid }: { uid: string }) => {
     // TODO: userInfoもbooksもサーバー側で取得しとく説ある
     const [isLoadingProfileAndBooks, setLoadingProfileAndBooks] = useState(true)
     const [targetUserInfo, setTargetUserInfo] = useState<null | UserInfo>(null)
-    const [reviews, setReviews] = useState<Review[]>([])
+    const [reviews, setReviews] = useState<ReviewJoinedUser[]>([])
     const { currentUser } = useContext(AuthContext)
 
     useEffect(() => {
@@ -24,8 +31,10 @@ const ReviewPage = ({ uid }: { uid: string }) => {
                     setTargetUserInfo(profile)
                     getReviewsFromUser(profile.uid)
                         .then((reviews) => {
-                            setReviews(reviews as Review[])
-                            setLoadingProfileAndBooks(false)
+                            if (reviews) {
+                                setReviews(reviews)
+                                setLoadingProfileAndBooks(false)
+                            }
                         })
                         .catch((err) => alert(err))
                 } else {
@@ -53,8 +62,8 @@ const ReviewPage = ({ uid }: { uid: string }) => {
             behavior: 'smooth'
         })
     }
-    if (!currentUser) return null
-    const userName = currentUser.displayName
+    if (!targetUserInfo) return null
+    const userName = targetUserInfo.displayName
     return (
         <>
             {/* <div className={globalStyles.wrapper}> */}
@@ -73,7 +82,7 @@ const ReviewPage = ({ uid }: { uid: string }) => {
                         <img
                             className={styles.icon}
                             alt="user icon"
-                            src={currentUser.photoURL as string}
+                            src={targetUserInfo.profileImage as string}
                         />
                         <div className={styles.reviewUserName}>
                             {/* <div>紹介してくれたのは・・・</div> */}
@@ -81,9 +90,17 @@ const ReviewPage = ({ uid }: { uid: string }) => {
                                 {userName}
                                 <span style={{ fontSize: '1rem' }}>さん</span>
                             </div>
-                            <div className={styles.reviewUserKeywords}>
-                                北大OG ＋ 猫 ＋ マイクラ
-                            </div>
+                            {isNullGradePart(targetUserInfo.gratePartList) ? (
+                                <div className={styles.reviewUserKeywords}>
+                                    {targetUserInfo.gratePartList
+                                        .filter((el) => el !== null)
+                                        .join(' + ')}
+                                </div>
+                            ) : (
+                                <div className={styles.reviewUserKeywords}>
+                                    まだ自己紹介が設定されていないよ！
+                                </div>
+                            )}
                         </div>
                     </div>
                     {/* <div className={styles.reccomment}>
@@ -122,13 +139,9 @@ const ReviewPage = ({ uid }: { uid: string }) => {
                         {reviews.length ? (
                             <>
                                 <div style={{ textAlign: 'center' }}>{userName} の選んだ本たち</div>
-                                {reviews.map((review, i) => (
-                                    <BookWithReview
-                                        key={i}
-                                        review={review}
-                                        userInfo={targetUserInfo as UserInfo}
-                                    />
-                                ))}
+                                {reviews.map((review, i) => {
+                                    return <BookWithReview key={i} review={review} />
+                                })}
                             </>
                         ) : (
                             <p style={{ textAlign: 'center' }}>
