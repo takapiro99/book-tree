@@ -1,8 +1,13 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import { FaPlusCircle } from 'react-icons/fa'
+import { fetchBookListFromRakutenAPIByTitle } from '../lib/api'
+import { RakutenBookItem, RakutenResponse } from '../lib/types'
 import useDebounce from '../lib/useDebounce'
 import styles from '../styles/ReviewForm.module.scss'
-import BookOnBigTree from './BookOnBigTree'
+import AddReview from './reviews/addReview'
+
+/* eslint @next/next/no-img-element:0 */
 
 // TODO: 見直す（直書きしてるが、用いるべき型は types.ts のどこかにある）
 export interface BooksProps {
@@ -35,34 +40,42 @@ const initialData: IData = {
 
 const NewPost = () => {
     //保存するデータ
-    const [data, setData] = useState<IData>(initialData)
-    //const [books, setBooks] = useState<BooksProps[]>([])
+    const [suggestions, setSuggestions] = useState<RakutenBookItem[]>([])
+    const [selectedBooks, setSelectedBooks] = useState<RakutenBookItem[]>([])
+    // TODO: POSTするくん。ここのコンポーネントで 入力などを管理してやる？考える。
     //保存しないデータ
     const [title, setTitle] = useState<string>('')
+    const debouncedValue = useDebounce<string>(title, 1000)
 
-    const debouncedValue = useDebounce<string>(title, 400)
+    const fetchSuggestions = () => {
+        if (debouncedValue) {
+            fetchBookListFromRakutenAPIByTitle(debouncedValue)
+                .then((res) => {
+                    console.log(res)
+                    setSuggestions(res.Items)
+                })
+                .catch((err) => alert(err))
+        } else {
+            setSuggestions([])
+        }
+    }
 
     useEffect(() => {
-        axios
-            .get(`https://www.googleapis.com/books/v1/volumes?q=${debouncedValue}`)
-            .then((res: any) => {
-                console.log(res.data.items)
-                //帰ってきたデータからタイトルと画像データを取得し、
-                //data内のbooksに入れる
-            })
-            .catch((err) => {
-                alert(`err occurred: ${err}`)
-            })
-    }, [debouncedValue])
+        fetchSuggestions()
+    }, [debouncedValue]) // eslint-disable-line
 
-    const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value = event.target.value
-        const name = event.target.name
-        setData({ ...data, [name]: value })
-        console.log(data)
+    const SearchBooks = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setTitle(e.target.value)
     }
-    const SearchBooks = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setTitle(event.target.value)
+
+    const handleSelectSuggestion = (book: RakutenBookItem) => {
+        setSuggestions([...suggestions].filter((b) => b.Item.itemUrl !== book.Item.itemUrl))
+        setSelectedBooks([...selectedBooks, book])
+    }
+
+    // 一回選択したけど消すやつ
+    const removeOnceSelectedBook = (book: RakutenBookItem) => {
+        // TODO
     }
 
     return (
@@ -80,38 +93,44 @@ const NewPost = () => {
                                 value={title}
                                 onChange={SearchBooks}
                             />
-                            {/* <div className={styles.reviewformBookselectResult}>
-                                {data.books.length &&
-                                    data.books.map((b) => {
-                                        return (
-                                            <div>
-                                                <BookOnBigTree
-                                                    bookImageURL={b.bookImageURL}
-                                                    bookLink=""
-                                                    displayType="bookOnly"
-                                                    userID="sakusaku"
-                                                />
-                                                <div className={styles.plus}>
-                                                    <i className="fas fa-plus-circle"></i>{' '}
+                            <div className={styles.reviewformBookselectResult}>
+                                <div className={styles.suggestedBooksContainer}>
+                                    {suggestions.length ? (
+                                        suggestions.map((b, i) => {
+                                            return (
+                                                <div
+                                                    key={i}
+                                                    className={styles.suggestedBook}
+                                                    onClick={() => handleSelectSuggestion(b)}
+                                                >
+                                                    <img src={b.Item.largeImageUrl} alt="" />
+                                                    <div className={styles.plus}>
+                                                        <FaPlusCircle size={35} />
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        )
-                                    })}
-                            </div> */}
+                                            )
+                                        })
+                                    ) : (
+                                        <p>検索してね</p>
+                                    )}
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    {/* {data?.selectedBooks.map((book) =>{
-				return(
-						<AddReview
-						bookImageURL={data.selectedBook.bookImageURL}
-						bookLink={data.book.bookLink}
-						displayType={data.book.displayType}
-						userID={data.book.userID}
-						key={data.book.userID}
-				/>
-				)
-		})
-} */}
+                    {selectedBooks.length ? (
+                        selectedBooks.map((book) => {
+                            return (
+                                <AddReview
+                                    bookImageURL={book.Item.itemUrl}
+                                    bookLink={book.Item.itemUrl}
+                                    key={book.Item.isbn}
+                                    removeOnceSelectedBook={removeOnceSelectedBook}
+                                />
+                            )
+                        })
+                    ) : (
+                        <p>選択してね</p>
+                    )}
                     <div className={styles.reviewformSubmit}>
                         <button className={styles.submitButton}>決定</button>
                     </div>
