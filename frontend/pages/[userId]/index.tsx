@@ -23,12 +23,14 @@ const Mypage = () => {
     if (currentUser && currentUser.uid === userId) {
         // 自分のマイページを見ている場合
         return (
-            <GuardedRoute>
+            <>
                 <Head>
                     <title>Mypage</title>
                 </Head>
-                <Review uid={userId} />
-            </GuardedRoute>
+                <GuardedRoute>
+                    <Review uid={userId} />
+                </GuardedRoute>
+            </>
         )
     } else {
         return <Review uid={userId as string} />
