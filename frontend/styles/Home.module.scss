@@ -155,3 +155,9 @@
         cursor: pointer;
     }
 }
+@media screen and (max-width: 380px) {
+    .topContent__staffTree {
+        position: relative;
+        background-color: aqua;
+    }
+}

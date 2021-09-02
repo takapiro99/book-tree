@@ -8,7 +8,7 @@ import { checkInvitation, getUserInfo } from '../../lib/api'
 import { AuthContext } from '../../lib/AuthProvider'
 import { Invitation, UserInfo } from '../../lib/types'
 import styles from '../../styles/invitation.module.scss'
-
+import Head from 'next/head'
 /* eslint @next/next/no-img-element:0 */
 
 // TODO: SSR にしたい
@@ -57,6 +57,9 @@ const InviteReview = () => {
 
     return (
         <div className={`${styles.nominateBlock} container`}>
+            <Head>
+                <title>InviteReview</title>
+            </Head>
             <div className={styles.nominateReasonWrapper}>
                 <h1 className={styles.nominateBlock__reason}>
                     デザインがすごいあなたに
