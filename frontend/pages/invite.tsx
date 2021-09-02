@@ -2,6 +2,7 @@ import styles from '../styles/invite.module.scss'
 //import LinkBlock from '../components/LinkBlock'
 import { useState } from 'react'
 import { FaCopy } from 'react-icons/fa'
+import Head from 'next/head'
 
 // interface LinkInfo {
 //     Why:String[]
@@ -31,6 +32,9 @@ const Invite = () => {
 
     return (
         <div>
+            <Head>
+                <title>CreateLink</title>
+            </Head>
             {/* // className={globalStyles.wrapper} */}
             <div className={styles.createLinkWrapper}>
                 <h1 className={styles.createLinkTitle}>お願いリンクを作る</h1>

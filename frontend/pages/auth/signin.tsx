@@ -2,7 +2,7 @@ import styles from './Signin.module.scss'
 import { useContext } from 'react'
 import { AuthContext } from '../../src/lib/AuthProvider'
 import { useRouter } from 'next/dist/client/router'
-
+import Head from 'next/head'
 /* eslint @next/next/no-img-element:0 */
 
 // TODO: google のアイコンとかの利用規約とか調べる
@@ -15,6 +15,9 @@ const SignIn = () => {
     }
     return (
         <div>
+            <Head>
+                <title>SignIn</title>
+            </Head>
             <h1 className={styles.title}>BOOKTREEにログインする</h1>
             <p className={`${styles.Twitter} ${styles.icon}`} onClick={context.twitterLogin}>
                 <img

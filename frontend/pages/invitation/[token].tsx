@@ -1,10 +1,13 @@
 import styles from '../../styles/invitation.module.scss'
-
+import Head from 'next/head'
 /* eslint @next/next/no-img-element:0 */
 
 const InviteReview = () => {
     return (
         <div>
+            <Head>
+                <title>InviteReview</title>
+            </Head>
             <div className={styles.nominateBlock}>
                 <div className={styles.nominateReasonWrapper}>
                     <h1 className={styles.nominateBlock__reason}>

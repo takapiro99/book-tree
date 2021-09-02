@@ -5,6 +5,7 @@ import BigTreeWithBooks from '../../components/BigTreeWithBooks'
 import Review from '../../components/Review'
 import { AuthContext } from '../../src/lib/AuthProvider'
 import Custom404 from '../404'
+import Head from 'next/head'
 
 interface RouteParams {
     id: string
@@ -25,12 +26,18 @@ const Mypage = () => {
     if (!currentUser) {
         return (
             <div>
+                <Head>
+                    <title>Mypage</title>
+                </Head>
                 <Link href="/auth/signin">sign in first</Link>
             </div>
         )
     }
     return (
         <div>
+            <Head>
+                <title>Mypage</title>
+            </Head>
             <Review />
         </div>
     )
