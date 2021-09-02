@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getReviewsFromUser } from '../lib/api'
+import { getBookTree } from '../lib/api'
 import styles from '../styles/BigTreeWithBooks.module.scss'
 import BookOnBigTree from '../components/BookOnBigTree'
 
@@ -7,11 +7,13 @@ import { ReviewJoinedUser } from '../lib/types'
 
 const BigTreeWithBooks = ({ uid }: { uid: string }) => {
     // 本をいい感じに横並びにするコンポーネント
+    const [loading, setLoading] = useState<boolean>(true)
     const [books, setBooks] = useState<ReviewJoinedUser[]>([])
     useEffect(() => {
-        getReviewsFromUser(uid).then((books) => {
+        getBookTree(uid).then((books) => {
             if (books) {
                 setBooks(books)
+                setLoading(false)
             }
         })
     }, [])
@@ -21,8 +23,10 @@ const BigTreeWithBooks = ({ uid }: { uid: string }) => {
             <div className={styles.BigTreeWrapper}>
                 {/* icon */}
                 <div className={styles.books_wrapper}>
-                    {books.length ? (
-                        books.map((book) => <BookOnBigTree review={book} key={book.user.uid} />)
+                    {loading ? (
+                        <p style={{ textAlign: 'center', width: '100%' }}>loading...</p>
+                    ) : books.length ? (
+                        books.map((book, i) => <BookOnBigTree review={book} key={i} />)
                     ) : (
                         <p style={{ textAlign: 'center', width: '100%' }}>
                             まだ booktree に本が生えていないようだ

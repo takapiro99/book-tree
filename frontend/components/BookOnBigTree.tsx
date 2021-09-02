@@ -1,6 +1,6 @@
 import styles from '../styles/BookOnBigTree.module.scss'
 import iconFox from '../public/images/foxIcon.png'
-import Image from 'next/image'
+import Link from 'next/link'
 
 import { ReviewJoinedUser } from '../lib/types'
 
@@ -11,10 +11,10 @@ import { ReviewJoinedUser } from '../lib/types'
 // TODO: レビューページの右上のまるがあるかないかの分岐
 
 /*  eslint @next/next/no-img-element:0 */
-export interface BookOnBigTreeProps {
+interface BookOnBigTreeProps {
     // 本の画像、リンク、表示のさせ方（アイコンの場合アイコン画像とID）
     withYellowBackground?: boolean
-    review?: ReviewJoinedUser
+    review: ReviewJoinedUser
 }
 
 const BookOnBigTree = (props: BookOnBigTreeProps) => {
@@ -27,9 +27,9 @@ const BookOnBigTree = (props: BookOnBigTreeProps) => {
                     ></div>
                 )}
                 <div className={styles.bookLinkBlock}>
-                    <a href={props.review?.bookLink}>
+                    <a href={props.review.bookLink}>
                         <img
-                            src={props.review?.bookImageURL}
+                            src={props.review.bookImageURL}
                             className={styles.books}
                             alt="本の表紙画像"
                         />
@@ -37,13 +37,13 @@ const BookOnBigTree = (props: BookOnBigTreeProps) => {
                 </div>
                 {!props.withYellowBackground && (
                     <div className={styles.booksBlock__account}>
-                        <a href="#accont-review">
+                        <Link href={`/${props.review.uid}`}>
                             <img
                                 className={styles.accountImg}
-                                src="/images/foxIcon.png"
+                                src={props.review.user.profileImage}
                                 alt="アイコン画像"
                             />
-                        </a>
+                        </Link>
                     </div>
                 )}
             </div>

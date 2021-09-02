@@ -1,12 +1,12 @@
-import { Review, UserInfo } from '../lib/types'
+import { ReviewJoinedUser } from '../lib/types'
 import styles from '../styles/Review.module.scss'
 import BookOnBigTree from './BookOnBigTree'
 
-const BookWithReview = ({ review, userInfo }: { review: Review; userInfo: UserInfo }) => {
+const BookWithReview = ({ review }: { review: ReviewJoinedUser }) => {
     return (
         <div className={styles.reviewpageReviewBlock}>
             <div className={styles.reviewpageReviewBook}>
-                <BookOnBigTree withYellowBackground review={{ ...review, user: userInfo }} />
+                <BookOnBigTree withYellowBackground review={review} />
             </div>
             <div className={styles.reviewpageReviewContent}>
                 <div className={styles.reviewpageReviewContent__reason}>{review.reason}</div>
