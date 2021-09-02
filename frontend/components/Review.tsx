@@ -10,6 +10,13 @@ import { getReviewsFromUser, getUserInfo } from '../lib/api'
 import { ReviewJoinedUser, UserInfo } from '../lib/types'
 /*  eslint @next/next/no-img-element:0 */
 
+const isNullGradePart = (arr: (string | null | undefined)[]) => {
+    let f = true
+    if (arr.length !== 3) f = false
+    if (arr.filter(el => el !== null).length === 0) return false
+    return true
+}
+
 const ReviewPage = ({ uid }: { uid: string }) => {
     // TODO: userInfoもbooksもサーバー側で取得しとく説ある
     const [isLoadingProfileAndBooks, setLoadingProfileAndBooks] = useState(true)
@@ -83,9 +90,17 @@ const ReviewPage = ({ uid }: { uid: string }) => {
                                 {userName}
                                 <span style={{ fontSize: '1rem' }}>さん</span>
                             </div>
-                            <div className={styles.reviewUserKeywords}>
-                                北大OG ＋ 猫 ＋ マイクラ
-                            </div>
+                            {
+                                    isNullGradePart(targetUserInfo.gratePartList) ? (
+                                        <div className={styles.reviewUserKeywords}>
+                                            {targetUserInfo.gratePartList.filter(el => el !== null).join(' + ')}
+                                        </div>  
+                                    ):
+                                    <div className={styles.reviewUserKeywords}>
+                                        まだ自己紹介が設定されていないよ！
+                                    </div>  
+                            }
+                            
                         </div>
                     </div>
                     {/* <div className={styles.reccomment}>
