@@ -122,7 +122,7 @@ const ReviewPage = ({ uid }: { uid: string }) => {
                         {/* <button className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}>
                             レビューを作成する
                         </button> */}
-                        <Link href={`/invite`} passHref={true}>
+                        <Link href={`/invite`}>
                             <button
                                 className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}
                             >
