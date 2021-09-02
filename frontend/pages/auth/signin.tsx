@@ -1,36 +1,39 @@
-import styles from './Signin.module.scss'
-import { useContext } from 'react'
-import { AuthContext } from '../../src/lib/AuthProvider'
-import { useRouter } from 'next/dist/client/router'
+// import styles from '../../styles/Signin.module.scss'
 import Head from 'next/head'
+import SignInWithTwitterOrGoogle from '../../components/auth/SignInWithTwitterOrGoogle'
+
 /* eslint @next/next/no-img-element:0 */
 
 // TODO: google のアイコンとかの利用規約とか調べる
 
+const titleStyle = {
+    textAlign: 'center',
+    marginTop: '100px',
+    marginBottom: '30px'
+}
+
 const SignIn = () => {
-    const context = useContext(AuthContext)
-    const router = useRouter()
-    if (context.currentUser) {
-        router.push(`/@${context.currentUser.uid}`)
-    }
+    // const context = useContext(AuthContext)
+    // const router = useRouter()
+    // if (context.currentUser) {
+    //     router.push(`/${context.currentUser.uid}`)
+    // }
+    // TODO: 既にサインインしていた場合どうするか考える
     return (
         <div>
             <Head>
                 <title>SignIn</title>
             </Head>
-            <h1 className={styles.title}>BOOKTREEにログインする</h1>
-            <p className={`${styles.Twitter} ${styles.icon}`} onClick={context.twitterLogin}>
-                <img
-                    src="/twitter-blue.svg"
-                    alt="twitter icon"
-                    height={35}
-                    style={{ display: 'inline-block', marginRight: '15px' }}
-                />
-                twitter で続ける
-            </p>
-            <p className={`${styles.Google} ${styles.icon}`} onClick={context.googleLogin}>
-                Googleアカウントでログイン
-            </p>
+            <h1
+                style={{
+                    textAlign: 'center',
+                    marginTop: '100px',
+                    marginBottom: '30px'
+                }}
+            >
+                BOOKTREEにログインする
+            </h1>
+            <SignInWithTwitterOrGoogle />
         </div>
     )
 }

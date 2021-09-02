@@ -1,13 +1,13 @@
-import * as admin from 'firebase-admin'
+import firebase from './firebase'
+import { Timestamp } from '@firebase/firestore-types'
 
 export interface UserInfo {
+    createdAt: Timestamp
     displayName: string
+    gratePartList: (string | null | undefined)[]
     profileImage: string
     uid: string
-    gratePartList: (string | null | undefined)[]
-    createdAt: admin.firestore.FieldValue
 }
-
 // functionsにreviewをpostするときの型
 export interface PostReview {
     content: string
@@ -16,22 +16,28 @@ export interface PostReview {
 }
 
 export interface Review {
-    uid: string
-    specialty: string | null | undefined
-    title: string
-    content: string
-    reason: string
     bookImageURL: string
     bookLink: string
-    createdAt: admin.firestore.FieldValue
+    content: string
+    createdAt: Timestamp
+    reason: string
+    specialty: string | null | undefined
+    title: string
+    uid: string
 }
 
 export interface ReviewJoinedUser extends Review {
-    user: UserInfo | null | undefined
+    user: UserInfo
 }
 
-export type getBookTreePostType = {
-    uid: string | null | undefined
+export interface Invitation {
+    accepted: boolean
+    acceptedAt: Timestamp | null
+    createdAt: Timestamp
+    from: string
+    specialty: string
+    to: string | null
+    token: string
 }
 
 // 必要な属性だけ抽出 (適時追加)
@@ -58,4 +64,8 @@ export interface RakutenResponse {
     last: number
     page: number
     pageCount: number
+}
+
+export interface getBookTreePostType {
+    userID: string | null | undefined
 }

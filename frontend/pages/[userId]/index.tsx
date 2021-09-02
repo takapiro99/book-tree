@@ -1,15 +1,11 @@
 import { useRouter } from 'next/dist/client/router'
+import Head from 'next/head'
 import Link from 'next/link'
 import { useContext } from 'react'
+import GuardedRoute from '../../components/auth/GuardedRoute'
 import BigTreeWithBooks from '../../components/BigTreeWithBooks'
 import Review from '../../components/Review'
-import { AuthContext } from '../../src/lib/AuthProvider'
-import Custom404 from '../404'
-import Head from 'next/head'
-
-interface RouteParams {
-    id: string
-}
+import { AuthContext } from '../../lib/AuthProvider'
 
 // TODO: 色々やる
 // TODO: どこでユーザーが本物か確認する？
@@ -18,29 +14,25 @@ const Mypage = () => {
     const router = useRouter()
     const { currentUser } = useContext(AuthContext)
     const { userId } = router.query
-    // if (userId && userId[0] !== '@') {
-    //     console.log('invalid route')
-    //     return <Custom404 />
-    // }
-    console.log(currentUser)
-    if (!currentUser) {
+    // firestore の len(uid) は 28 らしい
+
+    if ((userId as string)?.length >= 33 || (userId as string)?.length <= 26) {
+        // invalid uid
+        router.push('/404')
+    }
+    if (currentUser && currentUser.uid === userId) {
+        // 自分のマイページを見ている場合
         return (
-            <div>
+            <GuardedRoute>
                 <Head>
                     <title>Mypage</title>
                 </Head>
-                <Link href="/auth/signin">sign in first</Link>
-            </div>
+                <Review uid={userId} />
+            </GuardedRoute>
         )
+    } else {
+        return <Review uid={userId as string} />
     }
-    return (
-        <div>
-            <Head>
-                <title>Mypage</title>
-            </Head>
-            <Review />
-        </div>
-    )
 }
 
 export default Mypage

@@ -1,49 +1,57 @@
-//import Reviewtree from '../../components/review_tree'
 import BookWithReview from './BookWithReview'
 import styles from '../styles/Review.module.scss'
 import { FaArrowCircleUp, FaBullhorn } from 'react-icons/fa'
 import RecComment from './RecComment'
 import BigTreeWithBooks from './BigTreeWithBooks'
 import Link from 'next/link'
-import { useRouter } from 'next/dist/client/router'
 import { useContext, useEffect, useState } from 'react'
-import { AuthContext } from '../src/lib/AuthProvider'
-import { User } from '@firebase/auth-types'
-import { getProfile, getReviews, Profile } from '../lib/firestore'
+import { AuthContext } from '../lib/AuthProvider'
+import { getReviewsFromUser, getUserInfo } from '../lib/api'
+import { Review, UserInfo } from '../lib/types'
 /*  eslint @next/next/no-img-element:0 */
 
-const Review = () => {
+const ReviewPage = ({ uid }: { uid: string }) => {
+    // TODO: userInfoもbooksもサーバー側で取得しとく説ある
     const [isLoadingProfileAndBooks, setLoadingProfileAndBooks] = useState(true)
+    const [targetUserInfo, setTargetUserInfo] = useState<null | UserInfo>(null)
+    const [reviews, setReviews] = useState<Review[]>([])
     const { currentUser } = useContext(AuthContext)
 
     useEffect(() => {
-        if (currentUser) {
-            // TODO: fetch profile
-            getProfile(currentUser.uid)
-                .then((profile) => {
-                    if (profile) {
-                        console.log(profile)
-                    } else {
-                        // 深刻なerror
-                    }
-                })
-                .catch((err) => {})
-            // TODO: fetch user's reviews
-            getReviews(currentUser.uid)
-                .then((reviews) => {})
-                .catch((err) => {})
-            setLoadingProfileAndBooks(false)
-        }
-    }, [currentUser])
+        getUserInfo(uid)
+            .then((profile) => {
+                if (profile) {
+                    setTargetUserInfo(profile)
+                    getReviewsFromUser(profile.uid)
+                        .then((reviews) => {
+                            setReviews(reviews as Review[])
+                            setLoadingProfileAndBooks(false)
+                        })
+                        .catch((err) => alert(err))
+                } else {
+                    console.log('no user info')
+                    setLoadingProfileAndBooks(false)
+                }
+            })
+            .catch((err: any) => {
+                alert(err)
+                setLoadingProfileAndBooks(false)
+            })
+    }, []) // eslint-disable-line
+
+    if (!isLoadingProfileAndBooks && !targetUserInfo) {
+        console.log(isLoadingProfileAndBooks, targetUserInfo)
+        return <>no user which uid={uid}</>
+    }
+    if (isLoadingProfileAndBooks) {
+        return <p>loading...</p> // TODO: create loading skeleton component
+    }
 
     const returnTop = () => {
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
         })
-    }
-    if (isLoadingProfileAndBooks) {
-        return <p>loading...</p> // TODO: create loading skeleton component
     }
     if (!currentUser) return null
     const userName = currentUser.displayName
@@ -91,7 +99,7 @@ const Review = () => {
                     <div className={styles.reviewBigTree}>
                         <h1>{userName} のBook Tree</h1>
                         <div>{userName} のところに集まった本たち</div>
-                        <BigTreeWithBooks />
+                        <BigTreeWithBooks uid={uid} />
                     </div>
                     <div className={styles.mypageButtons}>
                         {/* <button className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}>
@@ -104,21 +112,29 @@ const Review = () => {
                                 レビューをお願いする
                             </button>
                         </Link>
-                        {/* TODO: このボタンはこんなに目立たせてはいけない */}
-                        {/* <button
-                            className={`${styles.mypageButtons__buttonGray} ${styles.buttonGray}`}
-                        >
-                            BOOK TREEを削除する
-                        </button> */}
                     </div>
 
                     <div className={styles.reviewBlock}>
                         <div className={styles.reviewBlock__title}>
                             <h1>{userName} のレビュー</h1>
-                            <div>{userName} の選んだ本たち</div>
                         </div>
                         {/* TODO: 本の情報をひとつづつ渡す */}
-                        <BookWithReview />
+                        {reviews.length ? (
+                            <>
+                                <div style={{ textAlign: 'center' }}>{userName} の選んだ本たち</div>
+                                {reviews.map((review, i) => (
+                                    <BookWithReview
+                                        key={i}
+                                        review={review}
+                                        userInfo={targetUserInfo as UserInfo}
+                                    />
+                                ))}
+                            </>
+                        ) : (
+                            <p style={{ textAlign: 'center' }}>
+                                {targetUserInfo?.displayName} さんのレビューはまだありません！
+                            </p>
+                        )}
                     </div>
                 </div>
 
@@ -133,4 +149,4 @@ const Review = () => {
     )
 }
 
-export default Review
+export default ReviewPage
