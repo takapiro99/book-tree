@@ -86,7 +86,7 @@ const InviteReview = () => {
                 <p>invalid invitation</p>
             ) : currentUser ? (
                 <>
-                    <NewPost />
+                    <NewPost token={token as string} />
                 </>
             ) : (
                 <div className={styles.accontCreateFromRecom}>

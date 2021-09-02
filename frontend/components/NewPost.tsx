@@ -1,8 +1,9 @@
 import axios from 'axios'
+import { useRouter } from 'next/dist/client/router'
 import { useEffect, useState } from 'react'
 import { FaPlusCircle } from 'react-icons/fa'
-import { fetchBookListFromRakutenAPIByTitle } from '../lib/api'
-import { RakutenBookItem, RakutenResponse } from '../lib/types'
+import { fetchBookListFromRakutenAPIByTitle, postReviewsInvitation } from '../lib/api'
+import { PostReview, RakutenBookItem, RakutenResponse } from '../lib/types'
 import useDebounce from '../lib/useDebounce'
 import styles from '../styles/ReviewForm.module.scss'
 import AddReview from './reviews/addReview'
@@ -38,10 +39,13 @@ const initialData: IData = {
     selectedBooks: []
 }
 
-const NewPost = () => {
+const NewPost = ({ token }: { token: string }) => {
+    const router = useRouter()
     //保存するデータ
     const [suggestions, setSuggestions] = useState<RakutenBookItem[]>([])
     const [selectedBooks, setSelectedBooks] = useState<RakutenBookItem[]>([])
+    const [draftData, setDraftData] = useState<PostReview[]>([])
+    const [posted, setPosted] = useState(false)
     // TODO: POSTするくん。ここのコンポーネントで 入力などを管理してやる？考える。
     //保存しないデータ
     const [title, setTitle] = useState<string>('')
@@ -76,6 +80,28 @@ const NewPost = () => {
     // 一回選択したけど消すやつ
     const removeOnceSelectedBook = (book: RakutenBookItem) => {
         // TODO
+    }
+
+    const update = (index: number, data: PostReview) => {
+        console.log(index, data)
+        // deep copy したいだけ
+        const draft = JSON.parse(JSON.stringify(draftData))
+        draft[index] = data
+        setDraftData(draft)
+    }
+
+    const handlePost = () => {
+        setPosted(true)
+        console.log(draftData)
+        postReviewsInvitation(draftData, token)
+            .then((success) => {
+                if (success) {
+                    alert('投稿できました！')
+                    router.push('/')
+                }
+                router.push('/')
+            })
+            .catch((e) => alert(`unknown error: ${e}`))
     }
 
     return (
@@ -118,13 +144,16 @@ const NewPost = () => {
                         </div>
                     </div>
                     {selectedBooks.length ? (
-                        selectedBooks.map((book) => {
+                        selectedBooks.map((book, i) => {
                             return (
                                 <AddReview
-                                    bookImageURL={book.Item.itemUrl}
-                                    bookLink={book.Item.itemUrl}
+                                    index={i}
+                                    book={book}
                                     key={book.Item.isbn}
                                     removeOnceSelectedBook={removeOnceSelectedBook}
+                                    draftData={draftData}
+                                    setDraftData={setDraftData}
+                                    update={update}
                                 />
                             )
                         })
@@ -132,7 +161,13 @@ const NewPost = () => {
                         <p>選択してね</p>
                     )}
                     <div className={styles.reviewformSubmit}>
-                        <button className={styles.submitButton}>決定</button>
+                        <button
+                            className={styles.submitButton}
+                            disabled={posted}
+                            onClick={handlePost}
+                        >
+                            決定
+                        </button>
                     </div>
                 </form>
             </div>

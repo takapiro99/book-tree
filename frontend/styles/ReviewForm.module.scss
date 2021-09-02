@@ -252,6 +252,11 @@
         border-color: #6b6b6b;
         color: #f9d555;
     }
+    &:disabled {
+        background-color: #6b6b6b;
+        border-color: #6b6b6b;
+        color: #222;
+    }
 }
 
 // For AddReview Component
@@ -278,6 +283,12 @@
 .reviewformAddreviewReview__review {
     height: 13rem;
     width: 98%;
+    padding: 20px;
 }
 
 // For AddReview Component END
+
+.selectedBookImage {
+    border: 1px solid lightgray;
+    border-radius: 2px;
+}
