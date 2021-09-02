@@ -1,0 +1,30 @@
+.title {
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 30px;
+}
+
+.icon {
+    position: relative;
+    width: 280px;
+    height: 40px;
+    text-align: center;
+    margin: 20px auto;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    &:hover {
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12),
+            0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.Twitter {
+    background-color: #1d9bf0;
+    color: white;
+}
+.Google {
+    background-color: gray;
+    color: white;
+}

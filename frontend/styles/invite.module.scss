@@ -1,0 +1,127 @@
+.createLinkTitle {
+    text-align: center;
+}
+
+.createLinkBlock {
+    display: flex;
+    justify-content: center;
+    padding: 20px 10px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border: 1px solid lightgray;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    font-size: 20px;
+    position: relative;
+    z-index: 3;
+
+    .createLinkBlock__tree {
+        width: 7rem;
+        position: absolute;
+        top: 13%;
+        left: 8%;
+        opacity: 0.7;
+    }
+
+    .createLinkBlock__input {
+        .createLinkBlock__reason {
+            font-weight: 500;
+            border-radius: 30px;
+            border: 1px solid gray;
+            padding: 20px;
+            margin: 0 15px;
+            height: 24px;
+            display: inline-block;
+        }
+    }
+    .createButtonBlock {
+        //position: absolute;
+        display: inline-block;
+        // width: 100px;
+        //top: 30%;
+        //right: 7%;
+
+        .createButtonBlock__button {
+            border-radius: 20px;
+            border: none;
+            padding: 10px 10px;
+            margin-left: 20px;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+            background-color: #6fa769;
+            color: white;
+            height: 2rem;
+            width: 4rem;
+            transition: 0.3s;
+            font-weight: bold;
+            letter-spacing: 1px;
+            line-height: 16px;
+            &:hover {
+                cursor: pointer;
+                text-decoration: none;
+                //color: white;
+                box-shadow: 0 0 0;
+            }
+            &:disabled {
+                background-color: grey;
+                color: darkgray;
+            }
+        }
+    }
+}
+
+.linkcopy {
+    position: relative;
+    .url {
+        margin-left: 25%;
+        width: 45%;
+        height: 30px;
+        border-radius: 20px;
+        font-size: 20px;
+        border: 1px solid gray;
+        padding: 30px;
+    }
+    .link {
+        position: absolute;
+        top: -15px;
+        left: 15%;
+        font-size: 1rem;
+    }
+    .copyicon {
+        top: 20px;
+        position: absolute;
+        right: 130px;
+        cursor: pointer;
+    }
+}
+
+//LinkBlock
+.LinkWrapper {
+    margin: 0 10%;
+
+    .LinkCreated {
+        width: 100%;
+        min-width: 400px;
+        border: 1px solid black;
+        height: 2rem;
+        position: relative;
+        background-color: gainsboro;
+        opacity: 0.7;
+        text-align: center;
+        padding: 6px 0 0 0;
+        font-size: 15px;
+        letter-spacing: 1px;
+        &:hover {
+            cursor: pointer;
+        }
+        .LinkCreated__share {
+            text-align: right;
+            position: absolute;
+            top: 25%;
+            right: 2%;
+        }
+    }
+}
+.LinkWrapper:nth-child(n + 2) {
+    margin-bottom: 1.2rem;
+}
+//LinkBlock end

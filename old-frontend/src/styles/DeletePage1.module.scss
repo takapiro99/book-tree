@@ -1,0 +1,28 @@
+.DeletePage1 {
+    margin-top: 20vw;
+    height: 20vw;
+    text-align: center;
+    p {
+        font-size: 2vw;
+    }
+    button {
+        margin-top: 2vw;
+        cursor: pointer;
+        background-color: #acabab;
+        color: black;
+        border-radius: 40px;
+        width: 10rem;
+        height: 2.5rem;
+        margin-left: auto;
+        margin-right: auto;
+        border-color: #adadab;
+        font-size: 18px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        &:hover {
+            background-color: black;
+            border-color: #141414;
+            color: #adadab;
+        }
+    }
+}

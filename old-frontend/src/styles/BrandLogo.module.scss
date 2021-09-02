@@ -1,0 +1,53 @@
+.BrandLogo {
+    position: fixed;
+    width: 100%;
+    height: 6vw;
+    // background-color: #ffebc6;
+    top: 0;
+    z-index: 10000;
+    // opacity: 0.8;
+}
+.booktree_logo {
+    position: absolute;
+    width: 13vw;
+    top: 1.9vw;
+    left: 1.5vw;
+}
+.icon {
+    opacity: 1;
+    margin-left: 90vw;
+    width: 5vw;
+    height: 5vw;
+    border-radius: 50%;
+    margin-top: 0.6vw;
+    cursor: pointer;
+}
+ul {
+    background-color: #f4fcdb;
+    align-items: center;
+    width: 16vw;
+    list-style: none;
+    margin-left: 81vw;
+    margin-top: 15px;
+    padding: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    cursor: pointer;
+    box-shadow: 6px 6px rgb(209, 230, 118);
+    border-radius: 5px;
+}
+li {
+    font-weight: bolder;
+    color: rgb(20, 20, 20);
+    opacity: 1;
+    padding: 8px;
+    font-size: 15px;
+    align-items: center;
+    // border: 1px solid rgb(160, 152, 152);
+    position: relative;
+}
+
+li:hover {
+    background-color: rgb(188, 231, 132);
+    transition: 0.5s;
+}

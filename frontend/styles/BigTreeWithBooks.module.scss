@@ -1,0 +1,16 @@
+.BigTreeWrapper {
+    background-image: url('/images/BigBookTree.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    width: 100%;
+    padding: 5rem 0 8rem 0;
+    margin: 3rem 0;
+}
+
+.books_wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    right: 10px;
+}

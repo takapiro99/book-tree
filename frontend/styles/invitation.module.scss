@@ -1,0 +1,135 @@
+.icon {
+    width: 6vw;
+    height: 6vw;
+    position: relative;
+    border-radius: 50%;
+
+    img {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        z-index: 1;
+        transition: all 0.4s;
+        border: solid 0.5vw rgb(255, 214, 79);
+
+        &:hover {
+            opacity: 0.5;
+            cursor: pointer;
+            transition: all 0.4s;
+            transform: scale(1.5);
+        }
+    }
+    &:after {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        background-color: white;
+        width: 90%;
+        height: 90%;
+        border-radius: 50%;
+        z-index: 0;
+    }
+}
+
+.nominateBlock {
+    //background-color: lightgray;
+    padding: 1vh 0;
+    .nominateReasonWrapper {
+        .nominateBlock__reason {
+            //background-color: aqua;
+            font-size: 3.5rem;
+            text-align: center;
+        }
+    }
+    .nominateFromWho {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+        position: relative;
+
+        .greenCloud {
+            position: absolute;
+            //background-color: lightgreen;
+            top: 4.3vw;
+            width: 10vw;
+            height: 4vw;
+            left: 42.5%;
+            .img {
+                width: 5%;
+                height: 5%;
+            }
+        }
+    }
+    .nominateExplation {
+        margin: 4rem 0;
+        text-align: center;
+    }
+
+    .reviewSteps {
+        margin: 1rem 0;
+        background-color: white;
+        //background-color: blue;
+        text-align: center;
+        img {
+            width: 80%;
+        }
+    }
+
+    .accontCreateFromRecom {
+        margin: 1rem 0;
+    }
+    .title {
+        text-align: center;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+    .Twitter {
+        width: 30vw;
+        height: 4vw;
+        font-size: 1.8vw;
+        text-align: center;
+        background-color: rgb(114, 211, 255);
+        color: white;
+        margin-left: 16vw;
+        position: relative;
+        border-radius: 100px;
+        padding-top: 1.3vw;
+        cursor: pointer;
+        box-shadow: 0 5px 0 #7291a7;
+        transition: 0.1s;
+        border-radius: 30px;
+        border: none;
+
+        &:hover {
+            transform: translateY(3px);
+            text-decoration: none;
+            box-shadow: 0 2px 0 #353638;
+            cursor: pointer;
+        }
+    }
+    .Google {
+        width: 30vw;
+        height: 4vw;
+        background-color: gray;
+        font-size: 1.8vw;
+        text-align: center;
+        color: white;
+        margin-left: 16vw;
+        border-radius: 100px;
+        padding-top: 1.3vw;
+        cursor: pointer;
+        box-shadow: 0 5px 0 #535353;
+        transition: 0.1s;
+        border-radius: 30px;
+        border: none;
+
+        &:hover {
+            transform: translateY(3px);
+            text-decoration: none;
+            box-shadow: 0 2px 0 #2c2b2b;
+            cursor: pointer;
+        }
+    }
+}

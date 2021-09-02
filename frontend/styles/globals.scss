@@ -1,0 +1,75 @@
+@import url(sanitize.css);
+
+.wrapper {
+    margin: 7rem auto 0 auto;
+    max-width: 1580px;
+    width: 100%;
+    position: relative;
+}
+
+@media only screen and (min-width: 601px) {
+    .wrapper {
+        width: 85%;
+    }
+}
+
+@media only screen and (min-width: 993px) {
+    .wrapper {
+        width: 70%;
+    }
+}
+
+.wrapper__title {
+    text-align: center;
+}
+
+.logoTitle {
+    width: 14rem;
+    /* margin:0 30%; */
+}
+
+.wrapper-content {
+    padding: 5rem 7rem;
+}
+
+.fotter {
+    text-align: center;
+    margin: 4rem;
+    position: relative;
+}
+
+.footer-img {
+    position: absolute;
+    left: -5rem;
+    top: -4rem;
+    width: 24%;
+}
+
+// * {
+//     outline: 2px solid red;
+// }
+
+.container {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 90%;
+}
+
+@media only screen and (min-width: 601px) {
+    .container {
+        width: 85%;
+    }
+}
+
+@media only screen and (min-width: 993px) {
+    .container {
+        width: 70%;
+    }
+}
+
+.szh-menu__item {
+    text-decoration: none !important;
+    &:visited {
+        color: black;
+    }
+}
