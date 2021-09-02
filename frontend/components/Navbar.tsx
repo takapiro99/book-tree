@@ -32,7 +32,7 @@ const NavBar = () => {
     return (
         <nav>
             <div className={styles.navbar_wrapper}>
-                <Link href="/" passHref={true}>
+                <Link href="/">
                     <div className={styles.booktree_logo_wrapper}>
                         <img
                             className={styles.booktree_logo}

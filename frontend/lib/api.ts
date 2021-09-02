@@ -2,7 +2,7 @@
 import firebase, { db } from './firebase'
 import { UserInfo, ReviewJoinedUser, Invitation, RakutenResponse, PostReview } from './types'
 
-export const fetchBooksToShowOnTopPage: () => Promise<ReviewJoinedUser[] | null> = async () => {
+export const fetchBooksToShowOnTopPage: () => Promise<ReviewJoinedUser[]> = async () => {
     const querySnapshotReview = await db
         .collection('reviews')
         .where('createdAt', '!=', false)
@@ -19,7 +19,7 @@ export const fetchBooksToShowOnTopPage: () => Promise<ReviewJoinedUser[] | null>
     })
 
     if (reviews.length === 0) {
-        return null
+        return []
     }
     const promises = []
 
