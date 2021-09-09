@@ -86,49 +86,39 @@
         margin-bottom: 1rem;
     }
     .Twitter {
-        width: 30vw;
-        height: 4vw;
-        font-size: 1.8vw;
-        text-align: center;
-        background-color: rgb(114, 211, 255);
+        background-color: #1d9bf0;
         color: white;
-        margin-left: 16vw;
-        position: relative;
-        border-radius: 100px;
-        padding-top: 1.3vw;
-        cursor: pointer;
-        box-shadow: 0 5px 0 #7291a7;
+        font-weight: 700;
+        box-shadow: 0 5px 0 #354980;
         transition: 0.1s;
         border-radius: 30px;
         border: none;
-
+        padding-top: 10px;
+        img {
+            height: 30px;
+            // margin-top: 8px;
+            margin-right: 13px;
+        }
         &:hover {
             transform: translateY(3px);
             text-decoration: none;
-            box-shadow: 0 2px 0 #353638;
+            box-shadow: 0 2px 0 #1b293f;
             cursor: pointer;
         }
     }
     .Google {
-        width: 30vw;
-        height: 4vw;
         background-color: gray;
-        font-size: 1.8vw;
-        text-align: center;
         color: white;
-        margin-left: 16vw;
-        border-radius: 100px;
-        padding-top: 1.3vw;
-        cursor: pointer;
-        box-shadow: 0 5px 0 #535353;
+        font-weight: 700;
+        box-shadow: 0 5px 0 #3f4446;
         transition: 0.1s;
         border-radius: 30px;
         border: none;
-
+        padding-top: 15px;
         &:hover {
             transform: translateY(3px);
             text-decoration: none;
-            box-shadow: 0 2px 0 #2c2b2b;
+            box-shadow: 0 2px 0 #111213;
             cursor: pointer;
         }
     }
