@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useRouter } from 'next/dist/client/router'
-import { useEffect, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { FaPlusCircle } from 'react-icons/fa'
 import Loader from 'react-loader-spinner'
 import {
@@ -46,7 +46,7 @@ const initialData: IData = {
     selectedBooks: []
 }
 
-const NewPost = ({ token }: { token: string }) => {
+const NewPost = ({ token, specialty }: { token: string; specialty: string }) => {
     const isNora = token === NORA_QUERY
     const router = useRouter()
     const [suggestions, setSuggestions] = useState<RakutenBookItem[]>([])
@@ -96,47 +96,38 @@ const NewPost = ({ token }: { token: string }) => {
         setDraftData(draft)
     }
 
-    const handlePost = () => {
+    const handlePost = (e: FormEvent) => {
+        e.preventDefault()
         setPosting(true)
         if (isNora) {
-            postReviewsIndividual(draftData)
-                .then((success) => {
-                    if (success) {
-                        setPosted(true)
-                        successToast('投稿完了！')
-                        router.push('/')
-                    } else {
-                        // TODO: 失敗 toast
-                    }
+            postReviewsIndividual(draftData).then((success) => {
+                if (success) {
+                    setPosted(true)
+                    successToast('投稿完了！')
                     router.push('/')
-                })
-                .catch((e) => {
-                    errorToast(e)
-                    setPosting(false)
-                })
+                } else {
+                    // TODO: 失敗 toastは呼び出し元で出してくれる
+                }
+                // router.push('/')
+            })
         } else {
-            postReviewsInvitation(draftData, token)
-                .then((success) => {
-                    if (success) {
-                        setPosted(true)
-                        successToast('投稿完了！')
-                        router.push('/')
-                    } else {
-                        // 失敗 toast
-                    }
+            postReviewsInvitation(draftData, token).then((success) => {
+                if (success) {
+                    setPosted(true)
+                    successToast('投稿完了！')
                     router.push('/')
-                })
-                .catch((e) => {
-                    errorToast(e)
-                    setPosting(false)
-                })
+                } else {
+                    // 失敗 toastは呼び出し元で出してくれる
+                }
+                // router.push('/')
+            })
         }
     }
 
     return (
         <div className={styles.reviewformWrapper}>
             <div>
-                <form className="reviewform">
+                <form className="reviewform" onSubmit={handlePost}>
                     <div className={`${styles.reviewformBookselect} ${styles.blockbtwMd}`}>
                         <h2>本を選ぶ</h2>
                         <div className={styles.reviewformBookselect__block}>
@@ -181,6 +172,7 @@ const NewPost = ({ token }: { token: string }) => {
                                     draftData={draftData}
                                     setDraftData={setDraftData}
                                     update={update}
+                                    specialty={specialty}
                                 />
                             )
                         })
@@ -188,11 +180,7 @@ const NewPost = ({ token }: { token: string }) => {
                         <p>選択してね</p>
                     )}
                     <div className={styles.reviewformSubmit}>
-                        <button
-                            className={styles.submitButton}
-                            disabled={posted}
-                            onClick={handlePost}
-                        >
+                        <button className={styles.submitButton} disabled={posted} type="submit">
                             決定
                         </button>
                         {isPosting && (

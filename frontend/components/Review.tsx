@@ -151,7 +151,7 @@ const ReviewPage = ({ uid, isMe = false }: { uid: string; isMe?: boolean }) => {
                         )}
                     </div>
                     <div style={{ textAlign: 'center', marginTop: '50px' }}>
-                        <Link href="/invitaiton/new">
+                        <Link href="/invitation/new">
                             <button
                                 className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}
                             >
