@@ -139,15 +139,13 @@ const InviteReview = () => {
                 )
             ) : loadingInvitation ? (
                 <p>loading</p>
-            ) : isNora ? (
+            ) : (
                 <div className={styles.accontCreateFromRecom}>
                     <div>
                         <h2 className={styles.title}>BOOKTREE を作る</h2>
                         <SignInWithTwitterOrGoogle />
                     </div>
                 </div>
-            ) : (
-                invitation?.token && <NewPost token={invitation.token as string} />
             )}
         </div>
     )
