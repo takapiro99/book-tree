@@ -1,0 +1,39 @@
+.centerTitle {
+    font-size: 3rem;
+    margin: 5rem 0 3rem;
+    text-align: center;
+}
+
+.centerText {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.deleteBtn {
+    width: 8rem;
+    font-size: 1.4rem;
+    background-color: rgb(88, 88, 88);
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 300;
+    box-shadow: 0 5px 0 #313131;
+    transition: 0.1s;
+    border-radius: 30px;
+    border: none;
+    padding-top: 6px;
+    display: block;
+    margin: 0 auto;
+    &:hover {
+        transform: translateY(3px);
+        text-decoration: none;
+        box-shadow: 0 2px 0 #1b293f;
+        cursor: pointer;
+    }
+}
+.deleted_sentence {
+    font-size: 2vw;
+    text-align: center;
+    margin-bottom: 12vw;
+    margin-top: 12vw;
+}

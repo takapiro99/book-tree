@@ -19,9 +19,13 @@ const db = admin.firestore()
 
 export const userOnCreate = functions.auth.user().onCreate(async (user) => {
     await db.runTransaction(async (transaction) => {
+        const photoURL = user?.photoURL?.includes('twimg')
+            ? user.photoURL.replace('normal', '400x400')
+            : user.photoURL
+
         transaction.set(db.collection('users').doc(user.uid), {
             uid: user.uid,
-            profileImage: user.photoURL,
+            profileImage: photoURL,
             displayName: user.displayName,
             gratePartList: [null, null, null],
             createdAt: dbType.FieldValue.serverTimestamp()
@@ -114,12 +118,6 @@ export const createInvitationCode = functions.https.onCall(
 // 招待コードが有効かどうか調べる。有効なら招待オブジェクトを返す。
 export const checkInvitationCode = functions.https.onCall(
     async (data, context) => {
-        if (context.auth?.uid === undefined) {
-            throw new functions.https.HttpsError(
-                'failed-precondition',
-                'ログインをしてください'
-            )
-        }
         const clientToken: string = data.token
         const querySnapshot = await db
             .collection('invitations')
@@ -140,7 +138,7 @@ export const checkInvitationCode = functions.https.onCall(
 
         const docData = querySnapshot.docs[0].data()
 
-        if (docData.from === context.auth.uid) {
+        if (docData.from === context?.auth?.uid) {
             throw new functions.https.HttpsError(
                 'failed-precondition',
                 '別のユーザーが作成した招待のみ有効です。'
@@ -153,6 +151,13 @@ export const checkInvitationCode = functions.https.onCall(
                 '既に承認されています。'
             )
         }
+
+        // if (context.auth?.uid === undefined) {
+        //     throw new functions.https.HttpsError(
+        //         'failed-precondition',
+        //         'ログインをしてください'
+        //     )
+        // }
 
         return docData
     }

@@ -8,6 +8,7 @@ import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../lib/AuthProvider'
 import { getReviewsFromUser, getUserInfo } from '../lib/api'
 import { ReviewJoinedUser, UserInfo } from '../lib/types'
+import { errorToast } from '../lib/toasts'
 /*  eslint @next/next/no-img-element:0 */
 
 const isNullGradePart = (arr: (string | null | undefined)[]) => {
@@ -17,36 +18,38 @@ const isNullGradePart = (arr: (string | null | undefined)[]) => {
     return true
 }
 
-const ReviewPage = ({ uid }: { uid: string }) => {
+const ReviewPage = ({ uid, isMe = false }: { uid: string; isMe?: boolean }) => {
     // TODO: userInfoもbooksもサーバー側で取得しとく説ある
     const [isLoadingProfileAndBooks, setLoadingProfileAndBooks] = useState(true)
     const [targetUserInfo, setTargetUserInfo] = useState<null | UserInfo>(null)
     const [reviews, setReviews] = useState<ReviewJoinedUser[]>([])
-    const { currentUser } = useContext(AuthContext)
+    const [reviewsDraft, setReviewsDraft] = useState<ReviewJoinedUser[]>([])
 
     useEffect(() => {
-        getUserInfo(uid)
-            .then((profile) => {
-                if (profile) {
-                    setTargetUserInfo(profile)
-                    getReviewsFromUser(profile.uid)
-                        .then((reviews) => {
-                            if (reviews) {
-                                setReviews(reviews)
-                                setLoadingProfileAndBooks(false)
-                            }
-                        })
-                        .catch((err) => alert(err))
-                } else {
-                    console.log('no user info')
-                    setLoadingProfileAndBooks(false)
-                }
-            })
-            .catch((err: any) => {
-                alert(err)
+        Promise.all([
+            getUserInfo(uid).then((info) => {
+                setTargetUserInfo(info)
+            }),
+            getReviewsFromUser(uid)
+                .then((reviews) => {
+                    if (reviews) {
+                        setReviews(reviews)
+                    } else throw new Error("couldn't get reviews")
+                })
+                .catch(errorToast)
+        ])
+            .then(() => setLoadingProfileAndBooks(false))
+            .catch((err) => {
                 setLoadingProfileAndBooks(false)
+                errorToast(err)
             })
     }, []) // eslint-disable-line
+
+    useEffect(() => {
+        if (reviews) {
+            setReviewsDraft(JSON.parse(JSON.stringify(reviews)))
+        }
+    }, [reviews])
 
     if (!isLoadingProfileAndBooks && !targetUserInfo) {
         console.log(isLoadingProfileAndBooks, targetUserInfo)
@@ -63,7 +66,9 @@ const ReviewPage = ({ uid }: { uid: string }) => {
         })
     }
     if (!targetUserInfo) return null
+
     const userName = targetUserInfo.displayName
+
     return (
         <>
             {/* <div className={globalStyles.wrapper}> */}
@@ -111,7 +116,7 @@ const ReviewPage = ({ uid }: { uid: string }) => {
                         </div>
                     </div> */}
 
-                    <div className="blockbtwMd"></div>
+                    <div className="blockbtwMd" />
 
                     <div className={styles.reviewBigTree}>
                         <h1>{userName} のBook Tree</h1>
@@ -119,9 +124,6 @@ const ReviewPage = ({ uid }: { uid: string }) => {
                         <BigTreeWithBooks uid={uid} />
                     </div>
                     <div className={styles.mypageButtons}>
-                        {/* <button className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}>
-                            レビューを作成する
-                        </button> */}
                         <Link href={`/invite`}>
                             <button
                                 className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}
@@ -135,12 +137,11 @@ const ReviewPage = ({ uid }: { uid: string }) => {
                         <div className={styles.reviewBlock__title}>
                             <h1>{userName} のレビュー</h1>
                         </div>
-                        {/* TODO: 本の情報をひとつづつ渡す */}
                         {reviews.length ? (
                             <>
                                 <div style={{ textAlign: 'center' }}>{userName} の選んだ本たち</div>
                                 {reviews.map((review, i) => {
-                                    return <BookWithReview key={i} review={review} />
+                                    return <BookWithReview key={i} review={review} isMe={isMe} />
                                 })}
                             </>
                         ) : (
@@ -148,6 +149,15 @@ const ReviewPage = ({ uid }: { uid: string }) => {
                                 {targetUserInfo?.displayName} さんのレビューはまだありません！
                             </p>
                         )}
+                    </div>
+                    <div style={{ textAlign: 'center', marginTop: '50px' }}>
+                        <Link href="/invitaiton/new">
+                            <button
+                                className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}
+                            >
+                                レビューを投稿する
+                            </button>
+                        </Link>
                     </div>
                 </div>
 

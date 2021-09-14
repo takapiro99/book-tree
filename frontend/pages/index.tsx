@@ -42,19 +42,21 @@ export default function Home() {
                         />
                     </div>
                     <div className={styles.topContent__introduce}>
-                        <h1>周りにいる凄い人、</h1>
+                        <h1>周りにいるすごい人、</h1>
                         <h1>どんな本読んでいるんだろう？</h1>
                         あなたのすごいと思う人が読んでる本を集めてBOOKTREEをつくろう！
                         新しくやってみたいこと、ずっとやりたいと思っていたこと、知らなかったことに出会う機会
                         直接人と出会うことが難しい時代 新しい形でつながり学ぼう！
                     </div>
                 </div>
-                <h1 className={styles.topContentSteps__title}>どんなことができる？</h1>
+                <div style={{ height: '30px' }} />
+                <h2 className={styles.topContentSteps__title}>どんなことができる？</h2>
                 <div className={styles.topContent__steps}>
                     <div className={styles.topContentSteps__block}>
                         <div className={styles.topContentSteps__photo}>
                             <img src="/images/home/top_1.png" alt="" />
                         </div>
+                        {/* TODO: booktreeをつくろう、は分かりにくそう */}
                         <div className={styles.topContentSteps__explain}>BOOK TREEをつくろう</div>
                         <div className={styles.topContentSteps__explainS}>
                             無料でアカウントを作成して、BOOKTREEをつくろう
@@ -83,12 +85,13 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
+                <p className={styles.BOOKTREEBtn}>BOOKTREEを作成する</p>
             </div>
             <div className={styles.greenbar} />
             <div className="container">
                 <div className={styles.BookTreeForest}>
                     <h1 className={styles.BookTreeForest__title}>what&apos;s new?</h1>
-                    <img className={styles.shiori} src="/images/home/shiori.png" alt="shiori" />
+                    {/* <img className={styles.shiori} src="/images/home/shiori.png" alt="shiori" /> */}
                     <div className={styles.forestWrapper}>
                         <div className={styles.littletreeWrapper}>
                             {booksRow1.map((book, index) => {
@@ -107,6 +110,9 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div>
+                <p>TODO: ここにbooktreeを作るボタンほしくね？</p>
             </div>
             <div className={styles.greenbar}> </div>
         </div>

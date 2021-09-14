@@ -1,6 +1,7 @@
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useState } from 'react'
 import firebase, { db } from './firebase'
+import { errorToast } from './toasts'
 import { UserInfo } from './types'
 
 type UserState = firebase.User | null
@@ -12,8 +13,8 @@ type AuthContextType = {
     currentUser: UserState
     isFirstLoading: boolean
     setFirstLoading: (loading: boolean) => void
-    isFetchingFirestoreUser: boolean | undefined
-    setFetchingFirestoreUser: (fetching: boolean | undefined) => void
+    isFetchingFirestoreUser: boolean
+    setFetchingFirestoreUser: (fetching: boolean) => void
     userInfo: UserInfo | null
     setUserInfo: (user: UserInfo | null) => void
     getMyFirebaseUser: (uid: string) => Promise<void>
@@ -27,14 +28,12 @@ export const AuthProvider: React.FC = ({ children }) => {
     const router = useRouter()
     const [currentUser, setCurrentUser] = useState<UserState>(null)
     const [isFirstLoading, setFirstLoading] = useState(true)
-    const [isFetchingFirestoreUser, setFetchingFirestoreUser] = useState<boolean | undefined>(
-        undefined
-    )
+    const [isFetchingFirestoreUser, setFetchingFirestoreUser] = useState<boolean>(true)
     const [userInfo, setUserInfo] = useState<UserInfo | null>(null)
 
     const cleanUp = () => {
         setCurrentUser(null)
-        setFetchingFirestoreUser(undefined)
+        setFetchingFirestoreUser(true)
         setUserInfo(null)
     }
 
@@ -45,10 +44,10 @@ export const AuthProvider: React.FC = ({ children }) => {
             .get()
             .then((querySnapshot) => {
                 if (!querySnapshot.docs.length) {
-                    alert('no corresponding user record found')
+                    errorToast('no corresponding user record found')
                     return
                 } else if (querySnapshot.docs.length >= 2) {
-                    alert(`${querySnapshot.docs.length} records have same uid`)
+                    errorToast(`${querySnapshot.docs.length} records have same uid`)
                     return
                 }
                 const profile = querySnapshot.docs[0].data() as UserInfo
@@ -57,7 +56,7 @@ export const AuthProvider: React.FC = ({ children }) => {
             })
             .catch((err) => {
                 setFetchingFirestoreUser(false)
-                alert(err)
+                errorToast(err)
             })
     }
 
@@ -77,15 +76,15 @@ export const AuthProvider: React.FC = ({ children }) => {
             cleanUp()
             router.push('/')
         } catch (error) {
-            alert('ログアウトに失敗しました。')
+            errorToast('ログアウトに失敗しました。')
         }
     }
 
     // TODO: isFirstLoadingによってUIをいじる
     useEffect(() => {
         firebase.auth().onAuthStateChanged(async (user) => {
-            setFirstLoading(false)
             setCurrentUser(user)
+            setFirstLoading(false)
             if (user) {
                 setFetchingFirestoreUser(true)
                 getMyFirebaseUser(user.uid)

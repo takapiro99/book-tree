@@ -10,7 +10,7 @@ const GuardedRoute = ({ children, loading }: any) => {
         return <></>
     }
     if (currentUser) {
-        return cloneElement(children, isFirstLoading, currentUser) //children(currentUser, isFirstLoading)
+        return children
     }
     throw new Error("couldn't guard route")
 }

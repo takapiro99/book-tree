@@ -177,44 +177,60 @@
 }
 
 .reviewpageReviewBlock {
-    margin: 0 3rem;
+    display: flex;
+    margin: 2rem auto;
+    position: relative;
+    justify-content: center; /* 子要素をflexboxにより中央に配置する */
+    align-items: center;
 }
 
-// BookWithReviewに関するstyles
-.reviewpageReviewBlock {
-    display: flex;
-    margin: 3rem 3rem;
-    position: relative;
-}
 .reviewpageReviewBook {
-    flex: 1;
+    flex: 3;
     display: flex;
-    margin: 2rem 0rem 2rem 6rem;
+    // margin: 2rem 0rem 2rem 6rem;
+    // margin-left: 30px;
     justify-content: center;
     position: relative;
 }
 
 .reviewpageReviewContent {
-    flex: 3;
-    margin: 0 0 0 3rem;
+    flex: 7;
+    margin-left: 1rem;
+    > *:disabled {
+        cursor: default;
+    }
+}
+.reviewpageReviewEdit {
+    flex: 1;
+    margin-left: 1rem;
+    &:hover {
+        cursor: pointer;
+    }
+}
+.reviewpageReviewEditAction {
+    // display: inline-block;
+    margin-top: 20px;
+    margin-left: 5px;
 }
 
+$post-text-background: #efefef;
+$post-text-border: #bcaaa4;
+
 .reviewpageReviewContent__reason {
-    background-color: gray;
-    padding: 1rem 1rem 1rem 1.5rem;
-    border-radius: 20px;
-    width: 80%;
-    max-width: 800px;
+    background-color: $post-text-background;
+    border: 2px solid $post-text-border;
+    padding: 1rem;
+    border-radius: 8px;
 }
 
 .reviewpageReviewContent__comment {
     margin-top: 1rem;
-    padding: 1rem 1rem 1rem 1.5rem;
-    background-color: gray;
+    padding: 1rem;
+    background-color: $post-text-background;
+    border: 2px solid $post-text-border;
     height: 10rem;
-    border-radius: 20px;
-    width: 80%;
-    max-width: 800px;
+    border-radius: 8px;
+    resize: none;
 }
 
 .reviewpageReview {

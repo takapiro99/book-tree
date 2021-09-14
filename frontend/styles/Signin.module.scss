@@ -6,25 +6,48 @@
 
 .icon {
     position: relative;
-    width: 280px;
-    height: 40px;
+    width: 290px;
+    height: 50px;
     text-align: center;
-    margin: 20px auto;
+    margin: 15px auto;
     border-radius: 20px;
     cursor: pointer;
-    transition: all 0.2s ease;
-    &:hover {
-        transition: all 0.2s ease;
-        box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12),
-            0 2px 4px -1px rgba(0, 0, 0, 0.3);
-    }
 }
 
 .Twitter {
     background-color: #1d9bf0;
     color: white;
+    font-weight: 700;
+    box-shadow: 0 5px 0 #354980;
+    transition: 0.1s;
+    border-radius: 30px;
+    border: none;
+    padding-top: 10px;
+    img {
+        height: 30px;
+        // margin-top: 8px;
+        margin-right: 13px;
+    }
+    &:hover {
+        transform: translateY(3px);
+        text-decoration: none;
+        box-shadow: 0 2px 0 #1b293f;
+        cursor: pointer;
+    }
 }
 .Google {
     background-color: gray;
     color: white;
+    font-weight: 700;
+    box-shadow: 0 5px 0 #3f4446;
+    transition: 0.1s;
+    border-radius: 30px;
+    border: none;
+    padding-top: 15px;
+    &:hover {
+        transform: translateY(3px);
+        text-decoration: none;
+        box-shadow: 0 2px 0 #111213;
+        cursor: pointer;
+    }
 }

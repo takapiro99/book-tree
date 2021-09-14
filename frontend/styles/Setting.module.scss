@@ -23,61 +23,6 @@
     }
 }
 
-/* ここから下はglobalにしたい */
-// だめです
-
-.wrapper {
-    margin: 5rem 13rem 5rem 13rem;
-    position: relative;
-}
-.wrapper__title {
-    text-align: center;
-}
-
-.logo-title {
-    width: 14rem;
-    /* margin:0 30%; */
-}
-
-.wrapper-content {
-    padding: 5rem 7rem;
-}
-
-.fotter {
-    text-align: center;
-    margin: 4rem;
-    position: relative;
-}
-
-.footer-img {
-    position: absolute;
-    left: -5rem;
-    top: -4rem;
-    width: 24%;
-}
-
-.blockbtwMd {
-    margin: 4rem 0;
-}
-/* ここから上はglobalにしたい */
-
-// .greenbar {
-//     /* background-image: url("黄緑バー.svg"); */
-//     position: absolute;
-//     top: 25.3rem;
-//     height: 3rem;
-//     width: 100%;
-// }
-// .yellowgreenbar {
-//     // margin: 4rem 0;
-//     width: 100vw;
-//     transform: rotate(8deg);
-//     background-color: #6fa769;
-//     position: absolute;
-//     top: 26rem;
-//     height: 4.7rem;
-//     width: 100%;
-// }
 .reviewformWrapper {
     //background-color: aqua;
     &:before {
@@ -107,6 +52,7 @@
     height: 9rem;
     color: black;
     border-radius: 80px;
+    margin-top: 3vw;
 }
 
 .reviewformName__icon {
@@ -153,73 +99,19 @@
 }
 .reviewformBookselect__block {
     width: auto;
-    height: 22rem;
+    height: 19rem;
     padding: 2rem;
     border: 1px solid black;
 }
 .reviewformBookselect__input {
-    width: 100%;
+    width: 30rem;
     height: 2rem;
-    margin-bottom: 20px;
-    padding: 20px;
-    border-radius: 12px;
+    margin-bottom: 0.3rem;
 }
 
 .reviewformBookselectResult {
-    width: 100%;
-    text-align: center;
-    overflow: hidden;
-}
-.plus {
-    position: absolute;
-    // bottom: 10px;
-    // left: 50%;
-    cursor: pointer;
-    width: 100%;
-    height: 100%;
-    bottom: 0;
-    left: 0;
-    text-align: center;
-    font-size: 140%;
-    &:hover {
-        & > svg {
-            transition: all ease 0.1s;
-            color: #222;
-        }
-    }
-    & > svg {
-        transition: all ease 0.1s;
-        color: #888;
-    }
-}
-
-.suggestedBooksContainer {
     display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    margin-bottom: 20px;
-}
-
-.suggestedBook {
-    position: relative;
-    scroll-snap-align: start;
-    flex-shrink: 0;
-    width: 28%;
-    height: 100%;
-    margin-right: 15px;
-    border-radius: 10px;
-    background: #eee;
-    transform-origin: center center;
-    transform: scale(1);
-    transition: transform 0.2s;
-    position: relative;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 100px;
+    flex-direction: row;
 }
 
 .reviewform-bookselect-result__books {
@@ -230,9 +122,9 @@
 }
 
 .reviewformSubmit {
-    position: relative;
     display: flex;
     justify-content: center;
+    margin-top: 3rem;
     margin-bottom: 2vw;
 }
 
@@ -252,11 +144,6 @@
         background-color: #6b6b6b;
         border-color: #6b6b6b;
         color: #f9d555;
-    }
-    &:disabled {
-        background-color: #6b6b6b;
-        border-color: #6b6b6b;
-        color: #222;
     }
 }
 
@@ -284,12 +171,4 @@
 .reviewformAddreviewReview__review {
     height: 13rem;
     width: 98%;
-    padding: 20px;
-}
-
-// For AddReview Component END
-
-.selectedBookImage {
-    border: 1px solid lightgray;
-    border-radius: 2px;
 }
