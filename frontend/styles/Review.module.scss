@@ -1,16 +1,6 @@
 .reviewpageReview {
-    //background-color: lightgray;
+    // background-color: lightgray;
     position: relative;
-    // .yellowgreenbar{
-    //     // margin: 4rem 0;
-    //     position: absolute;
-    //     top:-7rem;
-    //     z-index:0;
-    //     width: 100vw;
-    //     height:15rem;
-    //     transform: rotate(8deg);
-    //     background-color: lightgray;
-    //     }
     &::before {
         content: '';
         position: absolute;

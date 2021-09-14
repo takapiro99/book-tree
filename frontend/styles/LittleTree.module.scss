@@ -1,31 +1,16 @@
 .littletree_pic {
     position: relative;
-    height: 100%;
-    width: 100%;
     // メイン画像の位置を動かす時
     z-index: 1000;
     img {
         //LittleTreeの大きさ
-        width: 87%;
-    }
-    .flag_sentence_1 {
-        position: absolute;
-        top: -5vw;
-        left: 3vw;
-        font-size: 2.5vw;
-    }
-    .flag_sentence_2 {
-        position: absolute;
-        top: 0vw;
-        left: 8vw;
-        font-size: 1.5vw;
-        text-align: center;
+        width: 300px;
     }
     .icon_pic {
         position: absolute;
         border-radius: 50%;
-        width: 6vw;
-        height: 6vw;
+        width: 80px;
+        height: 80px;
         left: 3vw;
         top: 4vw;
         border: solid 4px rgb(255, 214, 79);
@@ -57,8 +42,8 @@
     }
     .name {
         position: absolute;
-        left: 12vw;
-        font-size: 2rem;
+        left: 130px;
+        font-size: 1.5rem;
         top: 4vw;
     }
 
@@ -67,5 +52,20 @@
         left: 3vw;
         top: 13vw;
         width: 6vw;
+    }
+}
+@media screen and (max-width: 400px) {
+    .littletree_pic{
+        img{
+            width:150px;
+        }
+        .icon_pic{
+            width: 50px;
+            height: 50px;
+        }
+        .name{
+            font-size: 12px;
+            left: 70px;
+        }
     }
 }

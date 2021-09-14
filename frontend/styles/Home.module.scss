@@ -1,6 +1,9 @@
+
 .topContent {
+    margin-top: 10px;
     display: flex;
     flex-direction: row;
+
 }
 .topContentSteps__title {
     text-align: center;
@@ -43,8 +46,9 @@
     display: inline-block;
     flex: 2;
     width: 100%;
-    vertical-align: middle;
+    // vertical-align: middle;
 }
+
 .topContent__introduce {
     flex: 3;
     padding: 1rem 1rem 1rem 0;
@@ -55,25 +59,24 @@
     height: 35vh;
     background-color: #6fa769;
     position: relative;
-    z-index: -1;
 }
 
-.circleDate {
-    position: absolute;
-    width: 6rem;
-    height: 6rem;
-    border-radius: 50%;
-    background-color: #91b522;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-    left: 16%;
-    top: -60px;
-    .circleDate__date {
-        color: white;
-        padding: 1.8rem 1.6rem;
-        font-size: 30px;
-        font-weight: bold;
-    }
-}
+// .circleDate {
+//     position: absolute;
+//     width: 6rem;
+//     height: 6rem;
+//     border-radius: 50%;
+//     background-color: #91b522;
+//     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+//     left: 16%;
+//     top: -60px;
+//     .circleDate__date {
+//         color: white;
+//         padding: 1.8rem 1.6rem;
+//         font-size: 30px;
+//         font-weight: bold;
+//     }
+// }
 
 .littletreeWrapper {
     display: flex;
@@ -95,21 +98,16 @@
 }
 
 .BookTreeForest {
-    margin: 0 1rem;
+    margin: -80px 1rem;
     background-image: url('../public/images/home/dot.svg');
     background-repeat: space repeat;
     background-position: center center;
-    background-size: 51%;
+    background-size: 47%;
     position: relative;
-    .shiori {
-        position: absolute;
-        z-index: 2;
-        width: 580px;
-        left: 16rem;
-        margin-top: -70px;
-    }
     .BookTreeForest__title {
+        background-color: white;
         text-align: center;
+        margin: 0;
         //font-size: 20px;
     }
 }
@@ -122,14 +120,6 @@
     gap: 2%;
     justify-content: center;
     //justify-content: space-between;
-}
-
-@media screen and (max-width: 380px) {
-    .forestWrapper {
-        display: flex;
-        flex-direction: column;
-        width: 50%;
-    }
 }
 
 .BOOKTREEBtn {
@@ -161,6 +151,37 @@
 @media screen and (max-width: 380px) {
     .topContent__staffTree {
         position: relative;
-        background-color: aqua;
+    }
+}
+@media screen and (max-width: 400px) {
+    .topContent__introduce {
+        font-size: 6px;
+    }
+    // importantで応急措置してます
+    .topContentSteps__explain{
+        font-size: 6px!important;
+    }
+    .topContentSteps__explainS{
+        font-size: 6px!important;
+    }
+    .forestWrapper {
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+        width: 80%;
+    }
+    .BookTreeForest{
+        background-size: 80%;
+    }
+    .greenbar{
+    opacity: 0;
+    }
+    .BOOKTREEBtn{
+        width: 180px;
+        height: 40px;
+        font-size: 15px;
+    }
+    .BookTreeForest{
+        margin-top: -300px;
     }
 }
