@@ -84,8 +84,8 @@ export const AuthProvider: React.FC = ({ children }) => {
     // TODO: isFirstLoadingによってUIをいじる
     useEffect(() => {
         firebase.auth().onAuthStateChanged(async (user) => {
-            setFirstLoading(false)
             setCurrentUser(user)
+            setFirstLoading(false)
             if (user) {
                 setFetchingFirestoreUser(true)
                 getMyFirebaseUser(user.uid)

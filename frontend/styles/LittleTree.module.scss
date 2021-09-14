@@ -58,7 +58,14 @@
     .name {
         position: absolute;
         left: 12vw;
-        font-size: 2vw;
+        font-size: 2rem;
         top: 4vw;
+    }
+
+    .review_img {
+        position: absolute;
+        left: 3vw;
+        top: 13vw;
+        width: 6vw;
     }
 }
