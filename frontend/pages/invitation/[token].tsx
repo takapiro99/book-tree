@@ -10,6 +10,7 @@ import { Invitation, UserInfo } from '../../lib/types'
 import styles from '../../styles/invitation.module.scss'
 import Head from 'next/head'
 import Link from 'next/link'
+import { errorToast } from '../../lib/toasts'
 /* eslint @next/next/no-img-element:0 */
 
 // TODO: SSR にしたい
@@ -43,7 +44,7 @@ const InviteReview = () => {
                     })
                     .catch((err) => {
                         setErr(err)
-                        alert(err)
+                        errorToast(err)
                         setLoadingInvitation(false)
                     })
             }

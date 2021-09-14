@@ -3,6 +3,7 @@ import { useContext, useEffect } from 'react'
 import { AuthContext } from '../../lib/AuthProvider'
 import { useRouter } from 'next/router'
 import styles from '../../styles/Delete.module.scss'
+import { errorToast } from '../../lib/toasts'
 
 export default function Delete() {
     const router = useRouter()
@@ -11,7 +12,7 @@ export default function Delete() {
     const deleteBookTreeFunc = async () => {
         const isOk = await deleteBookTree()
         if (!isOk) {
-            alert('削除に失敗しやした！')
+            errorToast('削除に失敗しました！')
         } else {
             router.push('/')
         }
@@ -21,7 +22,7 @@ export default function Delete() {
         if (!currentUser && !isFirstLoading) {
             router.push('/auth/signin/')
         }
-    }, [currentUser, isFirstLoading])
+    }, [currentUser, isFirstLoading]) // eslint-disable-line
 
     if (isFirstLoading) {
         return <p>Loading...</p>
