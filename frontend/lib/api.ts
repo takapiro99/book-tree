@@ -1,5 +1,5 @@
 // そのうち各機能ごとにファイル作ったほうがよさそう
-import firebase, { db } from './firebase'
+import { db, functions } from './firebase'
 import { errorToast } from './toasts'
 import { UserInfo, ReviewJoinedUser, Invitation, RakutenResponse, PostReview } from './types'
 
@@ -82,9 +82,7 @@ export const getReviewsFromUser: (
 export const postReviewsIndividual: (postReviews: PostReview[]) => Promise<boolean> = async (
     postReviews
 ) => {
-    const createReviewsIndividualFunc = firebase
-        .functions()
-        .httpsCallable('createReviewsIndividual')
+    const createReviewsIndividualFunc = functions.httpsCallable('createReviewsIndividual')
     try {
         const res = await createReviewsIndividualFunc({ postReviews: postReviews })
     } catch (err) {
@@ -98,9 +96,7 @@ export const postReviewsIndividual: (postReviews: PostReview[]) => Promise<boole
 // 招待を受け取ったときのレビュー
 export const postReviewsInvitation: (postReviews: PostReview[], token: string) => Promise<boolean> =
     async (postReviews, token) => {
-        const createInvitationReviewFunc = firebase
-            .functions()
-            .httpsCallable('createInvitationReview')
+        const createInvitationReviewFunc = functions.httpsCallable('createInvitationReview')
         try {
             const res = await createInvitationReviewFunc({
                 token: token,
@@ -116,7 +112,7 @@ export const postReviewsInvitation: (postReviews: PostReview[], token: string) =
 // 招待コードが有効かチェック
 // 招待が有効だったら招待オブジェクトを返す
 export const checkInvitation: (token: string) => Promise<Invitation | null> = async (token) => {
-    const checkInvitationFunc = firebase.functions().httpsCallable('checkInvitationCode')
+    const checkInvitationFunc = functions.httpsCallable('checkInvitationCode')
     try {
         const res = await checkInvitationFunc({ token: token })
         return res.data as Invitation
@@ -130,7 +126,7 @@ export const checkInvitation: (token: string) => Promise<Invitation | null> = as
 export const createInvitationCode: (specialty: string) => Promise<string | null> = async (
     specialty
 ) => {
-    const createInvitationFunc = firebase.functions().httpsCallable('createInvitationCode')
+    const createInvitationFunc = functions.httpsCallable('createInvitationCode')
     try {
         const res = await createInvitationFunc({ specialty: specialty })
         return res.data as string
@@ -147,7 +143,7 @@ export const getBookTree: (
         return null
     }
 
-    const getBookTreeFunc = firebase.functions().httpsCallable('getBookTree')
+    const getBookTreeFunc = functions.httpsCallable('getBookTree')
     try {
         const res = await getBookTreeFunc({ uid: userID })
         return res.data as ReviewJoinedUser[]
@@ -157,7 +153,7 @@ export const getBookTree: (
 }
 
 export const deleteBookTree: () => Promise<boolean> = async () => {
-    const deleteBookTreeFunc = firebase.functions().httpsCallable('deleteBookTree')
+    const deleteBookTreeFunc = functions.httpsCallable('deleteBookTree')
     try {
         const res = await deleteBookTreeFunc()
     } catch (err) {

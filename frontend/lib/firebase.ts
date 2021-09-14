@@ -34,4 +34,6 @@ firebase.auth().languageCode = 'ja'
 
 export const db = firebase.firestore()
 
+export const functions = firebase.app().functions('asia-northeast1')
+
 export default firebase
