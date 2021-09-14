@@ -23,7 +23,7 @@ export default function Home() {
     }, [])
 
     return (
-        <div >
+        <div>
             <Head>
                 <title>TopPage</title>
             </Head>
@@ -91,7 +91,7 @@ export default function Home() {
             <div className="container">
                 <div className={styles.BookTreeForest}>
                     <h1 className={styles.BookTreeForest__title}>what&apos;s new?</h1>
-                        <p className={styles.BookTreeForest__title}>最近レビューしてくれた人たち</p>
+                    <p className={styles.BookTreeForest__title}>最近レビューしてくれた人たち</p>
                     {/* <img className={styles.shiori} src="/images/home/shiori.png" alt="shiori" /> */}
                     <div className={styles.forestWrapper}>
                         <div className={styles.littletreeWrapper}>

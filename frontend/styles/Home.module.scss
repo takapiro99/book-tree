@@ -1,9 +1,7 @@
-
 .topContent {
     margin-top: 10px;
     display: flex;
     flex-direction: row;
-
 }
 .topContentSteps__title {
     text-align: center;
@@ -158,11 +156,11 @@
         font-size: 6px;
     }
     // importantで応急措置してます
-    .topContentSteps__explain{
-        font-size: 6px!important;
+    .topContentSteps__explain {
+        font-size: 6px !important;
     }
-    .topContentSteps__explainS{
-        font-size: 6px!important;
+    .topContentSteps__explainS {
+        font-size: 6px !important;
     }
     .forestWrapper {
         display: flex;
@@ -170,18 +168,18 @@
         margin-left: 10px;
         width: 80%;
     }
-    .BookTreeForest{
+    .BookTreeForest {
         background-size: 80%;
     }
-    .greenbar{
-    opacity: 0;
+    .greenbar {
+        opacity: 0;
     }
-    .BOOKTREEBtn{
+    .BOOKTREEBtn {
         width: 180px;
         height: 40px;
         font-size: 15px;
     }
-    .BookTreeForest{
+    .BookTreeForest {
         margin-top: -300px;
     }
 }
