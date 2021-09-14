@@ -7,12 +7,12 @@ const Footer = () => {
             <div className={styles.icon_wrapper}>
                 <a href="https://github.com/takapiro99/book-tree" target="blank">
                     <div className={styles.icon1}>
-                        <FaGithub size={25} color="#222" />
+                        <FaGithub size={25} color="#eee" />
                     </div>
                 </a>
                 <a href="https://forms.gle/3rEduWMNYPspcF8j8" target="blank">
                     <div className={styles.icon2}>
-                        <FaQuestion size={24} color="#222" />
+                        <FaQuestion size={24} color="#eee" />
                     </div>
                 </a>
             </div>
