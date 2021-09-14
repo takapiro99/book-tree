@@ -4,7 +4,7 @@ import BookOnBigTree from './BookOnBigTree'
 
 const BookWithReview = ({ review }: { review: ReviewJoinedUser }) => {
     return (
-        <div className={styles.reviewpageReviewBlock}>
+        <div className={`${styles.reviewpageReviewBlock} container`}>
             <div className={styles.reviewpageReviewBook}>
                 <BookOnBigTree withYellowBackground review={review} />
             </div>
@@ -15,4 +15,5 @@ const BookWithReview = ({ review }: { review: ReviewJoinedUser }) => {
         </div>
     )
 }
+
 export default BookWithReview

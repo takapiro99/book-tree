@@ -16,10 +16,9 @@ const BigTreeWithBooks = ({ uid }: { uid: string }) => {
                 setLoading(false)
             }
         })
-    }, [])
+    }, []) // eslint-disable-line
 
     return (
-        <div>
             <div className={styles.BigTreeWrapper}>
                 {/* icon */}
                 <div className={styles.books_wrapper}>
@@ -34,7 +33,6 @@ const BigTreeWithBooks = ({ uid }: { uid: string }) => {
                     )}
                 </div>
             </div>
-        </div>
     )
 }
 

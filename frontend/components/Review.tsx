@@ -128,7 +128,6 @@ const ReviewPage = ({ uid, isMe = false }: { uid: string; isMe?: boolean }) => {
                         <div className={styles.reviewBlock__title}>
                             <h1>{userName} のレビュー</h1>
                         </div>
-                        {/* TODO: 本の情報をひとつづつ渡す */}
                         {reviews.length ? (
                             <>
                                 <div style={{ textAlign: 'center' }}>{userName} の選んだ本たち</div>
