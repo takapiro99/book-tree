@@ -16,8 +16,6 @@ const LittleTree: React.FC<LittleTreeProps> = ({ review }) => {
         <div>
             <div className={styles.littletree_pic}>
                 <img src="/images/LittleTreeSmall.png" alt="littletree" />
-                <p className={styles.flag_sentence_1}>{content}</p>
-                <p className={styles.flag_sentence_2}>がすごい人！</p>
                 <Link href={`/${review.uid}`}>
                     <div className={styles.icon_pic}>
                         <img src={review.user.profileImage} alt="TwitterIcon" />
@@ -25,6 +23,9 @@ const LittleTree: React.FC<LittleTreeProps> = ({ review }) => {
                 </Link>
                 <div>{/* <img className={styles.shiori}src={shiori} alt="shiori" /> */}</div>
                 <p className={styles.name}>{review.user.displayName}さん</p>
+                <a href={review.bookLink}>
+                    <img className={styles.review_img} src={review.bookImageURL} />
+                </a>
             </div>
             {/* <div className={styles.icon_pic}><img  src={icon} alt="TwitterIcon" /></div> */}
         </div>
