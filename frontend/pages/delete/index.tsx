@@ -13,7 +13,7 @@ export default function Delete() {
         if (!isOk) {
             alert('削除に失敗しやした！')
         } else {
-            router.push('/')
+            router.push('/delete/complete')
         }
     }
 
@@ -34,9 +34,9 @@ export default function Delete() {
                     <h1 className={styles.centerTitle}>BOOKTREEを削除する</h1>
                     <p className={styles.centerText}>アカウント情報とレビュー内容を削除します。</p>
                     <p className={styles.centerText}>参加してくれてありがとう！</p>
-                    <button className={styles.deleteBtn} onClick={deleteBookTreeFunc}>
-                        BOOKTREEさくじょ-----------
-                    </button>
+                    <div className={styles.deleteBtn} onClick={deleteBookTreeFunc}>
+                        削除
+                    </div>
                 </div>
             </div>
         )
