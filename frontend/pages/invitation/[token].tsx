@@ -87,7 +87,7 @@ const InviteReview = () => {
             <div className={styles.nominateReasonWrapper}>
                 {!isNora ? (
                     <h2 className={styles.nominateBlock__reason}>
-                        デザインがすごいあなたに
+                        {invitation?.specialty} がすごいあなたに
                         <br />
                         おすすめの本を教えて
                         <br />
