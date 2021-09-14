@@ -208,7 +208,7 @@ export const updateGratePartList = async (
         await db.collection('users').doc(uid).update({ gratePartList: gratePartList })
         return true
     } catch (err) {
-        alert(err)
+        errorToast(err)
     }
     return false
 }

@@ -4,6 +4,7 @@ import styles from '../../styles/Setting.module.scss'
 import { useEffect, useState, useContext } from 'react'
 import { AuthContext } from '../../lib/AuthProvider'
 import { updateGratePartList } from '../../lib/api'
+import { successToast } from '../../lib/toasts'
 
 /* eslint @next/next/no-img-element:0 */
 
@@ -68,7 +69,7 @@ const Setting = () => {
         if (context.currentUser?.uid) {
             const isOk = await updateGratePartList(context.currentUser?.uid, gratePartList)
             if (isOk) {
-                alert('保存に成功しました！！')
+                successToast('保存に成功しました！')
             }
         }
     }
