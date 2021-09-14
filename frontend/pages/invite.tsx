@@ -5,6 +5,7 @@ import { createInvitationCode } from '../lib/api'
 import { useForm } from 'react-hook-form'
 import Head from 'next/head'
 import { errorToast } from '../lib/toasts'
+import { useRouter } from 'next/router'
 
 /* eslint @next/next/no-img-element:0 */
 
@@ -16,6 +17,7 @@ const Invite = () => {
     const [inviteLink, setInviteLink] = useState<string>('')
     const [copyStatus, setCopyStatus] = useState<string>('')
     const { register, handleSubmit } = useForm()
+    const router = useRouter()
 
     const inputRef = useRef<HTMLInputElement>(null)
     const handleCopy = (e: any) => {
@@ -36,7 +38,7 @@ const Invite = () => {
         createInvitationCode(reason)
             .then((res) => {
                 if (res) {
-                    setInviteLink(res)
+                    setInviteLink(`${window.location.origin}/invitation/${res}`)
                     setLoadingInvitationLink(false)
                     return
                 }
