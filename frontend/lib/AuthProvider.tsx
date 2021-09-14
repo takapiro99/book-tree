@@ -16,8 +16,6 @@ type AuthContextType = {
     isFetchingFirestoreUser: boolean
     setFetchingFirestoreUser: (fetching: boolean) => void
     userInfo: UserInfo | null
-    setUserInfo: (user: UserInfo | null) => void
-    getMyFirebaseUser: (uid: string) => Promise<void>
 }
 
 // provider の外側でcontextを絶対呼び出さないという意思の元
@@ -37,27 +35,35 @@ export const AuthProvider: React.FC = ({ children }) => {
         setUserInfo(null)
     }
 
-    const getMyFirebaseUser = async (uid: string) => {
-        return db
-            .collection('users')
-            .where('uid', '==', uid)
-            .get()
-            .then((querySnapshot) => {
-                if (!querySnapshot.docs.length) {
-                    errorToast('no corresponding user record found')
-                    return
-                } else if (querySnapshot.docs.length >= 2) {
-                    errorToast(`${querySnapshot.docs.length} records have same uid`)
-                    return
+    // いつも userInfo をとりにいく
+    // 初手の場合、userInfoがないので2秒後くらいにもういっかい見に行きたい
+    // その場合、promise の待ち時間としてよい。
+    // userInfoが0件だったらuidが間違ってるよねと。
+    // たまにuserInfoが複数見つかる変なときがある
+    const getMyFirebaseUser = async (uid: string): Promise<void> => {
+        for (let i = 0; i < 3; i++) {
+            try {
+                const userQuerySnapshot = await db.collection('users').where('uid', '==', uid).get()
+                const userDocs = userQuerySnapshot.docs
+                if (userDocs.length >= 2) {
+                    throw new Error(`${userDocs.length} records have same uid`)
                 }
-                const profile = querySnapshot.docs[0].data() as UserInfo
+                if (!userDocs.length) {
+                    if (i === 2) throw new Error('no corresponding user record found')
+                    await new Promise((resolve) => setTimeout(resolve, 1500))
+                    console.log(i)
+                    continue
+                }
+                const profile = userDocs[0].data() as UserInfo
                 setUserInfo(profile)
                 setFetchingFirestoreUser(false)
-            })
-            .catch((err) => {
+                break
+            } catch (error) {
+                // どうしょうもないエラー
                 setFetchingFirestoreUser(false)
-                errorToast(err)
-            })
+                errorToast(error.toString())
+            }
+        }
     }
 
     const twitterLogin = async () => {
@@ -103,9 +109,7 @@ export const AuthProvider: React.FC = ({ children }) => {
                 setFirstLoading,
                 isFetchingFirestoreUser,
                 setFetchingFirestoreUser,
-                userInfo,
-                setUserInfo,
-                getMyFirebaseUser
+                userInfo
             }}
         >
             {children}
