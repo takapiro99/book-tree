@@ -13,8 +13,8 @@ type AuthContextType = {
     currentUser: UserState
     isFirstLoading: boolean
     setFirstLoading: (loading: boolean) => void
-    isFetchingFirestoreUser: boolean | undefined
-    setFetchingFirestoreUser: (fetching: boolean | undefined) => void
+    isFetchingFirestoreUser: boolean
+    setFetchingFirestoreUser: (fetching: boolean) => void
     userInfo: UserInfo | null
     setUserInfo: (user: UserInfo | null) => void
     getMyFirebaseUser: (uid: string) => Promise<void>
@@ -28,14 +28,12 @@ export const AuthProvider: React.FC = ({ children }) => {
     const router = useRouter()
     const [currentUser, setCurrentUser] = useState<UserState>(null)
     const [isFirstLoading, setFirstLoading] = useState(true)
-    const [isFetchingFirestoreUser, setFetchingFirestoreUser] = useState<boolean | undefined>(
-        undefined
-    )
+    const [isFetchingFirestoreUser, setFetchingFirestoreUser] = useState<boolean>(true)
     const [userInfo, setUserInfo] = useState<UserInfo | null>(null)
 
     const cleanUp = () => {
         setCurrentUser(null)
-        setFetchingFirestoreUser(undefined)
+        setFetchingFirestoreUser(true)
         setUserInfo(null)
     }
 

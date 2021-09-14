@@ -5,6 +5,8 @@ import { useRouter } from 'next/router'
 import styles from '../../styles/Delete.module.scss'
 import { errorToast } from '../../lib/toasts'
 
+/* eslint @next/next/no-img-element:0 */
+
 export default function Delete() {
     const router = useRouter()
     const { currentUser, isFirstLoading } = useContext(AuthContext)

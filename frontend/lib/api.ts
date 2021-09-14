@@ -199,3 +199,16 @@ export const getUserInfo = async (uid: string): Promise<UserInfo> => {
             return userInfo
         })
 }
+
+export const updateGratePartList = async (
+    uid: string,
+    gratePartList: (string | null | undefined)[]
+) => {
+    try {
+        await db.collection('users').doc(uid).update({ gratePartList: gratePartList })
+        return true
+    } catch (err) {
+        errorToast(err)
+    }
+    return false
+}
