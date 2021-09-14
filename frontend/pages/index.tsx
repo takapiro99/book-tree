@@ -85,6 +85,8 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
+            <p className={styles.BOOKTREEBtn}>BOOKTREEを作成する</p>
+
             </div>
             <div className={styles.greenbar} />
             <div className="container">
