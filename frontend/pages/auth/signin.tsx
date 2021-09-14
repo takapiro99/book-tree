@@ -1,6 +1,9 @@
 // import styles from '../../styles/Signin.module.scss'
+import { useRouter } from 'next/dist/client/router'
 import Head from 'next/head'
+import { useContext } from 'react'
 import SignInWithTwitterOrGoogle from '../../components/auth/SignInWithTwitterOrGoogle'
+import { AuthContext } from '../../lib/AuthProvider'
 
 /* eslint @next/next/no-img-element:0 */
 
@@ -13,11 +16,11 @@ const titleStyle = {
 }
 
 const SignIn = () => {
-    // const context = useContext(AuthContext)
-    // const router = useRouter()
-    // if (context.currentUser) {
-    //     router.push(`/${context.currentUser.uid}`)
-    // }
+    const context = useContext(AuthContext)
+    const router = useRouter()
+    if (context.currentUser) {
+        router.push(`/${context.currentUser.uid}`)
+    }
     // TODO: 既にサインインしていた場合どうするか考える
     return (
         <div>
@@ -31,7 +34,7 @@ const SignIn = () => {
                     marginBottom: '30px'
                 }}
             >
-                BOOKTREEにログインする
+                BOOKTREE にログインする
             </h1>
             <SignInWithTwitterOrGoogle />
         </div>

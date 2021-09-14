@@ -89,10 +89,9 @@ const NewPost = ({ token }: { token: string }) => {
         draft[index] = data
         setDraftData(draft)
     }
-
+    // TODO: ノラ
     const handlePost = () => {
         setPosted(true)
-        console.log(draftData)
         postReviewsInvitation(draftData, token)
             .then((success) => {
                 if (success) {
