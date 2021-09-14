@@ -133,9 +133,14 @@ const InviteReview = () => {
             )}
             {currentUser ? (
                 isNora ? (
-                    <NewPost token={NORA_QUERY} />
+                    <NewPost token={NORA_QUERY} specialty={invitation?.specialty as string} />
                 ) : (
-                    invitation?.token && <NewPost token={invitation.token as string} />
+                    invitation?.token && (
+                        <NewPost
+                            token={invitation.token as string}
+                            specialty={invitation?.specialty}
+                        />
+                    )
                 )
             ) : loadingInvitation ? (
                 <p>loading</p>

@@ -46,7 +46,7 @@ const initialData: IData = {
     selectedBooks: []
 }
 
-const NewPost = ({ token }: { token: string }) => {
+const NewPost = ({ token, specialty }: { token: string, specialty: string }) => {
     const isNora = token === NORA_QUERY
     const router = useRouter()
     const [suggestions, setSuggestions] = useState<RakutenBookItem[]>([])
@@ -181,6 +181,7 @@ const NewPost = ({ token }: { token: string }) => {
                                     draftData={draftData}
                                     setDraftData={setDraftData}
                                     update={update}
+                                    specialty={specialty}
                                 />
                             )
                         })
