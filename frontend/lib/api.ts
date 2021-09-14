@@ -183,7 +183,7 @@ export const fetchBookListFromRakutenAPIByTitle: (title: string) => Promise<Raku
         return data
     }
 
-export const getUserInfo = async (uid: string): Promise<UserInfo | null> => {
+export const getUserInfo = async (uid: string): Promise<UserInfo> => {
     return db
         .collection('users')
         .where('uid', '==', uid)
@@ -191,10 +191,9 @@ export const getUserInfo = async (uid: string): Promise<UserInfo | null> => {
         .then((querySnapshot) => {
             if (!querySnapshot.docs.length) {
                 console.warn('no corresponding firestore uid found')
-                return null
+                throw new Error('no corresponding firestore uid found')
             } else if (querySnapshot.docs.length >= 2) {
-                alert(`${querySnapshot.docs.length} records have same uid`)
-                return null
+                throw new Error(`${querySnapshot.docs.length} records have same uid`)
             }
             const userInfo = querySnapshot.docs[0].data() as UserInfo
             return userInfo
