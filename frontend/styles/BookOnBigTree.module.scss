@@ -10,18 +10,22 @@
     .booksBlock {
         position: relative;
         .books {
-            width: 8rem;
-            height: 10rem;
+            // width: 7rem;
+            width: 100%;
+            // height: 10rem;
             &:hover {
+                transition: all 0.2s ease;
                 opacity: 0.2;
                 cursor: pointer;
             }
         }
         .bookLinkBlock {
             &:hover {
+                transition: all 0.2s ease;
                 cursor: pointer;
                 background-color: rgba(0, 0, 0, 0.65);
                 &::before {
+                    transition: all 0.2s ease;
                     content: '楽天で見る';
                     position: absolute;
                     top: 30%;
@@ -84,4 +88,6 @@
     height: 4rem;
     border-radius: 50%;
     background-color: #f9d555;
+    // position: relative;
+    z-index: -1;
 }

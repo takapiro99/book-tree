@@ -16,23 +16,21 @@ const BigTreeWithBooks = ({ uid }: { uid: string }) => {
                 setLoading(false)
             }
         })
-    }, [])
+    }, []) // eslint-disable-line
 
     return (
-        <div>
-            <div className={styles.BigTreeWrapper}>
-                {/* icon */}
-                <div className={styles.books_wrapper}>
-                    {loading ? (
-                        <p style={{ textAlign: 'center', width: '100%' }}>loading...</p>
-                    ) : books.length ? (
-                        books.map((book, i) => <BookOnBigTree review={book} key={i} />)
-                    ) : (
-                        <p style={{ textAlign: 'center', width: '100%' }}>
-                            まだ booktree に本が生えていないようだ
-                        </p>
-                    )}
-                </div>
+        <div className={styles.BigTreeWrapper}>
+            {/* icon */}
+            <div className={styles.books_wrapper}>
+                {loading ? (
+                    <p style={{ textAlign: 'center', width: '100%' }}>loading...</p>
+                ) : books.length ? (
+                    books.map((book, i) => <BookOnBigTree review={book} key={i} />)
+                ) : (
+                    <p style={{ textAlign: 'center', width: '100%' }}>
+                        まだ booktree に本が生えていないようだ
+                    </p>
+                )}
             </div>
         </div>
     )
