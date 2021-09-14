@@ -1,4 +1,4 @@
-// import styles from '../../styles/Signin.module.scss'
+import styles from '../../styles/Signin.module.scss'
 import { useRouter } from 'next/dist/client/router'
 import Head from 'next/head'
 import { useContext } from 'react'
@@ -23,7 +23,7 @@ const SignIn = () => {
     }
     // TODO: 既にサインインしていた場合どうするか考える
     return (
-        <div>
+        <div style={{ height: '43.7vh' }}>
             <Head>
                 <title>SignIn</title>
             </Head>
