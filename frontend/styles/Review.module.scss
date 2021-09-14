@@ -185,7 +185,7 @@
 }
 
 .reviewpageReviewBook {
-    flex: 1;
+    flex: 3;
     display: flex;
     // margin: 2rem 0rem 2rem 6rem;
     // margin-left: 30px;
@@ -194,8 +194,23 @@
 }
 
 .reviewpageReviewContent {
-    flex: 3;
+    flex: 7;
     margin-left: 1rem;
+    > *:disabled {
+        cursor: default;
+    }
+}
+.reviewpageReviewEdit {
+    flex: 1;
+    margin-left: 1rem;
+    &:hover {
+        cursor: pointer;
+    }
+}
+.reviewpageReviewEditAction {
+    // display: inline-block;
+    margin-top: 20px;
+    margin-left: 5px;
 }
 
 $post-text-background: #efefef;
@@ -215,6 +230,7 @@ $post-text-border: #bcaaa4;
     border: 2px solid $post-text-border;
     height: 10rem;
     border-radius: 8px;
+    resize: none;
 }
 
 .reviewpageReview {

@@ -23,6 +23,7 @@ const ReviewPage = ({ uid, isMe = false }: { uid: string; isMe?: boolean }) => {
     const [isLoadingProfileAndBooks, setLoadingProfileAndBooks] = useState(true)
     const [targetUserInfo, setTargetUserInfo] = useState<null | UserInfo>(null)
     const [reviews, setReviews] = useState<ReviewJoinedUser[]>([])
+    const [reviewsDraft, setReviewsDraft] = useState<ReviewJoinedUser[]>([])
 
     useEffect(() => {
         Promise.all([
@@ -44,6 +45,12 @@ const ReviewPage = ({ uid, isMe = false }: { uid: string; isMe?: boolean }) => {
             })
     }, []) // eslint-disable-line
 
+    useEffect(() => {
+        if (reviews) {
+            setReviewsDraft(JSON.parse(JSON.stringify(reviews)))
+        }
+    }, [reviews])
+
     if (!isLoadingProfileAndBooks && !targetUserInfo) {
         console.log(isLoadingProfileAndBooks, targetUserInfo)
         return <>no user which uid={uid}</>
@@ -59,7 +66,9 @@ const ReviewPage = ({ uid, isMe = false }: { uid: string; isMe?: boolean }) => {
         })
     }
     if (!targetUserInfo) return null
+
     const userName = targetUserInfo.displayName
+
     return (
         <>
             {/* <div className={globalStyles.wrapper}> */}
@@ -132,7 +141,7 @@ const ReviewPage = ({ uid, isMe = false }: { uid: string; isMe?: boolean }) => {
                             <>
                                 <div style={{ textAlign: 'center' }}>{userName} の選んだ本たち</div>
                                 {reviews.map((review, i) => {
-                                    return <BookWithReview key={i} review={review} />
+                                    return <BookWithReview key={i} review={review} isMe={isMe} />
                                 })}
                             </>
                         ) : (
