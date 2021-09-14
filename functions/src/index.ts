@@ -103,7 +103,6 @@ export const createInvitationCode = functions
         if (token) {
             // TODO: token だけ生成して、URLはフロントエンドで `location.origin` で生成するほうがよさそう
             // サーバー側でフロントのURLが分からんので
-            const invitationURL = `http://localhost:3000/invite/?token=${token}`
             // それと、`/invitation/{token}` っていうパスにしました…
             const invitationsRef = db.collection('invitations')
             invitationsRef.add({
@@ -115,7 +114,7 @@ export const createInvitationCode = functions
                 createdAt: dbType.FieldValue.serverTimestamp(),
                 acceptedAt: null
             })
-            return invitationURL
+            return token
         } else {
             throw new functions.https.HttpsError(
                 'aborted',
