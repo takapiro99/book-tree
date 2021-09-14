@@ -3,6 +3,7 @@ import styles from '../../styles/Setting.module.scss'
 
 import { useEffect, useState, useContext } from 'react'
 import { AuthContext } from '../../lib/AuthProvider'
+import { updateGratePartList } from '../../lib/api'
 
 const swap = (arr: any[], i1: number, i2: number) => {
     const tmp = arr[i1]
@@ -10,21 +11,21 @@ const swap = (arr: any[], i1: number, i2: number) => {
     arr[i2] = tmp
 }
 
-// nullを右寄せ
-const orderingGratePartList = (gradePartList: (string | null | undefined)[] | undefined) => {
-    if (!gradePartList || gradePartList.length !== 3) {
+// nullや空文字を右寄せ
+const orderingGratePartList = (gratePartList: (string | null | undefined)[] | undefined) => {
+    if (!gratePartList || gratePartList.length !== 3) {
         return null
     }
 
-    if (gradePartList[2] && !gradePartList[1]) swap(gradePartList, 2, 1)
-    if (gradePartList[1] && !gradePartList[0]) swap(gradePartList, 0, 1)
-    if (gradePartList[2] && !gradePartList[1]) swap(gradePartList, 2, 1)
+    if (gratePartList[2] && !gratePartList[1]) swap(gratePartList, 2, 1)
+    if (gratePartList[1] && !gratePartList[0]) swap(gratePartList, 0, 1)
+    if (gratePartList[2] && !gratePartList[1]) swap(gratePartList, 2, 1)
 }
 
 const Setting = () => {
     //const [books, setBooks] = useState<BooksProps[]>([])
     const context = useContext(AuthContext)
-    const [gradePartList, setGradePartList] = useState<(string | null | undefined)[]>([
+    const [gratePartList, setGratePartList] = useState<(string | null | undefined)[]>([
         null,
         null,
         null
@@ -36,31 +37,45 @@ const Setting = () => {
 
         switch (name) {
             case 'threeWords_0': {
-                const gcopy = gradePartList.slice()
+                const gcopy = gratePartList.slice()
                 gcopy[0] = value
-                setGradePartList(gcopy)
+                setGratePartList(gcopy)
                 break
             }
             case 'threeWords_1': {
-                const gcopy = gradePartList.slice()
+                const gcopy = gratePartList.slice()
                 gcopy[1] = value
-                setGradePartList(gcopy)
+                setGratePartList(gcopy)
                 break
             }
             case 'threeWords_2': {
-                const gcopy = gradePartList.slice()
+                const gcopy = gratePartList.slice()
                 gcopy[2] = value
-                setGradePartList(gcopy)
+                setGratePartList(gcopy)
                 break
+            }
+        }
+    }
+
+    const handleSubmit = (event: React.SyntheticEvent) => {
+        updateGratePartListFunc()
+        event.preventDefault()
+    }
+
+    const updateGratePartListFunc = async () => {
+        if (context.currentUser?.uid) {
+            const isOk = await updateGratePartList(context.currentUser?.uid, gratePartList)
+            if (isOk) {
+                alert('保存に成功しました！！')
             }
         }
     }
 
     useEffect(() => {
         if (!context.isFetchingFirestoreUser && userInfo) {
+            console.log(userInfo)
             orderingGratePartList(userInfo.gratePartList)
-            console.log(userInfo.gratePartList)
-            setGradePartList(userInfo.gratePartList)
+            setGratePartList(userInfo.gratePartList)
         }
     }, [context.isFetchingFirestoreUser])
 
@@ -79,7 +94,7 @@ const Setting = () => {
                 <title>Setting Page</title>
             </Head>
             <div className="wrapper">
-                <form className="reviewform">
+                <form className="reviewform" onSubmit={handleSubmit}>
                     <div className={`${styles.reviewformName} ${styles.blockbtwMd}`}>
                         <div className={styles.reviewformName__block}>
                             <div className={styles.reviewformName__namewrapper}>
@@ -103,7 +118,7 @@ const Setting = () => {
                                 <input
                                     className={styles.reviewform3keywords__3box}
                                     name="threeWords_0"
-                                    value={gradePartList[0] || ''}
+                                    value={gratePartList[0] || ''}
                                     onChange={handleChangeInput}
                                 />{' '}
                                 <span className={styles.reviewform__plus}>
@@ -112,7 +127,7 @@ const Setting = () => {
                                 <input
                                     className={styles.reviewform3keywords__3box}
                                     name="threeWords_1"
-                                    value={gradePartList[1] || ''}
+                                    value={gratePartList[1] || ''}
                                     onChange={handleChangeInput}
                                 />{' '}
                                 <span className={styles.reviewform__plus}>
@@ -121,7 +136,7 @@ const Setting = () => {
                                 <input
                                     className={styles.reviewform3keywords__3box}
                                     name="threeWords_2"
-                                    value={gradePartList[2] || ''}
+                                    value={gratePartList[2] || ''}
                                     onChange={handleChangeInput}
                                 />
                             </div>
