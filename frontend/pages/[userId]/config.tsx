@@ -5,6 +5,8 @@ import { useEffect, useState, useContext } from 'react'
 import { AuthContext } from '../../lib/AuthProvider'
 import { updateGratePartList } from '../../lib/api'
 
+/* eslint @next/next/no-img-element:0 */
+
 const swap = (arr: any[], i1: number, i2: number) => {
     const tmp = arr[i1]
     arr[i1] = arr[i2]
