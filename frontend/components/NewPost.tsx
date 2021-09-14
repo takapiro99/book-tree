@@ -8,6 +8,7 @@ import {
     postReviewsIndividual,
     postReviewsInvitation
 } from '../lib/api'
+import { errorToast, successToast } from '../lib/toasts'
 import { PostReview, RakutenBookItem, RakutenResponse } from '../lib/types'
 import useDebounce from '../lib/useDebounce'
 import { NORA_QUERY } from '../pages/invitation/[token]'
@@ -63,7 +64,7 @@ const NewPost = ({ token }: { token: string }) => {
                     console.log(res)
                     setSuggestions(res.Items)
                 })
-                .catch((err) => alert(err))
+                .catch(errorToast)
         } else {
             setSuggestions([])
         }
@@ -102,7 +103,7 @@ const NewPost = ({ token }: { token: string }) => {
                 .then((success) => {
                     if (success) {
                         setPosted(true)
-                        alert('投稿できました！')
+                        successToast('投稿完了！')
                         router.push('/')
                     } else {
                         // TODO: 失敗 toast
@@ -110,14 +111,15 @@ const NewPost = ({ token }: { token: string }) => {
                     router.push('/')
                 })
                 .catch((e) => {
-                    alert(`unknown error: ${e}`)
+                    errorToast(e)
                     setPosting(false)
                 })
         } else {
             postReviewsInvitation(draftData, token)
                 .then((success) => {
                     if (success) {
-                        alert('投稿できました！')
+                        setPosted(true)
+                        successToast('投稿完了！')
                         router.push('/')
                     } else {
                         // 失敗 toast
@@ -125,7 +127,7 @@ const NewPost = ({ token }: { token: string }) => {
                     router.push('/')
                 })
                 .catch((e) => {
-                    alert(`unknown error: ${e}`)
+                    errorToast(e)
                     setPosting(false)
                 })
         }

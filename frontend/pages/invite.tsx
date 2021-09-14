@@ -4,6 +4,7 @@ import { FaCopy } from 'react-icons/fa'
 import { createInvitationCode } from '../lib/api'
 import { useForm } from 'react-hook-form'
 import Head from 'next/head'
+import { errorToast } from '../lib/toasts'
 
 /* eslint @next/next/no-img-element:0 */
 
@@ -39,11 +40,11 @@ const Invite = () => {
                     setLoadingInvitationLink(false)
                     return
                 }
-                alert("couldn't generate invite link due to unknown error")
+                errorToast("couldn't generate invite link due to unknown error")
                 setLoadingInvitationLink(false)
             })
             .catch((err) => {
-                alert(err)
+                errorToast(err)
                 setLoadingInvitationLink(false)
             })
         // SetAddLink(reason)

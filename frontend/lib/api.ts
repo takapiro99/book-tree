@@ -1,5 +1,6 @@
 // そのうち各機能ごとにファイル作ったほうがよさそう
 import firebase, { db } from './firebase'
+import { errorToast } from './toasts'
 import { UserInfo, ReviewJoinedUser, Invitation, RakutenResponse, PostReview } from './types'
 
 export const fetchBooksToShowOnTopPage: () => Promise<ReviewJoinedUser[]> = async () => {
@@ -107,7 +108,7 @@ export const postReviewsInvitation: (postReviews: PostReview[], token: string) =
             })
         } catch (err) {
             console.log(err)
-            alert(err)
+            errorToast(err)
             return false
         }
 
@@ -122,7 +123,7 @@ export const checkInvitation: (token: string) => Promise<Invitation | null> = as
         const res = await checkInvitationFunc({ token: token })
         return res.data as Invitation
     } catch (err) {
-        alert(err)
+        errorToast(err)
     }
     return null
 }
@@ -137,7 +138,7 @@ export const createInvitationCode: (specialty: string) => Promise<string | null>
         const res = await createInvitationFunc({ specialty: specialty })
         return res.data as string
     } catch (err) {
-        alert(err)
+        errorToast(err)
     }
     return null
 }
@@ -155,7 +156,7 @@ export const getBookTree: (
         const res = await getBookTreeFunc({ uid: userID })
         return res.data as ReviewJoinedUser[]
     } catch (err) {
-        alert(err)
+        errorToast(err)
     }
 
     return null
@@ -166,7 +167,7 @@ export const deleteBookTree: () => Promise<boolean> = async () => {
     try {
         const res = await deleteBookTreeFunc()
     } catch (err) {
-        alert(err)
+        errorToast(err)
         return false
     }
 

@@ -1,6 +1,7 @@
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useState } from 'react'
 import firebase, { db } from './firebase'
+import { errorToast } from './toasts'
 import { UserInfo } from './types'
 
 type UserState = firebase.User | null
@@ -45,10 +46,10 @@ export const AuthProvider: React.FC = ({ children }) => {
             .get()
             .then((querySnapshot) => {
                 if (!querySnapshot.docs.length) {
-                    alert('no corresponding user record found')
+                    errorToast('no corresponding user record found')
                     return
                 } else if (querySnapshot.docs.length >= 2) {
-                    alert(`${querySnapshot.docs.length} records have same uid`)
+                    errorToast(`${querySnapshot.docs.length} records have same uid`)
                     return
                 }
                 const profile = querySnapshot.docs[0].data() as UserInfo
@@ -57,7 +58,7 @@ export const AuthProvider: React.FC = ({ children }) => {
             })
             .catch((err) => {
                 setFetchingFirestoreUser(false)
-                alert(err)
+                errorToast(err)
             })
     }
 
@@ -77,7 +78,7 @@ export const AuthProvider: React.FC = ({ children }) => {
             cleanUp()
             router.push('/')
         } catch (error) {
-            alert('ログアウトに失敗しました。')
+            errorToast('ログアウトに失敗しました。')
         }
     }
 
