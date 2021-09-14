@@ -89,9 +89,9 @@ export const postReviewsIndividual: (postReviews: PostReview[]) => Promise<boole
         const res = await createReviewsIndividualFunc({ postReviews: postReviews })
     } catch (err) {
         console.log(err)
+        errorToast(err.toString())
         return false
     }
-
     return true
 }
 
@@ -107,9 +107,9 @@ export const postReviewsInvitation: (postReviews: PostReview[], token: string) =
                 postReviews: postReviews
             })
         } catch (err) {
-            throw new Error(err.toString())
+            errorToast(err.toString())
+            return false
         }
-
         return true
     }
 
