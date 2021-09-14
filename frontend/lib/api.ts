@@ -107,9 +107,7 @@ export const postReviewsInvitation: (postReviews: PostReview[], token: string) =
                 postReviews: postReviews
             })
         } catch (err) {
-            console.log(err)
-            errorToast(err)
-            return false
+            throw new Error(err.toString())
         }
 
         return true
@@ -123,9 +121,8 @@ export const checkInvitation: (token: string) => Promise<Invitation | null> = as
         const res = await checkInvitationFunc({ token: token })
         return res.data as Invitation
     } catch (err) {
-        errorToast(err)
+        throw new Error(err.toString())
     }
-    return null
 }
 
 // 招待コードの作成
@@ -138,9 +135,8 @@ export const createInvitationCode: (specialty: string) => Promise<string | null>
         const res = await createInvitationFunc({ specialty: specialty })
         return res.data as string
     } catch (err) {
-        errorToast(err)
+        throw new Error(err.toString())
     }
-    return null
 }
 
 // ブックツリーの取得
@@ -156,10 +152,8 @@ export const getBookTree: (
         const res = await getBookTreeFunc({ uid: userID })
         return res.data as ReviewJoinedUser[]
     } catch (err) {
-        errorToast(err)
+        throw new Error(err.toString())
     }
-
-    return null
 }
 
 export const deleteBookTree: () => Promise<boolean> = async () => {
@@ -167,7 +161,8 @@ export const deleteBookTree: () => Promise<boolean> = async () => {
     try {
         const res = await deleteBookTreeFunc()
     } catch (err) {
-        errorToast(err)
+        errorToast(err.toString())
+        // throw new Error(err.toString())
         return false
     }
 
@@ -208,7 +203,9 @@ export const updateGratePartList = async (
         await db.collection('users').doc(uid).update({ gratePartList: gratePartList })
         return true
     } catch (err) {
-        errorToast(err)
+        // throw new Error(err.toString())
+        // TODO: 伝わらない
+        errorToast(err.toString())
+        return false
     }
-    return false
 }

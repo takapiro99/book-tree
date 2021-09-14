@@ -108,6 +108,7 @@ const Setting = () => {
                             <img
                                 className={styles.reviewformName__icon}
                                 src={userInfo.profileImage}
+                                alt=""
                             ></img>
                         </div>
                     </div>

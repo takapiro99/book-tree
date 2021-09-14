@@ -46,7 +46,7 @@ const initialData: IData = {
     selectedBooks: []
 }
 
-const NewPost = ({ token, specialty }: { token: string, specialty: string }) => {
+const NewPost = ({ token, specialty }: { token: string; specialty: string }) => {
     const isNora = token === NORA_QUERY
     const router = useRouter()
     const [suggestions, setSuggestions] = useState<RakutenBookItem[]>([])
