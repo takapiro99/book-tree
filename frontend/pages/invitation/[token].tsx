@@ -13,6 +13,8 @@ import Head from 'next/head'
 
 // TODO: SSR にしたい
 
+const NORA_QUERY = 'new'
+
 const InviteReview = () => {
     const [loadingInvitation, setLoadingInvitation] = useState<boolean>(true)
     const [invitation, setInvitation] = useState<Invitation | undefined>(undefined)
@@ -21,20 +23,26 @@ const InviteReview = () => {
     const { currentUser } = useContext(AuthContext)
     const { token } = router.query
 
+    const isNora = !invitation && !loadingInvitation && token === NORA_QUERY
+
     useEffect(() => {
         if (token) {
-            checkInvitation(token as string)
-                .then((invitation) => {
-                    if (invitation) {
-                        console.log(invitation)
-                        setInvitation(invitation)
-                    }
-                    setLoadingInvitation(false)
-                })
-                .catch((err) => {
-                    alert(err)
-                    setLoadingInvitation(false)
-                })
+            if (token === NORA_QUERY) {
+                setLoadingInvitation(false)
+            } else {
+                checkInvitation(token as string)
+                    .then((invitation) => {
+                        if (invitation) {
+                            console.log(invitation)
+                            setInvitation(invitation)
+                        }
+                        setLoadingInvitation(false)
+                    })
+                    .catch((err) => {
+                        alert(err)
+                        setLoadingInvitation(false)
+                    })
+            }
         }
         return () => {
             setInvitation(undefined)
@@ -61,32 +69,56 @@ const InviteReview = () => {
                 <title>InviteReview</title>
             </Head>
             <div className={styles.nominateReasonWrapper}>
-                <h1 className={styles.nominateBlock__reason}>
-                    デザインがすごいあなたに
-                    <br />
-                    おすすめの本を教えて
-                    <br />
-                    ほしーーーーーい！！
-                </h1>
+                {invitation ? (
+                    <h2 className={styles.nominateBlock__reason}>
+                        デザインがすごいあなたに
+                        <br />
+                        おすすめの本を教えて
+                        <br />
+                        ほしーーーーーい！！
+                    </h2>
+                ) : (
+                    <h2 className={styles.nominateBlock__reason}>
+                        おすすめの本を教えて
+                        <br />
+                        ほしーーーーーい！！
+                    </h2>
+                )}
             </div>
             <div className={styles.nominateFromWho}>
-                <div className={styles.icon}>
-                    <img src={inviter?.profileImage} alt="icon" />
-                </div>
-                <img src="/images/greencloud.png" alt="cloud" className={styles.greenCloud} />
+                {invitation ? (
+                    <>
+                        <div className={styles.icon}>
+                            <img src={inviter?.profileImage} alt="icon" />
+                        </div>
+                        <img
+                            src="/images/greencloud.png"
+                            alt="cloud"
+                            className={styles.greenCloud}
+                        />
+                    </>
+                ) : null}
             </div>
-            <div className={styles.nominateExplation}>
-                レビューを書いてくれると＊＊＊さんのBOOKTREEにあなたのレビューが実ります。
-            </div>
-            <div className={styles.reviewSteps}>
-                <img src="/images/reviewImg.png" alt="レビューを書くと相手の木に実る" />
-            </div>
+            {isNora ? (
+                <div className={styles.nominateExplation}>レビューを書いちゃう？</div>
+            ) : (
+                <>
+                    <div className={styles.nominateExplation}>
+                        レビューを書いてくれると＊＊＊さんのBOOKTREEにあなたのレビューが実ります。
+                    </div>
+                    <div className={styles.reviewSteps}>
+                        <img src="/images/reviewImg.png" alt="レビューを書くと相手の木に実る" />
+                    </div>
+                </>
+            )}
             {/* TODO: ここにログインくん */}
             {!loadingInvitation && !invitation ? (
-                <p>invalid invitation</p>
+                isNora ? null : (
+                    <p>invalid invitation</p>
+                )
             ) : currentUser ? (
                 <>
-                    <NewPost token={token as string} />
+                    <NewPost token={NORA_QUERY} />
                 </>
             ) : (
                 <div className={styles.accontCreateFromRecom}>

@@ -47,7 +47,7 @@ const Mypage = () => {
                     <title>Mypage</title>
                 </Head>
                 <GuardedRoute>
-                    <Review uid={userId} />
+                    <Review uid={userId} isMe={true} />
                 </GuardedRoute>
             </>
         )
