@@ -8,6 +8,7 @@ import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../lib/AuthProvider'
 import { getReviewsFromUser, getUserInfo } from '../lib/api'
 import { ReviewJoinedUser, UserInfo } from '../lib/types'
+import { errorToast } from '../lib/toasts'
 /*  eslint @next/next/no-img-element:0 */
 
 const isNullGradePart = (arr: (string | null | undefined)[]) => {
@@ -34,12 +35,12 @@ const ReviewPage = ({ uid, isMe = false }: { uid: string; isMe?: boolean }) => {
                         setReviews(reviews)
                     } else throw new Error("couldn't get reviews")
                 })
-                .catch(alert)
+                .catch(errorToast)
         ])
             .then(() => setLoadingProfileAndBooks(false))
             .catch((err) => {
                 setLoadingProfileAndBooks(false)
-                alert(err)
+                errorToast(err)
             })
     }, []) // eslint-disable-line
 

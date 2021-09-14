@@ -7,6 +7,7 @@ import { Menu, MenuItem, MenuButton } from '@szhsin/react-menu'
 import '@szhsin/react-menu/dist/index.css'
 import '@szhsin/react-menu/dist/transitions/slide.css'
 import { useRouter } from 'next/dist/client/router'
+import { errorToast, successToast } from '../lib/toasts'
 
 // TODO: ログイン状態またはローディングを取得し、それに応じて表示を変える
 
@@ -21,11 +22,11 @@ const NavBar = () => {
         signOut().then(
             (res) => {
                 console.log(res)
-                alert('ログアウト成功！ｗ')
+                successToast('ログアウトしました')
             },
             (err) => {
                 console.error(err)
-                alert('ログアウト失敗！ｗ')
+                errorToast('ログアウト失敗！ｗ')
             }
         )
     }
