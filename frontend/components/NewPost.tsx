@@ -2,9 +2,15 @@ import axios from 'axios'
 import { useRouter } from 'next/dist/client/router'
 import { useEffect, useState } from 'react'
 import { FaPlusCircle } from 'react-icons/fa'
-import { fetchBookListFromRakutenAPIByTitle, postReviewsInvitation } from '../lib/api'
+import Loader from 'react-loader-spinner'
+import {
+    fetchBookListFromRakutenAPIByTitle,
+    postReviewsIndividual,
+    postReviewsInvitation
+} from '../lib/api'
 import { PostReview, RakutenBookItem, RakutenResponse } from '../lib/types'
 import useDebounce from '../lib/useDebounce'
+import { NORA_QUERY } from '../pages/invitation/[token]'
 import styles from '../styles/ReviewForm.module.scss'
 import AddReview from './reviews/addReview'
 
@@ -40,14 +46,13 @@ const initialData: IData = {
 }
 
 const NewPost = ({ token }: { token: string }) => {
+    const isNora = token === NORA_QUERY
     const router = useRouter()
-    //保存するデータ
     const [suggestions, setSuggestions] = useState<RakutenBookItem[]>([])
     const [selectedBooks, setSelectedBooks] = useState<RakutenBookItem[]>([])
     const [draftData, setDraftData] = useState<PostReview[]>([])
+    const [isPosting, setPosting] = useState(false)
     const [posted, setPosted] = useState(false)
-    // TODO: POSTするくん。ここのコンポーネントで 入力などを管理してやる？考える。
-    //保存しないデータ
     const [title, setTitle] = useState<string>('')
     const debouncedValue = useDebounce<string>(title, 1000)
 
@@ -83,24 +88,47 @@ const NewPost = ({ token }: { token: string }) => {
     }
 
     const update = (index: number, data: PostReview) => {
-        console.log(index, data)
+        // console.log(index, data)
         // deep copy したいだけ
         const draft = JSON.parse(JSON.stringify(draftData))
         draft[index] = data
         setDraftData(draft)
     }
-    // TODO: ノラ
+
     const handlePost = () => {
-        setPosted(true)
-        postReviewsInvitation(draftData, token)
-            .then((success) => {
-                if (success) {
-                    alert('投稿できました！')
+        setPosting(true)
+        if (isNora) {
+            postReviewsIndividual(draftData)
+                .then((success) => {
+                    if (success) {
+                        setPosted(true)
+                        alert('投稿できました！')
+                        router.push('/')
+                    } else {
+                        // TODO: 失敗 toast
+                    }
                     router.push('/')
-                }
-                router.push('/')
-            })
-            .catch((e) => alert(`unknown error: ${e}`))
+                })
+                .catch((e) => {
+                    alert(`unknown error: ${e}`)
+                    setPosting(false)
+                })
+        } else {
+            postReviewsInvitation(draftData, token)
+                .then((success) => {
+                    if (success) {
+                        alert('投稿できました！')
+                        router.push('/')
+                    } else {
+                        // 失敗 toast
+                    }
+                    router.push('/')
+                })
+                .catch((e) => {
+                    alert(`unknown error: ${e}`)
+                    setPosting(false)
+                })
+        }
     }
 
     return (
@@ -121,20 +149,18 @@ const NewPost = ({ token }: { token: string }) => {
                             <div className={styles.reviewformBookselectResult}>
                                 <div className={styles.suggestedBooksContainer}>
                                     {suggestions.length ? (
-                                        suggestions.map((b, i) => {
-                                            return (
-                                                <div
-                                                    key={i}
-                                                    className={styles.suggestedBook}
-                                                    onClick={() => handleSelectSuggestion(b)}
-                                                >
-                                                    <img src={b.Item.largeImageUrl} alt="" />
-                                                    <div className={styles.plus}>
-                                                        <FaPlusCircle size={35} />
-                                                    </div>
+                                        suggestions.map((b, i) => (
+                                            <div
+                                                key={i}
+                                                className={styles.suggestedBook}
+                                                onClick={() => handleSelectSuggestion(b)}
+                                            >
+                                                <img src={b.Item.largeImageUrl} alt="" />
+                                                <div className={styles.plus}>
+                                                    <FaPlusCircle size={35} />
                                                 </div>
-                                            )
-                                        })
+                                            </div>
+                                        ))
                                     ) : (
                                         <p>検索してね</p>
                                     )}
@@ -167,6 +193,11 @@ const NewPost = ({ token }: { token: string }) => {
                         >
                             決定
                         </button>
+                        {isPosting && (
+                            <span style={{ position: 'absolute', top: 10, right: '30%' }}>
+                                <Loader type="Oval" color="#00BFFF" height={25} width={25} />
+                            </span>
+                        )}
                     </div>
                 </form>
             </div>

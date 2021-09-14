@@ -9,22 +9,25 @@ import { AuthContext } from '../../lib/AuthProvider'
 import { Invitation, UserInfo } from '../../lib/types'
 import styles from '../../styles/invitation.module.scss'
 import Head from 'next/head'
+import Link from 'next/link'
 /* eslint @next/next/no-img-element:0 */
 
 // TODO: SSR にしたい
 
-const NORA_QUERY = 'new'
+export const NORA_QUERY = 'new'
 
 const InviteReview = () => {
     const [loadingInvitation, setLoadingInvitation] = useState<boolean>(true)
     const [invitation, setInvitation] = useState<Invitation | undefined>(undefined)
     const [inviter, setInviter] = useState<UserInfo | undefined>(undefined)
+    const [err, setErr] = useState('')
     const router = useRouter()
     const { currentUser } = useContext(AuthContext)
     const { token } = router.query
 
+    const isInvalidInvitation = !loadingInvitation && !invitation && token !== NORA_QUERY
     const isNora = !invitation && !loadingInvitation && token === NORA_QUERY
-
+    const wasValidInvitation = !isInvalidInvitation
     useEffect(() => {
         if (token) {
             if (token === NORA_QUERY) {
@@ -33,12 +36,13 @@ const InviteReview = () => {
                 checkInvitation(token as string)
                     .then((invitation) => {
                         if (invitation) {
-                            console.log(invitation)
                             setInvitation(invitation)
                         }
+                        setErr(err)
                         setLoadingInvitation(false)
                     })
                     .catch((err) => {
+                        setErr(err)
                         alert(err)
                         setLoadingInvitation(false)
                     })
@@ -63,13 +67,24 @@ const InviteReview = () => {
         return <p style={{ textAlign: 'center' }}>loading...</p>
     }
 
+    if (err || isInvalidInvitation) {
+        return (
+            <div style={{ textAlign: 'center' }}>
+                <p>無効な招待です</p>
+                <p>
+                    <Link href="/">Top に戻る</Link>
+                </p>
+            </div>
+        )
+    }
+
     return (
         <div className={`${styles.nominateBlock} container`}>
             <Head>
                 <title>InviteReview</title>
             </Head>
             <div className={styles.nominateReasonWrapper}>
-                {invitation ? (
+                {!isNora ? (
                     <h2 className={styles.nominateBlock__reason}>
                         デザインがすごいあなたに
                         <br />
@@ -104,29 +119,34 @@ const InviteReview = () => {
             ) : (
                 <>
                     <div className={styles.nominateExplation}>
-                        レビューを書いてくれると＊＊＊さんのBOOKTREEにあなたのレビューが実ります。
+                        レビューを書いてくれると{' '}
+                        <span style={{ fontSize: '130%' }}>
+                            {inviter ? inviter.displayName : '&nbsp;'}
+                        </span>{' '}
+                        さんのBOOKTREEにあなたのレビューが実ります。
                     </div>
                     <div className={styles.reviewSteps}>
                         <img src="/images/reviewImg.png" alt="レビューを書くと相手の木に実る" />
                     </div>
                 </>
             )}
-            {/* TODO: ここにログインくん */}
-            {!loadingInvitation && !invitation ? (
-                isNora ? null : (
-                    <p>invalid invitation</p>
-                )
-            ) : currentUser ? (
-                <>
+            {currentUser ? (
+                isNora ? (
                     <NewPost token={NORA_QUERY} />
-                </>
-            ) : (
+                ) : (
+                    invitation?.token && <NewPost token={invitation.token as string} />
+                )
+            ) : loadingInvitation ? (
+                <p>loading</p>
+            ) : isNora ? (
                 <div className={styles.accontCreateFromRecom}>
                     <div>
                         <h2 className={styles.title}>BOOKTREE を作る</h2>
                         <SignInWithTwitterOrGoogle />
                     </div>
                 </div>
+            ) : (
+                invitation?.token && <NewPost token={invitation.token as string} />
             )}
         </div>
     )

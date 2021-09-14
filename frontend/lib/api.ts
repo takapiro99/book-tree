@@ -124,7 +124,6 @@ export const checkInvitation: (token: string) => Promise<Invitation | null> = as
     } catch (err) {
         alert(err)
     }
-
     return null
 }
 
