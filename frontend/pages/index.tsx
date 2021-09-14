@@ -111,10 +111,6 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <div>
-                <p>TODO: ここにbooktreeを作るボタンほしくね？</p>
-            </div>
-            <div className={styles.greenbar}> </div>
         </div>
     )
 }

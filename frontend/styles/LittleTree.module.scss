@@ -67,5 +67,10 @@
         left: 3vw;
         top: 13vw;
         width: 6vw;
+
+        &:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
     }
 }

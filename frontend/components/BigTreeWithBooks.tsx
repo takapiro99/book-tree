@@ -4,18 +4,23 @@ import styles from '../styles/BigTreeWithBooks.module.scss'
 import BookOnBigTree from '../components/BookOnBigTree'
 
 import { ReviewJoinedUser } from '../lib/types'
+import { errorToast } from '../lib/toasts'
 
 const BigTreeWithBooks = ({ uid }: { uid: string }) => {
     // 本をいい感じに横並びにするコンポーネント
     const [loading, setLoading] = useState<boolean>(true)
     const [books, setBooks] = useState<ReviewJoinedUser[]>([])
     useEffect(() => {
-        getBookTree(uid).then((books) => {
-            if (books) {
-                setBooks(books)
-                setLoading(false)
-            }
-        })
+        getBookTree(uid)
+            .then((books) => {
+                if (books) {
+                    setBooks(books)
+                    setLoading(false)
+                }
+            })
+            .catch((err) => {
+                errorToast(err)
+            })
     }, []) // eslint-disable-line
 
     return (

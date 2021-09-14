@@ -17,62 +17,72 @@ admin.initializeApp()
 const dbType = admin.firestore
 const db = admin.firestore()
 
-export const userOnCreate = functions.auth.user().onCreate(async (user) => {
-    await db.runTransaction(async (transaction) => {
-        const photoURL = user?.photoURL?.includes('twimg')
-            ? user.photoURL.replace('normal', '400x400')
-            : user.photoURL
+export const userOnCreate = functions
+    .runWith({ memory: '1GB' })
+    .region('asia-northeast1')
+    .auth.user()
+    .onCreate(async (user) => {
+        await db.runTransaction(async (transaction) => {
+            const photoURL = user?.photoURL?.includes('twimg')
+                ? user.photoURL.replace('normal', '400x400')
+                : user.photoURL
 
-        transaction.set(db.collection('users').doc(user.uid), {
-            uid: user.uid,
-            profileImage: photoURL,
-            displayName: user.displayName,
-            gratePartList: [null, null, null],
-            createdAt: dbType.FieldValue.serverTimestamp()
-        })
+            transaction.set(db.collection('users').doc(user.uid), {
+                uid: user.uid,
+                profileImage: photoURL,
+                displayName: user.displayName,
+                gratePartList: [null, null, null],
+                createdAt: dbType.FieldValue.serverTimestamp()
+            })
 
-        transaction.set(db.collection('_users').doc(user.uid), {
-            uid: user.uid,
-            email: user.email
+            transaction.set(db.collection('_users').doc(user.uid), {
+                uid: user.uid,
+                email: user.email
+            })
         })
     })
-})
 
 // ユーザー削除時にレビュー,ユーザー,招待を削除
-export const userOnDelete = functions.auth.user().onDelete(async (user) => {
-    await db.runTransaction(async (transaction) => {
-        const querySnapshotReview = await transaction.get(
-            db.collection('reviews').where('uid', '==', user.uid)
-        )
-        const querySnapshotFrom = await transaction.get(
-            db
-                .collection('invitations')
-                .where('from', '==', user.uid)
-                .where('accepted', '==', true)
-        )
-        const querySnapshotTo = await transaction.get(
-            db
-                .collection('invitations')
-                .where('to', '==', user.uid)
-                .where('accepted', '==', true)
-        )
-        const fromDoc = querySnapshotFrom.docs
-        const toDoc = querySnapshotTo.docs
-        const invitationDocs = fromDoc.concat(toDoc)
+export const userOnDelete = functions
+    .runWith({ memory: '1GB' })
+    .region('asia-northeast1')
+    .auth.user()
+    .onDelete(async (user) => {
+        await db.runTransaction(async (transaction) => {
+            const querySnapshotReview = await transaction.get(
+                db.collection('reviews').where('uid', '==', user.uid)
+            )
+            const querySnapshotFrom = await transaction.get(
+                db
+                    .collection('invitations')
+                    .where('from', '==', user.uid)
+                    .where('accepted', '==', true)
+            )
+            const querySnapshotTo = await transaction.get(
+                db
+                    .collection('invitations')
+                    .where('to', '==', user.uid)
+                    .where('accepted', '==', true)
+            )
+            const fromDoc = querySnapshotFrom.docs
+            const toDoc = querySnapshotTo.docs
+            const invitationDocs = fromDoc.concat(toDoc)
 
-        transaction.delete(db.collection('users').doc(user.uid))
-        transaction.delete(db.collection('_users').doc(user.uid))
-        querySnapshotReview.forEach((res) => {
-            transaction.delete(res.ref)
-        })
-        invitationDocs.forEach((res) => {
-            transaction.delete(res.ref)
+            transaction.delete(db.collection('users').doc(user.uid))
+            transaction.delete(db.collection('_users').doc(user.uid))
+            querySnapshotReview.forEach((res) => {
+                transaction.delete(res.ref)
+            })
+            invitationDocs.forEach((res) => {
+                transaction.delete(res.ref)
+            })
         })
     })
-})
 
-export const createInvitationCode = functions.https.onCall(
-    async (data, context) => {
+export const createInvitationCode = functions
+    .runWith({ memory: '1GB' })
+    .region('asia-northeast1')
+    .https.onCall(async (data, context) => {
         if (context.auth?.uid === undefined) {
             throw new functions.https.HttpsError(
                 'failed-precondition',
@@ -93,7 +103,6 @@ export const createInvitationCode = functions.https.onCall(
         if (token) {
             // TODO: token だけ生成して、URLはフロントエンドで `location.origin` で生成するほうがよさそう
             // サーバー側でフロントのURLが分からんので
-            const invitationURL = `http://localhost:3000/invite/?token=${token}`
             // それと、`/invitation/{token}` っていうパスにしました…
             const invitationsRef = db.collection('invitations')
             invitationsRef.add({
@@ -105,19 +114,20 @@ export const createInvitationCode = functions.https.onCall(
                 createdAt: dbType.FieldValue.serverTimestamp(),
                 acceptedAt: null
             })
-            return invitationURL
+            return token
         } else {
             throw new functions.https.HttpsError(
                 'aborted',
                 'トークンの生成に失敗しました。'
             )
         }
-    }
-)
+    })
 
 // 招待コードが有効かどうか調べる。有効なら招待オブジェクトを返す。
-export const checkInvitationCode = functions.https.onCall(
-    async (data, context) => {
+export const checkInvitationCode = functions
+    .runWith({ memory: '1GB' })
+    .region('asia-northeast1')
+    .https.onCall(async (data, context) => {
         const clientToken: string = data.token
         const querySnapshot = await db
             .collection('invitations')
@@ -160,11 +170,12 @@ export const checkInvitationCode = functions.https.onCall(
         // }
 
         return docData
-    }
-)
+    })
 
-export const createInvitationReview = functions.https.onCall(
-    async (data, context) => {
+export const createInvitationReview = functions
+    .runWith({ memory: '1GB' })
+    .region('asia-northeast1')
+    .https.onCall(async (data, context) => {
         if (context.auth?.uid === undefined) {
             throw new functions.https.HttpsError(
                 'failed-precondition',
@@ -247,11 +258,12 @@ export const createInvitationReview = functions.https.onCall(
             })
         })
         return 'success'
-    }
-)
+    })
 
-export const getBookTree = functions.https.onCall(
-    async (data: getBookTreePostType, context) => {
+export const getBookTree = functions
+    .runWith({ memory: '1GB' })
+    .region('asia-northeast1')
+    .https.onCall(async (data: getBookTreePostType, context) => {
         const userID = data.uid
         if (!userID) {
             throw new functions.https.HttpsError(
@@ -311,30 +323,34 @@ export const getBookTree = functions.https.onCall(
         })
 
         return bookTree
-    }
-)
+    })
 
-export const deleteBookTree = functions.https.onCall(async (data, context) => {
-    if (context.auth?.uid === undefined) {
-        throw new functions.https.HttpsError(
-            'failed-precondition',
-            'ログインをしてください'
-        )
-    }
+export const deleteBookTree = functions
+    .runWith({ memory: '1GB' })
+    .region('asia-northeast1')
+    .https.onCall(async (data, context) => {
+        if (context.auth?.uid === undefined) {
+            throw new functions.https.HttpsError(
+                'failed-precondition',
+                'ログインをしてください'
+            )
+        }
 
-    try {
-        await admin.auth().deleteUser(context.auth?.uid)
-    } catch (err) {
-        throw new functions.https.HttpsError(
-            'internal',
-            'ユーザー削除に失敗しました。'
-        )
-    }
-})
+        try {
+            await admin.auth().deleteUser(context.auth?.uid)
+        } catch (err) {
+            throw new functions.https.HttpsError(
+                'internal',
+                'ユーザー削除に失敗しました。'
+            )
+        }
+    })
 
 // 招待無しでレビューを作成する。
-export const createReviewsIndividual = functions.https.onCall(
-    async (data, context) => {
+export const createReviewsIndividual = functions
+    .runWith({ memory: '1GB' })
+    .region('asia-northeast1')
+    .https.onCall(async (data, context) => {
         if (context.auth?.uid === undefined) {
             throw new functions.https.HttpsError(
                 'failed-precondition',
@@ -381,5 +397,4 @@ export const createReviewsIndividual = functions.https.onCall(
             }
         })
         return 'success'
-    }
-)
+    })

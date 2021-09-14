@@ -16,6 +16,7 @@ interface AddReviewProps {
     draftData: Array<any>
     setDraftData: (data: any) => void
     update: (index: number, data: PostReview) => void
+    specialty: string
 }
 
 /* eslint @next/next/no-img-element:0 */
@@ -25,7 +26,8 @@ interface AddReviewProps {
 // isbn: string
 
 const AddReview = (props: AddReviewProps) => {
-    const { book, removeOnceSelectedBook, draftData, setDraftData, update, index } = props
+    const { book, removeOnceSelectedBook, draftData, setDraftData, update, index, specialty } =
+        props
     const [content, setContent] = useState<string>('')
     // TODO: デフォルト値なんとかする
     const [reason, setReason] = useState<string>('難しいけどおすすめ')
@@ -46,8 +48,8 @@ const AddReview = (props: AddReviewProps) => {
             <div className={styles.reviewformAddreviewReview}>
                 <div className={styles.reviewformAddreviewReview__reason}>
                     <select onChange={(e) => setReason(e.target.value)}>
-                        <option defaultValue="**を始めたい人におすすめ">
-                            **を始めたい人におすすめ
+                        <option defaultValue={`${specialty}を始めたい人におすすめ`}>
+                            {specialty}を始めたい人におすすめ
                         </option>
                         <option value="影響を受けたのはこの本！">影響を受けたのはこの本！</option>
                         <option value="難しいけどおすすめ">難しいけどおすすめ</option>
