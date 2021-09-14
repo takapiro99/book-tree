@@ -19,9 +19,13 @@ const db = admin.firestore()
 
 export const userOnCreate = functions.auth.user().onCreate(async (user) => {
     await db.runTransaction(async (transaction) => {
+        const photoURL = user?.photoURL?.includes('twimg')
+            ? user.photoURL.replace('normal', '400x400')
+            : user.photoURL
+
         transaction.set(db.collection('users').doc(user.uid), {
             uid: user.uid,
-            profileImage: user.photoURL,
+            profileImage: photoURL,
             displayName: user.displayName,
             gratePartList: [null, null, null],
             createdAt: dbType.FieldValue.serverTimestamp()
