@@ -103,7 +103,7 @@ const NewPost = ({ token }: { token: string }) => {
                 .then((success) => {
                     if (success) {
                         setPosted(true)
-                        successToast("投稿完了！")
+                        successToast('投稿完了！')
                         router.push('/')
                     } else {
                         // TODO: 失敗 toast
@@ -119,7 +119,7 @@ const NewPost = ({ token }: { token: string }) => {
                 .then((success) => {
                     if (success) {
                         setPosted(true)
-                        successToast("投稿完了！")
+                        successToast('投稿完了！')
                         router.push('/')
                     } else {
                         // 失敗 toast
