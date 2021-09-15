@@ -4,6 +4,7 @@ import Head from 'next/head'
 import { useContext } from 'react'
 import SignInWithTwitterOrGoogle from '../../components/auth/SignInWithTwitterOrGoogle'
 import { AuthContext } from '../../lib/AuthProvider'
+import { createTitle } from '../../lib/util'
 
 /* eslint @next/next/no-img-element:0 */
 
@@ -24,9 +25,7 @@ const SignIn = () => {
     // TODO: 既にサインインしていた場合どうするか考える
     return (
         <div style={{ height: '43.7vh' }}>
-            <Head>
-                <title>SignIn</title>
-            </Head>
+            <Head>{createTitle('ログイン')}</Head>
             <h1
                 style={{
                     textAlign: 'center',
