@@ -18,7 +18,13 @@ const isNullGradePart = (arr: (string | null | undefined)[]) => {
     return true
 }
 
-const ReviewPage = ({ uid, isMe = false }: { uid: string; isMe?: boolean }) => {
+interface IReviewPageProp {
+    uid: string
+    isMe?: boolean
+    setDisplayName: (name: string) => void
+}
+
+const ReviewPage = ({ uid, isMe = false, setDisplayName }: IReviewPageProp) => {
     // TODO: userInfoもbooksもサーバー側で取得しとく説ある
     const [isLoadingProfileAndBooks, setLoadingProfileAndBooks] = useState(true)
     const [targetUserInfo, setTargetUserInfo] = useState<null | UserInfo>(null)
@@ -29,6 +35,7 @@ const ReviewPage = ({ uid, isMe = false }: { uid: string; isMe?: boolean }) => {
         Promise.all([
             getUserInfo(uid).then((info) => {
                 setTargetUserInfo(info)
+                setDisplayName(info.displayName)
             }),
             getReviewsFromUser(uid)
                 .then((reviews) => {
