@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import styles from '../../styles/Setting.module.scss'
+import styles from '../styles/Setting.module.scss'
 
 import { useEffect, useState, useContext } from 'react'
 import { AuthContext } from '../lib/AuthProvider'
@@ -10,7 +10,7 @@ import GuardedRoute from '../components/auth/GuardedRoute'
 
 /* eslint @next/next/no-img-element:0 */
 
-const swap = <T,> (arr: T[], i1: number, i2: number) => {
+const swap = <T,>(arr: T[], i1: number, i2: number) => {
     const tmp = arr[i1]
     arr[i1] = arr[i2]
     arr[i2] = tmp
@@ -29,7 +29,7 @@ const orderingGratePartList = (gratePartList: (string | null | undefined)[] | un
 
 const Setting = () => {
     //const [books, setBooks] = useState<BooksProps[]>([])
-    const {userInfo, currentUser, isFetchingFirestoreUser } = useContext(AuthContext)
+    const { userInfo, currentUser, isFetchingFirestoreUser } = useContext(AuthContext)
     const [gratePartList, setGratePartList] = useState<(string | null | undefined)[]>([
         null,
         null,
@@ -86,65 +86,67 @@ const Setting = () => {
     return (
         <GuardedRoute waitFirestoreLoading={true}>
             <div className={styles.reviewformWrapper}>
-            <Head>{createTitle('setting')}</Head>
-            <div className="wrapper">
-                <form className="reviewform" onSubmit={handleSubmit}>
-                    <div className={`${styles.reviewformName} ${styles.blockbtwMd}`}>
-                        <div className={styles.reviewformName__block}>
-                            <div className={styles.reviewformName__namewrapper}>
-                                <div className={styles.reviewformName__name}>
-                                    {userInfo?.displayName}さん
+                <Head>{createTitle('setting')}</Head>
+                <div className="wrapper">
+                    <form className="reviewform" onSubmit={handleSubmit}>
+                        <div className={`${styles.reviewformName} ${styles.blockbtwMd}`}>
+                            <div className={styles.reviewformName__block}>
+                                <div className={styles.reviewformName__namewrapper}>
+                                    <div className={styles.reviewformName__name}>
+                                        {userInfo?.displayName}さん
+                                    </div>
+                                </div>
+                                <img
+                                    className={styles.reviewformName__icon}
+                                    src={userInfo?.profileImage}
+                                    alt=""
+                                ></img>
+                            </div>
+                        </div>
+                        <div className={styles.blockbtwMd}>
+                            <div className={styles.reviewform3keywords}>
+                                <h2>3つのキーワード</h2>
+                                <div className={styles.reviewform3keywords__example}>
+                                    例：北大2年 + カフェが好き + 漫画が好き
+                                </div>
+                                <div className={styles.reviewform3keywords__list}>
+                                    <input
+                                        className={styles.reviewform3keywords__3box}
+                                        name="threeWords_0"
+                                        value={gratePartList[0] || ''}
+                                        onChange={handleChangeInput}
+                                    />{' '}
+                                    <span className={styles.reviewform__plus}>
+                                        <i className="fas fa-plus"></i>{' '}
+                                    </span>
+                                    <input
+                                        className={styles.reviewform3keywords__3box}
+                                        name="threeWords_1"
+                                        value={gratePartList[1] || ''}
+                                        onChange={handleChangeInput}
+                                    />{' '}
+                                    <span className={styles.reviewform__plus}>
+                                        <i className="fas fa-plus"></i>
+                                    </span>
+                                    <input
+                                        className={styles.reviewform3keywords__3box}
+                                        name="threeWords_2"
+                                        value={gratePartList[2] || ''}
+                                        onChange={handleChangeInput}
+                                    />
                                 </div>
                             </div>
-                            <img
-                                className={styles.reviewformName__icon}
-                                src={userInfo?.profileImage}
-                                alt=""
-                            ></img>
                         </div>
-                    </div>
-                    <div className={styles.blockbtwMd}>
-                        <div className={styles.reviewform3keywords}>
-                            <h2>3つのキーワード</h2>
-                            <div className={styles.reviewform3keywords__example}>
-                                例：北大2年 + カフェが好き + 漫画が好き
-                            </div>
-                            <div className={styles.reviewform3keywords__list}>
-                                <input
-                                    className={styles.reviewform3keywords__3box}
-                                    name="threeWords_0"
-                                    value={gratePartList[0] || ''}
-                                    onChange={handleChangeInput}
-                                />{' '}
-                                <span className={styles.reviewform__plus}>
-                                    <i className="fas fa-plus"></i>{' '}
-                                </span>
-                                <input
-                                    className={styles.reviewform3keywords__3box}
-                                    name="threeWords_1"
-                                    value={gratePartList[1] || ''}
-                                    onChange={handleChangeInput}
-                                />{' '}
-                                <span className={styles.reviewform__plus}>
-                                    <i className="fas fa-plus"></i>
-                                </span>
-                                <input
-                                    className={styles.reviewform3keywords__3box}
-                                    name="threeWords_2"
-                                    value={gratePartList[2] || ''}
-                                    onChange={handleChangeInput}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div className={`${styles.reviewformBookselect} ${styles.blockbtwMd}`}></div>
+                        <div
+                            className={`${styles.reviewformBookselect} ${styles.blockbtwMd}`}
+                        ></div>
 
-                    <div className={styles.reviewformSubmit}>
-                        <button className={styles.submitButton}>決定</button>
-                    </div>
-                </form>
+                        <div className={styles.reviewformSubmit}>
+                            <button className={styles.submitButton}>決定</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
         </GuardedRoute>
     )
 }
