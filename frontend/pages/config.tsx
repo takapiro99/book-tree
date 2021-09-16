@@ -10,7 +10,7 @@ import GuardedRoute from '../components/auth/GuardedRoute'
 
 /* eslint @next/next/no-img-element:0 */
 
-const swap = (arr: any[], i1: number, i2: number) => {
+const swap = <T,> (arr: T[], i1: number, i2: number) => {
     const tmp = arr[i1]
     arr[i1] = arr[i2]
     arr[i2] = tmp
