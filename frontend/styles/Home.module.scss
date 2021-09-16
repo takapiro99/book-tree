@@ -94,7 +94,6 @@
     gap: 30px;
     margin-top: 80px;
 }
-
 .BookTreeForest {
     margin: -80px 1rem;
     background-image: url('../public/images/home/dot.svg');
@@ -119,7 +118,6 @@
     justify-content: center;
     //justify-content: space-between;
 }
-
 .BOOKTREEBtn {
     width: 300px;
     height: 50px;
@@ -146,9 +144,20 @@
         cursor: pointer;
     }
 }
-@media screen and (max-width: 380px) {
-    .topContent__staffTree {
-        position: relative;
+@media screen and (max-width: 940px) {
+    .littletreeWrapper3 {
+        display: none;
+        flex-direction: column;
+        gap: 30px;
+        margin-top: 80px;
+    }
+}
+@media screen and (max-width: 620px) {
+    .littletreeWrapper2 {
+        display: none;
+        flex-direction: column;
+        gap: 30px;
+        margin-top: 155px;
     }
 }
 @media screen and (max-width: 400px) {

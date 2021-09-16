@@ -16,8 +16,7 @@ import { errorToast, successToast } from '../lib/toasts'
 const NavBar = () => {
     const { signOut } = useContext(AuthContext)
     const router = useRouter()
-    const { currentUser } = useContext(AuthContext)
-
+    const { currentUser,userInfo } = useContext(AuthContext)
     const handleSignOut = () => {
         signOut().then(
             (res) => {
@@ -47,7 +46,7 @@ const NavBar = () => {
                         menuButton={
                             <img
                                 className={styles.icon}
-                                src={currentUser.photoURL as string}
+                                src={userInfo?.profileImage as string}
                                 id="icon"
                                 alt="icon"
                             />
