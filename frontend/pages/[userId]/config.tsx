@@ -6,6 +6,7 @@ import { AuthContext } from '../../lib/AuthProvider'
 import { updateGratePartList } from '../../lib/api'
 import { successToast } from '../../lib/toasts'
 import { createTitle } from '../../lib/util'
+import GuardedRoute from '../../components/auth/GuardedRoute'
 
 /* eslint @next/next/no-img-element:0 */
 
@@ -28,7 +29,7 @@ const orderingGratePartList = (gratePartList: (string | null | undefined)[] | un
 
 const Setting = () => {
     //const [books, setBooks] = useState<BooksProps[]>([])
-    const context = useContext(AuthContext)
+    const {userInfo, currentUser, isFetchingFirestoreUser } = useContext(AuthContext)
     const [gratePartList, setGratePartList] = useState<(string | null | undefined)[]>([
         null,
         null,
@@ -67,8 +68,8 @@ const Setting = () => {
     }
 
     const updateGratePartListFunc = async () => {
-        if (context.currentUser?.uid) {
-            const isOk = await updateGratePartList(context.currentUser?.uid, gratePartList)
+        if (currentUser?.uid) {
+            const isOk = await updateGratePartList(currentUser?.uid, gratePartList)
             if (isOk) {
                 successToast('保存に成功しました！')
             }
@@ -76,24 +77,15 @@ const Setting = () => {
     }
 
     useEffect(() => {
-        if (!context.isFetchingFirestoreUser && userInfo) {
-            console.log(userInfo)
+        if (!isFetchingFirestoreUser && userInfo) {
             orderingGratePartList(userInfo.gratePartList)
             setGratePartList(userInfo.gratePartList)
         }
-    }, [context.isFetchingFirestoreUser])
-
-    if (context.isFetchingFirestoreUser) {
-        return <h1>Loading...</h1>
-    }
-
-    const userInfo = context.userInfo
-    if (!userInfo) {
-        return null
-    }
+    }, [isFetchingFirestoreUser])
 
     return (
-        <div className={styles.reviewformWrapper}>
+        <GuardedRoute waitFirestoreLoading={true}>
+            <div className={styles.reviewformWrapper}>
             <Head>{createTitle('setting')}</Head>
             <div className="wrapper">
                 <form className="reviewform" onSubmit={handleSubmit}>
@@ -101,12 +93,12 @@ const Setting = () => {
                         <div className={styles.reviewformName__block}>
                             <div className={styles.reviewformName__namewrapper}>
                                 <div className={styles.reviewformName__name}>
-                                    {userInfo.displayName}さん
+                                    {userInfo?.displayName}さん
                                 </div>
                             </div>
                             <img
                                 className={styles.reviewformName__icon}
-                                src={userInfo.profileImage}
+                                src={userInfo?.profileImage}
                                 alt=""
                             ></img>
                         </div>
@@ -153,6 +145,7 @@ const Setting = () => {
                 </form>
             </div>
         </div>
+        </GuardedRoute>
     )
 }
 

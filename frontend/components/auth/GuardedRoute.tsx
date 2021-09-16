@@ -14,8 +14,8 @@ const GuardedRoute: React.FC<GuardedRouteProps> = ({ children, waitFirestoreLoad
     } else if (isFirstLoading) {
         return <></>
     }
-    
     if (currentUser) {
+        // firestoreからの取得を待つ
         if (!waitFirestoreLoading) {
             return <>{children}</>
         }
