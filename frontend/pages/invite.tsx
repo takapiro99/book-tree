@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form'
 import Head from 'next/head'
 import { errorToast } from '../lib/toasts'
 import { useRouter } from 'next/router'
+import { createTitle } from '../lib/util'
 
 /* eslint @next/next/no-img-element:0 */
 
@@ -56,9 +57,7 @@ const Invite = () => {
 
     return (
         <div className="container">
-            <Head>
-                <title>CreateLink</title>
-            </Head>
+            <Head>{createTitle('招待リンク作成')}</Head>
             <div>
                 <h1 className={styles.createLinkTitle}>お願いリンクを作る</h1>
                 <div className={styles.createLinkBlock}>

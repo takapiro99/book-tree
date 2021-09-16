@@ -5,16 +5,18 @@ import { useContext, useState, useEffect } from 'react'
 import GuardedRoute from '../../components/auth/GuardedRoute'
 import Review from '../../components/Review'
 import { AuthContext } from '../../lib/AuthProvider'
+import { createTitle } from '../../lib/util'
 
 // TODO: 色々やる
 // TODO: どこでユーザーが本物か確認する？
 
 const Mypage = () => {
-    const [loading, setLoading] = useState<boolean>(true)
     const router = useRouter()
-    const isReady = router.isReady // routerの準備が完了したか
-    const { userId } = router.query
     const { currentUser } = useContext(AuthContext)
+    const [loading, setLoading] = useState<boolean>(true)
+    const [displayName, setDisplayName] = useState('...')
+    const { userId } = router.query
+    const isReady = router.isReady // routerの準備が完了したか
 
     useEffect(() => {
         if (isReady) {
@@ -43,16 +45,19 @@ const Mypage = () => {
         // 自分のマイページを見ている場合
         return (
             <>
-                <Head>
-                    <title>Mypage</title>
-                </Head>
+                <Head>{createTitle(displayName)}</Head>
                 <GuardedRoute>
-                    <Review uid={userId} isMe={true} />
+                    <Review uid={userId} isMe={true} setDisplayName={setDisplayName} />
                 </GuardedRoute>
             </>
         )
     } else {
-        return <Review uid={userId} />
+        return (
+            <>
+                <Head>{createTitle(displayName)}</Head>
+                <Review uid={userId} setDisplayName={setDisplayName} />
+            </>
+        )
     }
 }
 

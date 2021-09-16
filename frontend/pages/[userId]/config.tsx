@@ -5,6 +5,7 @@ import { useEffect, useState, useContext } from 'react'
 import { AuthContext } from '../../lib/AuthProvider'
 import { updateGratePartList } from '../../lib/api'
 import { successToast } from '../../lib/toasts'
+import { createTitle } from '../../lib/util'
 
 /* eslint @next/next/no-img-element:0 */
 
@@ -93,9 +94,7 @@ const Setting = () => {
 
     return (
         <div className={styles.reviewformWrapper}>
-            <Head>
-                <title>Setting Page</title>
-            </Head>
+            <Head>{createTitle('setting')}</Head>
             <div className="wrapper">
                 <form className="reviewform" onSubmit={handleSubmit}>
                     <div className={`${styles.reviewformName} ${styles.blockbtwMd}`}>

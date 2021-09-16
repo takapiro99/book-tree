@@ -6,6 +6,7 @@ import { ReviewJoinedUser } from '../lib/types'
 import { fetchBooksToShowOnTopPage } from '../lib/api'
 /* eslint @next/next/no-img-element:0 */
 import Head from 'next/head'
+import { createImageTags, createTitle } from '../lib/util'
 
 export default function Home() {
     // 列ごとに状態を持つ
@@ -24,9 +25,7 @@ export default function Home() {
 
     return (
         <div>
-            <Head>
-                <title>TopPage</title>
-            </Head>
+            <Head>{createTitle('Home')}</Head>
             <div className="container">
                 <div className={styles.topContent}>
                     <div className={styles.topContent__staffTree}>
