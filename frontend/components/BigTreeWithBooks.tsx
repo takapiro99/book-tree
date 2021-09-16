@@ -19,9 +19,9 @@ const BigTreeWithBooks = ({ uid }: { uid: string }) => {
                 }
             })
             .catch((err) => {
-                errorToast(err)
+                errorToast(err.toString())
             })
-    }, []) // eslint-disable-line
+    }, [uid]) // eslint-disable-line
 
     return (
         <div className={styles.BigTreeWrapper}>

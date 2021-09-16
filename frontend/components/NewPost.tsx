@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useRouter } from 'next/dist/client/router'
-import { FormEvent, useEffect, useState } from 'react'
+import { FormEvent, useEffect, useState, useContext } from 'react'
 import { FaPlusCircle } from 'react-icons/fa'
 import Loader from 'react-loader-spinner'
 import {
@@ -14,6 +14,8 @@ import useDebounce from '../lib/useDebounce'
 import { NORA_QUERY } from '../pages/invitation/[token]'
 import styles from '../styles/ReviewForm.module.scss'
 import AddReview from './reviews/addReview'
+
+import { AuthContext } from '../lib/AuthProvider'
 
 /* eslint @next/next/no-img-element:0 */
 
@@ -56,6 +58,8 @@ const NewPost = ({ token, specialty }: { token: string; specialty: string }) => 
     const [posted, setPosted] = useState(false)
     const [title, setTitle] = useState<string>('')
     const debouncedValue = useDebounce<string>(title, 1000)
+
+    const { currentUser } = useContext(AuthContext)
 
     const fetchSuggestions = () => {
         if (debouncedValue) {
@@ -104,7 +108,7 @@ const NewPost = ({ token, specialty }: { token: string; specialty: string }) => 
                 if (success) {
                     setPosted(true)
                     successToast('投稿完了！')
-                    router.push('/')
+                    router.push(`/${currentUser?.uid || ''}`)
                 } else {
                     // TODO: 失敗 toastは呼び出し元で出してくれる
                 }
@@ -115,7 +119,7 @@ const NewPost = ({ token, specialty }: { token: string; specialty: string }) => 
                 if (success) {
                     setPosted(true)
                     successToast('投稿完了！')
-                    router.push('/')
+                    router.push(`/${currentUser?.uid || ''}`)
                 } else {
                     // 失敗 toastは呼び出し元で出してくれる
                 }

@@ -1,6 +1,6 @@
 import styles from '../styles/BrandLogo.module.scss'
 import Link from 'next/link'
-import { FaBook, FaTree, FaUserCog, FaSignOutAlt, FaSignInAlt } from 'react-icons/fa'
+import { FaBook, FaTree, FaUserCog, FaSignOutAlt, FaSignInAlt, FaRegSun } from 'react-icons/fa'
 import { useContext } from 'react'
 import { AuthContext } from '../lib/AuthProvider'
 import { Menu, MenuItem, MenuButton } from '@szhsin/react-menu'
@@ -26,7 +26,7 @@ const NavBar = () => {
             },
             (err) => {
                 console.error(err)
-                errorToast('ログアウト失敗！ｗ')
+                errorToast('ログアウトに失敗しました')
             }
         )
     }
@@ -63,6 +63,12 @@ const NavBar = () => {
                             onClick={() => router.push(currentUser ? `/${currentUser.uid}` : '')}
                         >
                             <FaTree /> &emsp;マイページ
+                        </MenuItem>
+                        <MenuItem
+                            disabled={!currentUser}
+                            onClick={() => router.push(currentUser ? `/config` : '')}
+                        >
+                            <FaRegSun /> &emsp;設定
                         </MenuItem>
                         <MenuItem disabled={!currentUser} onClick={handleSignOut}>
                             <FaSignOutAlt /> &emsp;ログアウト

@@ -1,17 +1,35 @@
 import Link from 'next/link'
-import { useContext, cloneElement } from 'react'
+import React, { useContext, cloneElement } from 'react'
 import { AuthContext } from '../../lib/AuthProvider'
 
-const GuardedRoute = ({ children, loading }: any) => {
-    const { currentUser, isFirstLoading } = useContext(AuthContext)
+interface GuardedRouteProps {
+    waitFirestoreLoading?: boolean
+}
+
+const GuardedRoute: React.FC<GuardedRouteProps> = ({ children, waitFirestoreLoading = false }) => {
+    const { currentUser, isFirstLoading, isFetchingFirestoreUser, userInfo } =
+        useContext(AuthContext)
     if (!isFirstLoading && !currentUser) {
         return <Link href="/auth/signin">sign in first.</Link>
     } else if (isFirstLoading) {
         return <></>
     }
     if (currentUser) {
-        return children
+        // firestoreからの取得を待つ
+        if (!waitFirestoreLoading) {
+            return <>{children}</>
+        }
+
+        // firestoreデータを取得中
+        if (isFetchingFirestoreUser) {
+            return <></>
+        }
+
+        if (userInfo) {
+            return <>{children}</>
+        }
     }
+
     throw new Error("couldn't guard route")
 }
 
