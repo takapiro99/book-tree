@@ -26,7 +26,7 @@ const NavBar = () => {
             },
             (err) => {
                 console.error(err)
-                errorToast('ログアウト失敗！ｗ')
+                errorToast('ログアウトに失敗しました')
             }
         )
     }

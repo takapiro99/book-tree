@@ -47,7 +47,7 @@ const Invite = () => {
                 setLoadingInvitationLink(false)
             })
             .catch((err) => {
-                errorToast(err)
+                errorToast(err.toString())
                 setLoadingInvitationLink(false)
             })
         // SetAddLink(reason)
