@@ -2,11 +2,11 @@ import Head from 'next/head'
 import styles from '../../styles/Setting.module.scss'
 
 import { useEffect, useState, useContext } from 'react'
-import { AuthContext } from '../../lib/AuthProvider'
-import { updateGratePartList } from '../../lib/api'
-import { successToast } from '../../lib/toasts'
-import { createTitle } from '../../lib/util'
-import GuardedRoute from '../../components/auth/GuardedRoute'
+import { AuthContext } from '../lib/AuthProvider'
+import { updateGratePartList } from '../lib/api'
+import { successToast } from '../lib/toasts'
+import { createTitle } from '../lib/util'
+import GuardedRoute from '../components/auth/GuardedRoute'
 
 /* eslint @next/next/no-img-element:0 */
 
