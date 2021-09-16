@@ -50,7 +50,7 @@ const ReviewPage = ({ uid, isMe = false, setDisplayName }: IReviewPageProp) => {
                 setLoadingProfileAndBooks(false)
                 errorToast(err.toString())
             })
-    }, []) // eslint-disable-line
+    }, [uid]) // eslint-disable-line
 
     useEffect(() => {
         if (reviews) {
