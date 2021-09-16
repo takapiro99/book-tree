@@ -53,17 +53,32 @@ const NavBar = () => {
                         }
                         transition
                         offsetY={10}
+                    
                     >
-                        <MenuItem onClick={() => router.push('/')}>
+                        <MenuItem onClick={() => router.push('/')} styles={{
+                            hover:{
+                                backgroundColor:"rgb(218, 241, 181)"
+                            }
+                        }}>
                             <FaBook /> &emsp;トップページ
                         </MenuItem>
                         <MenuItem
                             disabled={!currentUser}
+                            styles={{
+                                hover:{
+                                    backgroundColor:"rgb(218, 241, 181)"
+                                }
+                            }}
                             onClick={() => router.push(currentUser ? `/${currentUser.uid}` : '')}
                         >
                             <FaTree /> &emsp;マイページ
                         </MenuItem>
-                        <MenuItem disabled={!currentUser} onClick={handleSignOut}>
+                        <MenuItem disabled={!currentUser} onClick={handleSignOut}
+                        styles={{
+                            hover:{
+                                backgroundColor:"rgb(218, 241, 181)"
+                            }
+                        }}>
                             <FaSignOutAlt /> &emsp;ログアウト
                         </MenuItem>
                     </Menu>
@@ -80,7 +95,12 @@ const NavBar = () => {
                         transition
                         offsetY={10}
                     >
-                        <MenuItem onClick={() => router.push('/auth/signin')}>
+                        <MenuItem onClick={() => router.push('/auth/signin')}
+                        styles={{
+                            hover:{
+                                backgroundColor:"rgb(218, 241, 181)"
+                            }
+                        }}>
                             <FaSignInAlt /> &emsp;ログインする
                         </MenuItem>
                     </Menu>

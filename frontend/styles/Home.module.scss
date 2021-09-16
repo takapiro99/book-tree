@@ -58,50 +58,41 @@
     background-color: #6fa769;
     position: relative;
 }
-
-// .circleDate {
-//     position: absolute;
-//     width: 6rem;
-//     height: 6rem;
-//     border-radius: 50%;
-//     background-color: #91b522;
-//     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-//     left: 16%;
-//     top: -60px;
-//     .circleDate__date {
-//         color: white;
-//         padding: 1.8rem 1.6rem;
-//         font-size: 30px;
-//         font-weight: bold;
-//     }
-// }
-
 .littletreeWrapper {
     display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
-
-.littletreeWrapper2 {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    margin-top: 155px;
-}
-.littletreeWrapper3 {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    margin-top: 80px;
+    flex-wrap: wrap;
+    flex-direction: default;
+    justify-content: center;
+    gap: 5px;
+    > div {
+        width: calc((100% / 3) - 10px);
+        &:nth-child(3n) {
+            margin-top: 25px;
+            transform: translateY(35px);
+        }
+        &:nth-child(3n-1) {
+            margin-top: 25px;
+            transform: translateY(85px);
+        }
+        &:last-child {
+            opacity: 0;
+        }
+    }
 }
 .BookTreeForest {
-    margin: -80px 1rem;
     background-image: url('../public/images/home/dot.svg');
     background-repeat: space repeat;
     background-position: center center;
-    background-size: 47%;
+    background-size: 40%;
     position: relative;
-    .BookTreeForest__title {
+    margin-bottom: 0px;
+    .BookTreeForest__title1 {
+        background-color: white;
+        text-align: center;
+        margin: 0;
+        //font-size: 20px;
+    }
+    .BookTreeForest__title2 {
         background-color: white;
         text-align: center;
         margin: 0;
@@ -110,6 +101,7 @@
 }
 
 .forestWrapper {
+    margin-bottom: 100px;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -119,20 +111,21 @@
     //justify-content: space-between;
 }
 .BOOKTREEBtn {
-    width: 300px;
-    height: 50px;
+    width: 400px;
+    height: 70px;
     font-weight: 600;
     display: block;
     margin: 0 auto;
-    font-size: 1.3rem;
+    margin-top: 20px;
+    font-size: 1.6rem;
     text-align: center;
-    background-color: rgb(159, 207, 150);
+    background-color: rgba(255, 132, 115, 0.904);
     color: white;
     position: relative;
     border-radius: 100px;
-    padding-top: 10px;
+    padding-top: 18px;
     cursor: pointer;
-    box-shadow: 0 5px 0 #7c9b7f;
+    box-shadow: 0 6px 0 #ca7474;
     transition: 0.1s;
     border-radius: 30px;
     border: none;
@@ -140,29 +133,17 @@
     &:hover {
         transform: translateY(3px);
         text-decoration: none;
-        box-shadow: 0 2px 0 #3b5336;
+        box-shadow: 0 2px 0 #884d4d;
         cursor: pointer;
     }
 }
-@media screen and (max-width: 940px) {
-    .littletreeWrapper3 {
-        display: none;
-        flex-direction: column;
-        gap: 30px;
-        margin-top: 80px;
-    }
-}
-@media screen and (max-width: 620px) {
-    .littletreeWrapper2 {
-        display: none;
-        flex-direction: column;
-        gap: 30px;
-        margin-top: 155px;
-    }
-}
+
 @media screen and (max-width: 400px) {
     .topContent__introduce {
         font-size: 6px;
+    }
+    .topContentSteps__title {
+        font-size: 15px;
     }
     // importantで応急措置してます
     .topContentSteps__explain {
@@ -174,21 +155,53 @@
     .forestWrapper {
         display: flex;
         flex-direction: column;
-        margin-left: 10px;
-        width: 80%;
     }
+    // 上のコピペ
+    .littletreeWrapper {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: default;
+        justify-content: center;
+        gap: 5px;
+        > div {
+            width: calc((100% / 2) - 10px);
+            &:nth-child(3n) {
+                margin-top: 0px;
+                transform: translateY(0px);
+            }
+            &:nth-child(3n-1) {
+                margin-top: 0px;
+                transform: translateY(0px);
+            }
+            &:nth-child(2n) {
+                margin-top: 25px;
+                transform: translateY(65px);
+            }
+            &:last-child {
+                opacity: 0;
+            }
+        }
+    }
+
     .BookTreeForest {
-        background-size: 80%;
+        background-size: 45%;
     }
     .greenbar {
-        opacity: 0;
+        display: none;
     }
     .BOOKTREEBtn {
+        margin-top: -10px;
         width: 180px;
         height: 40px;
         font-size: 15px;
+        padding-top: 10px;
+        margin-bottom: 40px;
     }
-    .BookTreeForest {
-        margin-top: -300px;
+    .BookTreeForest__title1 {
+        padding-top: 15px;
+        font-size: 20px;
+    }
+    .BookTreeForest__title2 {
+        font-size: 6px;
     }
 }

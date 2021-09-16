@@ -1,16 +1,17 @@
 .littletree_pic {
+
     position: relative;
     // メイン画像の位置を動かす時
     z-index: 1000;
     img {
         //LittleTreeの大きさ
-        width: 300px;
+        width: 100%
     }
     .icon_pic {
         position: absolute;
         border-radius: 50%;
-        width: 80px;
-        height: 80px;
+        width: 70px;
+        height: 70px;
         left: 3vw;
         top: 4vw;
         border: solid 4px rgb(255, 214, 79);
@@ -21,7 +22,6 @@
             border-radius: 50%;
             z-index: 1000;
             transition: 0.3s;
-
             &:hover {
                 opacity: 0.5;
                 // transition: 0.5s;
@@ -45,6 +45,7 @@
         left: 130px;
         font-size: 1.5rem;
         top: 4vw;
+        font-weight: 500;
     }
 
     .review_img {
@@ -59,20 +60,22 @@
         }
     }
 }
+
 @media screen and (max-width: 400px) {
     .littletree_pic {
         img {
-            width: 150px;
+            width: 100%
         }
         .icon_pic {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
+            border: solid 3px rgb(255, 214, 79);
         }
         .name {
-            font-size: 12px;
+            font-size: 11px;
             left: 70px;
         }
-        .review_img{
+        .review_img {
             width: 40px;
             top: 80px;
         }

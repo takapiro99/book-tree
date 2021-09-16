@@ -1,17 +1,19 @@
 .reviewpageReview {
     // background-color: lightgray;
     position: relative;
-    &::before {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 120vh;
-        top: 45%;
-        right: 0;
-        clip-path: polygon(0 0, 100% 13%, 100% 100%, 0% 100%);
-        background-color: #f1f8dc;
-        z-index: -1;
-    }
+    background: linear-gradient(180deg, #ffffff 40%, #f1f8dc 70%, #ebf5cf 100%);
+    // &::before {
+    //     content: '';
+    //     position: absolute;
+    //     width: 100%;
+    //     height: 120vh;
+    //     top:　400px;
+    //     right: 0;
+    //     clip-path: polygon(0 0, 100% 13%, 100% 100%, 0% 100%);
+    //     background-color: #f1f8dc;
+
+    //     z-index: -1;
+    // }
 
     .reviewWrapper2 {
         margin-top: 0rem;
@@ -25,7 +27,7 @@
             justify-content: center;
             position: relative;
             .icon {
-                margin: 5% 0% 0 6%;
+                margin: 5% 0% 0 10%;
                 width: 6rem;
                 height: 6rem;
                 border-radius: 50%;
@@ -36,7 +38,7 @@
                 width: 60%;
                 text-align: center;
                 // TODO: スマホでfontsizeちょっとちっちゃくする
-                padding: 4% 1% 0 6%;
+                padding: 5% 1% 0 6%;
                 .reviewUserName__name {
                     font-size: 47px;
                     letter-spacing: 2px;
@@ -64,8 +66,20 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        position: relative;
         .reviewBlock__title {
             text-align: center;
+        }
+        &:before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 200px;
+            right: 0;
+            clip-path: polygon(0 0, 100% 10%, 100% 100%, 0% 100%);
+            background-color: #f1f8dc;
+            z-index: -1;
         }
     }
 

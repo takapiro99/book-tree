@@ -45,47 +45,47 @@
     // }
 }
 
-.navMenu {
-    position: absolute;
-    top: 70px;
-    right: 20px;
-    background-color: #a1bd4d;
-    width: 200px;
-    padding: 0;
-    box-shadow: 10px 10px rgb(205, 226, 110);
-    border-radius: 5px;
-    ul {
-        list-style: none;
-        align-items: center;
-        padding-left: 20px;
-        li {
-            cursor: pointer;
-            font-weight: bolder;
-            color: rgb(20, 20, 20);
-            opacity: 1;
-            padding: 10px 5px;
-            font-size: 15px;
-            align-items: center;
-            position: relative;
-        }
-        li::after {
-            position: absolute;
-            margin-left: 13px;
-            bottom: -2px;
-            left: 0;
-            content: '';
-            width: 90%;
-            height: 1.7px;
-            background: rgb(71, 71, 71);
-            transform: scale(0, 1);
-            transform-origin: left top;
-            transition: transform 0.4s;
-        }
-        li:hover::after {
-            transform: scale(1, 1);
-        }
-    }
-}
+// .navMenu {
+//     position: absolute;
+//     top: 70px;
+//     right: 20px;
+//     background-color: #8cbd4d;
+//     width: 200px;
+//     padding: 0;
+//     box-shadow: 10px 10px rgb(218, 241, 181);
+//     border-radius: 5px;
+//     ul {
+//         list-style: none;
+//         align-items: center;
+//         padding-left: 20px;
+//         li {
+//             cursor: pointer;
+//             font-weight: bolder;
+//             color: rgb(20, 20, 20);
+//             opacity: 1;
+//             padding: 10px 5px;
+//             font-size: 15px;
+//             align-items: center;
+//             position: relative;
+//         }
+//         li::after {
+//             position: absolute;
+//             margin-left: 13px;
+//             bottom: -2px;
+//             left: 0;
+//             content: '';
+//             width: 90%;
+//             height: 1.7px;
+//             background: rgb(71, 71, 71);
+//             transform: scale(0, 1);
+//             transform-origin: left top;
+//             transition: transform 0.4s;
+//         }
+//         li:hover::after {
+//             transform: scale(1, 1);
+//         }
+//     }
+// }
 @media screen and (max-width: 500px) {
     .booktree_logo {
         width: 150px;
@@ -98,7 +98,6 @@
     .icon {
         height: 35px;
     }
-    
 }
 // ul {
 //     display: flex;
