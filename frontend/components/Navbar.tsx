@@ -16,7 +16,7 @@ import { errorToast, successToast } from '../lib/toasts'
 const NavBar = () => {
     const { signOut } = useContext(AuthContext)
     const router = useRouter()
-    const { currentUser,userInfo } = useContext(AuthContext)
+    const { currentUser, userInfo } = useContext(AuthContext)
     const handleSignOut = () => {
         signOut().then(
             (res) => {
@@ -53,32 +53,37 @@ const NavBar = () => {
                         }
                         transition
                         offsetY={10}
-                    
                     >
-                        <MenuItem onClick={() => router.push('/')} styles={{
-                            hover:{
-                                backgroundColor:"rgb(218, 241, 181)"
-                            }
-                        }}>
+                        <MenuItem
+                            onClick={() => router.push('/')}
+                            styles={{
+                                hover: {
+                                    backgroundColor: 'rgb(218, 241, 181)'
+                                }
+                            }}
+                        >
                             <FaBook /> &emsp;トップページ
                         </MenuItem>
                         <MenuItem
                             disabled={!currentUser}
                             styles={{
-                                hover:{
-                                    backgroundColor:"rgb(218, 241, 181)"
+                                hover: {
+                                    backgroundColor: 'rgb(218, 241, 181)'
                                 }
                             }}
                             onClick={() => router.push(currentUser ? `/${currentUser.uid}` : '')}
                         >
                             <FaTree /> &emsp;マイページ
                         </MenuItem>
-                        <MenuItem disabled={!currentUser} onClick={handleSignOut}
-                        styles={{
-                            hover:{
-                                backgroundColor:"rgb(218, 241, 181)"
-                            }
-                        }}>
+                        <MenuItem
+                            disabled={!currentUser}
+                            onClick={handleSignOut}
+                            styles={{
+                                hover: {
+                                    backgroundColor: 'rgb(218, 241, 181)'
+                                }
+                            }}
+                        >
                             <FaSignOutAlt /> &emsp;ログアウト
                         </MenuItem>
                     </Menu>
@@ -87,7 +92,7 @@ const NavBar = () => {
                         menuButton={
                             <img
                                 className={styles.icon}
-                                src={'/images/foxIcon.png'}
+                                src={'/images/profile_icon.png'}
                                 id="icon"
                                 alt="icon"
                             />
@@ -95,12 +100,14 @@ const NavBar = () => {
                         transition
                         offsetY={10}
                     >
-                        <MenuItem onClick={() => router.push('/auth/signin')}
-                        styles={{
-                            hover:{
-                                backgroundColor:"rgb(218, 241, 181)"
-                            }
-                        }}>
+                        <MenuItem
+                            onClick={() => router.push('/auth/signin')}
+                            styles={{
+                                hover: {
+                                    backgroundColor: 'rgb(218, 241, 181)'
+                                }
+                            }}
+                        >
                             <FaSignInAlt /> &emsp;ログインする
                         </MenuItem>
                     </Menu>

@@ -11,10 +11,8 @@
     //     right: 0;
     //     clip-path: polygon(0 0, 100% 13%, 100% 100%, 0% 100%);
     //     background-color: #f1f8dc;
-
     //     z-index: -1;
     // }
-
     .reviewWrapper2 {
         margin-top: 0rem;
         margin-bottom: 5rem;
@@ -123,11 +121,11 @@
     padding: 1em 2em;
     width: 300px;
     min-width: 240px;
-    color: black;
+    color: white;
     font-size: 18px;
     font-weight: 700;
-    background-color: #cceeb8;
-    box-shadow: 0 5px 0 #b1cfa0;
+    background-color: rgb(255, 168, 157);
+    box-shadow: 0 6px 0 #ca7474;
     transition: 0.1s;
     border-radius: 30px;
     border: none;
@@ -135,7 +133,7 @@
     &:hover {
         transform: translateY(3px);
         text-decoration: none;
-        box-shadow: 0 2px 0 #aaaaaa;
+        box-shadow: 0 2px 0 #884d4d;
         cursor: pointer;
     }
 }
@@ -170,15 +168,15 @@
     position: relative;
 }
 
-.yellowgreenbar {
-    // margin: 4rem 0;
-    position: absolute;
-    top: 50%;
-    width: 100vw;
-    height: 3rem;
-    transform: rotate(8deg);
-    background-color: #6fa769;
-}
+// .yellowgreenbar {
+//     // margin: 4rem 0;
+//     position: absolute;
+//     top: 50%;
+//     width: 100vw;
+//     height: 3rem;
+//     transform: rotate(8deg);
+//     background-color: #6fa769;
+// }
 
 .reviewpageReviewBlock {
     display: flex;
@@ -232,7 +230,7 @@ $post-text-border: #bcaaa4;
     padding: 1rem;
     background-color: $post-text-background;
     border: 2px solid $post-text-border;
-    height: 10rem;
+    height: 8rem;
     border-radius: 8px;
     resize: none;
 }
@@ -255,3 +253,51 @@ $post-text-border: #bcaaa4;
     width: 80%;
 }
 // BookWithReviewに関するstyles 終わり
+@media screen and (max-width: 410px) {
+    .icon {
+        width: 80px !important;
+        height: 80px !important;
+    }
+    .reviewUserKeywords {
+        font-size: 10px !important;
+    }
+    .reviewUserName__name {
+        font-size: 20px !important;
+    }
+    .reviewBigTree {
+        font-size: 12px;
+        margin: 4rem 15% 2rem 15% !important;
+        width: 70%;
+        text-align: center;
+    }
+    .mypageButtons__button {
+        margin-top: 10px;
+        width: 200px;
+        font-size: 17px;
+    }
+    .reviewBlock__title {
+        font-size: 12px;
+    }
+    .topBtn {
+        position: fixed;
+        bottom: 5vh;
+        right: 3vw;
+        background-color: white;
+        //border:1px solid white;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        //font-size:51px;
+        .topBtn_icon {
+            font-size: 12px;
+        }
+        .topBtn_txt {
+            font-size: 10px;
+        }
+    }
+    .reviewpageReviewContent__comment {
+        margin-top: 0.5rem;
+        font-size: 10px;
+    }
+}

@@ -91,3 +91,10 @@
     // position: relative;
     z-index: -1;
 }
+@media screen and (max-width: 410px) {
+    .accountImg {
+        width: 30px !important;
+        height: 30px !important;
+        border: 1px solid rgb(255, 255, 254) !important;
+    }
+}

@@ -99,7 +99,7 @@ export default function Home() {
                             {books.map((book, index) => {
                                 return <LittleTree review={book} key={index} />
                             })}
-                            <div style={{height:100, opacity:0}} />
+                            <div style={{ height: 100, opacity: 0 }} />
                         </div>
                         {/* <div className={styles.littletreeWrapper2}>
                             {booksRow2.map((book, index) => {

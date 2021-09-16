@@ -58,7 +58,7 @@ const Invite = () => {
     return (
         <div className="container">
             <Head>{createTitle('招待リンク作成')}</Head>
-            <div>
+            <div className={styles.invitewrapper}>
                 <h1 className={styles.createLinkTitle}>お願いリンクを作る</h1>
                 <div className={styles.createLinkBlock}>
                     <img
@@ -75,7 +75,9 @@ const Invite = () => {
                                 {...register('reason')}
                                 // onChange={handleChange}
                             />
-                            <span>がすごいひとにお願いする</span>
+                            <span className={styles.createLinkBlock__text}>
+                                がすごいひとにお願いする
+                            </span>
                         </div>
                         <div className={styles.createButtonBlock}>
                             <button

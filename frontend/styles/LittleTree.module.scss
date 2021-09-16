@@ -1,11 +1,10 @@
 .littletree_pic {
-
     position: relative;
     // メイン画像の位置を動かす時
     z-index: 1000;
     img {
         //LittleTreeの大きさ
-        width: 100%
+        width: 100%;
     }
     .icon_pic {
         position: absolute;
@@ -64,7 +63,7 @@
 @media screen and (max-width: 400px) {
     .littletree_pic {
         img {
-            width: 100%
+            width: 100%;
         }
         .icon_pic {
             width: 45px;

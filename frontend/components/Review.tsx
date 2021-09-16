@@ -98,10 +98,7 @@ const ReviewPage = ({ uid, isMe = false, setDisplayName }: IReviewPageProp) => {
                         />
                         <div className={styles.reviewUserName}>
                             {/* <div>紹介してくれたのは・・・</div> */}
-                            <div className={styles.reviewUserName__name}>
-                                {userName}
-                                <span style={{ fontSize: '1rem' }}>さん</span>
-                            </div>
+                            <div className={styles.reviewUserName__name}>{userName}</div>
                             {isNullGradePart(targetUserInfo.gratePartList) ? (
                                 <div className={styles.reviewUserKeywords}>
                                     {targetUserInfo.gratePartList
