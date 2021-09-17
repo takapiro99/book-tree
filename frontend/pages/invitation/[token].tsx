@@ -126,7 +126,7 @@ const InviteReview = () => {
                         <span style={{ fontSize: '130%' }}>
                             {inviter ? inviter.displayName : '&nbsp;'}
                         </span>{' '}
-                        さんのBOOKTREEにあなたのレビューが実ります。
+                        さんのBOOK TREEにあなたのレビューが実ります。
                     </div>
                     <div className={styles.reviewSteps}>
                         <img src="/images/reviewImg.png" alt="レビューを書くと相手の木に実る" />
@@ -149,7 +149,7 @@ const InviteReview = () => {
             ) : (
                 <div className={styles.accontCreateFromRecom}>
                     <div>
-                        <h2 className={styles.title}>BOOKTREE を作る</h2>
+                        <h2 className={styles.title}>BOOK TREE を作る</h2>
                         <SignInWithTwitterOrGoogle />
                     </div>
                 </div>

@@ -144,6 +144,15 @@ const ReviewPage = ({ uid, isMe = false, setDisplayName }: IReviewPageProp) => {
                         {reviews.length ? (
                             <>
                                 <div style={{ textAlign: 'center' }}>{userName} の選んだ本たち</div>
+                                <div style={{ textAlign: 'center', marginTop: '50px' }}>
+                                    <Link href="/invitation/new">
+                                        <button
+                                            className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}
+                                        >
+                                            レビューを投稿する
+                                        </button>
+                                    </Link>
+                                </div>
                                 {reviews.map((review, i) => {
                                     return <BookWithReview key={i} review={review} isMe={isMe} />
                                 })}
@@ -153,15 +162,6 @@ const ReviewPage = ({ uid, isMe = false, setDisplayName }: IReviewPageProp) => {
                                 {targetUserInfo?.displayName} さんのレビューはまだありません！
                             </p>
                         )}
-                    </div>
-                    <div style={{ textAlign: 'center', marginTop: '50px' }}>
-                        <Link href="/invitation/new">
-                            <button
-                                className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}
-                            >
-                                レビューを投稿する
-                            </button>
-                        </Link>
                     </div>
                 </div>
 

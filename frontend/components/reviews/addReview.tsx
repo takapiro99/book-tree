@@ -1,5 +1,3 @@
-// TODO: ただコピペしただけ
-
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { FaPlusCircle } from 'react-icons/fa'
@@ -39,11 +37,13 @@ const AddReview = (props: AddReviewProps) => {
     return (
         <div className={`${styles.reviewformAddreview} ${styles.blockbtwMd}`}>
             <div className={styles.reviewformAddreviewBooks}>
-                <img src={book.Item.largeImageUrl} alt="" className={styles.selectedBookImage} />
-                {/* <Books bookImageURL="" bookLink="" displayType="bookOnly" userID="sakusaku" /> */}
-                <div className={styles.plus}>
-                    <FaPlusCircle />
-                </div>
+                <a href={book.Item.itemUrl} target="_blank">
+                    <img
+                        src={book.Item.largeImageUrl}
+                        alt=""
+                        className={styles.selectedBookImage}
+                    />
+                </a>
             </div>
             <div className={styles.reviewformAddreviewReview}>
                 <div className={styles.reviewformAddreviewReview__reason}>

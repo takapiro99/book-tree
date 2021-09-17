@@ -33,7 +33,7 @@ const BigTreeWithBooks = ({ uid }: { uid: string }) => {
                     books.map((book, i) => <BookOnBigTree review={book} key={i} />)
                 ) : (
                     <p style={{ textAlign: 'center', width: '100%' }}>
-                        まだ booktree に本が生えていないようだ
+                        まだBOOK TREEに本が生えていないようだ
                     </p>
                 )}
             </div>

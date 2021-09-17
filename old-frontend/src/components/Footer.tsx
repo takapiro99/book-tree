@@ -16,13 +16,13 @@ const Footer = () => {
             <span>&nbsp;</span>
             <Link to="/review/new">review編集/new</Link>
             <span>&nbsp;</span>
-            <Link to="/delete">BOOKTREE削除</Link>
+            <Link to="/delete">BOOK TREE削除</Link>
             <span>&nbsp;</span>
             <Link to="/invitation">依頼された時</Link>
             <span>&nbsp;</span>
             <Link to="/createLink">リンクを作る</Link>
             <span>&nbsp;</span>
-            <Link to="/createBookTree">BookTreeをつくる</Link>
+            <Link to="/createBookTree">BOOK TREEをつくる</Link>
             <span>&nbsp;</span>
             <Link to="/setting">設定</Link>
             <span>&nbsp;</span>
