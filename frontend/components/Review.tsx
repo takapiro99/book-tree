@@ -82,6 +82,17 @@ const ReviewPage = ({ uid, isMe = false, setDisplayName }: IReviewPageProp) => {
         <>
             <div className={styles.reviewpageReview}>
                 <div className={styles.reviewWrapper2}>
+                    <div className={styles.sharewrapper}>
+                        <div className={styles.Twittershare}>
+                            <img
+                                src="/twitter-blue.svg"
+                                alt="twitter icon"
+                                height={25}
+                                style={{ display: 'inline-block', marginRight: '15px' }}
+                            />
+                            share
+                        </div>
+                    </div>
                     <div className={styles.reviewUserBlock}>
                         <img
                             className={styles.icon}
@@ -103,15 +114,15 @@ const ReviewPage = ({ uid, isMe = false, setDisplayName }: IReviewPageProp) => {
                                 </div>
                             )}
                         </div>
+                        {/* <div className={styles.Twittershare}>
+                                <img
+                                        src="/twitter-blue.svg"
+                                        alt="twitter icon"
+                                        height={25}
+                                        style={{ display: 'inline-block', marginRight: '15px' }}/>
+                                share
+                        </div> */}
                     </div>
-                    {/* <div className={styles.reccomment}>
-                        <div className={styles.reccomment_content}>
-                            <RecComment comment="フロントエンド" />
-                            <RecComment comment="デザイン" />
-                            <RecComment comment="フロントエンド" />
-                        </div>
-                    </div> */}
-
                     <div className="blockbtwMd" />
 
                     {/* <div className={styles.reviewBigTree}>
