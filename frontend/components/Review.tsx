@@ -157,9 +157,20 @@ const ReviewPage = ({ uid, isMe = false, setDisplayName }: IReviewPageProp) => {
                                 })}
                             </>
                         ) : (
-                            <p style={{ textAlign: 'center' }}>
-                                {targetUserInfo?.displayName} さんのレビューはまだありません！
-                            </p>
+                            <div>
+                                <p style={{ textAlign: 'center' }}>
+                                    {targetUserInfo?.displayName} さんのレビューはまだありません！
+                                </p>
+                                <div style={{ textAlign: 'center', marginTop: '50px' }}>
+                                    <Link href="/invitation/new">
+                                        <button
+                                            className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}
+                                        >
+                                            レビューを投稿する
+                                        </button>
+                                    </Link>
+                                </div>
+                            </div>
                         )}
                     </div>
                 </div>

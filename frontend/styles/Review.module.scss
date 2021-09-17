@@ -1,5 +1,8 @@
 .reviewpageReview {
     // background-color: lightgray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     position: relative;
     background: linear-gradient(180deg, #ffffff 40%, #f1f8dc 70%, #ebf5cf 100%);
     // &::before {
@@ -115,6 +118,7 @@
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 100px;
+    margin-top: 150px;
 }
 .mypageButtons__button {
     margin: 0 auto;
@@ -235,11 +239,6 @@ $post-text-border: #bcaaa4;
     resize: none;
 }
 
-.reviewpageReview {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
 .mypageNews {
     display: flex;
     justify-content: center;
@@ -266,8 +265,8 @@ $post-text-border: #bcaaa4;
     }
     .reviewBigTree {
         font-size: 12px;
-        margin: 4rem 15% 2rem 15% !important;
-        width: 70%;
+        margin: 4rem 0 2rem !important;
+        width: 100%;
         text-align: center;
     }
     .mypageButtons__button {

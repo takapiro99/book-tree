@@ -23,12 +23,19 @@ const BigTreeWithBooks3D = ({ uid }: { uid: string }) => {
                 errorToast(err.toString())
             })
     }, [uid]) // eslint-disable-line
-
-    return (
-        <div className={styles.BigTreeWrapper3D}>
-            <ThreeTree books={books}></ThreeTree>
-        </div>
-    )
+    if (books.length) {
+        return (
+            <div className={styles.BigTreeWrapper3D}>
+                <ThreeTree books={books}></ThreeTree>
+            </div>
+        )
+    } else {
+        return (
+            <p style={{ textAlign: 'center', marginTop: '50px' }}>
+                まだ BOOK TREE が生えていないようだ…
+            </p>
+        )
+    }
 }
 
 export default BigTreeWithBooks3D
