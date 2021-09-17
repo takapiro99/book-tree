@@ -126,7 +126,7 @@ const ReviewPage = ({ uid, isMe = false, setDisplayName }: IReviewPageProp) => {
                         <div>{userName} のところに集まった本たち</div>
                         {/* // SSR無効化する場合 */}
 
-                        <ThreeTree />
+                        <ThreeTree books={reviews} />
                     </div>
                     <div className={styles.mypageButtons}>
                         <Link href={`/invite`}>
