@@ -179,7 +179,7 @@ const Sample = ({ books }: { books: ReviewJoinedUser[] }) => {
         camera.position.set(6.5, 3, 6.5)
 
         loader.load(
-            '/tree.gltf',
+            '/tree2.gltf',
             // called when the resource is loaded
             (gltf) => {
                 scene.add(gltf.scene)
