@@ -6,18 +6,26 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { errorToast } from '../lib/toasts'
 import { ReviewJoinedUser } from '../lib/types'
 
-const meshID2url: any = {}
+// TODO
+// 木の裏側にある本がクリックできてしまう
+// 404 not foundが多い
+// resize周り
+
+type PickedObjectType = THREE.Mesh<THREE.BufferGeometry, THREE.MeshBasicMaterial>
+const meshID2url = new Map<string, { type: 'book' | 'icon'; link: string }>()
 class PickHelper {
-    raycaster: any
-    pickedObject: any
-    pickedObjectSavedColor: any
+    raycaster: THREE.Raycaster
+    pickedObject: PickedObjectType | null | undefined
 
     constructor() {
         this.raycaster = new THREE.Raycaster()
         this.pickedObject = null
-        this.pickedObjectSavedColor = 0
     }
-    pick(normalizedPosition: any, scene: any, camera: any) {
+    pick(
+        normalizedPosition: { x: number; y: number },
+        scene: THREE.Scene,
+        camera: THREE.PerspectiveCamera
+    ) {
         // restore the color if there is a picked object
         if (this.pickedObject) {
             this.pickedObject.material.opacity = 1
@@ -27,16 +35,23 @@ class PickHelper {
         // cast a ray through the frustum
         this.raycaster.setFromCamera(normalizedPosition, camera)
         // get the list of objects the ray intersected
-        console.log(scene.getObjectByName("book"))
-        const intersectedObjects = this.raycaster.intersectObjects(scene.getObjectByName("book"), true)
+        const bookManager = scene.getObjectByName('bookManager')
+        const intersectedObjects = bookManager
+            ? this.raycaster.intersectObjects(bookManager.children, true)
+            : []
         if (intersectedObjects.length) {
             // pick the first object. It's the closest one
-            this.pickedObject = intersectedObjects[0].object
+            this.pickedObject = intersectedObjects[0].object as PickedObjectType
             this.pickedObject.material.opacity = 0.8
         }
     }
 
-    pickClick(normalizedPosition: any, scene: any, camera: any) {
+    pickClick(
+        normalizedPosition: { x: number; y: number },
+        scene: THREE.Scene,
+        camera: THREE.PerspectiveCamera,
+        controls: OrbitControls
+    ) {
         // restore the color if there is a picked object
         if (this.pickedObject) {
             this.pickedObject = undefined
@@ -45,17 +60,21 @@ class PickHelper {
         // cast a ray through the frustum
         this.raycaster.setFromCamera(normalizedPosition, camera)
         // get the list of objects the ray intersected
-        console.log("click")
-        console.log(scene.getObjectByName("book"))
-        const intersectedObjects = this.raycaster.intersectObjects(scene.getObjectByName("book"), true)
+        const bookManager = scene.getObjectByName('bookManager')
+        const intersectedObjects = bookManager
+            ? this.raycaster.intersectObjects(bookManager.children, true)
+            : []
         if (intersectedObjects.length) {
             // pick the first object. It's the closest one
-            this.pickedObject = intersectedObjects[0].object
-            const {type, link} = meshID2url[this.pickedObject.uuid]
-            if (type === "book") {
-                window.open(link, '_blank')
-            } else if (type === "icon") {
-                location.href = link
+            this.pickedObject = intersectedObjects[0].object as PickedObjectType
+            const urlObject = meshID2url.get(this.pickedObject.uuid)
+            if (!urlObject) return
+            if (urlObject.type === 'book') {
+                window.open(urlObject.link, '_blank')
+                controls.saveState()
+                controls.reset()
+            } else if (urlObject.type === 'icon') {
+                location.href = urlObject.link
             }
         }
     }
@@ -87,8 +106,12 @@ const Sample = ({ books }: { books: ReviewJoinedUser[] }) => {
         scene.background = new THREE.Color(0xcce0ff)
         scene.fog = new THREE.Fog(0xcce0ff, 500, 10000)
 
-        const createBook = (book: any, theta: number) => {
-            const r = 4.5
+        const bookManager = new THREE.Object3D()
+        bookManager.name = 'bookManager'
+        scene.add(bookManager)
+
+        const createBook = (book: ReviewJoinedUser, theta: number) => {
+            const r = 4.7
             const imageURL = `https://quiet-bayou-57256.herokuapp.com/${book.bookImageURL}`
             const profileImage = `https://quiet-bayou-57256.herokuapp.com/${book.user.profileImage}`
             const mypageLink = `/${book.uid}`
@@ -103,33 +126,33 @@ const Sample = ({ books }: { books: ReviewJoinedUser[] }) => {
                     transparent: true
                 })
                 const bookMesh = new THREE.Mesh(geometryBook, materialBook)
-                
+
                 textureLoader.load(profileImage, (texture) => {
-                    const geometryIcon = new THREE.CircleGeometry( 0.4, 64 );
-                    const materialIcon = new THREE.MeshBasicMaterial( {
+                    const geometryIcon = new THREE.CircleGeometry(0.4, 64)
+                    const materialIcon = new THREE.MeshBasicMaterial({
                         map: texture,
                         transparent: true
-                    });
-                    const iconMesh = new THREE.Mesh( geometryIcon, materialIcon );
+                    })
+                    const iconMesh = new THREE.Mesh(geometryIcon, materialIcon)
                     iconMesh.position.x = 1
                     iconMesh.position.y = -1
                     iconMesh.position.z = 0.1
                     bookMesh.add(iconMesh)
 
-                    bookMesh.position.y = 5
+                    bookMesh.position.y = 4.2
                     bookMesh.position.x = r * Math.sin(theta)
                     bookMesh.position.z = r * Math.cos(theta)
                     bookMesh.rotateY(theta)
-                    bookMesh.name = "book"
-                    scene.add(bookMesh)
-                    meshID2url[bookMesh.uuid] = {
+                    bookMesh.name = 'book'
+                    bookManager.add(bookMesh)
+                    meshID2url.set(bookMesh.uuid, {
                         type: 'book',
                         link: book.bookLink
-                    }
-                    meshID2url[iconMesh.uuid] = {
+                    })
+                    meshID2url.set(iconMesh.uuid, {
                         type: 'icon',
                         link: mypageLink
-                    }
+                    })
                 })
             })
         }
@@ -153,19 +176,16 @@ const Sample = ({ books }: { books: ReviewJoinedUser[] }) => {
         light.shadow.camera.far = 1000
         scene.add(light)
 
-        camera.position.x = 5
-        camera.position.z = 5
-        camera.position.y = 4
-        camera.lookAt(new THREE.Vector3(0, 10, 0))
+        camera.position.set(6.5, 3, 6.5)
 
         loader.load(
             '/tree.gltf',
             // called when the resource is loaded
-            (gltf: any) => {
+            (gltf) => {
                 scene.add(gltf.scene)
             },
             undefined,
-            (error: any) => {
+            (error) => {
                 console.error(error)
                 errorToast('3D モデルのロードに失敗しました。')
             }
@@ -180,12 +200,17 @@ const Sample = ({ books }: { books: ReviewJoinedUser[] }) => {
         })
 
         const controls = new OrbitControls(camera, renderer.domElement)
+        controls.target = new THREE.Vector3(0, 2.5, 0)
+        controls.maxPolarAngle = Math.PI * 0.5
+        controls.minPolarAngle = Math.PI * 0.4
+        controls.minDistance = 7
+        controls.maxDistance = 14
 
         // pick
         const pickPosition = { x: 0, y: 0 }
         clearPickPosition()
 
-        function getCanvasRelativePosition(event: any) {
+        function getCanvasRelativePosition(event: MouseEvent) {
             const rect = canvas.getBoundingClientRect()
             return {
                 x: ((event.clientX - rect.left) * canvas.width) / rect.width,
@@ -193,7 +218,7 @@ const Sample = ({ books }: { books: ReviewJoinedUser[] }) => {
             }
         }
 
-        function setPickPosition(event: any) {
+        function setPickPosition(event: MouseEvent) {
             const pos = getCanvasRelativePosition(event)
             pickPosition.x = (pos.x / canvas.width) * 2 - 1
             pickPosition.y = (pos.y / canvas.height) * -2 + 1 // note we flip Y
@@ -211,11 +236,9 @@ const Sample = ({ books }: { books: ReviewJoinedUser[] }) => {
         window.addEventListener('mouseleave', clearPickPosition)
         window.addEventListener('mousedown', (e) => {
             setPickPosition(e)
-            pickHelper.pickClick(pickPosition, scene, camera)
+            pickHelper.pickClick(pickPosition, scene, camera, controls)
         })
 
-        controls.update()
-        renderer.render(scene, camera)
         handleResize({ camera, renderer, canvas })
         function render() {
             pickHelper.pick(pickPosition, scene, camera)
