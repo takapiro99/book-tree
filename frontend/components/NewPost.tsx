@@ -8,7 +8,7 @@ import {
     postReviewsIndividual,
     postReviewsInvitation
 } from '../lib/api'
-import { errorToast, successToast } from '../lib/toasts'
+import { errorToast, successToast, warningToast } from '../lib/toasts'
 import { PostReview, RakutenBookItem, RakutenResponse } from '../lib/types'
 import useDebounce from '../lib/useDebounce'
 import { NORA_QUERY } from '../pages/invitation/[token]'
@@ -83,6 +83,8 @@ const NewPost = ({ token, specialty }: { token: string; specialty: string }) => 
     }
 
     const handleSelectSuggestion = (book: RakutenBookItem) => {
+        console.log(suggestions)
+        console.log([...suggestions].filter((b) => b.Item.itemUrl !== book.Item.itemUrl))
         setSuggestions([...suggestions].filter((b) => b.Item.itemUrl !== book.Item.itemUrl))
         setSelectedBooks([...selectedBooks, book])
     }
@@ -102,6 +104,24 @@ const NewPost = ({ token, specialty }: { token: string; specialty: string }) => 
 
     const handlePost = (e: FormEvent) => {
         e.preventDefault()
+        if (!draftData.length) {
+            warningToast('一冊以上選択してください！')
+            return
+        }
+        if (
+            draftData
+                .map((draft) => {
+                    if (!draft.content || !draft.reason) {
+                        return false
+                    }
+                    return true
+                })
+                .filter(Boolean).length !== draftData.length
+        ) {
+            warningToast('全て埋めてから投稿してね！')
+            return
+        }
+
         setPosting(true)
         if (isNora) {
             postReviewsIndividual(draftData).then((success) => {
@@ -130,71 +150,69 @@ const NewPost = ({ token, specialty }: { token: string; specialty: string }) => 
 
     return (
         <div className={styles.reviewformWrapper}>
-            <div>
-                <form className="reviewform" onSubmit={handlePost}>
-                    <div className={`${styles.reviewformBookselect} ${styles.blockbtwMd}`}>
-                        <h2>本を選ぶ</h2>
-                        <div className={styles.reviewformBookselect__block}>
-                            <input
-                                type="text"
-                                className={styles.reviewformBookselect__input}
-                                placeholder="本のタイトルを入力する"
-                                name="searchBookTitle"
-                                value={title}
-                                onChange={SearchBooks}
-                            />
-                            <div className={styles.reviewformBookselectResult}>
-                                <div className={styles.suggestedBooksContainer}>
-                                    {suggestions.length ? (
-                                        suggestions.map((b, i) => (
-                                            <div
-                                                key={i}
-                                                className={styles.suggestedBook}
-                                                onClick={() => handleSelectSuggestion(b)}
-                                            >
-                                                <img src={b.Item.largeImageUrl} alt="" />
-                                                <div className={styles.plus}>
-                                                    <FaPlusCircle size={35} />
-                                                </div>
+            <form className="reviewform" onSubmit={handlePost}>
+                <div className={`${styles.reviewformBookselect} ${styles.blockbtwMd}`}>
+                    <h2>本を選ぶ</h2>
+                    <div className={styles.reviewformBookselect__block}>
+                        <input
+                            type="text"
+                            className={styles.reviewformBookselect__input}
+                            placeholder="本のタイトルを入力する"
+                            name="searchBookTitle"
+                            value={title}
+                            onChange={SearchBooks}
+                        />
+                        <div className={styles.reviewformBookselectResult}>
+                            <div className={styles.suggestedBooksContainer}>
+                                {suggestions.length ? (
+                                    suggestions.map((b, i) => (
+                                        <div
+                                            key={i}
+                                            className={styles.suggestedBook}
+                                            onClick={() => handleSelectSuggestion(b)}
+                                        >
+                                            <img src={b.Item.largeImageUrl} alt="" />
+                                            <div className={styles.plus}>
+                                                <FaPlusCircle size={35} />
                                             </div>
-                                        ))
-                                    ) : (
-                                        <p>検索してね</p>
-                                    )}
-                                </div>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <p>検索してね</p>
+                                )}
                             </div>
                         </div>
                     </div>
-                    {selectedBooks.length ? (
-                        selectedBooks.map((book, i) => {
-                            return (
-                                <AddReview
-                                    index={i}
-                                    book={book}
-                                    key={book.Item.isbn}
-                                    removeOnceSelectedBook={removeOnceSelectedBook}
-                                    draftData={draftData}
-                                    setDraftData={setDraftData}
-                                    update={update}
-                                    specialty={specialty}
-                                />
-                            )
-                        })
-                    ) : (
-                        <p>選択してね</p>
+                </div>
+                {selectedBooks.length ? (
+                    selectedBooks.map((book, i) => {
+                        return (
+                            <AddReview
+                                index={i}
+                                book={book}
+                                key={book.Item.isbn}
+                                removeOnceSelectedBook={removeOnceSelectedBook}
+                                draftData={draftData}
+                                setDraftData={setDraftData}
+                                update={update}
+                                specialty={specialty}
+                            />
+                        )
+                    })
+                ) : (
+                    <p>選択してね</p>
+                )}
+                <div className={styles.reviewformSubmit}>
+                    <button className={styles.submitButton} disabled={posted} type="submit">
+                        決定
+                    </button>
+                    {isPosting && (
+                        <span style={{ position: 'absolute', top: 10, right: '30%' }}>
+                            <Loader type="Oval" color="#00BFFF" height={25} width={25} />
+                        </span>
                     )}
-                    <div className={styles.reviewformSubmit}>
-                        <button className={styles.submitButton} disabled={posted} type="submit">
-                            決定
-                        </button>
-                        {isPosting && (
-                            <span style={{ position: 'absolute', top: 10, right: '30%' }}>
-                                <Loader type="Oval" color="#00BFFF" height={25} width={25} />
-                            </span>
-                        )}
-                    </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     )
 }

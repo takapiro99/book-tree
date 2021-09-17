@@ -32,13 +32,13 @@
         z-index: 0;
     }
 }
-
 .nominateBlock {
-    //background-color: lightgray;
-    padding: 1vh 0;
+    // background-color: lightgray;
+    padding: 1vh 0 10vh;
     .nominateReasonWrapper {
         .nominateBlock__reason {
             //background-color: aqua;
+            font-weight: bold;
             font-size: 3rem;
             text-align: center;
         }
@@ -84,5 +84,13 @@
         text-align: center;
         margin-top: 2rem;
         margin-bottom: 1rem;
+    }
+}
+@media screen and (max-width: 400px) {
+    .nominateBlock {
+        .nominateBlock__reason {
+            font-size: 1.7rem !important;
+            text-align: center;
+        }
     }
 }
