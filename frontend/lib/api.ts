@@ -4,6 +4,7 @@ import { errorToast } from './toasts'
 import { UserInfo, ReviewJoinedUser, Invitation, RakutenResponse, PostReview } from './types'
 
 export const fetchBooksToShowOnTopPage: () => Promise<ReviewJoinedUser[]> = async () => {
+    // TODO: await は try catch!　エラーハンドリング！
     const querySnapshotReview = await db
         .collection('reviews')
         .where('createdAt', '!=', false)

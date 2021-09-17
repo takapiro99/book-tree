@@ -6,27 +6,28 @@ import { ReviewJoinedUser } from '../lib/types'
 import { fetchBooksToShowOnTopPage } from '../lib/api'
 /* eslint @next/next/no-img-element:0 */
 import Head from 'next/head'
+import { createImageTags, createTitle } from '../lib/util'
 
 export default function Home() {
     // 列ごとに状態を持つ
+    const [books, setBooks] = useState<ReviewJoinedUser[]>([])
     const [booksRow1, setBooksRow1] = useState<ReviewJoinedUser[]>([])
     const [booksRow2, setBooksRow2] = useState<ReviewJoinedUser[]>([])
     const [booksRow3, setBooksRow3] = useState<ReviewJoinedUser[]>([])
     useEffect(() => {
         const f = async () => {
-            const books = await fetchBooksToShowOnTopPage()
-            setBooksRow1(books.slice(0, 3))
-            setBooksRow2(books.slice(3, 6))
-            setBooksRow3(books.slice(6, 9))
+            const _books = await fetchBooksToShowOnTopPage()
+            setBooks(_books)
+            setBooksRow1(_books.slice(0, 3))
+            setBooksRow2(_books.slice(3, 6))
+            setBooksRow3(_books.slice(6, 9))
         }
         f()
     }, [])
 
     return (
         <div>
-            <Head>
-                <title>TopPage</title>
-            </Head>
+            <Head>{createTitle('Home')}</Head>
             <div className="container">
                 <div className={styles.topContent}>
                     <div className={styles.topContent__staffTree}>
@@ -44,7 +45,7 @@ export default function Home() {
                     <div className={styles.topContent__introduce}>
                         <h1>周りにいるすごい人、</h1>
                         <h1>どんな本読んでいるんだろう？</h1>
-                        あなたのすごいと思う人が読んでる本を集めてBOOKTREEをつくろう！
+                        あなたのすごいと思う人が読んでる本を集めてBOOK TREEをつくろう！
                         新しくやってみたいこと、ずっとやりたいと思っていたこと、知らなかったことに出会う機会
                         直接人と出会うことが難しい時代 新しい形でつながり学ぼう！
                     </div>
@@ -59,7 +60,7 @@ export default function Home() {
                         {/* TODO: booktreeをつくろう、は分かりにくそう */}
                         <div className={styles.topContentSteps__explain}>BOOK TREEをつくろう</div>
                         <div className={styles.topContentSteps__explainS}>
-                            無料でアカウントを作成して、BOOKTREEをつくろう
+                            無料でアカウントを作成して、BOOK TREEをつくろう
                         </div>
                     </div>
                     <div className={styles.topContentSteps__block}>
@@ -85,20 +86,22 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <p className={styles.BOOKTREEBtn}>BOOKTREEを作成する</p>
+                <p className={styles.BOOKTREEBtn}>BOOK TREEを作成する</p>
             </div>
             <div className={styles.greenbar} />
             <div className="container">
                 <div className={styles.BookTreeForest}>
-                    <h1 className={styles.BookTreeForest__title}>what&apos;s new?</h1>
+                    <h1 className={styles.BookTreeForest__title1}>what&apos;s new?</h1>
+                    <p className={styles.BookTreeForest__title2}>最近レビューしてくれた人たち</p>
                     {/* <img className={styles.shiori} src="/images/home/shiori.png" alt="shiori" /> */}
                     <div className={styles.forestWrapper}>
                         <div className={styles.littletreeWrapper}>
-                            {booksRow1.map((book, index) => {
+                            {books.map((book, index) => {
                                 return <LittleTree review={book} key={index} />
                             })}
+                            <div style={{ height: 100, opacity: 0 }} />
                         </div>
-                        <div className={styles.littletreeWrapper2}>
+                        {/* <div className={styles.littletreeWrapper2}>
                             {booksRow2.map((book, index) => {
                                 return <LittleTree review={book} key={index} />
                             })}
@@ -107,7 +110,7 @@ export default function Home() {
                             {booksRow3.map((book, index) => {
                                 return <LittleTree review={book} key={index} />
                             })}
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

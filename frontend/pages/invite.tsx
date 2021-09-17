@@ -6,6 +6,8 @@ import { useForm } from 'react-hook-form'
 import Head from 'next/head'
 import { errorToast } from '../lib/toasts'
 import { useRouter } from 'next/router'
+import { createTitle } from '../lib/util'
+import GuardedRoute from '../components/auth/GuardedRoute'
 
 /* eslint @next/next/no-img-element:0 */
 
@@ -29,7 +31,6 @@ const Invite = () => {
     }
 
     const onSubmit = (data: any) => {
-        console.log(data)
         makeLink(data.reason)
     }
 
@@ -46,7 +47,7 @@ const Invite = () => {
                 setLoadingInvitationLink(false)
             })
             .catch((err) => {
-                errorToast(err)
+                errorToast(err.toString())
                 setLoadingInvitationLink(false)
             })
         // SetAddLink(reason)
@@ -55,64 +56,64 @@ const Invite = () => {
     }
 
     return (
-        <div className="container">
-            <Head>
-                <title>CreateLink</title>
-            </Head>
-            <div>
-                <h1 className={styles.createLinkTitle}>お願いリンクを作る</h1>
-                <div className={styles.createLinkBlock}>
-                    <img
-                        src="/images/mediumBookTree.png"
-                        alt="ブックツリー"
-                        className={styles.createLinkBlock__tree}
-                    />
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <div className={styles.createLinkBlock__input}>
-                            <input
-                                className={styles.createLinkBlock__reason}
-                                placeholder="なにがすごい？"
-                                // value={reason}
-                                {...register('reason')}
-                                // onChange={handleChange}
-                            />
-                            <span>がすごいひとにお願いする</span>
-                        </div>
-                        <div className={styles.createButtonBlock}>
-                            <button
-                                disabled={
-                                    (inviteLink.length ? true : false) || loadingInvitationLink
-                                }
-                                type="submit"
-                                className={styles.createButtonBlock__button}
-                            >
-                                作成
-                            </button>
-                        </div>
-                    </form>
-                </div>
-                {loadingInvitationLink && <p>loading...</p>}
-            </div>
-            {inviteLink.length ? (
-                <div className={styles.linkcopy}>
-                    <p className={styles.link}>URL</p>
-                    <input
-                        className={styles.url}
-                        type="text"
-                        name="link "
-                        placeholder="作成されたURLが表示されます"
-                        readOnly
-                        value={inviteLink}
-                        ref={inputRef}
-                    />
-                    <div className={styles.copyicon}>
-                        {/* TODO: focusがあたるようにしたい */}
-                        <FaCopy size="30" color="#777" onClick={handleCopy} />
+        <GuardedRoute>
+            <div className="container">
+                <Head>{createTitle('招待リンク作成')}</Head>
+                <div>
+                    <h1 className={styles.createLinkTitle}>お願いリンクを作る</h1>
+                    <div className={styles.createLinkBlock}>
+                        <img
+                            src="/images/mediumBookTree.png"
+                            alt="ブックツリー"
+                            className={styles.createLinkBlock__tree}
+                        />
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            <div className={styles.createLinkBlock__input}>
+                                <input
+                                    className={styles.createLinkBlock__reason}
+                                    placeholder="なにがすごい？"
+                                    // value={reason}
+                                    {...register('reason')}
+                                    // onChange={handleChange}
+                                />
+                                <span>がすごいひとにお願いする</span>
+                            </div>
+                            <div className={styles.createButtonBlock}>
+                                <button
+                                    disabled={
+                                        (inviteLink.length ? true : false) || loadingInvitationLink
+                                    }
+                                    type="submit"
+                                    className={styles.createButtonBlock__button}
+                                >
+                                    作成
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                    <p style={{ textAlign: 'center', color: 'green' }}>{copyStatus}</p>
+                    {loadingInvitationLink && <p>loading...</p>}
                 </div>
-            ) : null}
-        </div>
+                {inviteLink.length ? (
+                    <div className={styles.linkcopy}>
+                        <p className={styles.link}>URL</p>
+                        <input
+                            className={styles.url}
+                            type="text"
+                            name="link "
+                            placeholder="作成されたURLが表示されます"
+                            readOnly
+                            value={inviteLink}
+                            ref={inputRef}
+                        />
+                        <div className={styles.copyicon}>
+                            {/* TODO: focusがあたるようにしたい */}
+                            <FaCopy size="30" color="#777" onClick={handleCopy} />
+                        </div>
+                        <p style={{ textAlign: 'center', color: 'green' }}>{copyStatus}</p>
+                    </div>
+                ) : null}
+            </div>
+        </GuardedRoute>
     )
 }
 

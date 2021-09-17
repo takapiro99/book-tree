@@ -3,12 +3,14 @@ import styles from '../styles/Review.module.scss'
 import { FaArrowCircleUp, FaBullhorn } from 'react-icons/fa'
 import RecComment from './RecComment'
 import BigTreeWithBooks from './BigTreeWithBooks'
+import BigTreeWithBooks3D from './BigTreeWithBooks3D'
 import Link from 'next/link'
 import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../lib/AuthProvider'
 import { getReviewsFromUser, getUserInfo } from '../lib/api'
 import { ReviewJoinedUser, UserInfo } from '../lib/types'
 import { errorToast } from '../lib/toasts'
+
 /*  eslint @next/next/no-img-element:0 */
 
 const isNullGradePart = (arr: (string | null | undefined)[]) => {
@@ -18,7 +20,13 @@ const isNullGradePart = (arr: (string | null | undefined)[]) => {
     return true
 }
 
-const ReviewPage = ({ uid, isMe = false }: { uid: string; isMe?: boolean }) => {
+interface IReviewPageProp {
+    uid: string
+    isMe?: boolean
+    setDisplayName: (name: string) => void
+}
+
+const ReviewPage = ({ uid, isMe = false, setDisplayName }: IReviewPageProp) => {
     // TODO: userInfoもbooksもサーバー側で取得しとく説ある
     const [isLoadingProfileAndBooks, setLoadingProfileAndBooks] = useState(true)
     const [targetUserInfo, setTargetUserInfo] = useState<null | UserInfo>(null)
@@ -29,6 +37,7 @@ const ReviewPage = ({ uid, isMe = false }: { uid: string; isMe?: boolean }) => {
         Promise.all([
             getUserInfo(uid).then((info) => {
                 setTargetUserInfo(info)
+                setDisplayName(info.displayName)
             }),
             getReviewsFromUser(uid)
                 .then((reviews) => {
@@ -41,9 +50,9 @@ const ReviewPage = ({ uid, isMe = false }: { uid: string; isMe?: boolean }) => {
             .then(() => setLoadingProfileAndBooks(false))
             .catch((err) => {
                 setLoadingProfileAndBooks(false)
-                errorToast(err)
+                errorToast(err.toString())
             })
-    }, []) // eslint-disable-line
+    }, [uid]) // eslint-disable-line
 
     useEffect(() => {
         if (reviews) {
@@ -71,16 +80,6 @@ const ReviewPage = ({ uid, isMe = false }: { uid: string; isMe?: boolean }) => {
 
     return (
         <>
-            {/* <div className={globalStyles.wrapper}> */}
-            {/* 本の情報を複数渡す */}
-            {/* </div> */}
-            {/* <div className={styles.mypageNews}>
-                <div className={styles.mypageNews__news}>
-                    <FaBullhorn />
-                    <a href="#review">お願いしていたレビューが届いたよ！</a>
-                </div>
-            </div> */}
-
             <div className={styles.reviewpageReview}>
                 <div className={styles.reviewWrapper2}>
                     <div className={styles.reviewUserBlock}>
@@ -91,10 +90,7 @@ const ReviewPage = ({ uid, isMe = false }: { uid: string; isMe?: boolean }) => {
                         />
                         <div className={styles.reviewUserName}>
                             {/* <div>紹介してくれたのは・・・</div> */}
-                            <div className={styles.reviewUserName__name}>
-                                {userName}
-                                <span style={{ fontSize: '1rem' }}>さん</span>
-                            </div>
+                            <div className={styles.reviewUserName__name}>{userName}</div>
                             {isNullGradePart(targetUserInfo.gratePartList) ? (
                                 <div className={styles.reviewUserKeywords}>
                                     {targetUserInfo.gratePartList
@@ -118,10 +114,17 @@ const ReviewPage = ({ uid, isMe = false }: { uid: string; isMe?: boolean }) => {
 
                     <div className="blockbtwMd" />
 
-                    <div className={styles.reviewBigTree}>
+                    {/* <div className={styles.reviewBigTree}>
                         <h1>{userName} のBook Tree</h1>
                         <div>{userName} のところに集まった本たち</div>
                         <BigTreeWithBooks uid={uid} />
+                    </div> */}
+                    <div className={styles.reviewBigTree}>
+                        <h1>{userName} のBook Tree</h1>
+                        <div>{userName} のところに集まった本たち</div>
+                        {/* // SSR無効化する場合 */}
+
+                        <BigTreeWithBooks3D uid={uid} />
                     </div>
                     <div className={styles.mypageButtons}>
                         <Link href={`/invite`}>
@@ -140,24 +143,35 @@ const ReviewPage = ({ uid, isMe = false }: { uid: string; isMe?: boolean }) => {
                         {reviews.length ? (
                             <>
                                 <div style={{ textAlign: 'center' }}>{userName} の選んだ本たち</div>
+                                <div style={{ textAlign: 'center', marginTop: '50px' }}>
+                                    <Link href="/invitation/new">
+                                        <button
+                                            className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}
+                                        >
+                                            レビューを投稿する
+                                        </button>
+                                    </Link>
+                                </div>
                                 {reviews.map((review, i) => {
                                     return <BookWithReview key={i} review={review} isMe={isMe} />
                                 })}
                             </>
                         ) : (
-                            <p style={{ textAlign: 'center' }}>
-                                {targetUserInfo?.displayName} さんのレビューはまだありません！
-                            </p>
+                            <div>
+                                <p style={{ textAlign: 'center' }}>
+                                    {targetUserInfo?.displayName} さんのレビューはまだありません！
+                                </p>
+                                <div style={{ textAlign: 'center', marginTop: '50px' }}>
+                                    <Link href="/invitation/new">
+                                        <button
+                                            className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}
+                                        >
+                                            レビューを投稿する
+                                        </button>
+                                    </Link>
+                                </div>
+                            </div>
                         )}
-                    </div>
-                    <div style={{ textAlign: 'center', marginTop: '50px' }}>
-                        <Link href="/invitation/new">
-                            <button
-                                className={`${styles.mypageButtons__button} ${styles.buttonWhite}`}
-                            >
-                                レビューを投稿する
-                            </button>
-                        </Link>
                     </div>
                 </div>
 

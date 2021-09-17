@@ -11,6 +11,7 @@ import styles from '../../styles/invitation.module.scss'
 import Head from 'next/head'
 import Link from 'next/link'
 import { errorToast } from '../../lib/toasts'
+import { createTitle } from '../../lib/util'
 /* eslint @next/next/no-img-element:0 */
 
 // TODO: SSR にしたい
@@ -44,7 +45,7 @@ const InviteReview = () => {
                     })
                     .catch((err) => {
                         setErr(err)
-                        errorToast(err)
+                        errorToast(err.toString())
                         setLoadingInvitation(false)
                     })
             }
@@ -70,20 +71,21 @@ const InviteReview = () => {
 
     if (err || isInvalidInvitation) {
         return (
-            <div style={{ textAlign: 'center' }}>
-                <p>無効な招待です</p>
-                <p>
-                    <Link href="/">Top に戻る</Link>
-                </p>
-            </div>
+            <>
+                <Head>{createTitle('無効な招待')}</Head>
+                <div style={{ textAlign: 'center' }}>
+                    <p>無効な招待です</p>
+                    <p>
+                        <Link href="/">Top に戻る</Link>
+                    </p>
+                </div>
+            </>
         )
     }
 
     return (
         <div className={`${styles.nominateBlock} container`}>
-            <Head>
-                <title>InviteReview</title>
-            </Head>
+            <Head>{createTitle('レビュー作成')}</Head>
             <div className={styles.nominateReasonWrapper}>
                 {!isNora ? (
                     <h2 className={styles.nominateBlock__reason}>
@@ -124,7 +126,7 @@ const InviteReview = () => {
                         <span style={{ fontSize: '130%' }}>
                             {inviter ? inviter.displayName : '&nbsp;'}
                         </span>{' '}
-                        さんのBOOKTREEにあなたのレビューが実ります。
+                        さんのBOOK TREEにあなたのレビューが実ります。
                     </div>
                     <div className={styles.reviewSteps}>
                         <img src="/images/reviewImg.png" alt="レビューを書くと相手の木に実る" />
@@ -133,7 +135,7 @@ const InviteReview = () => {
             )}
             {currentUser ? (
                 isNora ? (
-                    <NewPost token={NORA_QUERY} specialty={invitation?.specialty as string} />
+                    <NewPost token={NORA_QUERY} specialty="" />
                 ) : (
                     invitation?.token && (
                         <NewPost
@@ -147,7 +149,7 @@ const InviteReview = () => {
             ) : (
                 <div className={styles.accontCreateFromRecom}>
                     <div>
-                        <h2 className={styles.title}>BOOKTREE を作る</h2>
+                        <h2 className={styles.title}>BOOK TREE を作る</h2>
                         <SignInWithTwitterOrGoogle />
                     </div>
                 </div>

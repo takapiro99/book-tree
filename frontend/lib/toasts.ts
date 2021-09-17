@@ -16,6 +16,9 @@ export const successToast = (msg: string) => {
 export const infoToast = (msg: string) => {
     toast.info(msg, toastOption)
 }
+export const warningToast = (msg: string) => {
+    toast.warn(msg, toastOption)
+}
 export const errorToast = (msg: string) => {
     toast.error(msg, toastOption)
 }

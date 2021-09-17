@@ -37,3 +37,8 @@
     margin-bottom: 12vw;
     margin-top: 12vw;
 }
+@media only screen and (max-width: 410px) {
+    .centerTitle {
+        font-size: 2rem;
+    }
+}

@@ -18,7 +18,7 @@
     background-color: #1d9bf0;
     color: white;
     font-weight: 700;
-    box-shadow: 0 5px 0 #354980;
+    box-shadow: 0 5px 0 #5d70a5;
     transition: 0.1s;
     border-radius: 30px;
     border: none;
@@ -31,15 +31,15 @@
     &:hover {
         transform: translateY(3px);
         text-decoration: none;
-        box-shadow: 0 2px 0 #1b293f;
+        box-shadow: 0 2px 0 #3a4f72;
         cursor: pointer;
     }
 }
 .Google {
-    background-color: gray;
+    background-color: rgb(151, 151, 151);
     color: white;
     font-weight: 700;
-    box-shadow: 0 5px 0 #3f4446;
+    box-shadow: 0 5px 0 #5d6162;
     transition: 0.1s;
     border-radius: 30px;
     border: none;
@@ -49,5 +49,32 @@
         text-decoration: none;
         box-shadow: 0 2px 0 #111213;
         cursor: pointer;
+    }
+}
+.loginBOOKTREE {
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 30px;
+}
+.signinwrapper {
+    height: 60vh;
+}
+@media screen and (max-width: 410px) {
+    .Twitter {
+        width: 250px;
+        height: 45px;
+        font-size: 15px;
+        margin-bottom: 20px;
+    }
+    .Google {
+        width: 250px;
+        height: 45px;
+        font-size: 15px;
+    }
+    .loginBOOKTREE {
+        font-size: 18px;
+    }
+    .signinwrapper {
+        height: 68vh;
     }
 }

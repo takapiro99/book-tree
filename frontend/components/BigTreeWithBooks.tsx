@@ -19,9 +19,9 @@ const BigTreeWithBooks = ({ uid }: { uid: string }) => {
                 }
             })
             .catch((err) => {
-                errorToast(err)
+                errorToast(err.toString())
             })
-    }, []) // eslint-disable-line
+    }, [uid]) // eslint-disable-line
 
     return (
         <div className={styles.BigTreeWrapper}>
@@ -33,7 +33,7 @@ const BigTreeWithBooks = ({ uid }: { uid: string }) => {
                     books.map((book, i) => <BookOnBigTree review={book} key={i} />)
                 ) : (
                     <p style={{ textAlign: 'center', width: '100%' }}>
-                        まだ booktree に本が生えていないようだ
+                        まだBOOK TREEに本が生えていないようだ
                     </p>
                 )}
             </div>

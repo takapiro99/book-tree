@@ -30,7 +30,7 @@ const InviteReview = () => {
                 </div>
 
                 <div className={styles.nominateExplation}>
-                    レビューを書いてくれると＊＊＊さんのBOOKTREEにあなたのレビューが実ります。
+                    レビューを書いてくれると＊＊＊さんのBOOK　TREEにあなたのレビューが実ります。
                 </div>
 
                 <div className={styles.reviewSteps}>
