@@ -6,6 +6,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { errorToast } from '../lib/toasts'
 import { ReviewJoinedUser } from '../lib/types'
 
+const meshID2url: any = {}
 class PickHelper {
     raycaster: any
     pickedObject: any
@@ -19,7 +20,7 @@ class PickHelper {
     pick(normalizedPosition: any, scene: any, camera: any, time: any) {
         // restore the color if there is a picked object
         if (this.pickedObject) {
-            this.pickedObject.material.emissive.setHex(this.pickedObjectSavedColor)
+            this.pickedObject.material.opacity = 1
             this.pickedObject = undefined
         }
 
@@ -30,10 +31,26 @@ class PickHelper {
         if (intersectedObjects.length) {
             // pick the first object. It's the closest one
             this.pickedObject = intersectedObjects[0].object
-            // save its color
-            this.pickedObjectSavedColor = this.pickedObject.material.emissive.getHex()
-            // set its emissive color to flashing red/yellow
-            this.pickedObject.material.emissive.setHex((time * 8) % 2 > 1 ? 0xffff00 : 0xff0000)
+            this.pickedObject.material.opacity = 0.8
+        }
+    }
+
+    pickClick(normalizedPosition: any, scene: any, camera: any) {
+        // restore the color if there is a picked object
+        if (this.pickedObject) {
+            this.pickedObject = undefined
+        }
+
+        // cast a ray through the frustum
+        this.raycaster.setFromCamera(normalizedPosition, camera)
+        // get the list of objects the ray intersected
+        const intersectedObjects = this.raycaster.intersectObjects(scene.children)
+        if (intersectedObjects.length) {
+            // pick the first object. It's the closest one
+            this.pickedObject = intersectedObjects[0].object
+            const bookLink = meshID2url[this.pickedObject.uuid]
+            location.href = bookLink
+            console.log(this.pickedObject)
         }
     }
 }
@@ -54,22 +71,23 @@ const Sample = ({ books }: { books: ReviewJoinedUser[] }) => {
         // init scene
         const scene = new Scene()
 
-        const createBook = (bookScenes: any[], imageURL: string, theta: number) => {
+        const createBook = (book: any, theta: number) => {
             const r = 4.5
-            console.log(theta)
+            console.log(book)
+            const imageURL = `https://quiet-bayou-57256.herokuapp.com/${book.bookImageURL}`
             const texture = new THREE.TextureLoader().load(imageURL, () => {
                 const width = texture.image.width
                 const height = texture.image.height
                 const ratio = height / width
                 const geometry = new THREE.BoxGeometry(1.5, 1.5 * ratio, 0.1)
-                const material = new THREE.MeshBasicMaterial({ map: texture })
+                const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, })
                 const cube = new THREE.Mesh(geometry, material)
                 cube.position.y = 4
                 cube.position.x = r * Math.sin(theta)
                 cube.position.z = r * Math.cos(theta)
                 cube.rotateY(theta)
                 scene.add(cube)
-                bookScenes.push(cube)
+                meshID2url[cube.uuid] = book.bookLink
             })
         }
 
@@ -126,24 +144,15 @@ const Sample = ({ books }: { books: ReviewJoinedUser[] }) => {
             }
         )
 
-        // TODO 画像を読みこんで表示する
+        // TODO
         // ...  ユーザーアイコンと合わせる
         // ...  クリックしてリンクを飛ばせるようにする。
         // ...  適切な位置に配置する
         // ...  textureLoaderを使う
 
-        const threeCubeBooks: any[] = []
-        const urls: any[] = []
-        const url = `https://quiet-bayou-57256.herokuapp.com/${books[0].bookImageURL}`
-        const url2 = `https://quiet-bayou-57256.herokuapp.com/${books[1].bookImageURL}`
-        const url3 = `https://quiet-bayou-57256.herokuapp.com/${books[2].bookImageURL}`
         // const url = `https://pbs.twimg.com/profile_images/1268541932541804544/pTEgObfP_400x400.jpg`
-        const indexes = [0, 1, 2]
-        urls.push(url)
-        urls.push(url2)
-        urls.push(url3)
-        indexes.forEach((index) => {
-            createBook(threeCubeBooks, urls[index], (index / indexes.length) * (2 * Math.PI))
+        books.forEach((book, index) => {
+            createBook(book, (index / books.length) * (2 * Math.PI))
         })
 
         const controls = new OrbitControls(camera, renderer.domElement)
@@ -167,29 +176,32 @@ const Sample = ({ books }: { books: ReviewJoinedUser[] }) => {
         }
 
         function clearPickPosition() {
-            // unlike the mouse which always has a position
-            // if the user stops touching the screen we want
-            // to stop picking. For now we just pick a value
-            // unlikely to pick something
             pickPosition.x = -100000
             pickPosition.y = -100000
         }
 
+        const pickHelper = new PickHelper()
+
         window.addEventListener('mousemove', setPickPosition)
         window.addEventListener('mouseout', clearPickPosition)
         window.addEventListener('mouseleave', clearPickPosition)
-
-        const pickHelper = new PickHelper()
+        window.addEventListener('mousedown', (e) => {
+            console.log("click")
+            setPickPosition(e)
+            pickHelper.pickClick(pickPosition, scene, camera);
+        })
 
         controls.update()
         renderer.render(scene, camera)
         handleResize({ camera, renderer, canvas })
-        function animate() {
-            requestAnimationFrame(animate)
+        function render(time: any) {
+            time *= 0.001;  // convert to seconds;
+            pickHelper.pick(pickPosition, scene, camera, time);
             renderer.render(scene, camera)
             controls.update()
+            requestAnimationFrame(render);
         }
-        animate()
+        requestAnimationFrame(render);
     }
 
     const handleResize = ({
