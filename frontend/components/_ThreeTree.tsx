@@ -27,10 +27,10 @@ const Sample = ({ books }: { books: ReviewJoinedUser[] }) => {
                 const width = texture.image.width
                 const height = texture.image.height
                 const ratio = height / width
-                const geometry = new THREE.BoxGeometry(2, 2 * ratio, 0.1)
+                const geometry = new THREE.BoxGeometry(1.5, 1.5 * ratio, 0.1)
                 const material = new THREE.MeshBasicMaterial({ map: texture })
                 const cube = new THREE.Mesh(geometry, material)
-                cube.position.y = 10
+                cube.position.y = 5
                 scene.add(cube)
                 bookScenes.push(cube)
             })
@@ -103,8 +103,7 @@ const Sample = ({ books }: { books: ReviewJoinedUser[] }) => {
 
         const threeCubeBooks: any[] = []
         const urls: any[] = []
-        // const url = `https://no--cors.herokuapp.com/?url=${books[0].bookImageURL}`
-        const url = `https://no--cors.herokuapp.com/?url=https://pbs.twimg.com/profile_images/1268541932541804544/pTEgObfP_400x400.jpg`
+        const url = `https://quiet-bayou-57256.herokuapp.com/${books[0].bookImageURL}`
         // const url = `https://pbs.twimg.com/profile_images/1268541932541804544/pTEgObfP_400x400.jpg`
         urls.push(url)
         console.log(urls[0])
