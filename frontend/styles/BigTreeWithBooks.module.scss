@@ -11,10 +11,11 @@
 }
 
 .BigTreeWrapper3D {
-    width: 100%;
+    width: 80%;
     padding: 5rem 0 8rem;
     height: 55vh;
-    margin: 3rem auto;
+    display: inline-block;
+    text-align: center;
 }
 
 .books_wrapper {
@@ -23,9 +24,15 @@
     justify-content: space-between;
     right: 10px;
 }
-@media screen and (max-width: 410px) {
+@media screen and (max-width: 420px) {
     .BigTreeWrapper {
         padding: 5rem 0rem 8rem 0;
         margin: 0rem 0;
+    }
+    .BigTreeWrapper3D {
+        width: 100%;
+        padding: 0rem 0 0rem;
+        height: 55vh;
+        margin: 3rem auto;
     }
 }
