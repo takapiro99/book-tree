@@ -14,8 +14,8 @@ const Sample = ({ hoge }: { hoge: boolean }) => {
             return
         }
         const loader = new GLTFLoader()
-        const width = window.innerWidth
-        const height = window.innerHeight
+        const width = canvas.clientWidth
+        const height = canvas.clientHeight
 
         // init scene
         const scene = new Scene()
@@ -36,7 +36,7 @@ const Sample = ({ hoge }: { hoge: boolean }) => {
         scene.background = new THREE.Color(0xcce0ff)
         scene.fog = new THREE.Fog(0xcce0ff, 500, 10000)
         // resize
-        window.addEventListener('resize', () => handleResize({ camera, renderer }))
+        window.addEventListener('resize', () => handleResize({ camera, renderer, canvas }))
 
         const light2 = new THREE.AmbientLight(0x666666, 1) // soft white light
         scene.add(light2)
@@ -92,7 +92,9 @@ const Sample = ({ hoge }: { hoge: boolean }) => {
         )
 
         // instantiate a loader
-        const imageLoader = new THREE.ImageLoader()
+        const texture = new THREE.TextureLoader().load('images/BigBookTree.png');
+        const material = new THREE.MeshBasicMaterial( { map: texture } );
+        
 
         // load a image resource
         // TODO 画像を読みこんで表示する
@@ -100,62 +102,57 @@ const Sample = ({ hoge }: { hoge: boolean }) => {
         // ...  クリックしてリンクを飛ばせるようにする。
         // ...  適切な位置に配置する
         // ...  textureLoaderを使う
-        imageLoader.load(
-            // resource URL
-            'images/BigBookTree.png',
+        // imageLoader.load(
+        //     // resource URL
+        //     'images/BigBookTree.png',
 
-            // onLoad callback
-            function (image) {
-                // use the image, e.g. draw part of it on a canvas
-                scene.add(image)
-            },
+        //     // onLoad callback
+        //     function (image) {
+        //         // use the image, e.g. draw part of it on a canvas
+        //         scene.add(image)
+        //     },
 
-            // onProgress callback currently not supported
-            undefined,
+        //     // onProgress callback currently not supported
+        //     undefined,
 
-            // onError callback
-            function () {
-                console.error('An error happened.')
-            }
-        )
+        //     // onError callback
+        //     function () {
+        //         console.error('An error happened.')
+        //     }
+        // )
 
         const controls = new OrbitControls(camera, renderer.domElement)
 
         controls.update()
         renderer.render(scene, camera)
-        handleResize({ camera, renderer })
+        handleResize({ camera, renderer, canvas })
         function animate() {
             requestAnimationFrame(animate)
             renderer.render(scene, camera)
             controls.update()
         }
         animate()
-        // renderer.render(scene, camera)
     }
 
-    // handle resize
-    // const handleResize = ({ camera, renderer }: HandleCameraAspectParams) => {
     const handleResize = ({
         camera,
-        renderer
+        renderer,
+        canvas
     }: {
         camera: PerspectiveCamera
         renderer: WebGLRenderer
+        canvas: HTMLCanvasElement
     }) => {
-        // TODO: 幅と高さを決めてアスペクト比を出して渡す
-        const width = window.innerWidth
-        const height = window.innerHeight
-        // camera.aspect = width / width
-        camera.aspect = 1
+        let width = canvas.parentElement?.clientWidth || 0
+        let height = canvas.parentElement?.clientHeight || 0
+        camera.aspect = width / height
         camera.updateProjectionMatrix()
-        // renderer.setSize(width, height)
-        renderer.setSize(width - 30, 400)
+        renderer.setSize(width, height)
     }
     useEffect(() => {
         return () => window.removeEventListener('resize', () => handleResize)
     })
-
-    return <canvas ref={onCanvasLoaded} />
+    return <canvas ref={onCanvasLoaded} id="canvas" />
 }
 
 export default Sample
