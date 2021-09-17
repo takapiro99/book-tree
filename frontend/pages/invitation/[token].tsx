@@ -45,7 +45,7 @@ const InviteReview = () => {
                     })
                     .catch((err) => {
                         setErr(err)
-                        errorToast(err)
+                        errorToast(err.toString())
                         setLoadingInvitation(false)
                     })
             }
