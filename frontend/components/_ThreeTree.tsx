@@ -27,8 +27,8 @@ class PickHelper {
         // cast a ray through the frustum
         this.raycaster.setFromCamera(normalizedPosition, camera)
         // get the list of objects the ray intersected
-        console.log(scene.children)
-        const intersectedObjects = this.raycaster.intersectObjects(scene.children, true)
+        console.log(scene.getObjectByName("book"))
+        const intersectedObjects = this.raycaster.intersectObjects(scene.getObjectByName("book"), true)
         if (intersectedObjects.length) {
             // pick the first object. It's the closest one
             this.pickedObject = intersectedObjects[0].object
@@ -36,7 +36,7 @@ class PickHelper {
         }
     }
 
-    pickClick(normalizedPosition: any, scene: any, camera: any, clear?: any) {
+    pickClick(normalizedPosition: any, scene: any, camera: any) {
         // restore the color if there is a picked object
         if (this.pickedObject) {
             this.pickedObject = undefined
@@ -45,13 +45,14 @@ class PickHelper {
         // cast a ray through the frustum
         this.raycaster.setFromCamera(normalizedPosition, camera)
         // get the list of objects the ray intersected
-        const intersectedObjects = this.raycaster.intersectObjects(scene.children, true)
+        console.log("click")
+        console.log(scene.getObjectByName("book"))
+        const intersectedObjects = this.raycaster.intersectObjects(scene.getObjectByName("book"), true)
         if (intersectedObjects.length) {
             // pick the first object. It's the closest one
             this.pickedObject = intersectedObjects[0].object
             const {type, link} = meshID2url[this.pickedObject.uuid]
             if (type === "book") {
-                clear()
                 window.open(link, '_blank')
             } else if (type === "icon") {
                 location.href = link
@@ -119,6 +120,7 @@ const Sample = ({ books }: { books: ReviewJoinedUser[] }) => {
                     bookMesh.position.x = r * Math.sin(theta)
                     bookMesh.position.z = r * Math.cos(theta)
                     bookMesh.rotateY(theta)
+                    bookMesh.name = "book"
                     scene.add(bookMesh)
                     meshID2url[bookMesh.uuid] = {
                         type: 'book',
@@ -209,7 +211,7 @@ const Sample = ({ books }: { books: ReviewJoinedUser[] }) => {
         window.addEventListener('mouseleave', clearPickPosition)
         window.addEventListener('mousedown', (e) => {
             setPickPosition(e)
-            pickHelper.pickClick(pickPosition, scene, camera, clearPickPosition)
+            pickHelper.pickClick(pickPosition, scene, camera)
         })
 
         controls.update()
