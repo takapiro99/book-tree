@@ -101,7 +101,7 @@ const Setting = () => {
                         <div className={styles.reviewformName__block}>
                             <div className={styles.reviewformName__namewrapper}>
                                 <div className={styles.reviewformName__name}>
-                                    {userInfo.displayName}さん
+                                    {userInfo.displayName}
                                 </div>
                             </div>
                             <img
@@ -113,7 +113,7 @@ const Setting = () => {
                     </div>
                     <div className={styles.blockbtwMd}>
                         <div className={styles.reviewform3keywords}>
-                            <h2>3つのキーワード</h2>
+                            <h2 className={styles.settingkeyword}>3つのキーワード</h2>
                             <div className={styles.reviewform3keywords__example}>
                                 例：北大2年 + カフェが好き + 漫画が好き
                             </div>

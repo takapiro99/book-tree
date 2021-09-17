@@ -11,7 +11,7 @@ const SignInWithTwitterOrGoogle = () => {
     //     router.push(`/${context.currentUser.uid}`)
     // }
     return (
-        <>
+        <div>
             <p className={`${styles.Twitter} ${styles.icon}`} onClick={context.twitterLogin}>
                 <img
                     src="/twitter-blue.svg"
@@ -24,7 +24,7 @@ const SignInWithTwitterOrGoogle = () => {
             <p className={`${styles.Google} ${styles.icon}`} onClick={context.googleLogin}>
                 Googleアカウントでログイン
             </p>
-        </>
+        </div>
     )
 }
 
