@@ -3,12 +3,14 @@ import styles from '../styles/Review.module.scss'
 import { FaArrowCircleUp, FaBullhorn } from 'react-icons/fa'
 import RecComment from './RecComment'
 import BigTreeWithBooks from './BigTreeWithBooks'
+import BigTreeWithBooks3D from './BigTreeWithBooks3D'
 import Link from 'next/link'
 import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../lib/AuthProvider'
 import { getReviewsFromUser, getUserInfo } from '../lib/api'
 import { ReviewJoinedUser, UserInfo } from '../lib/types'
 import { errorToast } from '../lib/toasts'
+
 /*  eslint @next/next/no-img-element:0 */
 
 const isNullGradePart = (arr: (string | null | undefined)[]) => {
@@ -78,16 +80,6 @@ const ReviewPage = ({ uid, isMe = false, setDisplayName }: IReviewPageProp) => {
 
     return (
         <>
-            {/* <div className={globalStyles.wrapper}> */}
-            {/* 本の情報を複数渡す */}
-            {/* </div> */}
-            {/* <div className={styles.mypageNews}>
-                <div className={styles.mypageNews__news}>
-                    <FaBullhorn />
-                    <a href="#review">お願いしていたレビューが届いたよ！</a>
-                </div>
-            </div> */}
-
             <div className={styles.reviewpageReview}>
                 <div className={styles.reviewWrapper2}>
                     <div className={styles.reviewUserBlock}>
@@ -122,10 +114,17 @@ const ReviewPage = ({ uid, isMe = false, setDisplayName }: IReviewPageProp) => {
 
                     <div className="blockbtwMd" />
 
-                    <div className={styles.reviewBigTree}>
+                    {/* <div className={styles.reviewBigTree}>
                         <h1>{userName} のBook Tree</h1>
                         <div>{userName} のところに集まった本たち</div>
                         <BigTreeWithBooks uid={uid} />
+                    </div> */}
+                    <div className={styles.reviewBigTree}>
+                        <h1>{userName} のBook Tree</h1>
+                        <div>{userName} のところに集まった本たち</div>
+                        {/* // SSR無効化する場合 */}
+
+                        <BigTreeWithBooks3D uid={uid} />
                     </div>
                     <div className={styles.mypageButtons}>
                         <Link href={`/invite`}>

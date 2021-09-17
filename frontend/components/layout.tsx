@@ -18,6 +18,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <meta key="og:image" property="og:image" content={imageURL} />
                 <meta key="twitter:image" name="twitter:image" content={imageURL} />
 
+                {/* <meta charset="utf-8" /> */}
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta name="theme-color" content="#FEFEFE" />
+                <link rel="apple-touch-icon" href="/image/logo192.png" />
+                <link rel="manifest" href="/manifest.json" />
+
                 <meta key="description" name="description" content={description} />
                 <meta key="og:description" property="og:description" content={description} />
 
