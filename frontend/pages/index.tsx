@@ -45,7 +45,7 @@ export default function Home() {
                     <div className={styles.topContent__introduce}>
                         <h1>周りにいるすごい人、</h1>
                         <h1>どんな本読んでいるんだろう？</h1>
-                        あなたのすごいと思う人が読んでる本を集めてBOOKTREEをつくろう！
+                        あなたのすごいと思う人が読んでる本を集めてBOOK TREEをつくろう！
                         新しくやってみたいこと、ずっとやりたいと思っていたこと、知らなかったことに出会う機会
                         直接人と出会うことが難しい時代 新しい形でつながり学ぼう！
                     </div>
@@ -60,7 +60,7 @@ export default function Home() {
                         {/* TODO: booktreeをつくろう、は分かりにくそう */}
                         <div className={styles.topContentSteps__explain}>BOOK TREEをつくろう</div>
                         <div className={styles.topContentSteps__explainS}>
-                            無料でアカウントを作成して、BOOKTREEをつくろう
+                            無料でアカウントを作成して、BOOK TREEをつくろう
                         </div>
                     </div>
                     <div className={styles.topContentSteps__block}>
@@ -86,7 +86,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <p className={styles.BOOKTREEBtn}>BOOKTREEを作成する</p>
+                <p className={styles.BOOKTREEBtn}>BOOK TREEを作成する</p>
             </div>
             <div className={styles.greenbar} />
             <div className="container">
