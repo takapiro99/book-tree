@@ -24,17 +24,9 @@ const SignIn = () => {
     }
     // TODO: 既にサインインしていた場合どうするか考える
     return (
-        <div style={{ height: '43.7vh' }}>
+        <div className={styles.signinwrapper}>
             <Head>{createTitle('ログイン')}</Head>
-            <h1
-                style={{
-                    textAlign: 'center',
-                    marginTop: '100px',
-                    marginBottom: '30px'
-                }}
-            >
-                BOOKTREE にログインする
-            </h1>
+            <h1 className={styles.loginBOOKTREE}>BOOKTREE にログインする</h1>
             <SignInWithTwitterOrGoogle />
         </div>
     )

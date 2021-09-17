@@ -16,8 +16,7 @@ import { errorToast, successToast } from '../lib/toasts'
 const NavBar = () => {
     const { signOut } = useContext(AuthContext)
     const router = useRouter()
-    const { currentUser } = useContext(AuthContext)
-
+    const { currentUser, userInfo } = useContext(AuthContext)
     const handleSignOut = () => {
         signOut().then(
             (res) => {
@@ -47,7 +46,7 @@ const NavBar = () => {
                         menuButton={
                             <img
                                 className={styles.icon}
-                                src={currentUser.photoURL as string}
+                                src={userInfo?.profileImage as string}
                                 id="icon"
                                 alt="icon"
                             />
@@ -55,22 +54,46 @@ const NavBar = () => {
                         transition
                         offsetY={10}
                     >
-                        <MenuItem onClick={() => router.push('/')}>
+                        <MenuItem
+                            onClick={() => router.push('/')}
+                            styles={{
+                                hover: {
+                                    backgroundColor: 'rgb(218, 241, 181)'
+                                }
+                            }}
+                        >
                             <FaBook /> &emsp;トップページ
                         </MenuItem>
                         <MenuItem
                             disabled={!currentUser}
+                            styles={{
+                                hover: {
+                                    backgroundColor: 'rgb(218, 241, 181)'
+                                }
+                            }}
                             onClick={() => router.push(currentUser ? `/${currentUser.uid}` : '')}
                         >
                             <FaTree /> &emsp;マイページ
                         </MenuItem>
                         <MenuItem
-                            disabled={!currentUser}
                             onClick={() => router.push(currentUser ? `/config` : '')}
+                            styles={{
+                                hover: {
+                                    backgroundColor: 'rgb(218, 241, 181)'
+                                }
+                            }}
                         >
                             <FaRegSun /> &emsp;設定
                         </MenuItem>
-                        <MenuItem disabled={!currentUser} onClick={handleSignOut}>
+                        <MenuItem
+                            disabled={!currentUser}
+                            onClick={handleSignOut}
+                            styles={{
+                                hover: {
+                                    backgroundColor: 'rgb(218, 241, 181)'
+                                }
+                            }}
+                        >
                             <FaSignOutAlt /> &emsp;ログアウト
                         </MenuItem>
                     </Menu>
@@ -79,7 +102,7 @@ const NavBar = () => {
                         menuButton={
                             <img
                                 className={styles.icon}
-                                src={'/images/foxIcon.png'}
+                                src={'/images/profile_icon.png'}
                                 id="icon"
                                 alt="icon"
                             />
@@ -87,7 +110,14 @@ const NavBar = () => {
                         transition
                         offsetY={10}
                     >
-                        <MenuItem onClick={() => router.push('/auth/signin')}>
+                        <MenuItem
+                            onClick={() => router.push('/auth/signin')}
+                            styles={{
+                                hover: {
+                                    backgroundColor: 'rgb(218, 241, 181)'
+                                }
+                            }}
+                        >
                             <FaSignInAlt /> &emsp;ログインする
                         </MenuItem>
                     </Menu>

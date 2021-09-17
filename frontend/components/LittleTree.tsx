@@ -21,7 +21,7 @@ const LittleTree: React.FC<LittleTreeProps> = ({ review }) => {
                         <img src={review.user.profileImage} alt="TwitterIcon" />
                     </div>
                 </Link>
-                <p className={styles.name}>{review.user.displayName}さん</p>
+                <p className={styles.name}>{review.user.displayName}</p>
                 <a href={review.bookLink} target="_blank" rel="noopener noreferrer">
                     <img className={styles.review_img} src={review.bookImageURL} />
                 </a>

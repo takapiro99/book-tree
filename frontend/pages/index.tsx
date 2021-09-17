@@ -10,15 +10,17 @@ import { createImageTags, createTitle } from '../lib/util'
 
 export default function Home() {
     // 列ごとに状態を持つ
+    const [books, setBooks] = useState<ReviewJoinedUser[]>([])
     const [booksRow1, setBooksRow1] = useState<ReviewJoinedUser[]>([])
     const [booksRow2, setBooksRow2] = useState<ReviewJoinedUser[]>([])
     const [booksRow3, setBooksRow3] = useState<ReviewJoinedUser[]>([])
     useEffect(() => {
         const f = async () => {
-            const books = await fetchBooksToShowOnTopPage()
-            setBooksRow1(books.slice(0, 3))
-            setBooksRow2(books.slice(3, 6))
-            setBooksRow3(books.slice(6, 9))
+            const _books = await fetchBooksToShowOnTopPage()
+            setBooks(_books)
+            setBooksRow1(_books.slice(0, 3))
+            setBooksRow2(_books.slice(3, 6))
+            setBooksRow3(_books.slice(6, 9))
         }
         f()
     }, [])
@@ -89,16 +91,17 @@ export default function Home() {
             <div className={styles.greenbar} />
             <div className="container">
                 <div className={styles.BookTreeForest}>
-                    <h1 className={styles.BookTreeForest__title}>what&apos;s new?</h1>
-                    <p className={styles.BookTreeForest__title}>最近レビューしてくれた人たち</p>
+                    <h1 className={styles.BookTreeForest__title1}>what&apos;s new?</h1>
+                    <p className={styles.BookTreeForest__title2}>最近レビューしてくれた人たち</p>
                     {/* <img className={styles.shiori} src="/images/home/shiori.png" alt="shiori" /> */}
                     <div className={styles.forestWrapper}>
                         <div className={styles.littletreeWrapper}>
-                            {booksRow1.map((book, index) => {
+                            {books.map((book, index) => {
                                 return <LittleTree review={book} key={index} />
                             })}
+                            <div style={{ height: 100, opacity: 0 }} />
                         </div>
-                        <div className={styles.littletreeWrapper2}>
+                        {/* <div className={styles.littletreeWrapper2}>
                             {booksRow2.map((book, index) => {
                                 return <LittleTree review={book} key={index} />
                             })}
@@ -107,7 +110,7 @@ export default function Home() {
                             {booksRow3.map((book, index) => {
                                 return <LittleTree review={book} key={index} />
                             })}
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
