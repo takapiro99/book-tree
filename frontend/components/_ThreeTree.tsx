@@ -3,12 +3,14 @@ import { WebGLRenderer, Scene, PerspectiveCamera } from 'three'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { errorToast } from '../lib/toasts'
+import { ReviewJoinedUser } from '../lib/types'
 
 // 初期位置
 // ローテーション制限つける
 
-const Sample = ({ hoge }: { hoge: boolean }) => {
-    console.log(hoge)
+const Sample = ({ books }: { books: ReviewJoinedUser[] }) => {
+    console.log(books)
     const onCanvasLoaded = (canvas: HTMLCanvasElement) => {
         if (!canvas) {
             return
@@ -20,9 +22,20 @@ const Sample = ({ hoge }: { hoge: boolean }) => {
         // init scene
         const scene = new Scene()
 
-        // const renderer = new THREE.WebGLRenderer();
-        // renderer.setSize( window.innerWidth, window.innerHeight );
-        // document.body.appendChild( renderer.domElement );
+        const createBook = (bookScenes: any[], imageURL: string) => {
+            const texture = new THREE.TextureLoader().load(imageURL, () => {
+                const width = texture.image.width
+                const height = texture.image.height
+                const ratio = height / width
+                const geometry = new THREE.BoxGeometry(2, 2 * ratio, 0.1)
+                const material = new THREE.MeshBasicMaterial({ map: texture })
+                const cube = new THREE.Mesh(geometry, material)
+                cube.position.y = 10
+                scene.add(cube)
+                bookScenes.push(cube)
+            })
+        }
+
         const camera = new PerspectiveCamera(
             75,
             canvas.clientWidth / canvas.clientHeight,
@@ -31,7 +44,6 @@ const Sample = ({ hoge }: { hoge: boolean }) => {
         )
 
         const renderer = new WebGLRenderer({ canvas: canvas, antialias: true })
-        // renderer.setClearColor('#1d1d1d')
         renderer.setSize(width, height)
         scene.background = new THREE.Color(0xcce0ff)
         scene.fog = new THREE.Fog(0xcce0ff, 500, 10000)
@@ -44,9 +56,7 @@ const Sample = ({ hoge }: { hoge: boolean }) => {
         const light = new THREE.DirectionalLight(0xdfebff, 1)
         light.position.set(50, 200, 100)
         light.position.multiplyScalar(1.3)
-
         light.castShadow = true
-
         light.shadow.mapSize.width = 1024
         light.shadow.mapSize.height = 1024
 
@@ -56,70 +66,58 @@ const Sample = ({ hoge }: { hoge: boolean }) => {
         light.shadow.camera.right = d
         light.shadow.camera.top = d
         light.shadow.camera.bottom = -d
-
         light.shadow.camera.far = 1000
 
         scene.add(light)
         camera.position.z = 5
 
         loader.load(
-            // resource URL
-            // '../public/cube.glb',
             '/tree.gltf',
             // called when the resource is loaded
-            function (gltf: any) {
-                console.log('aaa')
-
+            (gltf: any) => {
                 scene.add(gltf.scene)
-
-                console.log(gltf)
-
                 // gltf.animations; // Array<THREE.AnimationClip>
                 // gltf.scene; // THREE.Group
                 // gltf.scenes; // Array<THREE.Group>
                 // gltf.cameras; // Array<THREE.Camera>
                 // gltf.asset; // Object
             },
-            // called while loading is progressing
-            function (xhr: any) {
-                console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
-            },
-            // called when loading has errors
-            function (error: any) {
+            undefined,
+            (error: any) => {
                 console.error(error)
-                console.log('An error happened')
+                errorToast('3D モデルのロードに失敗しました。')
             }
         )
 
-        // instantiate a loader
-        const texture = new THREE.TextureLoader().load('images/BigBookTree.png');
-        const material = new THREE.MeshBasicMaterial( { map: texture } );
-        
-
-        // load a image resource
         // TODO 画像を読みこんで表示する
         // ...  ユーザーアイコンと合わせる
         // ...  クリックしてリンクを飛ばせるようにする。
         // ...  適切な位置に配置する
         // ...  textureLoaderを使う
-        // imageLoader.load(
-        //     // resource URL
-        //     'images/BigBookTree.png',
+        const validateResponse = (response) => {
+            if (!response.ok) {
+                throw Error(response.statusText)
+            }
+            return response
+        }
 
-        //     // onLoad callback
-        //     function (image) {
-        //         // use the image, e.g. draw part of it on a canvas
-        //         scene.add(image)
-        //     },
-
-        //     // onProgress callback currently not supported
-        //     undefined,
-
-        //     // onError callback
-        //     function () {
-        //         console.error('An error happened.')
-        //     }
-        // )
+        const threeCubeBooks: any[] = []
+        const urls: any[] = []
+        // const url = `https://no--cors.herokuapp.com/?url=${books[0].bookImageURL}`
+        const url = `https://no--cors.herokuapp.com/?url=https://pbs.twimg.com/profile_images/1268541932541804544/pTEgObfP_400x400.jpg`
+        // const url = `https://pbs.twimg.com/profile_images/1268541932541804544/pTEgObfP_400x400.jpg`
+        urls.push(url)
+        console.log(urls[0])
+        // fetch(url)
+        //     .then(validateResponse)
+        //     .then((response) => response.blob())
+        //     .then((blob) => {
+        //         let a = URL.createObjectURL(blob)
+        //         console.log(a)
+        //         // http://localhost:3004/ce25bc1c-5687-44c6-8248-f86c48a2baf9
+        //         urls.push(a)
+        //     })
+        createBook(threeCubeBooks, urls[0])
 
         const controls = new OrbitControls(camera, renderer.domElement)
 
