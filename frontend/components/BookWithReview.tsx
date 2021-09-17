@@ -79,7 +79,7 @@ const BookWithReview = ({ review, isMe = false }: { review: ReviewJoinedUser; is
                                     className={styles.reviewpageReviewEditAction}
                                     onClick={handleCancelEditing}
                                 >
-                                    <FaRegEdit size={25} color="grey" />
+                                    <FaRegEdit size={23} color="grey" />
                                 </p>
                             </div>
                             <div onClick={() => infoToast('削除機能は実装中だよ！ごめんね！')}>
@@ -87,7 +87,7 @@ const BookWithReview = ({ review, isMe = false }: { review: ReviewJoinedUser; is
                                     className={styles.reviewpageReviewEditAction}
                                     onClick={handleCommitEdit}
                                 >
-                                    <MdDelete size={25} color="grey" />
+                                    <MdDelete size={23} color="grey" />
                                 </p>
                             </div>
                         </>

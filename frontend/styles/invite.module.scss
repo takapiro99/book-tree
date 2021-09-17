@@ -1,3 +1,6 @@
+.invitewrapper {
+    height: 80vh;
+}
 .createLinkTitle {
     text-align: center;
 }
@@ -45,6 +48,7 @@
             border-radius: 20px;
             border: none;
             padding: 10px 10px;
+            margin-top: 10px;
             margin-left: 20px;
             box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
             background-color: #6fa769;
@@ -58,6 +62,7 @@
             &:hover {
                 cursor: pointer;
                 text-decoration: none;
+                background-color: rgb(49, 109, 52);
                 //color: white;
                 box-shadow: 0 0 0;
             }
@@ -125,3 +130,23 @@
     margin-bottom: 1.2rem;
 }
 //LinkBlock end
+
+@media screen and (max-width: 410px) {
+    .createLinkTitle {
+        font-size: 24px;
+    }
+    .createLinkBlock__text {
+        font-size: 14px;
+    }
+    .createLinkBlock__reason {
+        width: 290px;
+    }
+    .createLinkBlock__text {
+        margin-left: 100px;
+        text-align: center;
+    }
+    .createButtonBlock {
+        display: block !important;
+        text-align: center !important;
+    }
+}
