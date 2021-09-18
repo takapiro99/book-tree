@@ -77,11 +77,30 @@ const ReviewPage = ({ uid, isMe = false, setDisplayName }: IReviewPageProp) => {
     if (!targetUserInfo) return null
 
     const userName = targetUserInfo.displayName
+    const twitterShareText = `${userName}さんのブックツリー`
+    const twitterShareURL = location.href
 
     return (
         <>
             <div className={styles.reviewpageReview}>
                 <div className={styles.reviewWrapper2}>
+                    <div className={styles.sharewrapper}>
+                        <a
+                            href={`https://twitter.com/intent/tweet?text=${twitterShareText}&url=${twitterShareURL}`}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <div className={styles.Twittershare}>
+                                <img
+                                    src="/twitter-blue.svg"
+                                    alt="twitter icon"
+                                    height={25}
+                                    style={{ display: 'inline-block', marginRight: '15px' }}
+                                />
+                                share
+                            </div>
+                        </a>
+                    </div>
                     <div className={styles.reviewUserBlock}>
                         <img
                             className={styles.icon}
@@ -103,15 +122,15 @@ const ReviewPage = ({ uid, isMe = false, setDisplayName }: IReviewPageProp) => {
                                 </div>
                             )}
                         </div>
+                        {/* <div className={styles.Twittershare}>
+                                <img
+                                        src="/twitter-blue.svg"
+                                        alt="twitter icon"
+                                        height={25}
+                                        style={{ display: 'inline-block', marginRight: '15px' }}/>
+                                share
+                        </div> */}
                     </div>
-                    {/* <div className={styles.reccomment}>
-                        <div className={styles.reccomment_content}>
-                            <RecComment comment="フロントエンド" />
-                            <RecComment comment="デザイン" />
-                            <RecComment comment="フロントエンド" />
-                        </div>
-                    </div> */}
-
                     <div className="blockbtwMd" />
 
                     {/* <div className={styles.reviewBigTree}>
