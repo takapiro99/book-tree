@@ -6,10 +6,6 @@ import { AuthContext } from '../../lib/AuthProvider'
 
 const SignInWithTwitterOrGoogle = () => {
     const context = useContext(AuthContext)
-    // const router = useRouter()
-    // if (context.currentUser) {
-    //     router.push(`/${context.currentUser.uid}`)
-    // }
     return (
         <div>
             <p className={`${styles.Twitter} ${styles.icon}`} onClick={context.twitterLogin}>
