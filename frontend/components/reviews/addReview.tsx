@@ -37,7 +37,7 @@ const AddReview = (props: AddReviewProps) => {
     return (
         <div className={`${styles.reviewformAddreview} ${styles.blockbtwMd}`}>
             <div className={styles.reviewformAddreviewBooks}>
-                <a href={book.Item.itemUrl} target="_blank">
+                <a href={book.Item.itemUrl} target="_blank" rel="noreferrer">
                     <img
                         src={book.Item.largeImageUrl}
                         alt=""

@@ -10,7 +10,7 @@ const Footer = () => {
                         <FaGithub size={25} color="#eee" />
                     </div>
                 </a>
-                <a href="https://forms.gle/3rEduWMNYPspcF8j8" target="blank"  rel="noreferrer">
+                <a href="https://forms.gle/3rEduWMNYPspcF8j8" target="blank" rel="noreferrer">
                     <div className={styles.icon2}>
                         <FaQuestion size={24} color="#eee" />
                     </div>
