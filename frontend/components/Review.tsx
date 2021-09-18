@@ -77,21 +77,29 @@ const ReviewPage = ({ uid, isMe = false, setDisplayName }: IReviewPageProp) => {
     if (!targetUserInfo) return null
 
     const userName = targetUserInfo.displayName
+    const twitterShareText = `${userName}さんのブックツリー`
+    const twitterShareURL = location.href
 
     return (
         <>
             <div className={styles.reviewpageReview}>
                 <div className={styles.reviewWrapper2}>
                     <div className={styles.sharewrapper}>
-                        <div className={styles.Twittershare}>
-                            <img
-                                src="/twitter-blue.svg"
-                                alt="twitter icon"
-                                height={25}
-                                style={{ display: 'inline-block', marginRight: '15px' }}
-                            />
-                            share
-                        </div>
+                        <a
+                            href={`https://twitter.com/intent/tweet?text=${twitterShareText}&url=${twitterShareURL}`}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <div className={styles.Twittershare}>
+                                <img
+                                    src="/twitter-blue.svg"
+                                    alt="twitter icon"
+                                    height={25}
+                                    style={{ display: 'inline-block', marginRight: '15px' }}
+                                />
+                                share
+                            </div>
+                        </a>
                     </div>
                     <div className={styles.reviewUserBlock}>
                         <img
