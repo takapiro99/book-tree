@@ -11,16 +11,10 @@ import { createImageTags, createTitle } from '../lib/util'
 export default function Home() {
     // 列ごとに状態を持つ
     const [books, setBooks] = useState<ReviewJoinedUser[]>([])
-    const [booksRow1, setBooksRow1] = useState<ReviewJoinedUser[]>([])
-    const [booksRow2, setBooksRow2] = useState<ReviewJoinedUser[]>([])
-    const [booksRow3, setBooksRow3] = useState<ReviewJoinedUser[]>([])
     useEffect(() => {
         const f = async () => {
             const _books = await fetchBooksToShowOnTopPage()
             setBooks(_books)
-            setBooksRow1(_books.slice(0, 3))
-            setBooksRow2(_books.slice(3, 6))
-            setBooksRow3(_books.slice(6, 9))
         }
         f()
     }, [])
@@ -51,6 +45,11 @@ export default function Home() {
                     </div>
                 </div>
                 <div style={{ height: '30px' }} />
+                <div className="kikangentei" style={{ textAlign: 'center' }}>
+                    <h3>期間限定で開催！！</h3>
+                    <p>09/18～10/18</p>
+                    {/* <p></p> */}
+                </div>
                 <h2 className={styles.topContentSteps__title}>どんなことができる？</h2>
                 <div className={styles.topContent__steps}>
                     <div className={styles.topContentSteps__block}>
