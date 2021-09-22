@@ -16,7 +16,12 @@ const Footer = () => {
                     </div>
                 </a>
             </div>
-            <p className={styles.sentence}>2021 スイカバー</p>
+            <p className={styles.sentence}>
+                2021 スイカバー{' '}
+                <a style={{ fontSize: '0.2rem' }} href="https://webservice.rakuten.co.jp/">
+                    Supported by Rakuten Developers
+                </a>
+            </p>
         </div>
     )
 }
